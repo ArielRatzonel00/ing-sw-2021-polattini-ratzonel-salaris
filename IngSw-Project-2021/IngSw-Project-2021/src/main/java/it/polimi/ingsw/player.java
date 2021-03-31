@@ -5,11 +5,18 @@ import jdk.internal.loader.Resource;
 public class player {
     private final String nickname;
 
-    public player (String nickname){
+
+    public player(String nickname) {
+
         this.nickname = nickname;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
     public void marketTray(MarketTray marketTray ){
+
 
     }
     public void produceByCard(DevelopmentCard developmentCard){

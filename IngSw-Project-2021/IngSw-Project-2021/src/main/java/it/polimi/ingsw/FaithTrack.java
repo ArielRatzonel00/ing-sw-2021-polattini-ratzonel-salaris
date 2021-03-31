@@ -3,18 +3,20 @@ package it.polimi.ingsw;
 public class FaithTrack {
     private int PopeFavorTiles;
     private boolean Multiplayer;
-    private int redPosition;
+    private int RedPosition;
     private int BlackPosition;
     private int points;
 
     public void moveForwardRed(){
+        RedPosition++;
 
     }
     public void moveForwardBlack(){
+        BlackPosition++;
 
     }
     public int getRedPosition(){
-        return redPosition;
+        return RedPosition;
     }
     public int getBlackPosition(){
         return BlackPosition;
@@ -23,7 +25,7 @@ public class FaithTrack {
         return points;
     }
     public void PopeSpaceAction(){
-
+        //
     }
 
 }
