@@ -2,5 +2,6 @@ package it.polimi.ingsw;
 
 public class player {
     private String username;
-//HELLOWORLD2
+    private String Name;
+
 }
