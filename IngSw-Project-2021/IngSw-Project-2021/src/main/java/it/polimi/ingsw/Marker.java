@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
-
+// da rivedere tutto
 public class Marker {
-    public action(){
+    public void action(){
 
     }
 }
