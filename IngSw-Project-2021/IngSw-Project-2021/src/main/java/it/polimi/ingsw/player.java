@@ -3,18 +3,49 @@ package it.polimi.ingsw;
 
 public class player {
     private final String nickname;
+    private FaithTrack faithTrack;
+    private Warehouse warehouse;
+    private Strongbox strongbox;
+    private LeaderCard[] leaderCards;
+    private Slots slots;
 
 
-    public player(String nickname) {
+    public player(String nickname, LeaderCard[] FourLeaderCards) {
 
         this.nickname = nickname;
+        this.faithTrack = new FaithTrack();
+        this.warehouse = new Warehouse();
+        this.strongbox = new Strongbox();
+        this.leaderCards = FourLeaderCards;
+        this.slots = new Slots();
     }
 
     public String getNickname() {
         return nickname;
     }
 
-    public void marketTray(MarketTray marketTray ){
+    public FaithTrack getFaithTrack() {
+        return faithTrack;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public Strongbox getStrongbox() {
+        return strongbox;
+    }
+
+    public LeaderCard[] getLeaderCards() {
+        return leaderCards;
+    }
+
+    public Slots getSlots() {
+        return slots;
+    }
+
+}
+ /*   public void marketTray(MarketTray marketTray ){
         //ChiamaLaFunzioneDiMarketTray
     }
     public void produceByCard(DevelopmentCard developmentCard){
@@ -39,6 +70,7 @@ public class player {
         //Chiama la funzione di Slots
     }
 
+  */
 
 
 

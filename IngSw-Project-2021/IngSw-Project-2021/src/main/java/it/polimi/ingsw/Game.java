@@ -4,16 +4,40 @@ public class Game {
 
     private player[] players;
     private int NumberOfPlayers; // numero di giocatori
+    private MarketTray marketTray;
+    private DevelopmentGrid developmentGrid;
+    private MarkerStack markers ;
 
-    public Game(player[] players) {
+    public Game(player[] players,DevelopmentCard[] developmentCards,Marker[] markers ) {
         this.players = players;
+        this.developmentGrid = new DevelopmentGrid(developmentCards);
+        this.marketTray = new MarketTray();
+        this.markers = new MarkerStack(markers); // creare classe MarkerStack
+    }
+
+    public player[] getPlayers() {
+        return players;
+    }
+
+    public MarketTray getMarketTray() {
+        return marketTray;
+    }
+
+    public DevelopmentGrid getDevelopmentGrid() {
+        return developmentGrid;
+    }
+
+    public MarkerStack getMarkers() {
+        return markers;
     }
 
     public int getNumberOfPlayers() {
         return NumberOfPlayers;
     } // numero di giocatori
 
-    public void startgame(){
+}
+
+ /*   public void startgame(){
         //Creazione di Development grid
         //Assegnazione di Leader Card a ogni player
         // settaggio di tutte le cose iniziali come creazione di ogni faithTrack/Warehouse ecc per ogni player
@@ -29,3 +53,4 @@ public class Game {
     }
 
 }
+  */

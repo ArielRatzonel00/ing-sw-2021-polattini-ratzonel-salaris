@@ -16,7 +16,10 @@ public class Slots {
     public DevelopmentCard[] getCard3() {
         return card3;
     }
-    public void addCard(DevelopmentCard developmentCard){
+}
+   /* public void addCard(DevelopmentCard developmentCard){
 
     }
 }
+
+    */

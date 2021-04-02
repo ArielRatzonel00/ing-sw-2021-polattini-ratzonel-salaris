@@ -11,8 +11,8 @@ public class MarketTray {
     public MarketMarble getOustideMarble() {
         return OustideMarble;
     }
-
-    public void chooseRow(){
+}
+   /* public void chooseRow(){
 
 
     }
@@ -20,4 +20,4 @@ public class MarketTray {
 
     }
 }
-// da vedere
+*/
