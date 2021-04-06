@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
 
-public class player {
+public class Player {
     private final String nickname;
     private FaithTrack faithTrack;
     private Warehouse warehouse;
@@ -10,7 +10,7 @@ public class player {
     private Slots slots;
 
 
-    public player(String nickname, LeaderCard[] FourLeaderCards) {
+    public Player(String nickname, LeaderCard[] FourLeaderCards) {
 
         this.nickname = nickname;
         this.faithTrack = new FaithTrack();
@@ -83,4 +83,4 @@ public class player {
 
 
 
-}
+

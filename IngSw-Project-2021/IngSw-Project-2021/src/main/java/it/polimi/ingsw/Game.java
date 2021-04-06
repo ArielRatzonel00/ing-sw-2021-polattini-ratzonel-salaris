@@ -2,20 +2,20 @@ package it.polimi.ingsw;
 
 public class Game {
 
-    private player[] players;
+    private Player[] players;
     private int NumberOfPlayers; // numero di giocatori
     private MarketTray marketTray;
     private DevelopmentGrid developmentGrid;
     private MarkerStack markers ;
 
-    public Game(player[] players,DevelopmentCard[] developmentCards,Marker[] markers ) {
+    public Game(Player[] players, DevelopmentCard[] developmentCards, Marker[] markers ) {
         this.players = players;
-        this.developmentGrid = new DevelopmentGrid(developmentCards);
+        this.developmentGrid = new DevelopmentGrid();
         this.marketTray = new MarketTray();
         this.markers = new MarkerStack(markers); // creare classe MarkerStack
     }
 
-    public player[] getPlayers() {
+    public Player[] getPlayers() {
         return players;
     }
 

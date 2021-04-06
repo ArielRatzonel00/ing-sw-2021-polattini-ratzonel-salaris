@@ -3,9 +3,18 @@ package it.polimi.ingsw;
 public class FaithTrack {
     //private int PopeFavorTiles;, da vedere come gestire i segnalini verso l'alto o verso il basso
     private boolean Multiplayer;
-    private int RedPosition;
-    private int BlackPosition;
-    private int points;
+    private int RedPosition = 0;
+    private int BlackPosition = 0;
+    private int points = 0;
+    public enum popeFavorState{
+        Activate,
+        Unabled,
+        Deleted
+    }
+    private popeFavorState popeFavor1 = popeFavorState.Unabled;
+    private popeFavorState popeFavor2 = popeFavorState.Unabled;
+    private popeFavorState popeFavor3 = popeFavorState.Unabled;
+
 
 
     public int getRedPosition() {
@@ -22,6 +31,18 @@ public class FaithTrack {
 
     public boolean isMultiplayer() {
         return Multiplayer;
+    }
+
+    public popeFavorState getPopeFavor1() {
+        return popeFavor1;
+    }
+
+    public popeFavorState getPopeFavor2() {
+        return popeFavor2;
+    }
+
+    public popeFavorState getPopeFavor3() {
+        return popeFavor3;
     }
 }
 

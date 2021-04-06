@@ -4,7 +4,7 @@ public class Warehouse {
     private MarketMarble row1;
     private MarketMarble[] row2;
     private MarketMarble[] row3;
-    public Warehouse (Warehouse warehouse){
+    public Warehouse (){
         row1 = null;
         row2 = null;
         row3 = null;

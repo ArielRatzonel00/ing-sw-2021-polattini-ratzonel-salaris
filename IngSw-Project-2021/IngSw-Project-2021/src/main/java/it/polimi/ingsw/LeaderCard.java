@@ -3,22 +3,28 @@ package it.polimi.ingsw;
 import java.util.Map;
 
 public class LeaderCard {
-    private int requirements; //metodo di Luca, dato che i requirments sono di diverso tipo li gestiamo con una tabella particolare da decidere insieme quando ci becchiamo
+    private boolean[] Type; // TypeExtraResources, TypeReduceCost, TypeExtraWarehouse, TypeConvertResource
+    private int Id;
+    private int Color1Cost; // se TypeExtraResources 1:yellow, 2:purple, 3: green, 4: blue
+                        // se TypeReduceCost uguale
+                        // se Type ExtraWarehouse 3 non è più green ma grey
+                        // se Type ConvertResources uguale a Extra resources
+
+    private int Color2; // i numeri rimangono uguale
+
     private int VictoryPoints;
-    private int SpecialAbility;//metodo di Luca, classe a parte per effetto
     // private int act; andrà nella funzione che chiama Active
 
-    public int getRequirements() {
-        return requirements;
-    } // scorrere la tabella e vedere come pescare i requirments
+    private int SpecialAbilityColor; // 1:yellow, 2:purple, 3: grey, 4: blue
 
-    public int getVictoryPoints() {
-        return VictoryPoints;
+    public LeaderCard(boolean[] type, int id, int color1Cost, int color2, int specialAbilityColor) {
+        Type = type;
+        Id = id;
+        Color1Cost = color1Cost;
+        Color2 = color2;
+        // da fare con i casi if VictoryPoints = ;
+        SpecialAbilityColor = specialAbilityColor;
     }
-
-    public int getSpecialAbility() {
-        return SpecialAbility;
-    } // scorrere Special Ability
 
     public boolean isActivate(int act) {
         if (act == 0) {
