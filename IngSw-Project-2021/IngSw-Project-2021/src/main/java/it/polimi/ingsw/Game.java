@@ -3,7 +3,6 @@ package it.polimi.ingsw;
 public class Game {
 
     private Player[] players;
-    private int NumberOfPlayers; // numero di giocatori
     private MarketTray marketTray;
     private DevelopmentGrid developmentGrid;
     private MarkerStack markers ;
@@ -14,6 +13,7 @@ public class Game {
         this.marketTray = new MarketTray();
         this.markers = new MarkerStack(markers); // creare classe MarkerStack
     }
+    private int NumberOfPlayers = players.length;
 
     public Player[] getPlayers() {
         return players;
