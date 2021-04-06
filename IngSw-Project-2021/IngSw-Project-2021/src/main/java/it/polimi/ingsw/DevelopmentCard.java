@@ -1,8 +1,5 @@
 package it.polimi.ingsw;
 
-import java.awt.*;
-import java.util.Map;
-
 public class DevelopmentCard {
     private int[] ResourcesCost; //purple, blue, yellow, grey
     private int[] ResourcesProductionCost; //purple, blue, yellow, grey
@@ -17,7 +14,6 @@ public class DevelopmentCard {
     private colorCard Color; //colore della carta
     private int Level;//livello della carta
     private int VictoryPoints; // Victory Points
-    //commento
 
     public DevelopmentCard(int[] resourcesCost, int[] resourcesProductionCost, int[] resourcesProductionProfit, int id, colorCard color, int level, int victoryPoints) {
         ResourcesCost = resourcesCost;

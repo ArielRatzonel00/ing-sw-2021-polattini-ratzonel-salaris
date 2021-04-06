@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
 public class DevelopmentGrid {
-    private GridCell[][] CardMatrix; // Matrice che contiene tutte le developmentCard,
+    private GridCell[][] CardMatrix; // Matrice che contiene tutte le developmentCard
     public GridCell[][] getCardMatrix() {
         return CardMatrix;
     }

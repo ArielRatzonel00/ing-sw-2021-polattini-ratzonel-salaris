@@ -1,7 +1,6 @@
 package it.polimi.ingsw;
 
 public class FaithTrack {
-    //private int PopeFavorTiles;, da vedere come gestire i segnalini verso l'alto o verso il basso
     private boolean Multiplayer;
     private int RedPosition = 0;
     private int BlackPosition = 0;

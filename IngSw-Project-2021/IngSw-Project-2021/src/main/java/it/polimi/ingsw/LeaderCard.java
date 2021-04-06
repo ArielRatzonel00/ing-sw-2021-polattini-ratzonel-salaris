@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class LeaderCard {
     private boolean[] Type; // TypeExtraResources, TypeReduceCost, TypeExtraWarehouse, TypeConvertResource
+    private boolean Activate = false;
     private int Id;
     private int Color1Cost; // se TypeExtraResources 1:yellow, 2:purple, 3: green, 4: blue
                         // se TypeReduceCost uguale
@@ -26,15 +27,33 @@ public class LeaderCard {
         SpecialAbilityColor = specialAbilityColor;
     }
 
-    public boolean isActivate(int act) {
-        if (act == 0) {
-            return false;
-        } else {
-            return true;
-        } // controllo se carta leader è da attivare
-
+    public boolean[] getType() {
+        return Type;
     }
 
+    public boolean isActivate() {
+        return Activate;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public int getColor1Cost() {
+        return Color1Cost;
+    }
+
+    public int getColor2() {
+        return Color2;
+    }
+
+    public int getVictoryPoints() {
+        return VictoryPoints;
+    }
+
+    public int getSpecialAbilityColor() {
+        return SpecialAbilityColor;
+    }
 }
 /*
     public void discard(){
