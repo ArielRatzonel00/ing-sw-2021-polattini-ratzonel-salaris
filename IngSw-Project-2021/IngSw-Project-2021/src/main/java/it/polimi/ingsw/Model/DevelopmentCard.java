@@ -5,7 +5,7 @@ public class DevelopmentCard {
     private int[] ResourcesProductionCost; //purple, blue, yellow, grey
     private int[] ResourcesProductionProfit; //purple, blue, yellow, grey, red
     private int Id;
-    private enum colorCard {
+    public enum colorCard {
         Green,
         Blue,
         Yellow,
@@ -16,13 +16,13 @@ public class DevelopmentCard {
     private int VictoryPoints; // Victory Points
 
     public DevelopmentCard(int[] resourcesCost, int[] resourcesProductionCost, int[] resourcesProductionProfit, int id, colorCard color, int level, int victoryPoints) {
-        ResourcesCost = resourcesCost;
-        ResourcesProductionCost = resourcesProductionCost;
-        ResourcesProductionProfit = resourcesProductionProfit;
-        Id = id;
-        Color = color;
-        Level = level;
-        VictoryPoints = victoryPoints;
+        this.ResourcesCost = resourcesCost;
+        this.ResourcesProductionCost = resourcesProductionCost;
+        this.ResourcesProductionProfit = resourcesProductionProfit;
+        this.Id = id;
+        this.Color = color;
+        this.Level = level;
+        this.VictoryPoints = victoryPoints;
     }
 
     public int[] getResourcesCost() {

@@ -19,12 +19,12 @@ public class LeaderCard {
     private int SpecialAbilityColor; // 1:yellow, 2:purple, 3: grey, 4: blue
 
     public LeaderCard(boolean[] type, int id, int color1Cost, int color2, int specialAbilityColor) {
-        Type = type;
-        Id = id;
-        Color1Cost = color1Cost;
-        Color2 = color2;
+        this.Type = type;
+        this.Id = id;
+        this.Color1Cost = color1Cost;
+        this.Color2 = color2;
         // da fare con i casi if VictoryPoints = ;
-        SpecialAbilityColor = specialAbilityColor;
+        this.SpecialAbilityColor = specialAbilityColor;
     }
 
     public boolean[] getType() {
