@@ -1,22 +1,20 @@
 package it.polimi.ingsw;
 
-public class Game {
+public class SinglePlayerGame {
 
-    private Player[] players;
+    private Player Player;
     private MarketTray marketTray;
     private DevelopmentGrid developmentGrid;
     private MarkerStack markers ;
-
-    public Game(Player[] players, DevelopmentCard[] developmentCards, Marker[] markers ) {
-        this.players = players;
+    private int CountForMarkerStack;
+    public SinglePlayerGame(Player player, DevelopmentCard[] developmentCards, Marker[] markers ) {
+        this.Player = player;
         this.developmentGrid = new DevelopmentGrid();
         this.marketTray = new MarketTray();
         this.markers = new MarkerStack(markers); // creare classe MarkerStack
     }
-    private int NumberOfPlayers = players.length;
-
-    public Player[] getPlayers() {
-        return players;
+    public it.polimi.ingsw.Player getPlayer() {
+        return Player;
     }
 
     public MarketTray getMarketTray() {
@@ -31,10 +29,9 @@ public class Game {
         return markers;
     }
 
-    public int getNumberOfPlayers() {
-        return NumberOfPlayers;
-    } // numero di giocatori
-
+    public int getCountForMarkerStack() {
+        return CountForMarkerStack;
+    }
 }
 
  /*   public void startgame(){
