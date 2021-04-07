@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Model;
 
 public class DevelopmentGrid {
     private GridCell[][] CardMatrix; // Matrice che contiene tutte le developmentCard

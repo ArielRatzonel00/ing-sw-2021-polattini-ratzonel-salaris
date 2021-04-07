@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Model;
 
 public class CreateCards {
     private DevelopmentCard[] Green1 = new DevelopmentCard[4];
