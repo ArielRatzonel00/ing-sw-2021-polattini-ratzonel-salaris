@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MarketTray  {
-    private MarketMarble[] ArrayMarble;
+    private MarketMarble[] ArrayMarble = new MarketMarble[13];
     private MarketMarble[][] MarketMatrix;
     private MarketMarble OustideMarble;
 
@@ -49,7 +49,12 @@ public class MarketTray  {
     public MarketMarble getOustideMarble() {
         return OustideMarble;
     }
-    public void ShiftMatrix(int i, int j) {
+
+    public void ShiftMatrixByRow(int i, int j) {
+        // pensare al codice da mettere qua
+
+    }
+    public void ShiftMatrixByCol(int i, int j) {
         // pensare al codice da mettere qua
 
     }

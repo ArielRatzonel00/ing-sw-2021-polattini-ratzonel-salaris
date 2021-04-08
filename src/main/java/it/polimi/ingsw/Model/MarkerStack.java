@@ -8,7 +8,6 @@ public class MarkerStack {
     private Marker[] markers;
 
     public MarkerStack(Marker[] markers) {
-
         this.markers = markers;
         List<Marker> ListMarkers = Arrays.asList(markers);
         Collections.shuffle(ListMarkers);

@@ -4,8 +4,8 @@ public class Warehouse {
     private MarketMarble.ColorMarble Colorrow1;
     private MarketMarble.ColorMarble Colorrow2;
     private MarketMarble.ColorMarble Colorrow3;
-    private MarketMarble.ColorMarble Colorrow4;
-    private MarketMarble.ColorMarble Colorrow5;
+    private MarketMarble.ColorMarble ColorrowExtra1;
+    private MarketMarble.ColorMarble ColorrowExtra2;
     private MarketMarble row1;
     private MarketMarble[] row2 = new MarketMarble[2];
     private MarketMarble[] row3 = new MarketMarble[3];
@@ -85,3 +85,4 @@ public class Warehouse {
 
     }
      */
+

@@ -12,9 +12,9 @@ public class GameManager {
     public GameManager(){
         //Se players <1 throw new exception
         if(players.size()>1)
-        this.MultiGame= new MultiplayerGame(CLASSE.getPlayers, CLASSE.getDevelopmentCards);
+        this.MultiGame= new MultiplayerGame(Lobby.getPlayers());
         else
-        this.SingleGame=new SinglePlayerGame(CLASSE.getPlayers, CLASSE.getDevelopmentCards,Classe.getMarkers);
+        this.SingleGame=new SinglePlayerGame(Lobby.getPlayers());
 
     }
 

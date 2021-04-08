@@ -28,19 +28,20 @@ public class Strongbox {
         return store;
     }
 
-    public void setShield() {
+    public void AddShield() {
         this.shield++;
     }
 
-    public void setCoin() {
+    public void AddCoin() {
         this.coin++;
     }
 
-    public void setServant() {
+    public void AddServant() {
         this.servant++;
     }
 
-    public void setStore() {
+    public void AddStore() {
         this.store++;
     }
+    //Remove
 }

@@ -7,7 +7,9 @@ public class CreateCards {
     private DevelopmentCard Green12 = new DevelopmentCard (new int[]{1, 1, 0, 1}, new int[]{0, 0, 0, 1}, new int[]{1, 0, 0, 0, 0}, 2, DevelopmentCard.colorCard.Green, 1, 2);
     private DevelopmentCard Green13 = new DevelopmentCard (new int[]{0, 3, 0, 0}, new int[]{2, 0, 0, 0}, new int[]{0, 1, 1, 1, 0}, 3, DevelopmentCard.colorCard.Green, 1, 3);
     private DevelopmentCard Green14 = new DevelopmentCard (new int[]{0, 2, 2, 0}, new int[]{1, 0, 0, 1}, new int[]{0, 0, 2, 0, 1}, 4, DevelopmentCard.colorCard.Green, 1, 4);
-
+    //private DevelopmentCard[] Array1 = {Green11, Green12, Green13, }
+    //private GridCell Cell1 = new GridCell()
+    // get cella 1
     private DevelopmentCard Yellow11 = new DevelopmentCard (new int[]{0, 0, 0, 2}, new int[]{1, 0, 0, 0}, new int[]{0, 0, 0, 0, 1}, 5, DevelopmentCard.colorCard.Yellow, 1, 1);
     private DevelopmentCard Yellow12 = new DevelopmentCard (new int[]{0, 1, 1, 1}, new int[]{0, 1, 0, 1}, new int[]{0, 0, 1, 0, 0}, 6, DevelopmentCard.colorCard.Yellow, 1, 2);
     private DevelopmentCard Yellow13 = new DevelopmentCard (new int[]{0, 0, 0, 3}, new int[]{0, 2, 0, 0}, new int[]{1, 0, 1, 1, 0}, 7, DevelopmentCard.colorCard.Yellow, 1, 3);
