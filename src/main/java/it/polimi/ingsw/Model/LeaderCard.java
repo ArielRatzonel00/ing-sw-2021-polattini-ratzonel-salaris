@@ -11,7 +11,7 @@ public class LeaderCard {
                             // se Type ExtraWarehouse 1=purple, 2=blue, 3=yellow, 4=grey
                             // se Type ConvertResources 1=purple, 2=blue, 3=yellow, 4=green
 
-    private int Color2; // i numeri rimangono uguali a sopra
+    private int Color2; // i numeri rimangono uguali a sopra, 0 se non ho un solo costo in quella carta
 
     private int VictoryPoints;
     // private int act; andrà nella funzione che chiama Active
