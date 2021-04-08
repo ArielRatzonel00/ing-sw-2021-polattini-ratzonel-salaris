@@ -55,6 +55,10 @@ public class LeaderCard {
     public int getSpecialAbilityColor() {
         return SpecialAbilityColor;
     }
+
+    public void setActivate(boolean activate) {
+        Activate = activate;
+    }
 }
 /*
     public void discard(){

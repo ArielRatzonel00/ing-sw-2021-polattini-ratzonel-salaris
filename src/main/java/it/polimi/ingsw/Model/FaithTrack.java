@@ -43,6 +43,30 @@ public class FaithTrack {
     public popeFavorState getPopeFavor3() {
         return popeFavor3;
     }
+
+    public void setMultiplayer(boolean multiplayer) {
+        Multiplayer = multiplayer;
+    }
+
+    public void setRedPosition(int redPosition) {
+        RedPosition  += redPosition;
+    }
+
+    public void setBlackPosition(int blackPosition) {
+        BlackPosition += blackPosition;
+    }
+
+    public void setPopeFavor1(popeFavorState popeFavor1) {
+        this.popeFavor1 = popeFavor1;
+    }
+
+    public void setPopeFavor2(popeFavorState popeFavor2) {
+        this.popeFavor2 = popeFavor2;
+    }
+
+    public void setPopeFavor3(popeFavorState popeFavor3) {
+        this.popeFavor3 = popeFavor3;
+    }
 }
 
 

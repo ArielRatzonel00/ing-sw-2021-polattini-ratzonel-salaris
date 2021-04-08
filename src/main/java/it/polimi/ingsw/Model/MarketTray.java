@@ -49,4 +49,8 @@ public class MarketTray  {
     public MarketMarble getOustideMarble() {
         return OustideMarble;
     }
+    public void ShiftMatrix(int i, int j) {
+        // pensare al codice da mettere qua
+
+    }
 }

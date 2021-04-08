@@ -13,6 +13,10 @@ public class MarketMarble {
         PURPLE,
         BLUE
     }
+
+    public ColorMarble getColorMarble() {
+        return colorMarble;
+    }
 }
 
 
