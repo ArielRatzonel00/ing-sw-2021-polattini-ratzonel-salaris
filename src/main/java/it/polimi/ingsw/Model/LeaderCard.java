@@ -3,7 +3,7 @@ package it.polimi.ingsw.Model;
 import java.util.Map;
 
 public class LeaderCard {
-    private int Type; // 1 = TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
+    private int Type; // 1=TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
     private boolean Activate = false;
     private int Id;
     private int Color1Cost; // se TypeExtraResources 1=purple, 2=blue, 3=yellow, 4=green
