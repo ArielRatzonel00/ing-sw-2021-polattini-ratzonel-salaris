@@ -3,31 +3,32 @@ package it.polimi.ingsw.Model;
 import java.util.Map;
 
 public class LeaderCard {
-    private boolean[] Type; // TypeExtraResources, TypeReduceCost, TypeExtraWarehouse, TypeConvertResource
+    private int Type; // 1 = TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
     private boolean Activate = false;
     private int Id;
-    private int Color1Cost; // se TypeExtraResources 1:yellow, 2:purple, 3: green, 4: blue
-                        // se TypeReduceCost uguale
-                        // se Type ExtraWarehouse 3 non è più green ma grey
-                        // se Type ConvertResources uguale a Extra resources
+    private int Color1Cost; // se TypeExtraResources 1=purple, 2=blue, 3=yellow, 4=green
+                            // se TypeReduceCost 1=purple, 2=blue, 3=yellow, 4=green
+                            // se Type ExtraWarehouse 1=purple, 2=blue, 3=yellow, 4=grey
+                            // se Type ConvertResources 1=purple, 2=blue, 3=yellow, 4=green
 
-    private int Color2; // i numeri rimangono uguale
+    private int Color2; // i numeri rimangono uguali a sopra
 
     private int VictoryPoints;
     // private int act; andrà nella funzione che chiama Active
 
-    private int SpecialAbilityColor; // 1:yellow, 2:purple, 3: grey, 4: blue
+    private int SpecialAbilityColor; // 1=purple, 2=blue, 3=yellow, 4=grey
+    // è il colore dell'abilità speciale che hanno
 
-    public LeaderCard(boolean[] type, int id, int color1Cost, int color2, int specialAbilityColor) {
+    public LeaderCard(int type, int id, int color1Cost, int color2, int specialAbilityColor, int victoryPoints) {
         this.Type = type;
         this.Id = id;
         this.Color1Cost = color1Cost;
         this.Color2 = color2;
-        // da fare con i casi if VictoryPoints = ;
         this.SpecialAbilityColor = specialAbilityColor;
+        this.VictoryPoints = victoryPoints;
     }
 
-    public boolean[] getType() {
+    public int getType() {
         return Type;
     }
 

@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class CreateCards {
 
+    // Creazione DevelopmentCards
+
     private DevelopmentCard Green11 = new DevelopmentCard (new int[]{0, 2, 0, 0}, new int[]{0, 0, 1, 0}, new int[]{0, 0, 0, 0, 1}, 1, DevelopmentCard.colorCard.Green, 1, 1);
     private DevelopmentCard Green12 = new DevelopmentCard (new int[]{1, 1, 0, 1}, new int[]{0, 0, 0, 1}, new int[]{1, 0, 0, 0, 0}, 2, DevelopmentCard.colorCard.Green, 1, 2);
     private DevelopmentCard Green13 = new DevelopmentCard (new int[]{0, 3, 0, 0}, new int[]{2, 0, 0, 0}, new int[]{0, 1, 1, 1, 0}, 3, DevelopmentCard.colorCard.Green, 1, 3);
@@ -67,4 +69,7 @@ public class CreateCards {
     private DevelopmentCard Blue32 = new DevelopmentCard (new int[]{0, 0, 5, 2}, new int[]{0, 1, 1, 0}, new int[]{2, 0, 0, 2, 1}, 47, DevelopmentCard.colorCard.Blue, 3, 10);
     private DevelopmentCard Blue33 = new DevelopmentCard (new int[]{0, 0, 7, 0}, new int[]{0, 0, 0, 1}, new int[]{0, 1, 0, 0, 3}, 48, DevelopmentCard.colorCard.Blue, 3, 11);
     private DevelopmentCard Blue34 = new DevelopmentCard (new int[]{0, 0, 4, 4}, new int[]{1, 0, 0, 0}, new int[]{0, 3, 1, 0, 0}, 49, DevelopmentCard.colorCard.Blue, 3, 12);
+
+    //Creazione LeaderCards
+
 }
