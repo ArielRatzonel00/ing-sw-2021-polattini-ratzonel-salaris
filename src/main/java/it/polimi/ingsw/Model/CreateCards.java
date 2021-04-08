@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Model;
 
-import java.awt.*;
-
 public class CreateCards {
 
     // Creazione DevelopmentCards
