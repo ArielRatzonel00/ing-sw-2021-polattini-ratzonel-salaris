@@ -4,15 +4,22 @@ import java.util.*;
 
 
 public class GameManager {
+    private List<Player> players;
     private MultiplayerGame MultiGame;
     private SinglePlayerGame SingleGame;
 
-    GameManager(){
-        // if(CLASSE.get.TANTIGIOCATORI)
-        this.MultiGame= new MultiplayerGame();
-        //else
-        this.SingleGame=new SinglePlayerGame();
+    //Constructor of game Manager, choose between single or multi player game
+    public GameManager(){
+        //Se players <1 throw new exception
+        if(players.size()>1)
+        this.MultiGame= new MultiplayerGame(CLASSE.getPlayers, CLASSE.getDevelopmentCards);
+        else
+        this.SingleGame=new SinglePlayerGame(CLASSE.getPlayers, CLASSE.getDevelopmentCards,Classe.getMarkers);
 
     }
+
+    // classe che estrae 4 carte per ogni giocatore e chiede di sceglierne 2
+    public LeaderCardExtractor();
+
 
 }

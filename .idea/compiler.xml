@@ -6,9 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ing-sw-2021-polattini-ratzonel-salaris" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ing-sw-2021-polattini-ratzonel-salaris" target="1.7" />
       <module name="IngSw-Project-2021" target="1.7" />
     </bytecodeTargetLevel>
   </component>
