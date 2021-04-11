@@ -1,9 +1,9 @@
 package it.polimi.ingsw.Model;
 
 public class DevelopmentCard {
-    private int[] ResourcesCost; //purple, blue, yellow, grey
-    private int[] ResourcesProductionCost; //purple, blue, yellow, grey
-    private int[] ResourcesProductionProfit; //purple, blue, yellow, grey, red
+    private int[] Cost; //purple, blue, yellow, grey
+    private int[] ProductionCost; //purple, blue, yellow, grey
+    private int[] ProductionProfit; //purple, blue, yellow, grey, red
     private int Id;
     public enum colorCard {
         Green,
@@ -15,26 +15,27 @@ public class DevelopmentCard {
     private int Level;//livello della carta
     private int VictoryPoints; // Victory Points
 
-    public DevelopmentCard(int[] resourcesCost, int[] resourcesProductionCost, int[] resourcesProductionProfit, int id, colorCard color, int level, int victoryPoints) {
-        this.ResourcesCost = resourcesCost;
-        this.ResourcesProductionCost = resourcesProductionCost;
-        this.ResourcesProductionProfit = resourcesProductionProfit;
+    public DevelopmentCard(int[] Cost, int[] ProductionCost, int[] ProductionProfit, int id, colorCard color, int level, int victoryPoints) {
+        this.Cost = Cost;
+        this.ProductionCost = ProductionCost;
+        this.ProductionProfit = ProductionProfit;
         this.Id = id;
         this.Color = color;
         this.Level = level;
         this.VictoryPoints = victoryPoints;
     }
 
+
     public int[] getResourcesCost() {
-        return ResourcesCost;
+        return Cost;
     }
 
     public int[] getResourcesProductionCost() {
-        return ResourcesProductionCost;
+        return ProductionCost;
     }
 
     public int[] getResourcesProductionProfit() {
-        return ResourcesProductionProfit;
+        return ProductionProfit;
     }
 
     public int getId() {
