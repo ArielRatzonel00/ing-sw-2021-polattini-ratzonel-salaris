@@ -50,12 +50,42 @@ public class MarketTray  {
         return OustideMarble;
     }
 
-    public void ShiftMatrixByRow(int i, int j) {
-        // pensare al codice da mettere qua
+    public MarketMarble[] GetMarketMarblesFromRow(int row){
+
+        MarketMarble[] returnedMarbles = new MarketMarble[4];
+        returnedMarbles[0] = MarketMatrix[row][0];
+        returnedMarbles[1] = MarketMatrix[row][1];
+        returnedMarbles[2] = MarketMatrix[row][2];
+        returnedMarbles[3] = MarketMatrix[row][3];
+        return returnedMarbles;
 
     }
-    public void ShiftMatrixByCol(int i, int j) {
-        // pensare al codice da mettere qua
+    public MarketMarble[] GetMarketMarblesFromCol(int col){
+
+        MarketMarble[] returnedMarbles = new MarketMarble[3];
+        returnedMarbles[0] = MarketMatrix[0][col];
+        returnedMarbles[1] = MarketMatrix[1][col];
+        returnedMarbles[2] = MarketMatrix[2][col];
+        return returnedMarbles;
+
+    }
+
+
+    public void ShiftMatrixByRow(int rig) {
+        MarketMarble temp = OustideMarble;
+        OustideMarble = MarketMatrix[rig][0];
+        MarketMatrix[rig][0] = MarketMatrix[rig][1];
+        MarketMatrix[rig][1] = MarketMatrix[rig][2];
+        MarketMatrix[rig][2] = MarketMatrix[rig][3];
+        MarketMatrix[rig][3] =  temp;
+
+    }
+    public void ShiftMatrixByCol(int col) {
+        MarketMarble temp2 = OustideMarble;
+        OustideMarble = MarketMatrix[2][col];
+        MarketMatrix[2][col] = MarketMatrix[1][col];
+        MarketMatrix[1][col] = MarketMatrix[0][col];
+        MarketMatrix[0][col] = temp2;
 
     }
 }
