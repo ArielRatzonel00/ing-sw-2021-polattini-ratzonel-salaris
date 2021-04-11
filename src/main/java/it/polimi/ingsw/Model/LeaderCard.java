@@ -57,7 +57,7 @@ public class LeaderCard {
     }
 
     public void setActivate(boolean activate) {
-        Activate = activate;
+        this.Activate = activate;
     }
 }
 /*
