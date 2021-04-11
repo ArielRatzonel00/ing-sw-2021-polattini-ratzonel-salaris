@@ -66,9 +66,9 @@ public class CreateCards {
 
     //Array con tutte le DevelopmentCards posizionate in base al loro ID (la carta con ID = 1 è posta in posizione ArrayDevelopmentCards[0]).
     //Ciò è fatto per sapere che quando l'ID=0 non è ancora stato modificato e non rappresenta nessuna carta.
-    private DevelopmentCard[] ArrDevelopmentCards = {Green11, Green12, Green13, Green14, Yellow11, Yellow12, Yellow13, Yellow14, Purple11, Purple12, Purple13, Purple14, Blue11, Blue12, Blue13, Blue14, Green21, Green22, Green23, Green24, Yellow21, Yellow22, Yellow23, Yellow24, Purple21, Purple22, Purple23, Purple24, Blue21, Blue22, Blue23, Blue24, Green31, Green32, Green33, Green34, Yellow31, Yellow32, Yellow33, Yellow34, Purple31, Purple32, Purple33, Purple34, Blue31, Blue32, Blue33, Blue34,};
+    private DevelopmentCard[] ArrDevelopmentCards = {Green11, Green12, Green13, Green14, Yellow11, Yellow12, Yellow13, Yellow14, Purple11, Purple12, Purple13, Purple14, Blue11, Blue12, Blue13, Blue14, Green21, Green22, Green23, Green24, Yellow21, Yellow22, Yellow23, Yellow24, Purple21, Purple22, Purple23, Purple24, Blue21, Blue22, Blue23, Blue24, Green31, Green32, Green33, Green34, Yellow31, Yellow32, Yellow33, Yellow34, Purple31, Purple32, Purple33, Purple34, Blue31, Blue32, Blue33, Blue34};
 
-    // manca una funzione che colleghi le carte con le altre parti e anche un metodo che inserito l'id mi ritorna la carta.
+    //inserisco l'id e mi ritorna la carta
     private DevelopmentCard SelectDevFromId(int IdDev) {
         return ArrDevelopmentCards[IdDev - 1];
     }
@@ -97,7 +97,7 @@ public class CreateCards {
     //Array con tutte le LeaderCards posizionate in base al loro ID (la carta con ID = 1 è posta in posizione ArrayLeaderCards[0]).
     private LeaderCard[] ArrLeaderCards = {ExtraRsc1, ExtraRsc2, ExtraRsc3, ExtraRsc4, ReduceCost1, ReduceCost2, ReduceCost3, ReduceCost4, ExtraWarehouse1, ExtraWarehouse2, ExtraWarehouse3, ExtraWarehouse4, ConvertRsc1, ConvertRsc2, ConvertRsc3, ConvertRsc4};
 
-    // manca una funzione che colleghi le carte con le altre parti e anche un metodo che inserito l'id mi ritorna la carta.
+    //inserisco l'id e mi ritorna la carta
     private LeaderCard SelectLeadFromId(int IdLead) {
         return ArrLeaderCards[IdLead - 1];
     }

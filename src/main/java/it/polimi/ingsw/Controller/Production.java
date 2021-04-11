@@ -1,16 +1,15 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.DevelopmentCard;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Slots;
 
-public class Production {
-    private int Card1Production = new ;
-    private DevelopmentCard Card2Production;
-    private DevelopmentCard Card3Production;
+public class Production (Player player) {
+    private DevelopmentCard Card1Production = player.getSlots().getCard1Top();
+    private DevelopmentCard Card2Production = player.getSlots().getCard2Top();;
+    private DevelopmentCard Card3Production = player.getSlots().getCard3Top();;
     private LeaderCardController Card4Production;
     private LeaderCardController Card5Production;
-
-    Card1Production = new DevelopmentCard(Slots.getCard1Top);
 
 }
 

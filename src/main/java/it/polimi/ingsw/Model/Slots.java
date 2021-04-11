@@ -17,16 +17,16 @@ public class Slots {
         return card3;
     }
 
-    public DevelopmentCard getIdCard1Top() { // metodo aggiunto per avere l'id della carta più in alto per fare la produzione
+    public DevelopmentCard getCard1Top() {
         return card1[0]; // verificare che sia effettivamente la 0 la più sopra
     }
 
-    public DevelopmentCard getIdCard2Top() { // metodo aggiunto per avere l'id della carta più in alto per fare la produzione
+    public DevelopmentCard getCard2Top() {
         return card2[0]; // verificare che sia effettivamente la 0 la più sopra
     }
 
-    public int getIdCard3Top() { // metodo aggiunto per avere l'id della carta più in alto per fare la produzione
-        return getIdCard3Top(); // verificare che sia effettivamente la 0 la più sopra
+    public DevelopmentCard getCard3Top() {
+        return card3[0]; // verificare che sia effettivamente la 0 la più sopra
     }
 
 
