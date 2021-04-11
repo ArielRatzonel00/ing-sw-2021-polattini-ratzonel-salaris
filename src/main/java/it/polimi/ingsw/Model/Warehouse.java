@@ -31,44 +31,87 @@ public class Warehouse {
         return rowextra2;
     }
 
-    public void addToRow1(MarketMarble row1Marble) {
-        row1 = row1Marble;
-        Colorrow1 = row1Marble.getColorMarble();
+    public void addToRow(MarketMarble rowMarble, int row) {
+        if (row == 1) {
+            row1 = rowMarble;
+            Colorrow1 = rowMarble.getColorMarble();
+        }
+        else if(row == 2){
+            if (this.row2[0] == null){
+                row2[0] = rowMarble;
+                Colorrow2 = rowMarble.getColorMarble();
+            }
+            else if (this.row2[1] == null && Colorrow2 == rowMarble.getColorMarble()){
+                row2[1] = rowMarble;
+            }
+            else {
+                // Can't put Marble here
+            }
+        }
+        else if(row == 3){
+            if (this.row3[0] == null){
+                row3[0] = rowMarble;
+                Colorrow3 = rowMarble.getColorMarble();
+            }
+            else if (this.row3[1] == null && Colorrow3 == rowMarble.getColorMarble()){
+                row3[1] = rowMarble;
+            }
+            else if (this.row3[2] == null && Colorrow3 == rowMarble.getColorMarble()){
+                row3[2] = rowMarble;
+            }
+            else {
+                // Can't put Marble here
+            }
+
+        }
+    }
+    public MarketMarble RemoveResource(int row){
+        MarketMarble temp = null;
+        if (row == 1){
+            temp = row1;
+            row1 = null;
+        }
+        else if (row == 2){
+            if (row2[1] != null){
+                temp = row2[1];
+                row2[1] = null;
+            }
+            else {
+                temp = row2[0];
+                row2[0] = null;
+            }
+        }
+        else if(row == 3){
+            if (row3[2] != null){
+                temp = row3[2];
+                row3[2] = null;
+            }
+            else if (row2[1] != null){
+                temp = row3[1];
+                row3[1] = null;
+            }
+            else {
+                temp = row3[0];
+                row3[0] = null;
+            }
+
+        }
+        return temp;
+    }
+        public void moveResources (int FromRow, int toRow){
+
+    }
+        public boolean CheckWarehouse(){
+        return true;
+
+        }
     }
 
-    public void addToRow2(MarketMarble row2Marble) {
-        if (this.row2[0] == null){
-            row2[0] = row2Marble;
-            Colorrow2 = row2Marble.getColorMarble();
-        }
-        else if (this.row2[1] == null && Colorrow2 == row2Marble.getColorMarble()){
-            row2[1] = row2Marble;
-        }
-        else {
-            // Can't put Marble here
-        }
-    }
 
-    public void addToRow3(MarketMarble row3Marble) {
-        if (this.row3[0] == null){
-            row3[0] = row3Marble;
-            Colorrow3 = row3Marble.getColorMarble();
-        }
-        else if (this.row3[1] == null && Colorrow3 == row3Marble.getColorMarble()){
-            row3[1] = row3Marble;
-        }
-        else if (this.row3[2] == null && Colorrow3 == row3Marble.getColorMarble()){
-            row3[2] = row3Marble;
-        }
-        else {
-            // Can't put Marble here
-        }
 
-        // funzione per gestire i row extra
+// funzione per gestire i row extra
         // funzione per togliere
         // funzione per muovere
-    }
-}
 
 /*
     public void addResourcesRow1(MarketMarble MarketMarble){
