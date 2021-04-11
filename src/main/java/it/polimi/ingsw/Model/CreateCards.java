@@ -1,15 +1,19 @@
 package it.polimi.ingsw.Model;
 
 public class CreateCards {
+    // manca una funzione che colleghi le carte con le altre parti e anche un funzione che inserito l'id mi ritorna la carta.
+    private DevelopmentCard SelectCardFromId (int IdCard)
+    {
+
+
+    }
 
     // Creazione DevelopmentCards
     private DevelopmentCard Green11 = new DevelopmentCard (new int[]{0, 2, 0, 0}, new int[]{0, 0, 1, 0}, new int[]{0, 0, 0, 0, 1}, 1, DevelopmentCard.colorCard.Green, 1, 1);
     private DevelopmentCard Green12 = new DevelopmentCard (new int[]{1, 1, 0, 1}, new int[]{0, 0, 0, 1}, new int[]{1, 0, 0, 0, 0}, 2, DevelopmentCard.colorCard.Green, 1, 2);
     private DevelopmentCard Green13 = new DevelopmentCard (new int[]{0, 3, 0, 0}, new int[]{2, 0, 0, 0}, new int[]{0, 1, 1, 1, 0}, 3, DevelopmentCard.colorCard.Green, 1, 3);
     private DevelopmentCard Green14 = new DevelopmentCard (new int[]{0, 2, 2, 0}, new int[]{1, 0, 0, 1}, new int[]{0, 0, 2, 0, 1}, 4, DevelopmentCard.colorCard.Green, 1, 4);
-    //private DevelopmentCard[] Array1 = {Green11, Green12, Green13, }
-    //private GridCell Cell1 = new GridCell()
-    // get cella 1
+
     private DevelopmentCard Yellow11 = new DevelopmentCard (new int[]{0, 0, 0, 2}, new int[]{1, 0, 0, 0}, new int[]{0, 0, 0, 0, 1}, 5, DevelopmentCard.colorCard.Yellow, 1, 1);
     private DevelopmentCard Yellow12 = new DevelopmentCard (new int[]{0, 1, 1, 1}, new int[]{0, 1, 0, 1}, new int[]{0, 0, 1, 0, 0}, 6, DevelopmentCard.colorCard.Yellow, 1, 2);
     private DevelopmentCard Yellow13 = new DevelopmentCard (new int[]{0, 0, 0, 3}, new int[]{0, 2, 0, 0}, new int[]{1, 0, 1, 1, 0}, 7, DevelopmentCard.colorCard.Yellow, 1, 3);
@@ -69,6 +73,11 @@ public class CreateCards {
     private DevelopmentCard Blue33 = new DevelopmentCard (new int[]{0, 0, 7, 0}, new int[]{0, 0, 0, 1}, new int[]{0, 1, 0, 0, 3}, 47, DevelopmentCard.colorCard.Blue, 3, 11);
     private DevelopmentCard Blue34 = new DevelopmentCard (new int[]{0, 0, 4, 4}, new int[]{1, 0, 0, 0}, new int[]{0, 3, 1, 0, 0}, 48, DevelopmentCard.colorCard.Blue, 3, 12);
 
+    //Array con tutte le DevelopmentCards posizionate in base al loro ID (la carta con ID = 1 è posta in posizione ArrayDevelopmentCards[0].
+    //Ciò è fatto per sapere che quando l'ID=0 non è ancora stato modificato e non rappresenta nessuna carta.
+    private DevelopmentCard[] ArrDevelopmentCards = {Green11, Green12, Green13, Green14, Yellow11, Yellow12, Yellow13, Yellow14, Purple11, Purple12, Purple13, Purple14, Blue11, Blue12, Blue13, Blue14, Green21, Green22, Green23, Green24, Yellow21, Yellow22, Yellow23, Yellow24, Purple21, Purple22, Purple23, Purple24, Blue21, Blue22, Blue23, Blue24, Green31, Green32, Green33, Green34, Yellow31, Yellow32, Yellow33, Yellow34, Purple31, Purple32, Purple33, Purple34, Blue31, Blue32, Blue33, Blue34,};
+
+
     //Creazione LeaderCards
     private LeaderCard ExtraRsc1 = new LeaderCard (1, 1, 3, 2, 1,5); //pallina bianca in viola
     private LeaderCard ExtraRsc2 = new LeaderCard (1, 2, 4, 1, 2,5); //pallina bianca in blu
@@ -89,4 +98,6 @@ public class CreateCards {
     private LeaderCard ConvertRsc2 = new LeaderCard (4, 14, 3, 0, 2,4); //converte un blu in una risorsa a scelta e 1 punto fede
     private LeaderCard ConvertRsc3 = new LeaderCard (4, 15, 4, 0, 3,4); //converte un giallo in una risorsa a scelta e 1 punto fede
     private LeaderCard ConvertRsc4 = new LeaderCard (4, 16, 1, 0, 4,4); //converte un grigio in una risorsa a scelta e 1 punto fede
+
+
 }

@@ -1,14 +1,16 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.DevelopmentCard;
+import it.polimi.ingsw.Model.Slots;
 
 public class Production {
-    private DevelopmentCard card1Production;
-    private DevelopmentCard card2Production;
-    private DevelopmentCard card3Production;
-    private LeaderCardController card4Production;
-    private LeaderCardController card5Production;
+    private int Card1Production = new ;
+    private DevelopmentCard Card2Production;
+    private DevelopmentCard Card3Production;
+    private LeaderCardController Card4Production;
+    private LeaderCardController Card5Production;
 
+    Card1Production = new DevelopmentCard(Slots.getCard1Top);
 
 }
 
@@ -19,5 +21,4 @@ Cose da fare:
 Posso attivare una certa produzione solo una volta per turno
 I poteri di produzione si attivano tutti contemporaneamente quindi la somma delle risorse di tutte le produzioni
 deve essere minore della somma di tutte le risorse che ho tra magazzino, carte leader e strongbox.
-
  */

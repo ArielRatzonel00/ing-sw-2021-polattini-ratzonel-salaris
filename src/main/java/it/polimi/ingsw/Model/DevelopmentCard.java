@@ -42,6 +42,10 @@ public class DevelopmentCard {
         return Id;
     }
 
+    public int getIdFromCard(DevelopmentCard Card) { //in teoria prende in ingresso una carta e mi ritorna il suo id
+        return Card.Id;
+    }
+
     public colorCard getColor() {
         return Color;
     }
