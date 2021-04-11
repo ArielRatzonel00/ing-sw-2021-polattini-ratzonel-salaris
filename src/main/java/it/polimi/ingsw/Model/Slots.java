@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model;
 
 public class Slots {
-    private DevelopmentCard[] card1;
+    private DevelopmentCard[] card1; // possiamo crearlo di 3 posti questo array? // possiamo farlo direttamente con gli id?
     private DevelopmentCard[] card2;
     private DevelopmentCard[] card3;
 
