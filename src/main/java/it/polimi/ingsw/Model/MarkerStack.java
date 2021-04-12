@@ -17,6 +17,11 @@ public class MarkerStack {
 
     public Marker getTopMarker(Marker[] markers, int CountForMarkerStack){
         return markers[CountForMarkerStack];
+    }
+    public void Shuffle(){
+        List<Marker> ListMarkers = Arrays.asList(markers);
+        Collections.shuffle(ListMarkers);
+        ListMarkers.toArray(markers);
 
     }
 }
