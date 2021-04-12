@@ -4,6 +4,7 @@ public class Slots {
     private DevelopmentCard[] card1; // possiamo crearlo di 3 posti questo array? // possiamo farlo direttamente con gli id?
     private DevelopmentCard[] card2;
     private DevelopmentCard[] card3;
+    private int[] ColorDevCards = {0, 0, 0, 0}; //posizione 0: purple, 1=blue, 2=yellow, 3=green
 
     public DevelopmentCard[] getCard1() {
         return card1;
@@ -41,6 +42,77 @@ public class Slots {
     public void setCard3(DevelopmentCard[] card3) {
         this.card3 = card3;
     }
+
+    public int[] getNumberOfDevCardsForColors(){ //da controllare bene
+       for(int counter=0; counter < card1.length; counter++)
+       {
+          if(card1[counter].getColor() == DevelopmentCard.colorCard.Purple){
+              ColorDevCards[0]+=1;
+          }
+          else{
+              if(card1[counter].getColor() == DevelopmentCard.colorCard.Blue){
+                  ColorDevCards[1]+=1;
+              }
+              else{
+                  if(card1[counter].getColor() == DevelopmentCard.colorCard.Yellow){
+                      ColorDevCards[2]+=1;
+                  }
+                  else{
+                      if(card1[counter].getColor() == DevelopmentCard.colorCard.Green){
+                          ColorDevCards[3]+=1;
+                      }
+                  }
+              }
+
+          }
+       }
+        for(int c=0; c < card2.length; c++)
+        {
+            if(card2[c].getColor() == DevelopmentCard.colorCard.Purple){
+                ColorDevCards[0]+=1;
+            }
+            else{
+                if(card2[c].getColor() == DevelopmentCard.colorCard.Blue){
+                    ColorDevCards[1]+=1;
+                }
+                else{
+                    if(card2[c].getColor() == DevelopmentCard.colorCard.Yellow){
+                        ColorDevCards[2]+=1;
+                    }
+                    else{
+                        if(card2[c].getColor() == DevelopmentCard.colorCard.Green){
+                            ColorDevCards[3]+=1;
+                        }
+                    }
+                }
+
+            }
+        }
+        for(int counter=0; counter < card3.length; counter++)
+        {
+            if(card3[counter].getColor() == DevelopmentCard.colorCard.Purple){
+                ColorDevCards[0]+=1;
+            }
+            else{
+                if(card3[counter].getColor() == DevelopmentCard.colorCard.Blue){
+                    ColorDevCards[1]+=1;
+                }
+                else{
+                    if(card3[counter].getColor() == DevelopmentCard.colorCard.Yellow){
+                        ColorDevCards[2]+=1;
+                    }
+                    else{
+                        if(card3[counter].getColor() == DevelopmentCard.colorCard.Green){
+                            ColorDevCards[3]+=1;
+                        }
+                    }
+                }
+
+            }
+        }
+       return ColorDevCards;
+    }
+
 }
    /* public void addCard(DevelopmentCard developmentCard){
 
