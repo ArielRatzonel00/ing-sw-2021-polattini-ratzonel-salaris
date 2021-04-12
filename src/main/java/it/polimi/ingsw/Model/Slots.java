@@ -2,7 +2,7 @@ package it.polimi.ingsw.Model;
 import java.util.ArrayList;
 
 public class Slots {
-    private ArrayList<DevelopmentCard> slot1; // possiamo crearlo di 3 posti questo array? // possiamo farlo direttamente con gli id?
+    private ArrayList<DevelopmentCard> slot1;
     private ArrayList<DevelopmentCard> slot2;
     private ArrayList<DevelopmentCard> slot3;
 
@@ -35,18 +35,18 @@ public class Slots {
     }
 
 
-    public void setSlot1(DevelopmentCard card1) {
-        if (card1.getLevel() >= getCard1Top().getLevel())
+    public void addSlot1(DevelopmentCard card1) {
+        if (card1.getLevel() > getCard1Top().getLevel())
             slot1.add(card1);
     }
 
-    public void setSlot2(DevelopmentCard card1) {
-        if (card1.getLevel() >= getCard1Top().getLevel())
+    public void addSlot2(DevelopmentCard card1) {
+        if (card1.getLevel() > getCard1Top().getLevel())
             slot1.add(card1);
     }
 
-    public void setSlot3(DevelopmentCard card1) {
-        if (card1.getLevel() >= getCard1Top().getLevel())
+    public void addSlot3(DevelopmentCard card1) {
+        if (card1.getLevel() > getCard1Top().getLevel())
             slot1.add(card1);
     }
 
@@ -102,74 +102,7 @@ public class Slots {
                     break;
             }
         }
-    /*
-        for(int counter=0; counter < slot1.size(); counter++)
-       {
-          if(slot1[counter].getColor() == DevelopmentCard.colorCard.Purple){
-              ColorDevCards[0]+=1;
-          }
-          else{
-              if(slot1[counter].getColor() == DevelopmentCard.colorCard.Blue){
-                  ColorDevCards[1]+=1;
-              }
-              else{
-                  if(slot1[counter].getColor() == DevelopmentCard.colorCard.Yellow){
-                      ColorDevCards[2]+=1;
-                  }
-                  else{
-                      if(slot1[counter].getColor() == DevelopmentCard.colorCard.Green){
-                          ColorDevCards[3]+=1;
-                      }
-                  }
-              }
 
-          }
-       }
-
-        for(int c=0; c < slot2.length; c++)
-        {
-            if(slot2[c].getColor() == DevelopmentCard.colorCard.Purple){
-                ColorDevCards[0]+=1;
-            }
-            else{
-                if(slot2[c].getColor() == DevelopmentCard.colorCard.Blue){
-                    ColorDevCards[1]+=1;
-                }
-                else{
-                    if(slot2[c].getColor() == DevelopmentCard.colorCard.Yellow){
-                        ColorDevCards[2]+=1;
-                    }
-                    else{
-                        if(slot2[c].getColor() == DevelopmentCard.colorCard.Green){
-                            ColorDevCards[3]+=1;
-                        }
-                    }
-                }
-
-            }
-        }
-        for(int counter=0; counter < slot3.length; counter++)
-        {
-            if(slot3[counter].getColor() == DevelopmentCard.colorCard.Purple){
-                ColorDevCards[0]+=1;
-            }
-            else{
-                if(slot3[counter].getColor() == DevelopmentCard.colorCard.Blue){
-                    ColorDevCards[1]+=1;
-                }
-                else{
-                    if(slot3[counter].getColor() == DevelopmentCard.colorCard.Yellow){
-                        ColorDevCards[2]+=1;
-                    }
-                    else{
-                        if(slot3[counter].getColor() == DevelopmentCard.colorCard.Green){
-                            ColorDevCards[3]+=1;
-                        }
-                    }
-                }
-
-            }
-        } */
         return ColorDevCards;
     }
 
