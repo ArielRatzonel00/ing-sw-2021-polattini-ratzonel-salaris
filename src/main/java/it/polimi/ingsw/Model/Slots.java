@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model;
 import java.util.arrayList;
 
-public class SlotsBoard {
+public class Slots {
     private arrayList<DevelopmentCard> slot1; // possiamo crearlo di 3 posti questo array? // possiamo farlo direttamente con gli id?
     private arrayList <DevelopmentCard> slot2;
     private arrayList <DevelopmentCard> slot3;
