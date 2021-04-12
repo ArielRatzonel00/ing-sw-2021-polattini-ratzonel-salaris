@@ -18,8 +18,15 @@ public class GameManager {
 
     }
 
-    // classe che estrae 4 carte per ogni giocatore e chiede di sceglierne 2
+    // metodo che estrae 4 carte per ogni giocatore e chiede di sceglierne 2
     public LeaderCardExtractor();
+
+    //metodo TURNO SUCCESSIVO
+
+    //metodo FINISCI PARTITA
+    //metodo conta punti
+
+
 
 
 }
