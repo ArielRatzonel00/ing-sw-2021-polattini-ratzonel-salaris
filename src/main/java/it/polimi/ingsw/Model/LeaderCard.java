@@ -59,16 +59,8 @@ public class LeaderCard {
     public void setActivate(boolean activate) {
         this.Activate = activate;
     }
-}
-/*
-    public void discard(){
-        // da rivedere, togliere la carta leader e fare add Faith Point
 
+    public int getLeadIdFromCard(LeaderCard LeadCard) { //prende in ingresso una carta e mi ritorna il suo id
+        return LeadCard.Id;
     }
-    public void activate(){
-        act = 1;
-        //attivare carta Leader magari chimando i metodi della classe effetto da creare
-        }
-
-
- */
+}
