@@ -31,12 +31,14 @@ public class LeaderCardController (Player player){
     private int NumberOfGreenDevCards;
     private int[] SlotCards = new int[4];
 
+    //Mettere dentro la classe player un arraylist di leadercard e inserire metodo remove leadercard in discard
+
 
 
 
     //posso scartare la mia carta leader
-    public void discard(int LeadDiscardId){
-        if(LeadDiscardId == LeaderCard1Id) {
+    public void discard(LeaderCard LeadDiscard, int num){
+        if(num == 1) {
             LeaderCard1Id = 0;
         }
         else {
@@ -47,6 +49,15 @@ public class LeaderCardController (Player player){
 
     //posso attivare la carta leader
     public void activate(LeaderCard LeadCardAct){
+        if(LeadCardAct.canBeActivated().equals(true)){
+            LeadCardAct.setActivate(true);
+        }
+
+        //rendo leadercard astratta e creo 4 sottoclassi per ogni tipo di leadercard che estendono leadercard e
+        //ogni classe fa l'ovveride del metodo canbeactivated
+
+
+
 
         switch (LeadCardAct.getType()) {
             case 1:
@@ -55,7 +66,7 @@ public class LeaderCardController (Player player){
                 SlotCards = player.getSlots().getNumberOfDevCardsForColors();
 
                 if(Cost1==1 && SlotCards[0]>=2 && Cost2==4 && SlotCards[3]>=1){
-                    LeadCardAct.setActivate(LeadCardAct.isActivate());
+
                 }
                 //farlo per le altre 4 carte
 
