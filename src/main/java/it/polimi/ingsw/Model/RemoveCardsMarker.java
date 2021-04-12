@@ -1,4 +1,4 @@
 package it.polimi.ingsw.Model;
 
-public class RemoveCardsMarker {
+public class RemoveCardsMarker extends Marker{
 }
