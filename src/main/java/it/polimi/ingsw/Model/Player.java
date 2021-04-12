@@ -9,7 +9,6 @@ public class Player {
     private LeaderCard[] leaderCards;
     private Slots slots;
 
-
     public Player(String nickname, LeaderCard[] FourLeaderCards) {
 
         this.nickname = nickname;

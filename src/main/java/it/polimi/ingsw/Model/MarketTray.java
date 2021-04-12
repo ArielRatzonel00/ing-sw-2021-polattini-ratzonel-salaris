@@ -10,19 +10,20 @@ public class MarketTray  {
     private MarketMarble OustideMarble;
 
     public MarketTray() {
-        ArrayMarble[0] = new MarketMarble (MarketMarble.ColorMarble.WHITE);
-        ArrayMarble[1] = new MarketMarble (MarketMarble.ColorMarble.WHITE);
-        ArrayMarble[2] = new MarketMarble (MarketMarble.ColorMarble.WHITE);
-        ArrayMarble[3] = new MarketMarble (MarketMarble.ColorMarble.WHITE);
-        ArrayMarble[4] = new MarketMarble (MarketMarble.ColorMarble.PURPLE);
-        ArrayMarble[5] = new MarketMarble (MarketMarble.ColorMarble.PURPLE);
-        ArrayMarble[6] = new MarketMarble (MarketMarble.ColorMarble.BLUE);
-        ArrayMarble[7] = new MarketMarble (MarketMarble.ColorMarble.BLUE);
-        ArrayMarble[8] = new MarketMarble (MarketMarble.ColorMarble.RED);
-        ArrayMarble[9] = new MarketMarble (MarketMarble.ColorMarble.GREY);
-        ArrayMarble[10] = new MarketMarble (MarketMarble.ColorMarble.GREY);
-        ArrayMarble[11] = new MarketMarble (MarketMarble.ColorMarble.YELLOW);
-        ArrayMarble[12] = new MarketMarble (MarketMarble.ColorMarble.YELLOW);
+        ArrayMarble[0] = new WhiteMarble();
+        ArrayMarble[1] = new WhiteMarble();
+        ArrayMarble[2] = new WhiteMarble();
+        ArrayMarble[3] = new WhiteMarble();
+        ArrayMarble[4] = new ColoredMarble (ColoredMarble.ColorMarble.PURPLE);
+        ArrayMarble[5] = new ColoredMarble (ColoredMarble.ColorMarble.PURPLE);
+        ArrayMarble[6] = new ColoredMarble (ColoredMarble.ColorMarble.BLUE);
+        ArrayMarble[7] = new ColoredMarble (ColoredMarble.ColorMarble.BLUE);
+        ArrayMarble[8] = new RedMarble();
+        ArrayMarble[9] = new ColoredMarble (ColoredMarble.ColorMarble.GREY);
+        ArrayMarble[10] = new ColoredMarble (ColoredMarble.ColorMarble.GREY);
+        ArrayMarble[11] = new ColoredMarble (ColoredMarble.ColorMarble.YELLOW);
+        ArrayMarble[12] = new ColoredMarble (ColoredMarble.ColorMarble.YELLOW);
+
         List<MarketMarble> ListMarketMarble = Arrays.asList(ArrayMarble);
         Collections.shuffle(ListMarketMarble);
         ListMarketMarble.toArray(ArrayMarble);

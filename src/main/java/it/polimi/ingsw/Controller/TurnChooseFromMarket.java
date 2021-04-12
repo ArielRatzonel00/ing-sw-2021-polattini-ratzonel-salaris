@@ -8,26 +8,18 @@ import java.util.Arrays;
 
 public class TurnChooseFromMarket {
    public void GetResourcesFromRow(int row, MarketTray marketTray, Player player){
-       MarketMarble[] NewResources = new MarketMarble[4];
+       MarketMarble[] NewResources;
        NewResources = marketTray.GetMarketMarblesFromRow(row);
        marketTray.ShiftMatrixByRow(row);
 
        for (MarketMarble marketMarble : NewResources){
-           if(marketMarble.getColorMarble() == MarketMarble.ColorMarble.WHITE){
-               // vedere cosa succede con la leader card
-           }
-           else if (marketMarble.getColorMarble() == MarketMarble.ColorMarble.RED){
-               player.getFaithTrack().setRedPosition(1);
+           marketMarble.EffectOfMarble(player);
            }
        }
-    }
+
     public void moveResourceFromWarehouse(Player player, int From, int To){
         player.getWarehouse().moveResources(From, To);
     }
-    public boolean CheckWarehouse(Player player){
-       return player.getWarehouse().CheckWarehouse();
-    }
-
 
 
 

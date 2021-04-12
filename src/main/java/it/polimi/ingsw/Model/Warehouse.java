@@ -1,131 +1,143 @@
 package it.polimi.ingsw.Model;
 
-public class Warehouse {
-    private MarketMarble.ColorMarble Colorrow1;
-    private MarketMarble.ColorMarble Colorrow2;
-    private MarketMarble.ColorMarble Colorrow3;
-    private MarketMarble.ColorMarble ColorrowExtra1;
-    private MarketMarble.ColorMarble ColorrowExtra2;
-    private MarketMarble row1;
-    private MarketMarble[] row2 = new MarketMarble[2];
-    private MarketMarble[] row3 = new MarketMarble[3];
-    private MarketMarble[] rowextra1 = new MarketMarble[2];
-    private MarketMarble[] rowextra2 = new MarketMarble[2];
-    private MarketMarble temp1;
+import java.util.ArrayList;
 
-    public MarketMarble getRow1() {
+public class Warehouse {
+    private ColoredMarble.ColorMarble Colorrow1;
+    private ColoredMarble.ColorMarble Colorrow2;
+    private ColoredMarble.ColorMarble Colorrow3;
+    private ColoredMarble.ColorMarble ColorrowExtra1;
+    private ColoredMarble.ColorMarble ColorrowExtra2;
+    private ColoredMarble row1;
+    private ArrayList<ColoredMarble> row2;
+    private ArrayList<ColoredMarble>  row3;
+    private ArrayList<ColoredMarble>  rowextra1;
+    private ArrayList<ColoredMarble>  rowextra2;
+
+    public ColoredMarble getRow1() {
         return row1;
     }
-    public MarketMarble[] getRow2() {
+    public ArrayList<ColoredMarble> getRow2() {
         return row2;
     }
-    public MarketMarble[] getRow3() {
+    public ArrayList<ColoredMarble> getRow3() {
         return row3;
     }
 
-    public MarketMarble[] getRowextra1() {
+    public ArrayList<ColoredMarble> getRowextra1() {
         return rowextra1;
     }
 
-    public MarketMarble[] getRowextra2() {
+    public ArrayList<ColoredMarble> getRowextra2() {
         return rowextra2;
     }
 
-    public void addToRow(MarketMarble rowMarble, int row) {
+    public void addToRow(ColoredMarble rowMarble, int row) {
         if (row == 1) {
             row1 = rowMarble;
             Colorrow1 = rowMarble.getColorMarble();
         }
         else if(row == 2){
-            if (this.row2[0] == null){
-                row2[0] = rowMarble;
+            if (row2.size() == 0){
+                row2.add(rowMarble);
                 Colorrow2 = rowMarble.getColorMarble();
             }
-            else if (this.row2[1] == null && Colorrow2 == rowMarble.getColorMarble()){
-                row2[1] = rowMarble;
+            else if (row2.size() > 0 && row2.size() < 2 && rowMarble.getColorMarble().equals(Colorrow1)){
+                row2.add(rowMarble);
             }
             else {
                 // Can't put Marble here
             }
         }
         else if(row == 3){
-            if (this.row3[0] == null){
-                row3[0] = rowMarble;
+            if (row3.size() == 0){
+                row3.add(rowMarble);
                 Colorrow3 = rowMarble.getColorMarble();
             }
-            else if (this.row3[1] == null && Colorrow3 == rowMarble.getColorMarble()){
-                row3[1] = rowMarble;
-            }
-            else if (this.row3[2] == null && Colorrow3 == rowMarble.getColorMarble()){
-                row3[2] = rowMarble;
+            else if (row3.size() > 0 && row3.size() < 3 && rowMarble.getColorMarble().equals(Colorrow2)){
+                row3.add(rowMarble);
             }
             else {
                 // Can't put Marble here
             }
-
         }
     }
-    public MarketMarble RemoveResource(int row){
-        MarketMarble temp = null;
+    public ColoredMarble RemoveResource(int row){
+        ColoredMarble temp = null;
         if (row == 1){
             temp = row1;
             row1 = null;
         }
         else if (row == 2){
-            if (row2[1] != null){
-                temp = row2[1];
-                row2[1] = null;
-            }
-            else {
-                temp = row2[0];
-                row2[0] = null;
-            }
+            temp = row2.get(row2.size()-1);
+            row2.remove(row2.size()-1);
         }
         else if(row == 3){
-            if (row3[2] != null){
-                temp = row3[2];
-                row3[2] = null;
-            }
-            else if (row2[1] != null){
-                temp = row3[1];
-                row3[1] = null;
-            }
-            else {
-                temp = row3[0];
-                row3[0] = null;
-            }
 
+            temp = row3.get(row3.size()-1);
+            row3.remove(row3.size()-1);
         }
         return temp;
     }
-        public void moveResources (int FromRow, int toRow){
-
-    }
-        public boolean CheckWarehouse(){
-        return true;
-
+    public void moveResources (int r1, int r2){
+        int FromRow = 0;
+        int toRow = 0;
+        if(r1 > r2){
+            FromRow = r1;
+            toRow = r2;
         }
+        else {
+            FromRow = r2;
+            toRow = r1;
+        }
+
+        if(FromRow == 3 && toRow == 2){
+            if (row3.size() > row2.size()){
+                System.out.println("Can't do this move");
+            }
+            else {
+                ArrayList<ColoredMarble> temp;
+                ColoredMarble.ColorMarble tempColor = Colorrow2;
+                temp = row2;
+                row2 = row3;
+                row3 = temp;
+                Colorrow2 = Colorrow3;
+                Colorrow3 = tempColor;
+            }
+        }
+        else if (FromRow == 3 && toRow == 1){
+            if (row3.size() > 1){
+                System.out.println("Can't do this move");
+            }
+            else {
+                ColoredMarble temp;
+                temp = row1;
+                row1 = row3.get(0);
+                row3.remove(0);
+                row3.add(temp);
+            }
+        }
+        else if(FromRow == 2 && toRow == 1){
+            if(row2.size() > 1){
+                System.out.println("Can't do this move");
+            }
+            else {
+                ColoredMarble temp;
+                temp = row1;
+                row1 = row2.get(0);
+                row2.remove(0);
+                row2.add(temp);
+            }
+        }
+
+
     }
+}
 
 
 
 // funzione per gestire i row extra
-        // funzione per togliere
-        // funzione per muovere
 
-/*
-    public void addResourcesRow1(MarketMarble MarketMarble){
 
-    }
 
-    public void addResourcesRow2(MarketMarble[] MarketMarble){
-
-    }
-    public void addResourcesRow3(MarketMarble[] MarketMarble){
-
-    }
-    public void moveResources(){
-
-    }
-     */
 
