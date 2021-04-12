@@ -7,6 +7,7 @@ public class Slots {
     private ArrayList<DevelopmentCard> slot3;
 
     private int[] ColorDevCards = {0, 0, 0, 0}; //posizione 0: purple, 1=blue, 2=yellow, 3=green
+    private boolean Respect = false;
 
 
     public ArrayList<DevelopmentCard> getSlot1() {
@@ -48,6 +49,88 @@ public class Slots {
     public void setSlot3(DevelopmentCard card1) {
         if (card1.getLevel() >= getCard1Top().getLevel())
             slot1.add(card1);
+    }
+
+    public boolean getDevCardsLevel2(int colorCard) { //mi ritorna true se ho una carta di quel colore di livello 2 nei miei slot
+        //1: purple, 2=blue, 3=yellow, 4=green
+        if (slot1.size()>0){
+            switch (colorCard) {
+
+                case 1: if(slot1.get(1).getColor().equals(DevelopmentCard.colorCard.Purple)) {
+                    Respect = true;
+                }
+                    break;
+                case 2:
+                    if(slot1.get(1).getColor().equals(DevelopmentCard.colorCard.Blue)) {
+                        Respect = true;
+                    }
+                    break;
+                case 3:
+                    if(slot1.get(1).getColor().equals(DevelopmentCard.colorCard.Yellow)) {
+                        Respect = true;
+                    }
+                    break;
+                case 4:
+                    if(slot1.get(1).getColor().equals(DevelopmentCard.colorCard.Green)) {
+                        Respect = true;
+                    }
+                    break;
+            }
+        }
+        else{
+            if (slot2.size()>0){
+                switch (colorCard) {
+
+                    case 1: if(slot2.get(1).getColor().equals(DevelopmentCard.colorCard.Purple)) {
+                        Respect = true;
+                    }
+                        break;
+                    case 2:
+                        if(slot2.get(1).getColor().equals(DevelopmentCard.colorCard.Blue)) {
+                            Respect = true;
+                        }
+                        break;
+                    case 3:
+                        if(slot2.get(1).getColor().equals(DevelopmentCard.colorCard.Yellow)) {
+                            Respect = true;
+                        }
+                        break;
+                    case 4:
+                        if(slot2.get(1).getColor().equals(DevelopmentCard.colorCard.Green)) {
+                            Respect = true;
+                        }
+                        break;
+                }
+            }
+            else{
+                if (slot3.size()>0){
+                    switch (colorCard) {
+
+                        case 1: if(slot3.get(1).getColor().equals(DevelopmentCard.colorCard.Purple)) {
+                            Respect = true;
+                        }
+                            break;
+                        case 2:
+                            if(slot3.get(1).getColor().equals(DevelopmentCard.colorCard.Blue)) {
+                                Respect = true;
+                            }
+                            break;
+                        case 3:
+                            if(slot3.get(1).getColor().equals(DevelopmentCard.colorCard.Yellow)) {
+                                Respect = true;
+                            }
+                            break;
+                        case 4:
+                            if(slot3.get(1).getColor().equals(DevelopmentCard.colorCard.Green)) {
+                                Respect = true;
+                            }
+                            break;
+                    }
+                }
+            }
+
+        }
+        return Respect;
     }
 
     public int[] getNumberOfDevCardsForColors() { //da controllare bene
