@@ -2,15 +2,30 @@ package it.polimi.ingsw.Model;
 
 import java.util.Map;
 
-public class LeaderCard {
-    private int Type; // 1=TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
+public  class LeaderCard {
+    //private int Type; // 1=TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
     private boolean Activate = false;
     private int Id;
+
+
+    public LeaderCard(int id, int color1Cost, int color2, int victoryPoints, int specialAbilityColor) {
+        Id = id;
+        Color1Cost = color1Cost;
+        Color2 = color2;
+        VictoryPoints = victoryPoints;
+        SpecialAbilityColor = specialAbilityColor;
+    }
+
     private int Color1Cost; // se TypeExtraResources 1=purple, 2=blue, 3=yellow, 4=green
                             // se TypeReduceCost 1=purple, 2=blue, 3=yellow, 4=green
                             // se Type ExtraWarehouse 1=purple, 2=blue, 3=yellow, 4=grey
                             // se Type ConvertResources 1=purple, 2=blue, 3=yellow, 4=green
 
+
+
+    public boolean canBeActivated (Player player) {
+        return true;
+    }
     private int Color2; // i numeri rimangono uguali a sopra, 0 se non ho un solo costo in quella carta
 
     private int VictoryPoints;
@@ -19,18 +34,11 @@ public class LeaderCard {
     private int SpecialAbilityColor; // 1=purple, 2=blue, 3=yellow, 4=grey
     // è il colore dell'abilità speciale che hanno
 
-    public LeaderCard(int type, int id, int color1Cost, int color2, int specialAbilityColor, int victoryPoints) {
-        this.Type = type;
-        this.Id = id;
-        this.Color1Cost = color1Cost;
-        this.Color2 = color2;
-        this.SpecialAbilityColor = specialAbilityColor;
-        this.VictoryPoints = victoryPoints;
-    }
 
-    public int getType() {
+
+    /*public int getType() {
         return Type;
-    }
+    }*/
 
     public boolean isActivate() {
         return Activate;
