@@ -74,25 +74,25 @@ public class CreateCards {
     }
 
     //Creazione LeaderCards
-    private LeaderCard ExtraRsc1 = new LeaderCard(1, 1, 3, 2, 1, 5); //pallina bianca in viola
-    private LeaderCard ExtraRsc2 = new LeaderCard(1, 2, 4, 1, 2, 5); //pallina bianca in blu
-    private LeaderCard ExtraRsc3 = new LeaderCard(1, 3, 1, 4, 3, 5); //pallina bianca in giallo
-    private LeaderCard ExtraRsc4 = new LeaderCard(1, 4, 2, 3, 4, 5); //pallina bianca in grigio
+    private LeaderCard ExtraRsc1 = new LeaderCard1( 1, 3, 2, 1, 5); //pallina bianca in viola
+    private LeaderCard ExtraRsc2 = new LeaderCard1( 2, 4, 1, 2, 5); //pallina bianca in blu
+    private LeaderCard ExtraRsc3 = new LeaderCard1( 3, 1, 4, 3, 5); //pallina bianca in giallo
+    private LeaderCard ExtraRsc4 = new LeaderCard1( 4, 2, 3, 4, 5); //pallina bianca in grigio
 
-    private LeaderCard ReduceCost1 = new LeaderCard(2, 5, 3, 4, 1, 2); //meno un viola nel costo
-    private LeaderCard ReduceCost2 = new LeaderCard(2, 6, 2, 1, 2, 2); //meno un blu nel costo
-    private LeaderCard ReduceCost3 = new LeaderCard(2, 7, 3, 1, 3, 2); //meno un giallo nel costo
-    private LeaderCard ReduceCost4 = new LeaderCard(2, 8, 4, 2, 4, 2); //meno un grigio nel costo
+    private LeaderCard ReduceCost1 = new LeaderCard2(5, 3, 4, 1, 2); //meno un viola nel costo
+    private LeaderCard ReduceCost2 = new LeaderCard2( 6, 2, 1, 2, 2); //meno un blu nel costo
+    private LeaderCard ReduceCost3 = new LeaderCard2( 7, 3, 1, 3, 2); //meno un giallo nel costo
+    private LeaderCard ReduceCost4 = new LeaderCard2( 8, 4, 2, 4, 2); //meno un grigio nel costo
 
-    private LeaderCard ExtraWarehouse1 = new LeaderCard(3, 9, 4, 0, 1, 3); //più 2 spazi viola nel warehouse
-    private LeaderCard ExtraWarehouse2 = new LeaderCard(3, 10, 1, 0, 2, 3); //più 2 spazi blu nel warehouse
-    private LeaderCard ExtraWarehouse3 = new LeaderCard(3, 11, 2, 0, 3, 3); //più 2 spazi gialli nel warehouse
-    private LeaderCard ExtraWarehouse4 = new LeaderCard(3, 12, 3, 0, 4, 3); //più 2 spazi grigi nel warehouse
+    private LeaderCard ExtraWarehouse1 = new LeaderCard3( 9, 4, 0, 1, 3); //più 2 spazi viola nel warehouse
+    private LeaderCard ExtraWarehouse2 = new LeaderCard3( 10, 1, 0, 2, 3); //più 2 spazi blu nel warehouse
+    private LeaderCard ExtraWarehouse3 = new LeaderCard3( 11, 2, 0, 3, 3); //più 2 spazi gialli nel warehouse
+    private LeaderCard ExtraWarehouse4 = new LeaderCard3( 12, 3, 0, 4, 3); //più 2 spazi grigi nel warehouse
 
-    private LeaderCard ConvertRsc1 = new LeaderCard(4, 13, 2, 0, 1, 4); //converte un viola in una risorsa a scelta e 1 punto fede
-    private LeaderCard ConvertRsc2 = new LeaderCard(4, 14, 3, 0, 2, 4); //converte un blu in una risorsa a scelta e 1 punto fede
-    private LeaderCard ConvertRsc3 = new LeaderCard(4, 15, 4, 0, 3, 4); //converte un giallo in una risorsa a scelta e 1 punto fede
-    private LeaderCard ConvertRsc4 = new LeaderCard(4, 16, 1, 0, 4, 4); //converte un grigio in una risorsa a scelta e 1 punto fede
+    private LeaderCard ConvertRsc1 = new LeaderCard4( 13, 2, 0, 1, 4); //converte un viola in una risorsa a scelta e 1 punto fede
+    private LeaderCard ConvertRsc2 = new LeaderCard4( 14, 3, 0, 2, 4); //converte un blu in una risorsa a scelta e 1 punto fede
+    private LeaderCard ConvertRsc3 = new LeaderCard4( 15, 4, 0, 3, 4); //converte un giallo in una risorsa a scelta e 1 punto fede
+    private LeaderCard ConvertRsc4 = new LeaderCard4( 16, 1, 0, 4, 4); //converte un grigio in una risorsa a scelta e 1 punto fede
 
     //Array con tutte le LeaderCards posizionate in base al loro ID (la carta con ID = 1 è posta in posizione ArrayLeaderCards[0]).
     private LeaderCard[] ArrLeaderCards = {ExtraRsc1, ExtraRsc2, ExtraRsc3, ExtraRsc4, ReduceCost1, ReduceCost2, ReduceCost3, ReduceCost4, ExtraWarehouse1, ExtraWarehouse2, ExtraWarehouse3, ExtraWarehouse4, ConvertRsc1, ConvertRsc2, ConvertRsc3, ConvertRsc4};
