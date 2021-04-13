@@ -8,6 +8,7 @@ public class Player {
     private Strongbox strongbox;
     private LeaderCard[] leaderCards;
     private Slots slots;
+    private boolean first;
 
     public Player(String nickname, LeaderCard[] FourLeaderCards) {
 
@@ -17,6 +18,7 @@ public class Player {
         this.strongbox = new Strongbox();
         this.leaderCards = FourLeaderCards;
         this.slots = new Slots();
+        this.first = false;
     }
 
     public String getNickname() {
@@ -43,6 +45,9 @@ public class Player {
         return slots;
     }
 
+    public void setFirst(boolean first) {
+        this.first = first;
+    }
 }
  /*   public void marketTray(MarketTray marketTray ){
         //ChiamaLaFunzioneDiMarketTray

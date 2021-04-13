@@ -9,7 +9,10 @@ public class GameManager {
     private SinglePlayerGame SingleGame;
 
     //Constructor of game Manager, choose between single or multi player game
-    public GameManager(){
+    public void GameManaer(){
+
+    }
+    public startGame(ArrayList<Player> players){
         //Se players <1 throw new exception
         if(players.size()>1)
         this.MultiGame= new MultiplayerGame(Lobby.getPlayers());
@@ -18,8 +21,8 @@ public class GameManager {
 
     }
 
-    // metodo che estrae 4 carte per ogni giocatore e chiede di sceglierne 2
-    public LeaderCardExtractor();
+    public void endGame(){}
+    public Player selectWinner(){}
 
     //metodo TURNO SUCCESSIVO
 
