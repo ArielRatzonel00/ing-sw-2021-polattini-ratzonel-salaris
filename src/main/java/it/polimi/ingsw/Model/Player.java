@@ -8,7 +8,7 @@ public class Player {
     private Strongbox strongbox;
     private LeaderCard[] leaderCards;
     private Slots slots;
-    private boolean first;
+    private boolean isFirst;
 
 
     public Player(String nickname, LeaderCard[] FourLeaderCards) {
@@ -19,7 +19,7 @@ public class Player {
         this.strongbox = new Strongbox();
         this.leaderCards = FourLeaderCards;
         this.slots = new Slots();
-        this.first = false;
+        this.isFirst = false;
     }
 
     public String getNickname() {
@@ -47,7 +47,7 @@ public class Player {
     }
 
     public void setFirst(boolean first) {
-        this.first = first;
+        this.isFirst = first;
     }
     public void DiscardLeaderCard(int num){
         leaderCards[num] = null; // Con ArrayList basta fare remove
