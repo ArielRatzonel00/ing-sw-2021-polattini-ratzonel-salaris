@@ -10,6 +10,7 @@ public class Player {
     private Slots slots;
     private boolean first;
 
+
     public Player(String nickname, LeaderCard[] FourLeaderCards) {
 
         this.nickname = nickname;
@@ -37,8 +38,8 @@ public class Player {
         return strongbox;
     }
 
-    public LeaderCard[] getLeaderCards() {
-        return leaderCards;
+    public LeaderCard getLeaderCards(int num) {
+        return leaderCards[num];
     }
 
     public Slots getSlots() {
@@ -47,6 +48,9 @@ public class Player {
 
     public void setFirst(boolean first) {
         this.first = first;
+    }
+    public void DiscardLeaderCard(int num){
+        leaderCards[num] = null; // Con ArrayList basta fare remove
     }
 }
  /*   public void marketTray(MarketTray marketTray ){
