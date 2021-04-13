@@ -26,15 +26,15 @@ public class DevelopmentCard {
     }
 
 
-    public int[] getResourcesCost() {
+    public int[] getCost() {
         return Cost;
     }
 
-    public int[] getResourcesProductionCost() {
+    public int[] getProductionCost() {
         return ProductionCost;
     }
 
-    public int[] getResourcesProductionProfit() {
+    public int[] getProductionProfit() {
         return ProductionProfit;
     }
 
