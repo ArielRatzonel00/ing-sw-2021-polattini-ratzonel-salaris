@@ -12,7 +12,7 @@ public class GameManager {
     public void GameManaer(){
 
     }
-    public startGame(ArrayList<Player> players){
+    public void startGame(ArrayList<Player> player){
         //Se players <1 throw new exception
         if(players.size()>1)
         this.MultiGame= new MultiplayerGame(Lobby.getPlayers());
