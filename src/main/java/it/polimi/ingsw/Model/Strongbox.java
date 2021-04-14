@@ -4,12 +4,12 @@ public class Strongbox {
     private int shield;
     private int coin;
     private int servant;
-    private int store;
+    private int stone;
     public Strongbox() {
         this.shield = 0;
         this.coin = 0;
         this.servant = 0;
-        this.store = 0;
+        this.stone = 0;
     }
 
     public int getShield() {
@@ -24,8 +24,8 @@ public class Strongbox {
         return servant;
     }
 
-    public int getStore() {
-        return store;
+    public int getStone() {
+        return stone;
     }
 
     public void AddShield() {
@@ -40,8 +40,8 @@ public class Strongbox {
         this.servant++;
     }
 
-    public void AddStore() {
-        this.store++;
+    public void AddStone() {
+        this.stone++;
     }
     //Remove
 }
