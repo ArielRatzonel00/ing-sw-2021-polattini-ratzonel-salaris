@@ -25,12 +25,17 @@ public class TurnManager {
     }
 
 
-    public void acquireCard(DevelopmentCard card, int n, int resoucesFromStrongbox[], int resourcesFromWarehouse[]) {
-        //int selectedResources[4]=somma(resourcesFromWarehouse,resoucesFromStrongox);
-        //controllo che player abbia effettivamente le risorse in strongbox e Warehouse.
-        // chiami il metodo checkresourcesFromStrongbox
-        // chiami CheckResourcesFromWarehoues
-        //CheckIfResourcesAreEnough
+    public void acquireCard(DevelopmentCard card, Player player, int n, int resoucesFromStrongbox[], int resourcesFromWarehouse[]) {
+        //Try{
+        player.getStrongbox().RemoveResourcesFromStrongbox(resoucesFromStrongbox);
+        // DA FARE player.getWarehouse().RemoveResource(resourcesFromWarehouse);
+
+        // } Catch (notEnoughResourcesException e)
+
+        // IF for(int requirements : card.getCost())
+        // devo controllare che la somma di ogni elemento di resourcesFromStrongbox[] e resourcesFromWarehouse[] sia maggiore del corrispndente elemento in
+        // card.getCost()
+
         if (n == 1) {
             player.getSlots().addSlot1(card);
 
@@ -42,7 +47,11 @@ public class TurnManager {
 
             player.getSlots().addSlot2(card);
         }
+    }
+    public boolean resourcesCheck(int strongBoxResources[], int WarehouseResources[]){
+        for(int i: strongBoxResources){
 
+        }
     }
     public void discardLeaderCard(int num) {
         player.DiscardLeaderCard(num);
