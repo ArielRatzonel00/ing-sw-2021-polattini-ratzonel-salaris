@@ -1,31 +1,27 @@
 package it.polimi.ingsw.Model;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class GridCell {
-    private DevelopmentCard[] cell;
+    private ArrayList<DevelopmentCard> cell;
+
     private int i = 0;
 
-    public GridCell(DevelopmentCard[] ArrayDevelopmentCard) {
+    public GridCell(ArrayList<DevelopmentCard> ArrayDevelopmentCard) {
         cell = ArrayDevelopmentCard;
-
-        List<DevelopmentCard> ListCell = Arrays.asList(cell);
-        Collections.shuffle(ListCell);
-        ListCell.toArray(cell);
-
+        Collections.shuffle(ArrayDevelopmentCard);
     } // le carte saranno mischiate prima di qua
 
-    public DevelopmentCard getTopCard() { // mi rida la prima carta non nulla
-        i = 0;
-        while (cell[i]== null &&  i <= 3){
-            i++;
-        }
-        if(i == 4) {
-            return null;
+    public DevelopmentCard getTopCard() { // mi ridà la prima carta non nulla
+        if (cell.size() > 0){
+            DevelopmentCard temp = cell.get(cell.size()-1);
+            cell.remove(cell.size()-1);
+            return temp;
         }
         else {
-            return cell[i];
+            return null;
         }
     }
 }
