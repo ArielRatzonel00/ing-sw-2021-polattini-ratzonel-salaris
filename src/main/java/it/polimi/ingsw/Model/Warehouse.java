@@ -210,6 +210,25 @@ public class Warehouse {
                 }
             }
         }
+//mi serve per la produzione in caso avessi due carte leader entrambe magazzino extra.
+        for (int c = 1; c < 3; c++) {
+            if (rowextra2.size() == c) {
+                switch (ColorrowExtra1) {
+                    case PURPLE:
+                        TotalResourcesWarehouse[0] += c;
+                        break;
+                    case BLUE:
+                        TotalResourcesWarehouse[1] += c;
+                        break;
+                    case YELLOW:
+                        TotalResourcesWarehouse[2] += c;
+                        break;
+                    case GREY:
+                        TotalResourcesWarehouse[3] += c;
+                        break;
+                }
+            }
+        }
 
         return TotalResourcesWarehouse;
     }

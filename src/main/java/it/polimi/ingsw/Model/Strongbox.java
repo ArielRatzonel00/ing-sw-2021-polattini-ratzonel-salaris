@@ -28,20 +28,35 @@ public class Strongbox {
         return stone;
     }
 
-    public void AddShield() {
-        this.shield++;
+    public void AddShield(int num) {
+        this.shield+= num;
     }
 
-    public void AddCoin() {
-        this.coin++;
+    public void AddCoin(int num) {
+        this.coin+=num;
     }
 
-    public void AddServant() {
-        this.servant++;
+    public void AddServant(int num) {
+        this.servant+=num;
     }
 
-    public void AddStone() {
-        this.stone++;
+    public void AddStone(int num) {
+        this.stone+=num;
     }
-    //Remove
+
+    public void RemoveShield(int num) {
+        this.shield-=num;
+    }
+
+    public void RemoveCoin(int num) {
+        this.coin-=num;
+    }
+
+    public void RemoveServant(int num) {
+        this.servant-=num;
+    }
+
+    public void RemoveStone(int num) {
+        this.stone-=num;
+    }
 }
