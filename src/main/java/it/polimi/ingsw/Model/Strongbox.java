@@ -1,14 +1,14 @@
 package it.polimi.ingsw.Model;
 
 public class Strongbox {
+    private int servant;
     private int shield;
     private int coin;
-    private int servant;
     private int stone;
     public Strongbox() {
+        this.servant = 0;
         this.shield = 0;
         this.coin = 0;
-        this.servant = 0;
         this.stone = 0;
     }
 
@@ -44,6 +44,10 @@ public class Strongbox {
         this.stone+=num;
     }
 
+    public void RemoveServant(int num) {
+        this.servant-=num;
+    }
+
     public void RemoveShield(int num) {
         this.shield-=num;
     }
@@ -52,11 +56,22 @@ public class Strongbox {
         this.coin-=num;
     }
 
-    public void RemoveServant(int num) {
-        this.servant-=num;
-    }
-
     public void RemoveStone(int num) {
         this.stone-=num;
+    }
+    public void RemoveResourcesFromStrongbox(int resources[]){
+        RemoveServant(resources[0]);
+        RemoveShield(resources[1]);
+        RemoveCoin(resources[2]);
+        RemoveStone(resources[3]);
+    }
+    public int[] getTotalResourcesStrongbox(){
+        int[] total={0,0,0,0};
+        total[0]=getServant();
+        total[1]=getShield();
+        total[2]=getCoin();
+        total[3]=getStone();
+      return total;
+
     }
 }
