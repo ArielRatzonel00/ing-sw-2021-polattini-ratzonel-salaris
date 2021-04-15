@@ -1,17 +1,16 @@
 package it.polimi.ingsw.Model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class MarkerStack {
-    private Marker[] markers;
+    private ArrayList<Marker> markers;
 
-    public MarkerStack(Marker[] markers) {
+    public MarkerStack(ArrayList<Marker> markers) {
         this.markers = markers;
-        List<Marker> ListMarkers = Arrays.asList(markers);
-        Collections.shuffle(ListMarkers);
-        ListMarkers.toArray(markers);
+        Collections.shuffle(markers);
     }
 
 
@@ -19,9 +18,7 @@ public class MarkerStack {
         return markers[CountForMarkerStack];
     }
     public void Shuffle(){
-        List<Marker> ListMarkers = Arrays.asList(markers);
-        Collections.shuffle(ListMarkers);
-        ListMarkers.toArray(markers);
+        Collections.shuffle(markers);
 
     }
 }

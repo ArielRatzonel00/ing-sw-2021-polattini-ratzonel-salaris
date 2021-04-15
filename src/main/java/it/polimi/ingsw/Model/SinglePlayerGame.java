@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import java.util.ArrayList;
+
 public class SinglePlayerGame {
 
     private Player Player;
@@ -7,7 +9,7 @@ public class SinglePlayerGame {
     private DevelopmentGrid developmentGrid;
     private MarkerStack markers ;
     private int CountForMarkerStack;
-    public SinglePlayerGame(Player player, DevelopmentCard[] developmentCards, Marker[] markers ) {
+    public SinglePlayerGame(Player player, DevelopmentCard[] developmentCards, ArrayList<Marker> markers ) {
         this.Player = player;
         this.developmentGrid = new DevelopmentGrid();
         this.marketTray = new MarketTray();
