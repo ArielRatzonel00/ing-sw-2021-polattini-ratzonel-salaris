@@ -14,7 +14,7 @@ public class Warehouse {
     private ArrayList<ColoredMarble> rowextra1;
     private ArrayList<ColoredMarble> rowextra2;
 
-    private int[] TotalResourcesWarehouse = {0, 0, 0, 0}; //0=purple, 1=blue, 2=yellow, 3=grey
+    private int[] TotalResourcesWarehouse = {0, 0, 0, 0}; //0=purple SERVANT, 1=blue SHIELD, 2=yellow COINS, 3=grey STONES
 
     public ColoredMarble getRow1() {
         return row1;
