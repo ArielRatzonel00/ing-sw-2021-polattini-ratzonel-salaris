@@ -232,7 +232,46 @@ public class Warehouse {
 
         return TotalResourcesWarehouse;
     }
+
+    //serve per la production
+    public void DeleteResources (int[] DeleteVector) { //0=purple, 1=blue, 2=yellow, 3=grey
+
+        for(int c=0; c<4;c++){
+            switch () {
+                case PURPLE:
+                    TotalResourcesWarehouse[0] += c;
+                    break;
+                case BLUE:
+                    TotalResourcesWarehouse[1] += c;
+                    break;
+                case YELLOW:
+                    TotalResourcesWarehouse[2] += c;
+                    break;
+                case GREY:
+                    TotalResourcesWarehouse[3] += c;
+                    break;
+            }
+        }
+
+
+
+
+
+        if (row == 1) {
+            temp = row1;
+            row1 = null;
+        } else if (row == 2) {
+            temp = row2.get(row2.size() - 1);
+            row2.remove(row2.size() - 1);
+        } else if (row == 3) {
+
+            temp = row3.get(row3.size() - 1);
+            row3.remove(row3.size() - 1);
+        }
+        return temp;
+    }
 }
+
 
 
 

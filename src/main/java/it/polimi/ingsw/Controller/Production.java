@@ -21,6 +21,7 @@ public class Production {
     private int[] TotalResourcesNeed = {0, 0, 0, 0}; //0=purple, 1=blue, 2=yellow, 3=grey
     private int[] TotalResourcesPoss = {0, 0, 0, 0}; //0=purple, 1=blue, 2=yellow, 3=grey
     private int[] TotalResourcesNew = {0, 0, 0, 0}; //0=purple, 1=blue, 2=yellow, 3=grey 4=faith
+    private int[] HowMuchTot = {0, 0, 0, 0}; //0=purple, 1=blue, 2=yellow, 3=grey
 
 
     public void activateProduction(int[] WhatCards, int Cost12in1, int Cost22in1, int Prod2in1, int ProdLead1, int ProdLead2, int[] HowMuchFromStrong, int[] HowMuchFromWare, int[] HowMuchFromLead){ //0 in tutti non attivo la 2in1, 1=purple, 2=blue, 3=yellow, 4=grey
@@ -111,6 +112,19 @@ public class Production {
         TotalResourcesPoss[2] += player.getStrongbox().getCoin();
         TotalResourcesPoss[3] += player.getStrongbox().getStone();
 
+        for(int c=0; c<4; c++){
+            HowMuchTot[c] += HowMuchFromLead[c];
+            HowMuchTot[c] += HowMuchFromStrong[c];
+            HowMuchTot[c] += HowMuchFromWare[c];
+        }
+
+        for(int c=0; c<4; c++){
+            if(HowMuchTot[c] != TotalResourcesNeed[c]){
+                activate = false;
+                //non mi hai passato da dove prendere le risorse necessarie in modo corretto
+            }
+        }
+
         for(int c=0; c<4;c++){
             if(TotalResourcesPoss[c]<TotalResourcesNeed[c]){
                 activate = false;
@@ -123,7 +137,9 @@ public class Production {
             //tolgo le risorse dal magazzino
 
 
+
             //tolgo le risorse dalle Leader
+
 
 
             //tolgo le risorse dallo strongbox
