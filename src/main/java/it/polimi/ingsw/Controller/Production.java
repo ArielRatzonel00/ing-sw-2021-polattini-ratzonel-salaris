@@ -16,6 +16,7 @@ public class Production {
     private int[] temp;
     private int[] temp1;
     private boolean activate=true;
+    private boolean removeSuccess;
 
 
     private int[] TotalResourcesNeed = {0, 0, 0, 0}; //0=purple, 1=blue, 2=yellow, 3=grey
@@ -135,11 +136,22 @@ public class Production {
         if(activate == true)
         {
             //tolgo le risorse dal magazzino
-
-
+            removeSuccess = player.getWarehouse().RemoveResourcesFromWare(HowMuchFromWare);
+            if(removeSuccess == true){
+                //rimozione avvenuta con successo
+            }
+            else{
+                //rimozione avvenuta senza successo
+            }
 
             //tolgo le risorse dalle Leader
-
+            removeSuccess = player.getWarehouse().RemoveResourcesFromLead(HowMuchFromLead);
+            if(removeSuccess == true){
+                //rimozione avvenuta con successo
+            }
+            else{
+                //rimozione avvenuta senza successo
+            }
 
 
             //tolgo le risorse dallo strongbox

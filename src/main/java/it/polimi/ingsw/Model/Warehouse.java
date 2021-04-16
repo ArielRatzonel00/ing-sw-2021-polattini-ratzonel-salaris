@@ -13,6 +13,7 @@ public class Warehouse {
     private ArrayList<ColoredMarble> row3;
     private ArrayList<ColoredMarble> rowextra1;
     private ArrayList<ColoredMarble> rowextra2;
+    private boolean removeSuccess = true;
 
     private int[] TotalResourcesWarehouse = {0, 0, 0, 0}; //0=purple SERVANT, 1=blue SHIELD, 2=yellow COINS, 3=grey STONES
 
@@ -61,7 +62,186 @@ public class Warehouse {
         }
     }
 
-    public ColoredMarble RemoveResource(int row) {
+    public boolean RemoveResourcesFromWare(int[] resources) { // il vettore che gli passo: 0=purple, 1=blue, 2=yellow, 3=grey
+        //Il boolean che ritorno indietro serve per dirmi se la procedura è andata a buon fine
+
+        switch (row1.getColorMarble()) {
+            case PURPLE:
+                if (resources[0] == 1) {
+                    row1 = null;
+                    resources[0] -= 1;
+                }
+                break;
+            case BLUE:
+                if (resources[1] == 1) {
+                    row1 = null;
+                    resources[1] -= 1;
+                }
+                break;
+            case YELLOW:
+                if (resources[2] == 1) {
+                    row1 = null;
+                    resources[2] -= 1;
+                }
+                break;
+            case GREY:
+                if (resources[3] == 1) {
+                    row1 = null;
+                    resources[3] -= 1;
+                }
+                break;
+            default:
+                break;
+        }
+
+
+        switch (Colorrow2) {
+            case PURPLE:
+                while (resources[0] > 0) {
+                    row2.remove(row2.size() - 1);
+                    resources[0] -= 1;
+                }
+                break;
+            case BLUE:
+                while (resources[1] > 0) {
+                    row2.remove(row2.size() - 1);
+                    resources[1] -= 1;
+                }
+                break;
+            case YELLOW:
+                while (resources[2] > 0) {
+                    row2.remove(row2.size() - 1);
+                    resources[2] -= 1;
+                }
+                break;
+            case GREY:
+                while (resources[3] > 0) {
+                    row2.remove(row2.size() - 1);
+                    resources[3] -= 1;
+                }
+                break;
+            default:
+                break;
+        }
+
+        switch (Colorrow3) {
+            case PURPLE:
+                while (resources[0] > 0) {
+                    row3.remove(row3.size() - 1);
+                    resources[0] -= 1;
+                }
+                break;
+            case BLUE:
+                while (resources[1] > 0) {
+                    row3.remove(row3.size() - 1);
+                    resources[1] -= 1;
+                }
+                break;
+            case YELLOW:
+                while (resources[2] > 0) {
+                    row3.remove(row3.size() - 1);
+                    resources[2] -= 1;
+                }
+                break;
+            case GREY:
+                while (resources[3] > 0) {
+                    row3.remove(row3.size() - 1);
+                    resources[3] -= 1;
+                }
+                break;
+            default:
+                break;
+        }
+        removeSuccess = true;
+
+        for (int c = 0; c < 4; c++) {
+            if (resources[c] != 0) {
+                removeSuccess = false;
+            }
+        }
+
+        return removeSuccess;
+    }
+
+    public boolean RemoveResourcesFromLead(int[] resources) { // il vettore che gli passo: 0=purple, 1=blue, 2=yellow, 3=grey
+        //Il boolean che ritorno indietro serve per dirmi se la procedura è andata a buon fine
+
+        switch (ColorrowExtra1) {
+            case PURPLE:
+                while (resources[0] > 0) {
+                    rowextra1.remove(rowextra1.size() - 1);
+                    resources[0] -= 1;
+                }
+                break;
+            case BLUE:
+                while (resources[1] > 0) {
+                    rowextra1.remove(rowextra1.size() - 1);
+                    resources[1] -= 1;
+                }
+                break;
+            case YELLOW:
+                while (resources[2] > 0) {
+                    rowextra1.remove(rowextra1.size() - 1);
+                    resources[2] -= 1;
+                }
+                break;
+            case GREY:
+                while (resources[3] > 0) {
+                    rowextra1.remove(rowextra1.size() - 1);
+                    resources[3] -= 1;
+                }
+                break;
+            default:
+                break;
+        }
+
+        switch (ColorrowExtra2) {
+            case PURPLE:
+                while (resources[0] > 0) {
+                    rowextra2.remove(rowextra2.size() - 1);
+                    resources[0] -= 1;
+                }
+                break;
+            case BLUE:
+                while (resources[1] > 0) {
+                    rowextra2.remove(rowextra2.size() - 1);
+                    resources[1] -= 1;
+                }
+                break;
+            case YELLOW:
+                while (resources[2] > 0) {
+                    rowextra2.remove(rowextra2.size() - 1);
+                    resources[2] -= 1;
+                }
+                break;
+            case GREY:
+                while (resources[3] > 0) {
+                    rowextra2.remove(rowextra2.size() - 1);
+                    resources[3] -= 1;
+                }
+                break;
+            default:
+                break;
+        }
+
+
+        removeSuccess = true;
+
+        for (int c = 0; c < 4; c++) {
+            if (resources[c] != 0) {
+                removeSuccess = false;
+            }
+        }
+
+
+        return removeSuccess;
+    }
+
+
+
+
+
+        /*
         ColoredMarble temp = null;
         if (row == 1) {
             temp = row1;
@@ -75,7 +255,7 @@ public class Warehouse {
             row3.remove(row3.size() - 1);
         }
         return temp;
-    }
+         */
 
     public void moveResources(int r1, int r2) {
         int FromRow = 0;
@@ -231,44 +411,6 @@ public class Warehouse {
         }
 
         return TotalResourcesWarehouse;
-    }
-
-    //serve per la production
-    public void DeleteResources (int[] DeleteVector) { //0=purple, 1=blue, 2=yellow, 3=grey
-
-        for(int c=0; c<4;c++){
-            switch () {
-                case PURPLE:
-                    TotalResourcesWarehouse[0] += c;
-                    break;
-                case BLUE:
-                    TotalResourcesWarehouse[1] += c;
-                    break;
-                case YELLOW:
-                    TotalResourcesWarehouse[2] += c;
-                    break;
-                case GREY:
-                    TotalResourcesWarehouse[3] += c;
-                    break;
-            }
-        }
-
-
-
-
-
-        if (row == 1) {
-            temp = row1;
-            row1 = null;
-        } else if (row == 2) {
-            temp = row2.get(row2.size() - 1);
-            row2.remove(row2.size() - 1);
-        } else if (row == 3) {
-
-            temp = row3.get(row3.size() - 1);
-            row3.remove(row3.size() - 1);
-        }
-        return temp;
     }
 }
 
