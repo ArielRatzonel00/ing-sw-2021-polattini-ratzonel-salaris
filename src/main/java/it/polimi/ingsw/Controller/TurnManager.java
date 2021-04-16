@@ -26,33 +26,43 @@ public class TurnManager {
 
 
     public void acquireCard(DevelopmentCard card, Player player, int n, int resoucesFromStrongbox[], int resourcesFromWarehouse[]) {
-        //Try{
-        player.getStrongbox().RemoveResourcesFromStrongbox(resoucesFromStrongbox);
-        // DA FARE player.getWarehouse().RemoveResource(resourcesFromWarehouse);
 
-        // } Catch (notEnoughResourcesException e)
 
-        // IF for(int requirements : card.getCost())
-        // devo controllare che la somma di ogni elemento di resourcesFromStrongbox[] e resourcesFromWarehouse[] sia maggiore del corrispndente elemento in
-        // card.getCost()
+        if (selectedResourcesCheck(card.getCost(),resourcesFromWarehouse,resourcesFromWarehouse)){ //check se le risorse passate sono sufficienti ad acquistare leader card
+            //Try{
+            player.getStrongbox().RemoveResourcesFromStrongbox(resoucesFromStrongbox);
+            // DA FARE player.getWarehouse().RemoveResource(resourcesFromWarehouse);
 
-        if (n == 1) {
-            player.getSlots().addSlot1(card);
+            // } Catch (notEnoughResourcesException e)
+            if (n == 1) {
+                player.getSlots().addSlot1(card);
 
+            }
+            if (n == 2) {
+                player.getSlots().addSlot2(card);
+            }
+            if (n == 3) {
+
+                player.getSlots().addSlot2(card);
+            }
         }
-        if (n == 2) {
-            player.getSlots().addSlot2(card);
-        }
-        if (n == 3) {
-
-            player.getSlots().addSlot2(card);
-        }
+        else
+            System.out.println("You didn't select enough resources to acquire this card");
     }
-    public boolean resourcesCheck(int strongBoxResources[], int WarehouseResources[]){
-        for(int i: strongBoxResources){
 
+    public boolean selectedResourcesCheck(int playerResources[], int strongBoxResources[], int warehouseResources[]){ // Funzione che controlla se la somma delle risorse selezionate i
+        int flag=0;                                                                                                 //dallo strongbox e dal warehouse sono maggiori
+        for(int i:strongBoxResources){                                                                               //di quelle richieste nel primo array passato
+            if (playerResources[i]<=strongBoxResources[i]+warehouseResources[i])                                       //potremmo metterlo nelle EXCEPTIONS
+                flag++;
         }
+        if(flag==strongBoxResources.length)
+            return true;
+        else
+            return false;
     }
+
+
     public void discardLeaderCard(int num) {
         player.DiscardLeaderCard(num);
         player.getFaithTrack().setRedPosition(1);
