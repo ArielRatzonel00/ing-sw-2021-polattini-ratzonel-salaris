@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Model.LeaderCard.*;
+
 public class CreateCards {
     // Creazione DevelopmentCards
     private DevelopmentCard Green11 = new DevelopmentCard(new int[]{0, 2, 0, 0}, new int[]{0, 0, 1, 0}, new int[]{0, 0, 0, 0, 1}, 1, DevelopmentCard.colorCard.Green, 1, 1);

@@ -1,6 +1,6 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Model.LeaderCard;
 
-import java.util.Map;
+import it.polimi.ingsw.Model.Player;
 
 public  class LeaderCard {
     //private int Type; // 1=TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource

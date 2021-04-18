@@ -1,10 +1,8 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Model.MarketMarble;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.MarketTray;
 import it.polimi.ingsw.Model.Player;
-
-import java.util.Arrays;
 
 public class TurnChooseFromMarket {
    public void GetResourcesFromRow(int row, MarketTray marketTray, Player player){

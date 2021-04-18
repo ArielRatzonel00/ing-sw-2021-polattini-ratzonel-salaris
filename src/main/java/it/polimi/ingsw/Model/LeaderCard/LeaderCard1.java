@@ -1,4 +1,6 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Model.LeaderCard;
+
+import it.polimi.ingsw.Model.Player;
 
 public class LeaderCard1 extends LeaderCard { //metodo per leader cards che trasformano pallina bianca in altri colori
 
