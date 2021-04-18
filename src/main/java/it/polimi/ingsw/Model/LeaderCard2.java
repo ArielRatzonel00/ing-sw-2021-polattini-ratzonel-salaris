@@ -21,4 +21,9 @@ package it.polimi.ingsw.Model;
             }
         }
 
+        @Override
+        public void effect(){
+
+        }
+
 }
