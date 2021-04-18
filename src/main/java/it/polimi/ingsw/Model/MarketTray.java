@@ -1,5 +1,10 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Model.Marble.ColoredMarble;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Model.Marble.RedMarble;
+import it.polimi.ingsw.Model.Marble.WhiteMarble;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +19,7 @@ public class MarketTray  {
         ArrayMarble[1] = new WhiteMarble();
         ArrayMarble[2] = new WhiteMarble();
         ArrayMarble[3] = new WhiteMarble();
-        ArrayMarble[4] = new ColoredMarble (ColoredMarble.ColorMarble.PURPLE);
+        ArrayMarble[4] = new ColoredMarble(ColoredMarble.ColorMarble.PURPLE);
         ArrayMarble[5] = new ColoredMarble (ColoredMarble.ColorMarble.PURPLE);
         ArrayMarble[6] = new ColoredMarble (ColoredMarble.ColorMarble.BLUE);
         ArrayMarble[7] = new ColoredMarble (ColoredMarble.ColorMarble.BLUE);

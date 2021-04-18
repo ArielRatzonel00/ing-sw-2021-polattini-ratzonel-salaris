@@ -1,4 +1,7 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Model.Marble;
+
+import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Model.Player;
 
 public class ColoredMarble extends MarketMarble {
     private ColorMarble colorMarble;

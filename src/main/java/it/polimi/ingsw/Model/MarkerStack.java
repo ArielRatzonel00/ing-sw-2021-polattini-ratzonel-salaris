@@ -1,9 +1,9 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Model.Markers.Marker;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class MarkerStack {
     private ArrayList<Marker> markers;

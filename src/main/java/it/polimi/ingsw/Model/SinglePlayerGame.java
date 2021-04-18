@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Model.Markers.Marker;
+
 import java.util.ArrayList;
 
 public class SinglePlayerGame {

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Model;
 
 
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+
 public class Player {
     private final String nickname;
     private FaithTrack faithTrack;

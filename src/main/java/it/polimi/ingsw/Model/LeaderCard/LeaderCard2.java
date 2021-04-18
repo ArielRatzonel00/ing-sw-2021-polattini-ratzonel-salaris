@@ -1,6 +1,8 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Model.LeaderCard;
 
-    public class LeaderCard2 extends LeaderCard { //metodo per leader cards che diminuisce costo
+import it.polimi.ingsw.Model.Player;
+
+public class LeaderCard2 extends LeaderCard { //metodo per leader cards che diminuisce costo
         private int[] SlotCards = new int[4];
 
         public LeaderCard2(int id, int color1Cost, int color2, int specialAbilityColor, int victoryPoints) {
