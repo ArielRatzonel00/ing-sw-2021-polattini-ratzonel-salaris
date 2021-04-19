@@ -32,5 +32,14 @@ public class LeaderCard4 extends LeaderCard{ //converte in punto fede e materia 
     public ColoredMarble.ColorMarble getProductionCostResource() {
         return ProductionCostResource;
     }
+
+    /*public void effect(){
+        DevCardSlot leaderSlot = new DevCardSlot();
+        DevelopmentCard LeaderDevelopment = new DevelopmentCard(0,);
+
+        leaderSlot.addCard();
+        slotsboard.addSlot();
+    }
+    */
 }
 //
