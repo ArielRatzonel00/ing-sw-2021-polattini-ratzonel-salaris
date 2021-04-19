@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Model.Marble.ColoredMarble;
+
 public class Strongbox {
     private int servant;
     private int shield;
@@ -11,7 +13,24 @@ public class Strongbox {
         this.coin = 0;
         this.stone = 0;
     }
+    public int CountResources(ColoredMarble.ColorMarble ColorOfResource){
+        switch (ColorOfResource){
+            case BLUE:
+                return shield;
 
+            case GREY:
+                return stone;
+
+            case PURPLE:
+                return servant;
+
+            case YELLOW:
+                return coin;
+
+            default:
+                return 0;
+        }
+    }
     public int getShield() {
         return shield;
     }

@@ -39,6 +39,18 @@ public class Warehouse {
         return rowextra2;
     }
 
+    public ColoredMarble.ColorMarble getColorrow1() {
+        return Colorrow1;
+    }
+
+    public ColoredMarble.ColorMarble getColorrow2() {
+        return Colorrow2;
+    }
+
+    public ColoredMarble.ColorMarble getColorrow3() {
+        return Colorrow3;
+    }
+
     public boolean addToRow(ColoredMarble rowMarble, int row) {
         if (row == 1) {
             row1 = rowMarble;

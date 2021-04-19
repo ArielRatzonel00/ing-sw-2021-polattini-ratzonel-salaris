@@ -2,18 +2,16 @@ package it.polimi.ingsw.Model.LeaderCard;
 
 import it.polimi.ingsw.Model.Player;
 
+import java.util.ArrayList;
+
 public  class LeaderCard {
     //private int Type; // 1=TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
     private boolean Activate = false;
     private int Id;
 
-
-    public LeaderCard(int id, int color1Cost, int color2, int victoryPoints, int specialAbilityColor) {
+    public LeaderCard(int id,int victoryPoints ) {
         Id = id;
-        Color1Cost = color1Cost;
-        Color2 = color2;
         VictoryPoints = victoryPoints;
-        SpecialAbilityColor = specialAbilityColor;
     }
 
     private int Color1Cost; // se TypeExtraResources 1=purple, 2=blue, 3=yellow, 4=green
