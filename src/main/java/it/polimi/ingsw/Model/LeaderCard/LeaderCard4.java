@@ -33,3 +33,4 @@ public class LeaderCard4 extends LeaderCard{ //converte in punto fede e materia 
         return ProductionCostResource;
     }
 }
+//
