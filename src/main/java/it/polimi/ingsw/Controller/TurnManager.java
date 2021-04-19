@@ -3,48 +3,73 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
-public class TurnManager {
-    Player player;
+import javax.print.attribute.standard.MediaSize;
+import java.util.ArrayList;
 
-    public TurnManager(Player player) {
-        this.player = player;
+public class TurnManager {
+    private Player Currentplayer;
+    private ArrayList<Player> OtherPlayers;
+
+    public TurnManager(Player currentplayer) {
+        this.Currentplayer = currentplayer;
     }
 
     //Funzioni che chiamano le funzioni delle classe del model
-    public void GetResourcesFromRow(int row, MarketTray marketTray, Player player) {
-        MarketMarble[] NewResources;
-        NewResources = marketTray.GetMarketMarblesFromRow(row);
+    public void GetResourcesFromRow(int row,boolean[] Keep, MarketTray marketTray) {
+        MarketMarble[] NewResources = marketTray.GetMarketMarblesFromRow(row);
         marketTray.ShiftMatrixByRow(row);
 
-        for (MarketMarble marketMarble : NewResources) {
-            marketMarble.EffectOfMarble(player);
+        for (int i = 0; i < 3; i++) {
+            if (Keep[i] == true) {
+                NewResources[i].EffectOfMarble(Currentplayer);
+            } else {
+                for (Player otherplayer : OtherPlayers) {
+                    otherplayer.getFaithTrack().setRedPosition(1); // devo farlo per tutti i players che non sono io
+                }
+            }
         }
     }
+    public void GetResourcesFromCol(int col,boolean[] Keep, MarketTray marketTray) {
+        MarketMarble[] NewResources = marketTray.GetMarketMarblesFromCol(col);
+        marketTray.ShiftMatrixByCol(col);
+
+        for (int i = 0; i < 4; i++) {
+            if (Keep[i] == true) {
+                NewResources[i].EffectOfMarble(Currentplayer);
+            } else {
+                for (Player otherplayer : OtherPlayers) {
+                    otherplayer.getFaithTrack().setRedPosition(1); // devo farlo per tutti i players che non sono io
+                }
+
+            }
+        }
+    }
+
 
     public void moveResourceFromWarehouse(Player player, int From, int To) {
         player.getWarehouse().moveResources(From, To);
     }
 
 
-    public void acquireCard(DevelopmentCard card, Player player, int n, int resoucesFromStrongbox[], int resourcesFromWarehouse[]) {
+    public void acquireCard(DevelopmentCard card, int n, int resoucesFromStrongbox[], int resourcesFromWarehouse[]) {
 
 
         if (selectedResourcesCheck(card.getCost(),resourcesFromWarehouse,resourcesFromWarehouse)){ //check se le risorse passate sono sufficienti ad acquistare leader card
             //Try{
-            player.getStrongbox().RemoveResourcesFromStrongbox(resoucesFromStrongbox);
+            Currentplayer.getStrongbox().RemoveResourcesFromStrongbox(resoucesFromStrongbox);
             // DA FARE player.getWarehouse().RemoveResource(resourcesFromWarehouse);
 
             // } Catch (notEnoughResourcesException e)
             if (n == 1) {
-                player.getSlots().addSlot1(card);
+                Currentplayer.getSlots().addSlot1(card);
 
             }
             if (n == 2) {
-                player.getSlots().addSlot2(card);
+                Currentplayer.getSlots().addSlot2(card);
             }
             if (n == 3) {
 
-                player.getSlots().addSlot2(card);
+                Currentplayer.getSlots().addSlot2(card);
             }
         }
         else
@@ -65,12 +90,12 @@ public class TurnManager {
 
 
     public void discardLeaderCard(int num) {
-        player.DiscardLeaderCard(num);
-        player.getFaithTrack().setRedPosition(1);
+        Currentplayer.DiscardLeaderCard(num);
+        Currentplayer.getFaithTrack().setRedPosition(1);
     }
     public void activateLeaderCard(int num) {
-        if (player.getLeaderCards(num).canBeActivated(player) == true) {
-            player.getLeaderCards(num).setActivate(true);
+        if (Currentplayer.getLeaderCards(num).canBeActivated(Currentplayer) == true) {
+            Currentplayer.getLeaderCards(num).setActivate(true);
         }
     }
     //public void productionByDevCard
