@@ -11,14 +11,16 @@ public class DevCardSlot {
 
     //add card above the top card if its level is higher
     public void addCard(DevelopmentCard card){
-        if (card.getLevel() > getTopCard().getLevel())
+        if (card.getLevel() == getTopCard().getLevel()+1)
             cards.add(card);
     }
+
 
     //get the "active" card, the one on top of the slot
     public DevelopmentCard getTopCard(){
         return (cards.get(cards.size() - 1));
     }
+
 
     //Count the total victory points of the cards in the slot
     public int countVictoryPoints(){
@@ -29,10 +31,12 @@ public class DevCardSlot {
         return points;
     }
 
+
     //return the array of cards
     public ArrayList<DevelopmentCard> getCards(){
         return cards;
     }
+
 
     public int filterCount(int level){
         List<DevelopmentCard> cardsLevelN = cards.stream().filter(c->c.getLevel()==level).collect(Collectors.toList());
