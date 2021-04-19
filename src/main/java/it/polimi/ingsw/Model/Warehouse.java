@@ -8,16 +8,16 @@ public class Warehouse {
     private ColoredMarble.ColorMarble Colorrow1;
     private ColoredMarble.ColorMarble Colorrow2;
     private ColoredMarble.ColorMarble Colorrow3;
-    private ColoredMarble.ColorMarble ColorrowExtra1;
-    private ColoredMarble.ColorMarble ColorrowExtra2;
+    //private ColoredMarble.ColorMarble ColorrowExtra1;
+    //private ColoredMarble.ColorMarble ColorrowExtra2;
     private ColoredMarble row1;
     private ArrayList<ColoredMarble> row2;
     private ArrayList<ColoredMarble> row3;
-    private ArrayList<ColoredMarble> rowextra1;
-    private ArrayList<ColoredMarble> rowextra2;
+    //private ArrayList<ColoredMarble> rowextra1;
+    //private ArrayList<ColoredMarble> rowextra2;
     private boolean removeSuccess = true;
 
-    private int[] TotalResourcesWarehouse = {0, 0, 0, 0}; //0=purple SERVANT, 1=blue SHIELD, 2=yellow COINS, 3=grey STONES
+    //private int[] TotalResourcesWarehouse = {0, 0, 0, 0}; //0=purple SERVANT, 1=blue SHIELD, 2=yellow COINS, 3=grey STONES
 
     public ColoredMarble getRow1() {
         return row1;
@@ -31,13 +31,13 @@ public class Warehouse {
         return row3;
     }
 
-    public ArrayList<ColoredMarble> getRowextra1() {
+    /*public ArrayList<ColoredMarble> getRowextra1() {
         return rowextra1;
-    }
+    }*/
 
-    public ArrayList<ColoredMarble> getRowextra2() {
+    /*public ArrayList<ColoredMarble> getRowextra2() {
         return rowextra2;
-    }
+    }*/
 
     public ColoredMarble.ColorMarble getColorrow1() {
         return Colorrow1;
@@ -61,7 +61,7 @@ public class Warehouse {
                 row2.add(rowMarble);
                 Colorrow2 = rowMarble.getColorMarble();
                 return true;
-            } else if (row2.size() > 0 && row2.size() < 2 && rowMarble.getColorMarble().equals(Colorrow1)) {
+            } else if (row2.size()  == 1 && rowMarble.getColorMarble().equals(Colorrow1)) {
                 row2.add(rowMarble);
                 return true;
             } else {
@@ -72,18 +72,29 @@ public class Warehouse {
                 row3.add(rowMarble);
                 Colorrow3 = rowMarble.getColorMarble();
                 return true;
-            } else if (row3.size() > 0 && row3.size() < 3 && rowMarble.getColorMarble().equals(Colorrow2)) {
+            } else if ( row3.size() < 3 && rowMarble.getColorMarble().equals(Colorrow2)) {
                 row3.add(rowMarble);
                 return true;
             } else {
                 return false;
             }
         }
-        return false; // manca la gestione di row = 4 e row = 5;
+        return false;
     }
 
-    public boolean RemoveResourcesFromWare(int[] resources) { // il vettore che gli passo: 0=purple, 1=blue, 2=yellow, 3=grey
+    public boolean RemoveResourcesFromWare(ColoredMarble rowMarble, int row) { // il vettore che gli passo: 0=purple, 1=blue, 2=yellow, 3=grey
         //Il boolean che ritorno indietro serve per dirmi se la procedura è andata a buon fine
+        if(row == 1)
+
+
+
+
+
+
+
+
+
+
 
         switch (row1.getColorMarble()) {
             case PURPLE:
