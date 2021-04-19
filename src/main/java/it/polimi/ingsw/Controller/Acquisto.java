@@ -1,5 +1,5 @@
 package it.polimi.ingsw.Controller;
-/*import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Model.*;
 
 
 public class Acquisto {
@@ -27,4 +27,3 @@ public class Acquisto {
 
     }
 }
-*/

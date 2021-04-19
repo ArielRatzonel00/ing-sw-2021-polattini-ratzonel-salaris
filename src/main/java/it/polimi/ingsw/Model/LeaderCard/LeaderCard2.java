@@ -23,4 +23,9 @@ public class LeaderCard2 extends LeaderCard { //metodo per leader cards che dimi
             }
         }
 
+        @Override
+        public void effect(){
+
+        }
+
 }
