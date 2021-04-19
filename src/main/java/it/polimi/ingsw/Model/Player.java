@@ -44,7 +44,7 @@ public class Player {
         return leaderCards[num];
     }
 
-    public SlotsBoard getSlots() {
+    public SlotsBoard getSlotsBoard() {
         return slotsBoard;
     }
 

@@ -6,6 +6,7 @@ import it.polimi.ingsw.Model.Marble.ColoredMarble;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.Marble.RedMarble;
 import it.polimi.ingsw.Model.Marble.WhiteMarble;
+import java.io.*;
 
 import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
@@ -61,16 +62,20 @@ public class TurnManager {
         MarketMarble[] NewResources = marketTray.GetMarketMarblesFromCol(col);
         marketTray.ShiftMatrixByCol(col);
     }
-    public void ChooseWhatToDoWithColoredMarble(int WarehouseRow, ColoredMarble marble){
-        if (WarehouseRow < 6 ){
-            Currentplayer.getWarehouse().addToRow(marble,WarehouseRow);
+    public void ChooseWhatToDoWithColoredMarble(boolean keep, ColoredMarble coloredMarble){
+        if (keep){
+            //ASPETTO CHE L'UTENTE MI PASSI RIGA(WarehouseRow) IN CUI METTERE PALLINA E FACCIO ADDTOROW
+            // Currentplayer.getWarehouse().addToRow(coloredMarble,WarehouseRow);
+        }
+        else{
+            //otherplayers.faithTrak.setRedPosition
         }
     }
 
 
 
-    public void moveResourceFromWarehouse(Player player, int From, int To) {
-        player.getWarehouse().moveResources(From, To);
+    public void moveResourceFromWarehouse(Player player, WarehouseRow From, WarehouseRow To) {
+        player.getWarehouse().MoveResource(From, To);
     }
 
 
@@ -83,18 +88,10 @@ public class TurnManager {
             // DA FARE player.getWarehouse().RemoveResource(resourcesFromWarehouse);
 
             // } Catch (notEnoughResourcesException e)
-            if (n == 1) {
-                Currentplayer.getSlots().addSlot1(card);
 
+                Currentplayer.getSlotsBoard().getSlots().get(n-1).addCard(card);
             }
-            if (n == 2) {
-                Currentplayer.getSlots().addSlot2(card);
-            }
-            if (n == 3) {
 
-                Currentplayer.getSlots().addSlot2(card);
-            }
-        }
         else
             System.out.println("You didn't select enough resources to acquire this card");
     }

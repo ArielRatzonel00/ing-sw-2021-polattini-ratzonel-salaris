@@ -9,7 +9,7 @@ public class SlotsBoard {
 
     // Create a SlotBoard with n (number that is set on the rules of the game) initial slots
     public SlotsBoard(int initialSlotNumber) throws NullPointerException{
-        for(int i=0; i<initialSlotNumber;i++){
+        for(int i=0; i<initialSlotNumber;i++){ //INITIALSLOTNUMBER = 3
             slots.add(new DevCardSlot());
         }
     }

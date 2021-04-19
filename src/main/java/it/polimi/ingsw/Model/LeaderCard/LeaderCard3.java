@@ -25,27 +25,7 @@ private ArrayList<ColoredMarble> ExtraRow;
     public boolean canBeActivated(Player player) {
 
 
-        int TotalResourcesWarehouse = 0;
-        if(ColorCost == player.getWarehouse().getColorrow1()){
-            TotalResourcesWarehouse = 1;
-        }
-        else if (ColorCost == player.getWarehouse().getColorrow2()){
-            TotalResourcesWarehouse = player.getWarehouse().getRow2().size();
-        }
-        else if (ColorCost == player.getWarehouse().getColorrow3()){
-            TotalResourcesWarehouse = player.getWarehouse().getRow3().size();
-        }
-        if (player.getLeaderCards(0) != null && player.getLeaderCards(0).isActivate() && player.getLeaderCards(0) instanceof LeaderCard3 ) {
-            if (((LeaderCard3) player.getLeaderCards(0)).colorOfExtraWarehouse.equals(ColorCost)) {
-                TotalResourcesWarehouse +=  ((LeaderCard3) player.getLeaderCards(0)).getExtraRow().size();
-            }
-        }
-        else if (player.getLeaderCards(1) != null && player.getLeaderCards(1).isActivate() && player.getLeaderCards(1) instanceof LeaderCard3 ){
-            if (((LeaderCard3) player.getLeaderCards(1)).colorOfExtraWarehouse.equals(ColorCost)) {
-                TotalResourcesWarehouse += ((LeaderCard3) player.getLeaderCards(1)).getExtraRow().size();
-            }
-        }
-
+        int TotalResourcesWarehouse=player.getWarehouse().getNumberOfResource(ColorCost);
         int TotalResourcesInStrongbox = player.getStrongbox().CountResources(ColorCost);
 
         if(TotalResourcesInStrongbox + TotalResourcesWarehouse >= 5)
