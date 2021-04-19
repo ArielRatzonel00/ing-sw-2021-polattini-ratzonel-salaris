@@ -24,4 +24,15 @@ public class GridCell {
             return null;
         }
     }
+    public boolean RemoveFirstCard(){
+        if (cell.size() > 0){
+            cell.remove(0);
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
 }

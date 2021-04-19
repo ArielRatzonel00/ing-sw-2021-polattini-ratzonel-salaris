@@ -3,7 +3,7 @@ import it.polimi.ingsw.Model.*;
 import java.util.*;
 
 
-public class GameManager {
+/*public class GameManager {
     private List<Player> players;
     private MultiplayerGame MultiGame;
     private SinglePlayerGame SingleGame;
@@ -32,4 +32,6 @@ public class GameManager {
 
 
 
+
 }
+ */

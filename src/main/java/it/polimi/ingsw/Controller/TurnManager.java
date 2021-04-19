@@ -1,7 +1,11 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard1;
+import it.polimi.ingsw.Model.Marble.ColoredMarble;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Model.Marble.RedMarble;
+import it.polimi.ingsw.Model.Marble.WhiteMarble;
 
 import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
@@ -15,35 +19,54 @@ public class TurnManager {
     }
 
     //Funzioni che chiamano le funzioni delle classe del model
-    public void GetResourcesFromRow(int row,boolean[] Keep, MarketTray marketTray) {
+
+    //WarwhouseRow:
+    // il valore 0 corrisponde al niente(quindi bianche(che non diventano di un altro colore) e rosse)
+    // il valore 1 corrisponde alla riga 1 del Warehouse
+    //il valore 2 corrisponde alla riga 2 del Warehouse
+    // il valore 3 corrisponed alla riga 3 del Warehouse
+    // il valore 4 corrisponde alla rigaExtra1 attivata dalla LeaderCard1
+    //il valore 5 corrisponde alla rigaExtra2 attivata dalla LeaderCard2
+    // il valore 6 corrisponde al discard
+    public void GetResourcesFromRow(int row,MarketTray marketTray) {
         MarketMarble[] NewResources = marketTray.GetMarketMarblesFromRow(row);
         marketTray.ShiftMatrixByRow(row);
-
-        for (int i = 0; i < 3; i++) {
-            if (Keep[i] == true) {
-                NewResources[i].EffectOfMarble(Currentplayer);
-            } else {
-                for (Player otherplayer : OtherPlayers) {
-                    otherplayer.getFaithTrack().setRedPosition(1); // devo farlo per tutti i players che non sono io
+        for (MarketMarble newresource : NewResources ){
+            if (newresource instanceof RedMarble){
+                Currentplayer.getFaithTrack().setRedPosition(1);
+            }
+            else if (newresource instanceof ColoredMarble) {
+                System.out.println("What do you want to do with this Marble");
+               //Utente Clicca Bottone che chiama choose what to do whith colored Card
+            }
+            else if(newresource instanceof WhiteMarble){
+                if(Currentplayer.getLeaderCards(0).isActivate() && Currentplayer.getLeaderCards(0) instanceof LeaderCard1){
+                    if(!Currentplayer.getLeaderCards(1).isActivate() || !(Currentplayer.getLeaderCards(1) instanceof LeaderCard1)){
+                        System.out.println("What do you want to do with this Marble");
+                    }
+                    else if(Currentplayer.getLeaderCards(1).isActivate() && (Currentplayer.getLeaderCards(1) instanceof LeaderCard1)){
+                        System.out.println("What do you want to do with this Marble and in which marble you want to Transform");
+                    }
+                }
+                else if (Currentplayer.getLeaderCards(1).isActivate() && (Currentplayer.getLeaderCards(1) instanceof LeaderCard1)){
+                    System.out.println("What do you want to do with this Marble");
+                }
+                else {
+                    //Nothing
                 }
             }
         }
     }
-    public void GetResourcesFromCol(int col,boolean[] Keep, MarketTray marketTray) {
+    public void GetResourcesFromCol(int col,MarketTray marketTray) {
         MarketMarble[] NewResources = marketTray.GetMarketMarblesFromCol(col);
         marketTray.ShiftMatrixByCol(col);
-
-        for (int i = 0; i < 4; i++) {
-            if (Keep[i] == true) {
-                NewResources[i].EffectOfMarble(Currentplayer);
-            } else {
-                for (Player otherplayer : OtherPlayers) {
-                    otherplayer.getFaithTrack().setRedPosition(1); // devo farlo per tutti i players che non sono io
-                }
-
-            }
+    }
+    public void ChooseWhatToDoWithColoredMarble(int WarehouseRow, ColoredMarble marble){
+        if (WarehouseRow < 6 ){
+            Currentplayer.getWarehouse().addToRow(marble,WarehouseRow);
         }
     }
+
 
 
     public void moveResourceFromWarehouse(Player player, int From, int To) {

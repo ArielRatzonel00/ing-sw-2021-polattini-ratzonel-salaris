@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Controller.GameManager;
+/*import it.polimi.ingsw.Controller.GameManager;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class Lobby {
 
     //Possibile idea: Observer
 
-
+/*
 void addPlayer (Player player){
     if(this.players.isEmpty()){
         player.setFirst(true);
@@ -34,3 +34,4 @@ void addPlayer (Player player){
         this.numberOfPlayers = numberOfPlayers;
     }
 }
+*/

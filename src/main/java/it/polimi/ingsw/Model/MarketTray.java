@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MarketTray  {
     private MarketMarble[] ArrayMarble = new MarketMarble[13];
-    private MarketMarble[][] MarketMatrix;
+    private MarketMarble[][] MarketMatrix = new MarketMarble[3][4];
     private MarketMarble OustideMarble;
 
     public MarketTray() {

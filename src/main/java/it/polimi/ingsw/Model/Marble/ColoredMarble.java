@@ -17,10 +17,6 @@ public class ColoredMarble extends MarketMarble {
         BLUE
     }
 
-    @Override
-    public void EffectOfMarble(Player player) {
-        System.out.println("Cosa vuoi fare con la Marble");
-    }
 
     public ColorMarble getColorMarble() {
         return colorMarble;

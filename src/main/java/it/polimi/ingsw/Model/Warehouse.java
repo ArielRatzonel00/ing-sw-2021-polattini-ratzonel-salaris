@@ -39,29 +39,35 @@ public class Warehouse {
         return rowextra2;
     }
 
-    public void addToRow(ColoredMarble rowMarble, int row) {
+    public boolean addToRow(ColoredMarble rowMarble, int row) {
         if (row == 1) {
             row1 = rowMarble;
             Colorrow1 = rowMarble.getColorMarble();
+            return true;
         } else if (row == 2) {
             if (row2.size() == 0) {
                 row2.add(rowMarble);
                 Colorrow2 = rowMarble.getColorMarble();
+                return true;
             } else if (row2.size() > 0 && row2.size() < 2 && rowMarble.getColorMarble().equals(Colorrow1)) {
                 row2.add(rowMarble);
+                return true;
             } else {
-                // Can't put Marble here
+                return false;
             }
         } else if (row == 3) {
             if (row3.size() == 0) {
                 row3.add(rowMarble);
                 Colorrow3 = rowMarble.getColorMarble();
+                return true;
             } else if (row3.size() > 0 && row3.size() < 3 && rowMarble.getColorMarble().equals(Colorrow2)) {
                 row3.add(rowMarble);
+                return true;
             } else {
-                // Can't put Marble here
+                return false;
             }
         }
+        return false; // manca la gestione di row = 4 e row = 5;
     }
 
     public boolean RemoveResourcesFromWare(int[] resources) { // il vettore che gli passo: 0=purple, 1=blue, 2=yellow, 3=grey
