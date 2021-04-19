@@ -9,7 +9,7 @@ public class Player {
     private Warehouse warehouse;
     private Strongbox strongbox;
     private LeaderCard[] leaderCards;
-    private Slots slots;
+    private SlotsBoard slotsBoard;
     private boolean isFirst;
 
 
@@ -20,7 +20,7 @@ public class Player {
         this.warehouse = new Warehouse();
         this.strongbox = new Strongbox();
         this.leaderCards = FourLeaderCards;
-        this.slots = new Slots();
+        this.slotsBoard = new SlotsBoard(3);
         this.isFirst = false;
     }
 
@@ -44,8 +44,8 @@ public class Player {
         return leaderCards[num];
     }
 
-    public Slots getSlots() {
-        return slots;
+    public SlotsBoard getSlots() {
+        return slotsBoard;
     }
 
     public void setFirst(boolean first) {

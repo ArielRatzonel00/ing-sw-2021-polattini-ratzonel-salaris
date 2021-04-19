@@ -1,55 +1,34 @@
 package it.polimi.ingsw.Model;
 import java.util.ArrayList;
 
-public class Slots {
-    private ArrayList<DevelopmentCard> slot1;
-    private ArrayList<DevelopmentCard> slot2;
-    private ArrayList<DevelopmentCard> slot3;
+public class SlotsBoard {
+    private ArrayList<DevCardSlot> slots;
 
     private int[] ColorDevCards = {0, 0, 0, 0}; //posizione 0: purple, 1=blue, 2=yellow, 3=green
     private boolean Respect = false;
 
 
-    public ArrayList<DevelopmentCard> getSlot1() {
-        return slot1;
-    }
-
-    public ArrayList<DevelopmentCard> getSlot2() {
-        return slot2;
-    }
-
-    public ArrayList<DevelopmentCard> getSlot3() {
-        return slot3;
+    // Create a SlotBoard with n (number that is set on the rules of the game) initial slots
+    public SlotsBoard(int initialSlotNumber) throws NullPointerException{
+        for(int i=0; i<initialSlotNumber;i++){
+            slots.add(new DevCardSlot());
+        }
     }
 
 
-    public DevelopmentCard getCard1Top() {
-        return (slot1.get(slot1.size() - 1));
-    }
-
-    public DevelopmentCard getCard2Top() {
-        return (slot1.get(slot2.size() - 1));
-    }
-
-    public DevelopmentCard getCard3Top() {
-        return (slot1.get(slot3.size() - 1));
+    // function that add a received slot (useful for LeaderCard)
+    public void addSlot(DevCardSlot slot) {
+        slots.add(slot);
     }
 
 
-    public void addSlot1(DevelopmentCard card1) {
-        if (card1.getLevel() > getCard1Top().getLevel())
-            slot1.add(card1);
-    }
 
-    public void addSlot2(DevelopmentCard card1) {
-        if (card1.getLevel() > getCard1Top().getLevel())
-            slot1.add(card1);
-    }
 
-    public void addSlot3(DevelopmentCard card1) {
-        if (card1.getLevel() > getCard1Top().getLevel())
-            slot1.add(card1);
-    }
+    // Da rivedere
+
+
+
+
 
     public boolean getDevCardsLevel2(int colorCard) { //mi ritorna true se ho una carta di quel colore di livello 2 nei miei slot
         //1: purple, 2=blue, 3=yellow, 4=green
@@ -189,10 +168,4 @@ public class Slots {
         return ColorDevCards;
     }
 
-   /* public void addCard(DevelopmentCard developmentCard){
-
-    }
-}
-
-    */
 }
