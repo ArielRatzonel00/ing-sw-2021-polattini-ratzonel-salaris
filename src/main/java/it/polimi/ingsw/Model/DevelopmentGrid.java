@@ -1,8 +1,23 @@
 package it.polimi.ingsw.Model;
 
 public class DevelopmentGrid {
+
+
     private GridCell[][] CardMatrix; // Matrice che contiene tutte le developmentCard
-   // CardMatrix[0][0] = get(Cella 1);
+    public DevelopmentGrid(CreateCards createCards) {
+        CardMatrix[0][0] = createCards.getCell00();
+        CardMatrix[0][1] = createCards.getCell01();
+        CardMatrix[0][2] = createCards.getCell02();
+        CardMatrix[0][3] = createCards.getCell03();
+        CardMatrix[1][0] = createCards.getCell10();
+        CardMatrix[1][1] = createCards.getCell11();
+        CardMatrix[1][2] = createCards.getCell12();
+        CardMatrix[1][3] = createCards.getCell13();
+        CardMatrix[2][0] = createCards.getCell20();
+        CardMatrix[2][1] = createCards.getCell21();
+        CardMatrix[2][2] = createCards.getCell22();
+        CardMatrix[2][3] = createCards.getCell23();
+    }
 
 
 

@@ -7,11 +7,15 @@ import java.util.List;
 public class GridCell {
     private ArrayList<DevelopmentCard> cell;
 
+
     private int i = 0;
 
-    public GridCell(ArrayList<DevelopmentCard> ArrayDevelopmentCard) {
-        cell = ArrayDevelopmentCard;
-        Collections.shuffle(ArrayDevelopmentCard);
+    public GridCell(DevelopmentCard developmentCard1, DevelopmentCard developmentCard2,DevelopmentCard developmentCard3,DevelopmentCard developmentCard4) {
+        cell.add(developmentCard1);
+        cell.add(developmentCard2);
+        cell.add(developmentCard3);
+        cell.add(developmentCard4);
+        Collections.shuffle(cell);
     } // le carte saranno mischiate prima di qua
 
     public DevelopmentCard getTopCard() { // mi ridà la prima carta non nulla
