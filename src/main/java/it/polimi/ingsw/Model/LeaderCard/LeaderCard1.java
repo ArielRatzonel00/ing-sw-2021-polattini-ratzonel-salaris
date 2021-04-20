@@ -23,7 +23,7 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
 
     @Override
     public boolean canBeActivated(Player player) {
-        if((player.getSlots().filterCount(colorCostOne) >= 1) && (player.getSlots().filterCount(colorCostTwo)>= 2)){
+        if((player.getSlotsBoard().filterCount(colorCostOne) >= 1) && (player.getSlotsBoard().filterCount(colorCostTwo)>= 2)){
             return true;
         }
         else {

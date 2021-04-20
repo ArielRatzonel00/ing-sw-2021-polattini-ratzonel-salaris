@@ -6,7 +6,7 @@ import it.polimi.ingsw.Model.Marble.ColoredMarble;
 
 import java.util.ArrayList;
 
-public class CreateCards {
+public class Deck {
     // Creazione DevelopmentCards
     private DevelopmentCard Green11 = new DevelopmentCard(new int[]{0, 2, 0, 0}, new int[]{0, 0, 1, 0}, new int[]{0, 0, 0, 0, 1}, 1, DevelopmentCard.colorCard.Green, 1, 1);
     private DevelopmentCard Green12 = new DevelopmentCard(new int[]{1, 1, 0, 1}, new int[]{0, 0, 0, 1}, new int[]{1, 0, 0, 0, 0}, 2, DevelopmentCard.colorCard.Green, 1, 2);

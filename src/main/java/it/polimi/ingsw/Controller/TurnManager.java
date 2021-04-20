@@ -74,8 +74,8 @@ public class TurnManager {
 
 
 
-    public void moveResourceFromWarehouse(Player player, WarehouseRow From, WarehouseRow To) {
-        player.getWarehouse().MoveResource(From, To);
+    public void moveResourceFromWarehouse(Player player, int WarehouseRow1, int Warehouse2) {
+        player.getWarehouse().MoveResource(WarehouseRow1, Warehouse2);
     }
 
 
@@ -96,7 +96,7 @@ public class TurnManager {
             System.out.println("You didn't select enough resources to acquire this card");
     }
 
-    public boolean selectedResourcesCheck(int playerResources[], int strongBoxResources[], int warehouseResources[]){ // Funzione che controlla se la somma delle risorse selezionate i
+    public boolean selectedResourcesCheck(int[] playerResources, int[] strongBoxResources, int[] warehouseResources){ // Funzione che controlla se la somma delle risorse selezionate i
         int flag=0;                                                                                                 //dallo strongbox e dal warehouse sono maggiori
         for(int i:strongBoxResources){                                                                               //di quelle richieste nel primo array passato
             if (playerResources[i]<=strongBoxResources[i]+warehouseResources[i])                                       //potremmo metterlo nelle EXCEPTIONS

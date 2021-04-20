@@ -6,10 +6,10 @@ public class MultiplayerGame {
     private MarketTray marketTray;
     private DevelopmentGrid developmentGrid;
     private MarkerStack markers ;
-    private CreateCards createCards = new CreateCards();
+    private Deck deck = new Deck();
     public MultiplayerGame(Player[] players, DevelopmentCard[] developmentCards) {
         this.players = players;
-        this.developmentGrid = new DevelopmentGrid(createCards);
+        this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();
     }
     private int NumberOfPlayers = players.length;

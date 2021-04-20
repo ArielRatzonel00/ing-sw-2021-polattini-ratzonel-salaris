@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class GridCell {
-    private ArrayList<DevelopmentCard> cell;
+    private ArrayList<DevelopmentCard> cell = new ArrayList<>();
 
 
     private int i = 0;

@@ -18,7 +18,7 @@ public class LeaderCard2 extends LeaderCard { //metodo per leader cards che dimi
 
     @Override
     public boolean canBeActivated(Player player) {
-        if ((player.getSlots().filterCount(FirstcolorCost) >= 1) && (player.getSlots().filterCount(SecondcolorCost) >= 1)) {
+        if ((player.getSlotsBoard().filterCount(FirstcolorCost) >= 1) && (player.getSlotsBoard().filterCount(SecondcolorCost) >= 1)) {
             return true;
         } else {
             return false;

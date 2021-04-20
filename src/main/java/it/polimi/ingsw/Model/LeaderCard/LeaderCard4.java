@@ -17,12 +17,7 @@ public class LeaderCard4 extends LeaderCard{ //converte in punto fede e materia 
     }
 
     public boolean canBeActivated(Player player) {
-        if(player.getSlots().filterCount(CostCardLevelTwo,2) >= 1){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return player.getSlotsBoard().filterCount(CostCardLevelTwo, 2) >= 1;
     }
 
     public DevelopmentCard.colorCard getCostCardLevelTwo() {

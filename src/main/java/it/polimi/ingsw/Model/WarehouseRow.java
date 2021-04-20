@@ -4,7 +4,7 @@ import it.polimi.ingsw.Model.Marble.ColoredMarble;
 import java.util.ArrayList;
 
 public class WarehouseRow {
-    private ArrayList<ColoredMarble> marbles;
+    private ArrayList<ColoredMarble> marbles = new ArrayList<>();
     private int space;
     private ColoredMarble.ColorMarble color;
 
@@ -27,6 +27,7 @@ public class WarehouseRow {
         }
         return false;
     }
+    p
 
     public boolean removeMarble(ColoredMarble coloredMarble){
         if(coloredMarble.getColorMarble().equals(color) && marbles.size()>0) {
@@ -41,6 +42,7 @@ public class WarehouseRow {
     public ArrayList<ColoredMarble> getMarbles() {
         return marbles;
     }
+
 
     public int getSpace() {
         return space;
