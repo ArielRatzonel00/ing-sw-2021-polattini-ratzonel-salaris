@@ -13,7 +13,9 @@ import java.util.ArrayList;
 
 public class TurnManager {
     private Player Currentplayer;
-    private ArrayList<Player> OtherPlayers;
+    private ArrayList<Player> OtherPlayers = new ArrayList<>();
+    private Deck deck =new Deck();
+    private DevelopmentGrid developmentGrid=new DevelopmentGrid(deck);
 
     public TurnManager(Player currentplayer) {
         this.Currentplayer = currentplayer;
@@ -79,8 +81,23 @@ public class TurnManager {
     }
 
 
-    public void acquireCard(DevelopmentCard card, int n, int resoucesFromStrongbox[], int resourcesFromWarehouse[]) {
+    public boolean selectedResourcesCheck(int[] cost, int[] strongBoxResources, int[] warehouseResources){ // Funzione che controlla se la somma delle risorse selezionate i
+        int flag=0;                                                                                                 //dallo strongbox e dal warehouse sono maggiori
+        for(int i:cost){                                                                               //di quelle richieste nel primo array passato
+            if (cost[i]<=strongBoxResources[i]+warehouseResources[i])                                       //potremmo metterlo nelle EXCEPTIONS
+                flag++;
+        }
+        if(flag==strongBoxResources.length)
+            return true;
+        else
+            return false;
+    }
 
+    public boolean acquireCard(Player player, int cellRowNumber, int cellColNumber, int slot, int resoucesFromStrongbox[], int resourcesFromWarehouse[]) {
+        try{
+        int[] cost= developmentGrid.getSingleCell(cellRowNumber,cellColNumber).getTopCard().getCost();
+        if(selectedResourcesCheck(cost,resoucesFromStrongbox,resourcesFromWarehouse))
+            player.getStrongbox().getTotalResourcesStrongbox()
 
         if (selectedResourcesCheck(card.getCost(),resourcesFromWarehouse,resourcesFromWarehouse)){ //check se le risorse passate sono sufficienti ad acquistare leader card
             //Try{
@@ -96,17 +113,7 @@ public class TurnManager {
             System.out.println("You didn't select enough resources to acquire this card");
     }
 
-    public boolean selectedResourcesCheck(int[] playerResources, int[] strongBoxResources, int[] warehouseResources){ // Funzione che controlla se la somma delle risorse selezionate i
-        int flag=0;                                                                                                 //dallo strongbox e dal warehouse sono maggiori
-        for(int i:strongBoxResources){                                                                               //di quelle richieste nel primo array passato
-            if (playerResources[i]<=strongBoxResources[i]+warehouseResources[i])                                       //potremmo metterlo nelle EXCEPTIONS
-                flag++;
-        }
-        if(flag==strongBoxResources.length)
-            return true;
-        else
-            return false;
-    }
+
 
 
     public void discardLeaderCard(int num) {

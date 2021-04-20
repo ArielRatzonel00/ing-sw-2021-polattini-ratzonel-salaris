@@ -71,5 +71,10 @@ public class DevelopmentGrid {
         }
         return true;
     }
+    public DevelopmentCard remove(int a, int b){
+        DevelopmentCard temp= CardMatrix[a][b].getTopCard();
+        CardMatrix[a][b].RemoveTopCard();
+        return temp;
+    }
 
 }

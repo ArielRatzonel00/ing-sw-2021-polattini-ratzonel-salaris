@@ -36,7 +36,9 @@ public class GridCell {
         else {
             return false;
         }
-
     }
 
+    public void RemoveTopCard(){
+        if(cell.size()>0) { //THROWS EXCEPTION EMPTYCELLEXCEPTION
+            cell.remove(cell.size() - 1);
 }
