@@ -27,7 +27,7 @@ public class WarehouseRow {
         }
         return false;
     }
-    p
+
 
     public boolean removeMarble(ColoredMarble coloredMarble){
         if(coloredMarble.getColorMarble().equals(color) && marbles.size()>0) {
@@ -41,6 +41,10 @@ public class WarehouseRow {
 
     public ArrayList<ColoredMarble> getMarbles() {
         return marbles;
+    }
+    public void ChangeMarbles(ArrayList<ColoredMarble> newmarbles, ColoredMarble.ColorMarble newcolor){
+        marbles = newmarbles;
+        color = newcolor;
     }
 
 
