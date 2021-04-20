@@ -3,6 +3,8 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 
+// Class that represents the Player
+
 public class Player {
     private final String nickname;
     private FaithTrack faithTrack;
@@ -20,7 +22,7 @@ public class Player {
         this.warehouse = new Warehouse();
         this.strongbox = new Strongbox();
         this.leaderCards = FourLeaderCards;
-        this.slotsBoard = new SlotsBoard(3);
+        this.slotsBoard = new SlotsBoard();
         this.isFirst = false;
     }
 
@@ -50,13 +52,27 @@ public class Player {
 
     public void setFirst(boolean first) {
         this.isFirst = first;
+    } // Method that set the first player to enter the lobby
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*   public void marketTray(MarketTray marketTray ){
+        //ChiamaLaFunzioneDiMarketTray
     }
     public void DiscardLeaderCard(int num){
         leaderCards[num] = null; // Con ArrayList basta fare remove
-    }
-}
- /*   public void marketTray(MarketTray marketTray ){
-        //ChiamaLaFunzioneDiMarketTray
     }
     public void produceByCard(DevelopmentCard developmentCard){
         //chiama la funzione di developmentCard

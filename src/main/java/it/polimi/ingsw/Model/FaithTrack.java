@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+//Method that Represents the Faith Traick. Every Player has one
+
 public class FaithTrack {
     private boolean Multiplayer;
     private int RedPosition = 0;

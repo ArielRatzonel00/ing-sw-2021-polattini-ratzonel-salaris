@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 public class DevelopmentGrid {
 
+    // Method that represents the DevelopmentGrid. It is a Matrix of GridCell and it contains all the DevelopmentCard
 
     private GridCell[][] CardMatrix = new GridCell[3][4]; // Matrice che contiene tutte le developmentCard
     public DevelopmentGrid(Deck deck) {
@@ -70,11 +71,13 @@ public class DevelopmentGrid {
             }
         }
         return true;
-    }
+    } // Method that removes the bottom card of the lowest level of the color that is still on the DevelopmentGrid (Used in the effect of the Marker that RemovesCard)
+
+
     public DevelopmentCard remove(int a, int b){
         DevelopmentCard temp= CardMatrix[a][b].getTopCard();
         CardMatrix[a][b].RemoveTopCard();
         return temp;
-    }
+    } // Method that removes and returns the top card of the cell selected
 
 }

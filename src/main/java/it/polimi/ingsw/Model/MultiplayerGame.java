@@ -2,12 +2,14 @@ package it.polimi.ingsw.Model;
 
 public class MultiplayerGame {
 
+    // Class that represents the MultiplayerGame
+
     private Player[] players;
     private MarketTray marketTray;
     private DevelopmentGrid developmentGrid;
     private MarkerStack markers ;
     private Deck deck = new Deck();
-    public MultiplayerGame(Player[] players, DevelopmentCard[] developmentCards) {
+    public MultiplayerGame(Player[] players) {
         this.players = players;
         this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();

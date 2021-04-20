@@ -4,16 +4,20 @@ import it.polimi.ingsw.Model.Markers.Marker;
 
 import java.util.ArrayList;
 
+// Class that represents the SinglePlayerGame
+
 public class SinglePlayerGame {
 
     private Player Player;
     private MarketTray marketTray;
     private DevelopmentGrid developmentGrid;
     private MarkerStack markers ;
-    private int CountForMarkerStack;
-    public SinglePlayerGame(Player player, DevelopmentCard[] developmentCards, ArrayList<Marker> markers ) {
+    private Deck deck = new Deck();
+
+
+    public SinglePlayerGame(Player player, DevelopmentCard[] developmentCards, ArrayList<Marker> markers) {
         this.Player = player;
-        this.developmentGrid = new DevelopmentGrid();
+        this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();
         this.markers = new MarkerStack(); // creare classe MarkerStack
     }
@@ -33,9 +37,7 @@ public class SinglePlayerGame {
         return markers;
     }
 
-    public int getCountForMarkerStack() {
-        return CountForMarkerStack;
-    }
+
 }
 
  /*   public void startgame(){

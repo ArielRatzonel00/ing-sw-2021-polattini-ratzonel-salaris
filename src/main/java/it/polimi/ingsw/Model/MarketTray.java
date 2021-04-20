@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+// Class the represents the Market Tray
+
 public class MarketTray  {
     private MarketMarble[] ArrayMarble = new MarketMarble[13];
     private MarketMarble[][] MarketMatrix = new MarketMarble[3][4];
@@ -65,7 +67,8 @@ public class MarketTray  {
         returnedMarbles[3] = MarketMatrix[row][3];
         return returnedMarbles;
 
-    }
+    } // Method that returns 4 marbles by selecting a row in the MarketTray
+
     public MarketMarble[] GetMarketMarblesFromCol(int col){
 
         MarketMarble[] returnedMarbles = new MarketMarble[3];
@@ -74,7 +77,7 @@ public class MarketTray  {
         returnedMarbles[2] = MarketMatrix[2][col];
         return returnedMarbles;
 
-    }
+    } // Method that returns 3 marbles by selecting a column in the MarketTray
 
 
     public void ShiftMatrixByRow(int rig) {
@@ -85,7 +88,9 @@ public class MarketTray  {
         MarketMatrix[rig][2] = MarketMatrix[rig][3];
         MarketMatrix[rig][3] =  temp;
 
-    }
+    } //Method that shift the MarketTray after choosing to get Marbles by selcted a row in the MarketTray
+
+
     public void ShiftMatrixByCol(int col) {
         MarketMarble temp2 = OustideMarble;
         OustideMarble = MarketMatrix[2][col];
@@ -93,5 +98,5 @@ public class MarketTray  {
         MarketMatrix[1][col] = MarketMatrix[0][col];
         MarketMatrix[0][col] = temp2;
 
-    }
+    } //Method that shift the MarketTray after choosing to get Marbles by selcted a column in the MarketTray
 }

@@ -9,8 +9,10 @@ import it.polimi.ingsw.Model.Markers.RemoveCardsMarker;
 import java.util.ArrayList;
 import java.util.Collections;
 
+//Class that represents the Stack of Markers in SinglePlayerGame
+
 public class MarkerStack {
-    private ArrayList<Marker> markers;
+    private ArrayList<Marker> markers = new ArrayList<>();
 
     public MarkerStack() {
         markers.add(new PlusTwoBlackMarker());
@@ -24,13 +26,15 @@ public class MarkerStack {
     }
 
 
-    public Marker getTopMarker(ArrayList<Marker> markers){
+    public Marker getTopMarker(){
         Marker temp = markers.get(markers.size()-1);
         markers.remove(markers.size()-1);
         markers.add(temp);
         return temp;
-    }
+    } // Method that returns the TopMarket in the stack and put it at the bottom of the stack
+
+
     public void Shuffle(){
         Collections.shuffle(markers);
-    }
+    } // Method that shuffle tha Markers in the Stack
 }

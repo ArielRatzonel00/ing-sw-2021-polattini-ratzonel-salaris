@@ -65,7 +65,7 @@ public  class LeaderCard {
     public void setActivate(boolean activate) {
         this.Activate = activate;
     }
-    public void effect(){};
+    public void effect(Player player){};
 
     public int getLeadIdFromCard(LeaderCard LeadCard) { //prende in ingresso una carta e mi ritorna il suo id
         return LeadCard.Id;

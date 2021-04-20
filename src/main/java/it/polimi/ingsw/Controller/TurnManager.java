@@ -111,28 +111,30 @@ public class TurnManager {
 
 
     public boolean acquireCard( int cellRowNumber, int cellColNumber, int slot, ArrayList<CostOfCard> resoucesFromStrongbox,ArrayList<CostOfCard> resourcesFromWarehouse) {
-        int[] cost= developmentGrid.getSingleCell(cellRowNumber,cellColNumber).getTopCard().getCost();
-        if(selectedResourcesCheck(cost,resoucesFromStrongbox,resourcesFromWarehouse)) {
-            for (CostOfCard costOfCard : resoucesFromStrongbox){
-                if (costOfCard.getCostNumber() > Currentplayer.getStrongbox().CountResources(costOfCard.getCostColor())){
+        int[] cost = developmentGrid.getSingleCell(cellRowNumber, cellColNumber).getTopCard().getCost();
+        if (selectedResourcesCheck(cost, resoucesFromStrongbox, resourcesFromWarehouse)) {
+            for (CostOfCard costOfCard : resoucesFromStrongbox) {
+                if (costOfCard.getCostNumber() > Currentplayer.getStrongbox().CountResources(costOfCard.getCostColor())) {
                     return false;
                 }
             }
-            for (CostOfCard costOfCard: resourcesFromWarehouse){
-                if (costOfCard.getCostNumber() > Currentplayer.getStrongbox().CountResources(costOfCard.getCostColor())){
+            for (CostOfCard costOfCard : resourcesFromWarehouse) {
+                if (costOfCard.getCostNumber() > Currentplayer.getStrongbox().CountResources(costOfCard.getCostColor())) {
                     return false;
                 }
             }
             // mi metto in attesa dei comandi del player che mi da per ogni riga quante risorse eliminare e faccio il controllo che corrispondono con resourcesFromWarehouse
             // anzi no faccio direttamente che passo le righe e creo il mio resources From Warehouse in base alle righe che passo
-            for (CostOfCard costOfCard : resourcesFromWarehouse){
-            Currentplayer.getStrongbox().RemoveResourcesFromStrongbox(costOfCard.getCostNumber(), costOfCard.getCostColor());
+            for (CostOfCard costOfCard : resourcesFromWarehouse) {
+                Currentplayer.getStrongbox().RemoveResourcesFromStrongbox(costOfCard.getCostNumber(), costOfCard.getCostColor());
 
 
             }
 
-            Currentplayer.getSlotsBoard().getSlots().get(slot-1).addCard(developmentGrid.remove(cellRowNumber, cellColNumber));
+            Currentplayer.getSlotsBoard().getSlots().get(slot - 1).addCard(developmentGrid.remove(cellRowNumber, cellColNumber));
 
+        }
+        return true;
     }
 
 

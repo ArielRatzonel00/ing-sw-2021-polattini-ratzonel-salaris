@@ -2,6 +2,8 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.ColoredMarble;
 
+// Class that represents a structure that has a number and a color
+
 public class CostOfCard {
     private int costNumber;
     private ColoredMarble.ColorMarble costColor;

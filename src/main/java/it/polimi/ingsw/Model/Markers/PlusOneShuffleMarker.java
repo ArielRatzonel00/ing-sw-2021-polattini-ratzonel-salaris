@@ -8,5 +8,5 @@ public class PlusOneShuffleMarker extends Marker {
     public void MarkerEffect(Player player, SinglePlayerGame singlePlayerGame) {
         player.getFaithTrack().setBlackPosition(1);
         singlePlayerGame.getMarkers().Shuffle();
-    }
+    } // Method that moves forward Lorenzo of one position and shuffles the MarkerStack
 }

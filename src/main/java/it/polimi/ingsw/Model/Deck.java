@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Model.LeaderCard.*;
 import it.polimi.ingsw.Model.Marble.ColoredMarble;
 
+// Class that contains the DevelopmentCards and the LeaderCards
 
 import java.util.ArrayList;
 

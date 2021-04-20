@@ -17,7 +17,5 @@ public class RemoveCardsMarker extends Marker {
     public void MarkerEffect(Player player, SinglePlayerGame singlePlayerGame) {
         singlePlayerGame.getDevelopmentGrid().RemoveCardByColor(colorCard);
         singlePlayerGame.getDevelopmentGrid().RemoveCardByColor(colorCard);
-
-        //Gli passo Livello livello della carta da scartare e mi calcolo le coordinate in base a quello
-    }
+    } // Method that removes the tow bottom card of the lowest level that are still in the DevelopmentGrif
 }

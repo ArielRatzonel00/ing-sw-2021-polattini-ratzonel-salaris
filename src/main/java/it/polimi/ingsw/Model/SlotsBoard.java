@@ -3,46 +3,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// class that represents the board of the slots. Every player has one SlotsBoard
+
 public class SlotsBoard {
-    private ArrayList<DevCardSlot> slots;
+    private ArrayList<DevCardSlot> slots = new ArrayList<>();
 
 
-    // Create a SlotBoard with n (number that is set on the rules of the game) initial slots
-    public SlotsBoard(int initialSlotNumber) throws NullPointerException{
-        for(int i=0; i<initialSlotNumber;i++){ //INITIALSLOTNUMBER = 3
+
+    public SlotsBoard() throws NullPointerException{
+        for(int i=0; i<3;i++){
             slots.add(new DevCardSlot());
         }
-    }
+    } // The SlotsBoard has 3 slots
 
-    //slots getter
+
     public ArrayList<DevCardSlot> getSlots() {
         return slots;
-    }
+    } // Method that returns the slots
 
-    // method that adds a slot received as parameter (useful for LeaderCard)
-    public void addSlot(DevCardSlot slot) {
-        slots.add(slot);
-    }
 
-    //count total victory points from the slots
     public int countVictoryPoints(){
             int points=0;
         for (DevCardSlot a: slots) {
             points += a.countVictoryPoints();
         }
         return points;
-    }
+    } // Method that counts total victory points from the slots
 
-    //Get total number of DevelopmentCards on a player board, useful for the 7 cards ending game check
     public int getCardsQuantity(){
         int cards=0;
         for (DevCardSlot a: slots) {
             cards += a.getCards().size();
         }
         return cards;
-    }
+    } // Method that gets total number of DevelopmentCards on a player board, useful for the 7 cards ending game check
 
-    // filterCount receive a level, a color or a pair of level and color and return the total number of DevelopmentCards in the SlotsBoard with that attributes
+
 
     public int filterCount(int level){
         int total=0;
@@ -65,6 +61,7 @@ public class SlotsBoard {
         }
         return total;
     }
+    // Methods filterCount receive a level, a color or a pair of level and color and return the total number of DevelopmentCards in the SlotsBoard with that attributes
 
 
 }

@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model.LeaderCard;
 
 import it.polimi.ingsw.Model.Marble.ColoredMarble;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.WarehouseRow;
 
 import java.util.ArrayList;
 
@@ -50,5 +51,11 @@ private ArrayList<ColoredMarble> ExtraRow;
 
     public ColoredMarble.ColorMarble getColorOfExtraWarehouse() {
         return colorOfExtraWarehouse;
+    }
+    public void effect(Player player){
+        player.getWarehouse().getRows().add(new WarehouseRow(2));
+        player.getWarehouse().getRows().get(player.getWarehouse().getRows().size()-1).setColor(colorOfExtraWarehouse);
+
+
     }
 }
