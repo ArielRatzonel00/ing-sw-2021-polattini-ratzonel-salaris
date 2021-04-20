@@ -131,7 +131,7 @@ public class TurnManager {
 
             }
 
-            Currentplayer.getSlotsBoard().getSlots().get(n-1).addCard(card);
+            Currentplayer.getSlotsBoard().getSlots().get(slot-1).addCard(developmentGrid.remove(cellRowNumber, cellColNumber));
 
     }
 
