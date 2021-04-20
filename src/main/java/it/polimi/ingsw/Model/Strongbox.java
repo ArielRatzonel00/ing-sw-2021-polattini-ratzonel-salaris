@@ -78,11 +78,20 @@ public class Strongbox {
     public void RemoveStone(int num) {
         this.stone-=num;
     }
-    public void RemoveResourcesFromStrongbox(int resources[]){
-        RemoveServant(resources[0]);
-        RemoveShield(resources[1]);
-        RemoveCoin(resources[2]);
-        RemoveStone(resources[3]);
+    public void RemoveResourcesFromStrongbox(int number, ColoredMarble.ColorMarble colorMarble){
+        switch (colorMarble){
+            case BLUE:
+                RemoveShield(number);
+
+            case GREY:
+                RemoveStone(number);
+
+            case PURPLE:
+                RemoveServant(number);
+
+            case YELLOW:
+                RemoveCoin(number);
+        }
     }
     public int[] getTotalResourcesStrongbox(){
         int[] total={0,0,0,0};

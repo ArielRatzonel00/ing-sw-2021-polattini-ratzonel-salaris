@@ -10,6 +10,7 @@ import java.io.*;
 
 import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TurnManager {
     private Player Currentplayer;
@@ -81,36 +82,57 @@ public class TurnManager {
     }
 
 
-    public boolean selectedResourcesCheck(int[] cost, int[] strongBoxResources, int[] warehouseResources){ // Funzione che controlla se la somma delle risorse selezionate i
-        int flag=0;                                                                                                 //dallo strongbox e dal warehouse sono maggiori
-        for(int i:cost){                                                                               //di quelle richieste nel primo array passato
-            if (cost[i]<=strongBoxResources[i]+warehouseResources[i])                                       //potremmo metterlo nelle EXCEPTIONS
-                flag++;
-        }
-        if(flag==strongBoxResources.length)
-            return true;
-        else
-            return false;
-    }
+    public boolean selectedResourcesCheck(ArrayList<CostOfCard> cost, ArrayList<CostOfCard>  strongBoxResources, ArrayList<CostOfCard> resourcesFromWarehouse){ // Funzione che controlla se la somma delle risorse selezionate i dallo strongbox e dal warehouse sono maggiori di quelle richieste nel primo array passato
 
-    public boolean acquireCard(Player player, int cellRowNumber, int cellColNumber, int slot, int resoucesFromStrongbox[], int resourcesFromWarehouse[]) {
-        try{
-        int[] cost= developmentGrid.getSingleCell(cellRowNumber,cellColNumber).getTopCard().getCost();
-        if(selectedResourcesCheck(cost,resoucesFromStrongbox,resourcesFromWarehouse))
-            player.getStrongbox().getTotalResourcesStrongbox()
 
-        if (selectedResourcesCheck(card.getCost(),resourcesFromWarehouse,resourcesFromWarehouse)){ //check se le risorse passate sono sufficienti ad acquistare leader card
-            //Try{
-            Currentplayer.getStrongbox().RemoveResourcesFromStrongbox(resoucesFromStrongbox);
-            // DA FARE player.getWarehouse().RemoveResource(resourcesFromWarehouse);
+        for(CostOfCard costOfCard : cost){
+            int costNumber = costOfCard.getCostNumber();
+            int ResouceNumber = 0;
+            int StrongboxNumber = 0;
 
-            // } Catch (notEnoughResourcesException e)
-
-                Currentplayer.getSlotsBoard().getSlots().get(n-1).addCard(card);
+            // CostOfCard one = strongBoxResources.stream().filter(a->a.getCostColor().equals(costOfCard.getCostColor())).collect(Collectors.toList()).get(0);
+            for (CostOfCard costOfCard1 : strongBoxResources){
+                if (costOfCard.getCostColor() == costOfCard1.getCostColor()){
+                    StrongboxNumber = costOfCard1.getCostNumber();
+                }
+            }
+            for (CostOfCard costOfCard2 : resourcesFromWarehouse){
+                if (costOfCard.getCostColor() == costOfCard2.getCostColor()){
+                    ResouceNumber = costOfCard2.getCostNumber();
+                }
+            }
+            if (costNumber > ResouceNumber + StrongboxNumber){
+                return false;
             }
 
-        else
-            System.out.println("You didn't select enough resources to acquire this card");
+            }
+        return true;
+        }
+
+
+    public boolean acquireCard( int cellRowNumber, int cellColNumber, int slot, ArrayList<CostOfCard> resoucesFromStrongbox,ArrayList<CostOfCard> resourcesFromWarehouse) {
+        int[] cost= developmentGrid.getSingleCell(cellRowNumber,cellColNumber).getTopCard().getCost();
+        if(selectedResourcesCheck(cost,resoucesFromStrongbox,resourcesFromWarehouse)) {
+            for (CostOfCard costOfCard : resoucesFromStrongbox){
+                if (costOfCard.getCostNumber() > Currentplayer.getStrongbox().CountResources(costOfCard.getCostColor())){
+                    return false;
+                }
+            }
+            for (CostOfCard costOfCard: resourcesFromWarehouse){
+                if (costOfCard.getCostNumber() > Currentplayer.getStrongbox().CountResources(costOfCard.getCostColor())){
+                    return false;
+                }
+            }
+            // mi metto in attesa dei comandi del player che mi da per ogni riga quante risorse eliminare e faccio il controllo che corrispondono con resourcesFromWarehouse
+            // anzi no faccio direttamente che passo le righe e creo il mio resources From Warehouse in base alle righe che passo
+            for (CostOfCard costOfCard : resourcesFromWarehouse){
+            Currentplayer.getStrongbox().RemoveResourcesFromStrongbox(costOfCard.getCostNumber(), costOfCard.getCostColor());
+
+
+            }
+
+            Currentplayer.getSlotsBoard().getSlots().get(n-1).addCard(card);
+
     }
 
 
