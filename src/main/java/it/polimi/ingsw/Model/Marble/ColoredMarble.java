@@ -14,7 +14,9 @@ public class ColoredMarble extends MarketMarble {
         GREY,
         YELLOW,
         PURPLE,
-        BLUE
+        BLUE,
+        RED,
+        WHITE
     }
 
 
