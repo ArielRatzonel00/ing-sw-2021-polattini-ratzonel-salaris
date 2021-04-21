@@ -3,10 +3,11 @@ package it.polimi.ingsw.Model;
 // Method that represents a DevelopmentCard.
 // Da cambiare inserendo una istanza di Production
 
+import java.util.ArrayList;
+
 public class DevelopmentCard {
-    private int[] Cost; //purple, blue, yellow, grey
-    private int[] ProductionCost; //purple, blue, yellow, grey
-    private int[] ProductionProfit; //purple, blue, yellow, grey, red
+    private ArrayList<CostOfCard> Cost = new ArrayList<>(); //purple, blue, yellow, grey
+    private Production production;
     private int Id;
     public enum colorCard {
         Green,
@@ -18,10 +19,9 @@ public class DevelopmentCard {
     private int Level;//livello della carta
     private int VictoryPoints; // Victory Points
 
-    public DevelopmentCard(int[] Cost, int[] ProductionCost, int[] ProductionProfit, int id, colorCard color, int level, int victoryPoints) {
+    public DevelopmentCard(ArrayList<CostOfCard> costOfCards, Production production, int id, colorCard color, int level, int victoryPoints) {
         this.Cost = Cost;
-        this.ProductionCost = ProductionCost;
-        this.ProductionProfit = ProductionProfit;
+        this.production = production;
         this.Id = id;
         this.Color = color;
         this.Level = level;
@@ -29,17 +29,14 @@ public class DevelopmentCard {
     }
 
 
-    public int[] getCost() {
+    public ArrayList<CostOfCard> getCost() {
         return Cost;
     }
 
-    public int[] getProductionCost() {
-        return ProductionCost;
+    public Production getProduction() {
+        return production;
     }
 
-    public int[] getProductionProfit() {
-        return ProductionProfit;
-    }
 
     public int getId() {
         return Id;

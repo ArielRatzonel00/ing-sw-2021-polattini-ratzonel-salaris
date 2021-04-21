@@ -18,7 +18,8 @@ public class Production {
     public ArrayList<CostOfCard> getProductionProfit() {
         return ProductionProfit;
     }
-    public boolean selectedResourcesCheck( ArrayList<CostOfCard>  strongBoxResources, ArrayList<CostOfCard> resourcesFromWarehouse){ // Funzione che controlla se la somma delle risorse selezionate i dallo strongbox e dal warehouse sono maggiori di quelle richieste nel primo array passato
+
+    public boolean selectedResourcesCheck(ArrayList<CostOfCard>  strongBoxResources, ArrayList<CostOfCard> resourcesFromWarehouse){ // Funzione che controlla se la somma delle risorse selezionate i dallo strongbox e dal warehouse sono maggiori di quelle richieste nel primo array passato
 
 
         for(CostOfCard costOfCard : ProductionCost){
