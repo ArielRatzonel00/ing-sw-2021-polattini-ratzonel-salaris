@@ -110,25 +110,20 @@ public class TurnManager {
         }
 
 
-    public boolean acquireCard( int cellRowNumber, int cellColNumber, int slot, ArrayList<CostOfCard> resoucesFromStrongbox,ArrayList<CostOfCard> resourcesFromWarehouse) {
+    public boolean acquireCard( int cellRowNumber, int cellColNumber, int slot) {
         ArrayList<CostOfCard>  cost = developmentGrid.getSingleCell(cellRowNumber, cellColNumber).getTopCard().getCost();
-        if (selectedResourcesCheck(cost, resoucesFromStrongbox, resourcesFromWarehouse)) {
-           if (!(Currentplayer.CheckResources(resoucesFromStrongbox, resourcesFromWarehouse))){
-               return false;
-           }
-            // mi metto in attesa dei comandi del player che mi da per ogni riga quante risorse eliminare e faccio il controllo che corrispondono con resourcesFromWarehouse
-            // anzi no faccio direttamente che passo le righe e creo il mio resources From Warehouse in base alle righe che passo
-            for (CostOfCard costOfCard : resoucesFromStrongbox) {
-                Currentplayer.getStrongbox().RemoveResourcesFromStrongbox(costOfCard.getCostNumber(), costOfCard.getCostColor());
-            }
-            /* for (CostOfCard costOfCard : resourcesFromWarehouse){
-               // qua dipende dalle righe che mi da il plater
-
-            }*/
-
-            Currentplayer.getSlotsBoard().getSlots().get(slot - 1).addCard(developmentGrid.remove(cellRowNumber, cellColNumber));
-
+        if (!(Currentplayer.CheckResources(cost))){
+            return false;
         }
+
+        //Quante risorse dallo Strongbox? andrà in ResourcesFromStrongbox
+        //ArrayList<CostOfCard> ResourcesFromStrongbox
+
+        // Quante risorse da ogni riga
+
+
+        Currentplayer.getSlotsBoard().getSlots().get(slot - 1).addCard(developmentGrid.remove(cellRowNumber, cellColNumber));
+
         return true;
     }
 

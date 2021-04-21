@@ -2,6 +2,10 @@ package it.polimi.ingsw.Model;
 
 //Method that Represents the Faith Traick. Every Player has one
 
+import com.sun.tools.javac.comp.Check;
+
+import java.util.ArrayList;
+
 public class FaithTrack {
     private boolean Multiplayer;
     private int RedPosition = 0;
@@ -15,6 +19,7 @@ public class FaithTrack {
     private popeFavorState popeFavor1 = popeFavorState.Unabled;
     private popeFavorState popeFavor2 = popeFavorState.Unabled;
     private popeFavorState popeFavor3 = popeFavorState.Unabled;
+    private ArrayList<Player> OtherPlayers = new ArrayList<>();
 
 
 
@@ -52,6 +57,38 @@ public class FaithTrack {
 
     public void setRedPosition(int redPosition) {
         RedPosition  += redPosition;
+        if (RedPosition == 8 || RedPosition == 16 || RedPosition == 24){
+            if (RedPosition == 8){
+                if (popeFavor1 == popeFavorState.Unabled){
+                    setPopeFavor1(popeFavorState.Activate);
+                    for (Player otherPlayer : OtherPlayers){
+                        otherPlayer.CheckPositionPopeFavor(RedPosition);{
+                        }
+                    }
+                    points += 2;
+                }
+            }
+            else if (RedPosition == 16){
+                if (popeFavor2 == popeFavorState.Unabled){
+                    setPopeFavor2(popeFavorState.Activate);
+                    for (Player otherPlayer : OtherPlayers){
+                        otherPlayer.CheckPositionPopeFavor(RedPosition);{
+                        }
+                    }
+                }
+                points += 3;
+            }
+            else {
+                if (popeFavor3 == popeFavorState.Unabled){
+                    setPopeFavor3(popeFavorState.Activate);
+                    for (Player otherPlayer : OtherPlayers){
+                        otherPlayer.CheckPositionPopeFavor(RedPosition);
+                    }
+                    points += 4;
+                }
+
+            }
+        }
     }
 
     public void setBlackPosition(int blackPosition) {
@@ -68,6 +105,10 @@ public class FaithTrack {
 
     public void setPopeFavor3(popeFavorState popeFavor3) {
         this.popeFavor3 = popeFavor3;
+    }
+
+    public void setPoints(int points) {
+        this.points += points;
     }
 }
 

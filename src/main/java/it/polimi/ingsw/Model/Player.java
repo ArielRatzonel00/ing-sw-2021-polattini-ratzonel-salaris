@@ -12,12 +12,12 @@ public class Player {
     private FaithTrack faithTrack;
     private Warehouse warehouse;
     private Strongbox strongbox;
-    private LeaderCard[] leaderCards;
+    private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
     private SlotsBoard slotsBoard;
     private boolean isFirst;
 
 
-    public Player(String nickname, LeaderCard[] FourLeaderCards) {
+    public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards) {
 
         this.nickname = nickname;
         this.faithTrack = new FaithTrack();
@@ -45,7 +45,7 @@ public class Player {
     }
 
     public LeaderCard getLeaderCards(int num) {
-        return leaderCards[num];
+        return leaderCards.get(num);
     }
 
     public SlotsBoard getSlotsBoard() {
@@ -56,18 +56,46 @@ public class Player {
         this.isFirst = first;
     } // Method that set the first player to enter the lobby
 
-    public boolean CheckResources(ArrayList<CostOfCard> resoucesFromStrongbox, ArrayList<CostOfCard> resourcesFromWarehouse) {
-        for (CostOfCard costOfCard : resoucesFromStrongbox) {
-            if (costOfCard.getCostNumber() > this.getStrongbox().CountResources(costOfCard.getCostColor())) {
+    public boolean CheckResources(ArrayList<CostOfCard> cost) {
+        for (CostOfCard costOfCard : cost){
+            if (costOfCard.getCostNumber() > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                 return false;
             }
-        }
-        for (CostOfCard costOfCard : resourcesFromWarehouse) {
-            if (costOfCard.getCostNumber() > this.getStrongbox().CountResources(costOfCard.getCostColor())) {
-                return false;
-            }
+
         }
         return true;
+    }
+    public void DiscardLeaderCard(int index){
+        leaderCards.remove(index);
+    }
+    public void CheckPositionPopeFavor(int RedPositionOfOtherPlayer){
+        if (RedPositionOfOtherPlayer == 8){
+            if (faithTrack.getRedPosition() >=5 ){
+                faithTrack.setPopeFavor1(FaithTrack.popeFavorState.Activate);
+                faithTrack.setPoints(2);
+            }
+            else {
+                faithTrack.setPopeFavor1(FaithTrack.popeFavorState.Deleted);
+            }
+        }
+        else if (RedPositionOfOtherPlayer == 16){
+            if (faithTrack.getRedPosition() >= 12){
+                faithTrack.setPopeFavor2(FaithTrack.popeFavorState.Activate);
+                faithTrack.setPoints(3);
+            }
+            else {
+                faithTrack.setPopeFavor1(FaithTrack.popeFavorState.Deleted);
+            }
+        }
+        else {
+            if (faithTrack.getRedPosition() >= 19){
+                faithTrack.setPopeFavor3(FaithTrack.popeFavorState.Activate);
+                faithTrack.setPoints(4);
+            }
+            else {
+                faithTrack.setPopeFavor3(FaithTrack.popeFavorState.Deleted);
+            }
+        }
     }
 }
 
