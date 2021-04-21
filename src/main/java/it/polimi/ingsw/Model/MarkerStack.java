@@ -29,7 +29,7 @@ public class MarkerStack {
     public Marker getTopMarker(){
         Marker temp = markers.get(markers.size()-1);
         markers.remove(markers.size()-1);
-        markers.add(temp);
+        markers.add(0, temp);
         return temp;
     } // Method that returns the TopMarket in the stack and put it at the bottom of the stack
 

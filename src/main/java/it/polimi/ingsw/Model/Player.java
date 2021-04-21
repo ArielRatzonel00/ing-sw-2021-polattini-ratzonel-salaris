@@ -3,6 +3,8 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 
+import java.util.ArrayList;
+
 // Class that represents the Player
 
 public class Player {
@@ -54,6 +56,19 @@ public class Player {
         this.isFirst = first;
     } // Method that set the first player to enter the lobby
 
+    public boolean CheckResources(ArrayList<CostOfCard> resoucesFromStrongbox, ArrayList<CostOfCard> resourcesFromWarehouse) {
+        for (CostOfCard costOfCard : resoucesFromStrongbox) {
+            if (costOfCard.getCostNumber() > this.getStrongbox().CountResources(costOfCard.getCostColor())) {
+                return false;
+            }
+        }
+        for (CostOfCard costOfCard : resourcesFromWarehouse) {
+            if (costOfCard.getCostNumber() > this.getStrongbox().CountResources(costOfCard.getCostColor())) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 

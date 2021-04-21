@@ -39,10 +39,10 @@ public class GridCell {
         }
     } // Method that removes the bottom card of the cell. Returns true if it exists and false if not. This method is used by the marker that remove cards
 
-    public void RemoveTopCard() {
+   /* public void RemoveTopCard() {
         if (cell.size() > 0) { //THROWS EXCEPTION EMPTYCELLEXCEPTION
             cell.remove(cell.size() - 1);
         }
     } // Method that removes the top card of the cell.
-
+*/
 }

@@ -75,9 +75,7 @@ public class DevelopmentGrid {
 
 
     public DevelopmentCard remove(int a, int b){
-        DevelopmentCard temp= CardMatrix[a][b].getTopCard();
-        CardMatrix[a][b].RemoveTopCard();
-        return temp;
+        return  CardMatrix[a][b].getTopCard();
     } // Method that removes and returns the top card of the cell selected
 
 }
