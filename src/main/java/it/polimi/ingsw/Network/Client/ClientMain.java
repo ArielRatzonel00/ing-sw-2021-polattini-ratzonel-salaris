@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Client;
 import java.io.IOException;
 
 public class ClientMain {
+
     public static void main(String[] args){
         LineClient client = new LineClient("127.0.0.1", 1337);
         try{
@@ -11,4 +12,5 @@ public class ClientMain {
             System.err.println(e.getMessage());
         }
     }
+
 }

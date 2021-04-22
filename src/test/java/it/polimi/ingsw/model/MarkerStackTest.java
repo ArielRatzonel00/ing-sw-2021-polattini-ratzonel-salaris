@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Model.DevelopmentCard;
@@ -28,3 +29,5 @@ class MarkerStackTest {
     }
 
 }
+
+ */
