@@ -1,3 +1,4 @@
+/*
 package network.client;
 
         import javafx.application.Application;
@@ -13,6 +14,8 @@ public class ClientMain {
         }
     }
 }
+
+ */
 
 /*
 package it.polimi.ingsw.Network.Client;

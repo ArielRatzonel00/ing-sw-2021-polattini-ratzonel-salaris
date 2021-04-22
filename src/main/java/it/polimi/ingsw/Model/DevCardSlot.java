@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 // Method that represents a single slots where the player adds the bought cards
 
-public class DevCardSlot {
+public class DevCardSlot  {
     private ArrayList<DevelopmentCard> cards = new ArrayList<>();
 
 

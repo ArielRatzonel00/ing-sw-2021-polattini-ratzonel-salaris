@@ -41,7 +41,10 @@ public class Deck {
     private GridCell cell21;
     private GridCell cell22;
     private GridCell cell23;
-
+    private DevelopmentCard Green11;
+    private DevelopmentCard Green12;
+    private DevelopmentCard Green13;
+    private DevelopmentCard Green14;
 
 
     public Deck() {
@@ -53,7 +56,7 @@ public class Deck {
         Green11ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Green11ProductionProfit = new ArrayList<>();
         Green11ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
-        DevelopmentCard Green11 = new DevelopmentCard(Green11Cost, new Production(Green11ProductionCost, Green11ProductionProfit), 1, DevelopmentCard.colorCard.Green, 1, 1);
+        Green11 = new DevelopmentCard(Green11Cost, new Production(Green11ProductionCost, Green11ProductionProfit), 1, DevelopmentCard.colorCard.Green, 1, 1);
 
         ArrayList<CostOfCard> Green12Cost = new ArrayList<>();
         Green12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
@@ -64,7 +67,7 @@ public class Deck {
         ArrayList<CostOfCard> Green12ProductionProfit = new ArrayList<>();
         Green12ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
         Green12ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
-        DevelopmentCard Green12 = new DevelopmentCard(Green12Cost, new Production(Green12ProductionCost, Green12ProductionProfit), 2, DevelopmentCard.colorCard.Green, 1, 4);
+        Green12 = new DevelopmentCard(Green12Cost, new Production(Green12ProductionCost, Green12ProductionProfit), 2, DevelopmentCard.colorCard.Green, 1, 4);
 
 
         ArrayList<CostOfCard> Green13Cost = new ArrayList<>();
@@ -75,7 +78,7 @@ public class Deck {
         Green13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
         Green13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
         Green13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        DevelopmentCard Green13 = new DevelopmentCard(Green13Cost, new Production(Green13ProductionCost, Green13ProductionProfit), 3, DevelopmentCard.colorCard.Green, 1, 3);
+        Green13 = new DevelopmentCard(Green13Cost, new Production(Green13ProductionCost, Green13ProductionProfit), 3, DevelopmentCard.colorCard.Green, 1, 3);
 
 
         ArrayList<CostOfCard> Green14Cost = new ArrayList<>();
@@ -86,7 +89,7 @@ public class Deck {
         Green14ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Green14ProductionProfit = new ArrayList<>();
         Green14ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
-        DevelopmentCard Green14 = new DevelopmentCard(Green14Cost, new Production(Green14ProductionCost, Green14ProductionProfit), 4, DevelopmentCard.colorCard.Green, 1, 2);
+        Green14 = new DevelopmentCard(Green14Cost, new Production(Green14ProductionCost, Green14ProductionProfit), 4, DevelopmentCard.colorCard.Green, 1, 2);
         cell00 = new GridCell(Green11, Green12, Green13, Green14);
 
 
@@ -682,6 +685,22 @@ public class Deck {
 
     public GridCell getCell23() {
         return cell23;
+    }
+
+    public DevelopmentCard getGreen11() {
+        return Green11;
+    }
+
+    public DevelopmentCard getGreen12() {
+        return Green12;
+    }
+
+    public DevelopmentCard getGreen13() {
+        return Green13;
+    }
+
+    public DevelopmentCard getGreen14() {
+        return Green14;
     }
 }
 /*
