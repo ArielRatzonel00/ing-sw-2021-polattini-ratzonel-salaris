@@ -6,7 +6,7 @@ package it.polimi.ingsw.Model;
 import java.util.ArrayList;
 
 public class DevelopmentCard {
-    private ArrayList<CostOfCard> Cost = new ArrayList<>(); //purple, blue, yellow, grey
+    private ArrayList<CostOfCard> Cost; //purple, blue, yellow, grey
     private Production production;
     private int Id;
     public enum colorCard {
