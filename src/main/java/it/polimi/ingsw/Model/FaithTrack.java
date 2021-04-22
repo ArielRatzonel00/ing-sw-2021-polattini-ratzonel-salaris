@@ -2,8 +2,6 @@ package it.polimi.ingsw.Model;
 
 //Method that Represents the Faith Traick. Every Player has one
 
-import com.sun.tools.javac.comp.Check;
-
 import java.util.ArrayList;
 
 public class FaithTrack {

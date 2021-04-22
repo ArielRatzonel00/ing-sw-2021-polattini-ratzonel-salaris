@@ -5,7 +5,7 @@ import it.polimi.ingsw.Model.Marble.ColoredMarble;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Production;
 
-import javax.smartcardio.Card;
+
 
 public class LeaderCard4 extends LeaderCard{ //converte in punto fede e materia a caso -> produzione extra
     private DevelopmentCard.colorCard CostCardLevelTwo;
