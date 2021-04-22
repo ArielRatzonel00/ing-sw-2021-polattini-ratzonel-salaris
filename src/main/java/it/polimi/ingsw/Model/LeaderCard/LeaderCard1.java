@@ -7,10 +7,6 @@ import it.polimi.ingsw.Model.Player;
 public class LeaderCard1 extends LeaderCard { //metodo per leader cards che trasformano pallina bianca in altri colori
 
 
-
-
-
-
     private DevelopmentCard.colorCard colorCostOne;
     private DevelopmentCard.colorCard colorCostTwo;
     private ColoredMarble.ColorMarble NewColorMarble;
@@ -29,6 +25,7 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
         else {
             return false;
         }
+
 
     }
 }

@@ -3,17 +3,18 @@ package it.polimi.ingsw.Model.LeaderCard;
 import it.polimi.ingsw.Model.DevelopmentCard;
 import it.polimi.ingsw.Model.Marble.ColoredMarble;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.Production;
 
 import javax.smartcardio.Card;
 
 public class LeaderCard4 extends LeaderCard{ //converte in punto fede e materia a caso -> produzione extra
     private DevelopmentCard.colorCard CostCardLevelTwo;
-    private ColoredMarble.ColorMarble ProductionCostResource;
+    private Production production;
 
-    public LeaderCard4(int id, int victoryPoints, DevelopmentCard.colorCard CostCardLevelTwo, ColoredMarble.ColorMarble ProductionCostResource) {
+    public LeaderCard4(int id, DevelopmentCard.colorCard CostCardLevelTwo, int victoryPoints, Production production) {
         super(id, victoryPoints);
         this.CostCardLevelTwo = CostCardLevelTwo;
-        this.ProductionCostResource = ProductionCostResource;
+        this.production = production;
     }
 
     public boolean canBeActivated(Player player) {
@@ -24,8 +25,11 @@ public class LeaderCard4 extends LeaderCard{ //converte in punto fede e materia 
         return CostCardLevelTwo;
     }
 
-    public ColoredMarble.ColorMarble getProductionCostResource() {
-        return ProductionCostResource;
+    public Production getProduction () {
+        return production;
+    }
+    public void effect(Player player){
+        player.newProductionFromLeaderCard(production);
     }
 
     /*public void effect(){

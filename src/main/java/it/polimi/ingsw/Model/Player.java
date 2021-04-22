@@ -2,19 +2,28 @@ package it.polimi.ingsw.Model;
 
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+import it.polimi.ingsw.Model.Marble.ColoredMarble;
 
+import java.awt.image.ColorConvertOp;
 import java.util.ArrayList;
 
 // Class that represents the Player
 
 public class Player {
-    private final String nickname;
+    private String nickname;
     private FaithTrack faithTrack;
     private Warehouse warehouse;
     private Strongbox strongbox;
     private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
     private SlotsBoard slotsBoard;
     private boolean isFirst;
+    private int DiscountGrey = 0;
+    private int DiscountYellow = 0;
+    private int DiscountPurple = 0;
+    private int DiscountBlue = 0;
+    private ArrayList<Production> productionsAvaible = new ArrayList<>(4);
+
+
 
 
     public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards) {
@@ -26,6 +35,11 @@ public class Player {
         this.leaderCards = FourLeaderCards;
         this.slotsBoard = new SlotsBoard();
         this.isFirst = false;
+        ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
+        ProductionBasicCost.add(0, new CostOfCard(2, ColoredMarble.ColorMarble.UNKNOWN));
+        ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
+        ProductionBasicCost.add(0, new CostOfCard(1, ColoredMarble.ColorMarble.UNKNOWN));
+        this.productionsAvaible.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
     }
 
     public String getNickname() {
@@ -56,13 +70,38 @@ public class Player {
         this.isFirst = first;
     } // Method that set the first player to enter the lobby
 
-    public boolean CheckResources(ArrayList<CostOfCard> cost) {
+    public boolean CheckResourcesForAcquisition(ArrayList<CostOfCard> cost) {
         for (CostOfCard costOfCard : cost){
-            if (costOfCard.getCostNumber() > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
-                return false;
+            if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.GREY){
+                if (costOfCard.getCostNumber() - DiscountGrey > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
+                    return false;
+                }
             }
-
+            else if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.YELLOW){
+                if (costOfCard.getCostNumber() - DiscountYellow > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
+                    return false;
+                }
+            }
+            else if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.BLUE){
+                if (costOfCard.getCostNumber() - DiscountBlue > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
+                    return false;
+                }
+            }
+            else if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.PURPLE){
+                if (costOfCard.getCostNumber() - DiscountPurple > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
+                    return false;
+                }
+            }
         }
+        return true;
+    }
+    public boolean CheckResourcesForProudce(ArrayList<CostOfCard> cost) {
+        for (CostOfCard costOfCard : cost){
+                if (costOfCard.getCostNumber() > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
+                    return false;
+                }
+
+            }
         return true;
     }
     public void DiscardLeaderCard(int index){
@@ -96,6 +135,28 @@ public class Player {
                 faithTrack.setPopeFavor3(FaithTrack.popeFavorState.Deleted);
             }
         }
+    }
+
+    public void setProductionsAvaible(int slot){
+        productionsAvaible.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
+    }
+    public void newProductionFromLeaderCard(Production production){
+        productionsAvaible.add(production);
+    }
+    public void setDiscountGrey(int discountGrey) {
+        DiscountGrey += discountGrey;
+    }
+
+    public void setDiscountYellow(int discountYellow) {
+        DiscountYellow += discountYellow;
+    }
+
+    public void setDiscountBlue(int discountBlue) {
+        DiscountBlue += discountBlue;
+    }
+
+    public void setDiscountPurple(int discountPurple) {
+        DiscountPurple += discountPurple;
     }
 }
 

@@ -112,7 +112,7 @@ public class TurnManager {
 
     public boolean acquireCard( int cellRowNumber, int cellColNumber, int slot) {
         ArrayList<CostOfCard>  cost = developmentGrid.getSingleCell(cellRowNumber, cellColNumber).getTopCard().getCost();
-        if (!(Currentplayer.CheckResources(cost))){
+        if (!(Currentplayer.CheckResourcesForAcquisition(cost))){
             return false;
         }
 

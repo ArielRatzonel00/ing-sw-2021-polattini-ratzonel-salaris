@@ -21,7 +21,7 @@ public class Production {
 
     public boolean Produce(Player player) {
         // Le resources from Warehouse e from Strongbox me le deve passare il Player
-        if (!(player.CheckResources(ProductionCost))){
+        if (!(player.CheckResourcesForProudce(ProductionCost))){
             return false;
         }
         // chiede quanti da Strogobx e quanti da Warehosue

@@ -36,4 +36,19 @@ public class LeaderCard2 extends LeaderCard { //metodo per leader cards che dimi
     public ColoredMarble.ColorMarble getDiscount() {
         return Discount;
     }
-}
+    public void effect(Player player){
+        if (Discount == ColoredMarble.ColorMarble.GREY){
+            player.setDiscountGrey(1);
+        }
+        else if (Discount == ColoredMarble.ColorMarble.YELLOW){
+            player.setDiscountYellow(1);
+        }
+        else if (Discount == ColoredMarble.ColorMarble.BLUE){
+            player.setDiscountBlue(1);
+        }
+        else if (Discount == ColoredMarble.ColorMarble.PURPLE){
+            player.setDiscountPurple(1);
+            }
+        }
+    }
+

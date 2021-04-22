@@ -25,7 +25,6 @@ private ArrayList<ColoredMarble> ExtraRow;
     @Override
     public boolean canBeActivated(Player player) {
 
-
         int TotalResourcesWarehouse=player.getWarehouse().getNumberOfResource(ColorCost);
         int TotalResourcesInStrongbox = player.getStrongbox().CountResources(ColorCost);
 
