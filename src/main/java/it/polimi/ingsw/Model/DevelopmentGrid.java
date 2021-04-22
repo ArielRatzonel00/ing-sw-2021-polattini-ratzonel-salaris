@@ -28,6 +28,7 @@ public class DevelopmentGrid {
     public GridCell getSingleCell(int riga, int colonna) {
         return CardMatrix[riga][colonna];
     }
+
     public boolean RemoveCardByColor(DevelopmentCard.colorCard colorCard){
         if(colorCard == DevelopmentCard.colorCard.Green){
             if(CardMatrix[0][0].RemoveFirstCard() == true){
