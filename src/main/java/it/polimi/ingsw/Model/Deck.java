@@ -554,7 +554,7 @@ public class Deck {
         Purple34ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
         Purple34ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.PURPLE));
         DevelopmentCard Purple34 = new DevelopmentCard(Purple34Cost, new Production(Purple34ProductionCost, Purple34ProductionProfit), 48, DevelopmentCard.colorCard.Purple, 3, 12);
-        cell00 = new GridCell(Purple31, Purple32, Purple33, Purple34);
+        cell23 = new GridCell(Purple31, Purple32, Purple33, Purple34);
 
 
 
