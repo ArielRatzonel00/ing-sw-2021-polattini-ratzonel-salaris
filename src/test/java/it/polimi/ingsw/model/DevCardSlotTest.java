@@ -1,5 +1,5 @@
 
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.DevCardSlot;
 import it.polimi.ingsw.Model.DevelopmentCard;
@@ -26,7 +26,9 @@ class DevCardSlotTest {
     @Test
      void countVictoryPointsTest(){
         DevCardSlot TestSlot = new DevCardSlot();
-        TestSlot.addCard(new Deck().getGreen11());
+        Deck deck = new Deck();
+        DevelopmentCard TestCard = deck.getGreen11();
+        TestSlot.addCard(TestCard);
         assertEquals(1, TestSlot.countVictoryPoints());
     }
 

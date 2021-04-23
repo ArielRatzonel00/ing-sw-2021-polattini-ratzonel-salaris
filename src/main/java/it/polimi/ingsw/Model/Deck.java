@@ -567,21 +567,6 @@ public class Deck {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //Creazione LeaderCards
 
         //Array con tutte le LeaderCards posizionate in base al loro ID (la carta con ID = 1 è posta in posizione ArrayLeaderCards[0]).
@@ -789,3 +774,4 @@ public class Deck {
         }
         /*
  */
+
