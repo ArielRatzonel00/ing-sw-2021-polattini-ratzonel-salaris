@@ -26,10 +26,10 @@ public class Player {
 
 
 
-    public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards) {
+    public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards, FaithTrack faithTrack) {
 
         this.nickname = nickname;
-        this.faithTrack = new FaithTrack();
+        this.faithTrack = faithTrack;
         this.warehouse = new Warehouse();
         this.strongbox = new Strongbox();
         this.leaderCards = FourLeaderCards;
