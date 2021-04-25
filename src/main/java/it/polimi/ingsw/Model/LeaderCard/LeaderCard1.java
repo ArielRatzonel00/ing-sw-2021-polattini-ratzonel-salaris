@@ -25,7 +25,5 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
         else {
             return false;
         }
-
-
     }
 }

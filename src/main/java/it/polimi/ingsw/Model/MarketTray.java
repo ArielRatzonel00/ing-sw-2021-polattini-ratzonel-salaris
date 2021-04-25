@@ -88,7 +88,7 @@ public class MarketTray  {
         MarketMatrix[rig][2] = MarketMatrix[rig][3];
         MarketMatrix[rig][3] =  temp;
 
-    } //Method that shift the MarketTray after choosing to get Marbles by selcted a row in the MarketTray
+    } //Method that shift the MarketTray after choosing to get Marbles by selected a row in the MarketTray
 
 
     public void ShiftMatrixByCol(int col) {
@@ -98,5 +98,5 @@ public class MarketTray  {
         MarketMatrix[1][col] = MarketMatrix[0][col];
         MarketMatrix[0][col] = temp2;
 
-    } //Method that shift the MarketTray after choosing to get Marbles by selcted a column in the MarketTray
+    } //Method that shift the MarketTray after choosing to get Marbles by selected a column in the MarketTray
 }
