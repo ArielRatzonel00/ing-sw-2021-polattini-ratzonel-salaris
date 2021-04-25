@@ -26,10 +26,10 @@ public class Player {
 
 
 
-    public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards, FaithTrack faithTrack) {
+    public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards) {
 
         this.nickname = nickname;
-        this.faithTrack = faithTrack;
+        this.faithTrack = new FaithTrack();
         this.warehouse = new Warehouse();
         this.strongbox = new Strongbox();
         this.leaderCards = FourLeaderCards;
@@ -136,7 +136,6 @@ public class Player {
             }
         }
     }
-
 
     public void setProductionsAvaible(int slot){
         productionsAvaible.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());

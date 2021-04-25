@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class DevelopmentCard {
     private ArrayList<CostOfCard> Cost; //purple, blue, yellow, grey
-    private Production production;
+    private Production Production;
     private int Id;
     public enum colorCard {
         Green,
@@ -20,8 +20,8 @@ public class DevelopmentCard {
     private int VictoryPoints; // Victory Points
 
     public DevelopmentCard(ArrayList<CostOfCard> costOfCards, Production production, int id, colorCard color, int level, int victoryPoints) {
-        this.Cost = Cost;
-        this.production = production;
+        this.Cost = costOfCards;
+        this.Production = production;
         this.Id = id;
         this.Color = color;
         this.Level = level;
@@ -34,7 +34,7 @@ public class DevelopmentCard {
     }
 
     public Production getProduction() {
-        return production;
+        return Production;
     }
 
 

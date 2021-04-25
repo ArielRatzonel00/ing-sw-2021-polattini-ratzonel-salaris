@@ -46,6 +46,11 @@ public class Deck {
     private DevelopmentCard Green13;
     private DevelopmentCard Green14;
 
+    private DevelopmentCard Blue11;
+
+    private DevelopmentCard Green21;
+    private DevelopmentCard Green31;
+
 
     public Deck() {
 
@@ -99,7 +104,7 @@ public class Deck {
         Blue11ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Blue11ProductionProfit = new ArrayList<>();
         Blue11ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
-        DevelopmentCard Blue11 = new DevelopmentCard(Blue11Cost, new Production(Blue11ProductionCost, Blue11ProductionProfit), 5, DevelopmentCard.colorCard.Blue, 1, 1);
+        Blue11 = new DevelopmentCard(Blue11Cost, new Production(Blue11ProductionCost, Blue11ProductionProfit), 5, DevelopmentCard.colorCard.Blue, 1, 1);
 
         ArrayList<CostOfCard> Blue12Cost = new ArrayList<>();
         Blue12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
@@ -228,7 +233,7 @@ public class Deck {
         Green21ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Green21ProductionProfit = new ArrayList<>();
         Green21ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
-        DevelopmentCard Green21 = new DevelopmentCard(Green21Cost, new Production(Green21ProductionCost, Green21ProductionProfit), 17, DevelopmentCard.colorCard.Green, 2, 5);
+        Green21 = new DevelopmentCard(Green21Cost, new Production(Green21ProductionCost, Green21ProductionProfit), 17, DevelopmentCard.colorCard.Green, 2, 5);
 
         ArrayList<CostOfCard> Green22Cost = new ArrayList<>();
         Green22Cost.add(new CostOfCard(5, ColoredMarble.ColorMarble.BLUE));
@@ -384,7 +389,7 @@ public class Deck {
         ArrayList<CostOfCard> Green31ProductionProfit = new ArrayList<>();
         Green31ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
         Green31ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.RED));
-        DevelopmentCard Green31 = new DevelopmentCard(Green31Cost, new Production(Green31ProductionCost, Green31ProductionProfit), 33, DevelopmentCard.colorCard.Green, 3, 11);
+        Green31 = new DevelopmentCard(Green31Cost, new Production(Green31ProductionCost, Green31ProductionProfit), 33, DevelopmentCard.colorCard.Green, 3, 11);
 
 
         ArrayList<CostOfCard> Green32Cost = new ArrayList<>();
@@ -617,9 +622,10 @@ public class Deck {
         ArrLeaderCards = new LeaderCard[]{ExtraRsc1, ExtraRsc2, ExtraRsc3, ExtraRsc4, ReduceCost1, ReduceCost2, ReduceCost3, ReduceCost4, ExtraWarehouse1, ExtraWarehouse2, ExtraWarehouse3, ExtraWarehouse4, ConvertRsc1, ConvertRsc2, ConvertRsc3, ConvertRsc4};
 
     }
+    // mancano 4 leader cards quelle del discount perchè comunque le devo passare al player da scegliere all'inizio.
 
     //inserisco l'id e mi ritorna la carta
-    private LeaderCard SelectLeadFromId(int IdLead) {
+    public LeaderCard SelectLeadFromId(int IdLead) {
         return ArrLeaderCards[IdLead - 1];
     }
 
@@ -687,6 +693,19 @@ public class Deck {
     public DevelopmentCard getGreen14() {
         return Green14;
     }
+
+    public DevelopmentCard getBlue11() {
+        return Blue11;
+    }
+
+    public DevelopmentCard getGreen21() {
+        return Green21;
+    }
+    public DevelopmentCard getGreen31() {
+        return Green31;
+    }
+
+
 }
 /*
      */
