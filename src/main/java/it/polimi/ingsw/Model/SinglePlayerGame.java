@@ -15,7 +15,7 @@ public class SinglePlayerGame {
     private Deck deck = new Deck();
 
 
-    public SinglePlayerGame(Player player, DevelopmentCard[] developmentCards, ArrayList<Marker> markers) {
+    public SinglePlayerGame(Player player) {
         this.Player = player;
         this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();

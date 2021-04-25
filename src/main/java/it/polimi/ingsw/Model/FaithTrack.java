@@ -4,20 +4,22 @@ package it.polimi.ingsw.Model;
 
 import java.util.ArrayList;
 
-public class FaithTrack {
-    private boolean Multiplayer;
-    private int RedPosition = 0;
-    private int BlackPosition = 0;
-    private int points = 0;
+public abstract class FaithTrack {
+    protected int RedPosition = 0;
+    protected int points = 0;
     public enum popeFavorState{
         Activate,
         Unabled,
         Deleted
     }
-    private popeFavorState popeFavor1 = popeFavorState.Unabled;
-    private popeFavorState popeFavor2 = popeFavorState.Unabled;
-    private popeFavorState popeFavor3 = popeFavorState.Unabled;
-    private ArrayList<Player> OtherPlayers = new ArrayList<>();
+    protected popeFavorState popeFavor1 = popeFavorState.Unabled;
+    protected popeFavorState popeFavor2 = popeFavorState.Unabled;
+    protected popeFavorState popeFavor3 = popeFavorState.Unabled;
+    //private ArrayList<Player> OtherPlayers = new ArrayList<>();
+    // private int BlackPosition = 0;
+    //private boolean Multiplayer;
+
+
 
 
 
@@ -26,16 +28,19 @@ public class FaithTrack {
     } // get posizione pedina rossa
 
     public int getBlackPosition() {
-        return BlackPosition;
+        return 1;
     } // get posizione pedina nera
 
-    public int getPoints() {
-        return points;
-    } // get punti totalizzati
 
-    public boolean isMultiplayer() {
+  /*  public boolean isMultiplayer() {
         return Multiplayer;
     }
+
+   */
+
+    public int getPoints() {
+      return points;
+  } // get punti totalizzati
 
     public popeFavorState getPopeFavor1() {
         return popeFavor1;
@@ -48,50 +53,19 @@ public class FaithTrack {
     public popeFavorState getPopeFavor3() {
         return popeFavor3;
     }
-
+/*
     public void setMultiplayer(boolean multiplayer) {
         Multiplayer = multiplayer;
     }
+*/
 
     public void setRedPosition(int redPosition) {
-        RedPosition  += redPosition;
-        if (RedPosition == 8 || RedPosition == 16 || RedPosition == 24){
-            if (RedPosition == 8){
-                if (popeFavor1 == popeFavorState.Unabled){
-                    setPopeFavor1(popeFavorState.Activate);
-                    for (Player otherPlayer : OtherPlayers){
-                        otherPlayer.CheckPositionPopeFavor(RedPosition);{
-                        }
-                    }
-                    points += 2;
-                }
-            }
-            else if (RedPosition == 16){
-                if (popeFavor2 == popeFavorState.Unabled){
-                    setPopeFavor2(popeFavorState.Activate);
-                    for (Player otherPlayer : OtherPlayers){
-                        otherPlayer.CheckPositionPopeFavor(RedPosition);{
-                        }
-                    }
-                }
-                points += 3;
-            }
-            else {
-                if (popeFavor3 == popeFavorState.Unabled){
-                    setPopeFavor3(popeFavorState.Activate);
-                    for (Player otherPlayer : OtherPlayers){
-                        otherPlayer.CheckPositionPopeFavor(RedPosition);
-                    }
-                    points += 4;
-                }
 
-            }
-        }
     }
 
-    public void setBlackPosition(int blackPosition) {
-        BlackPosition += blackPosition;
-    }
+   public void setBlackPosition(int blackPosition) { }
+
+
 
     public void setPopeFavor1(popeFavorState popeFavor1) {
         this.popeFavor1 = popeFavor1;
