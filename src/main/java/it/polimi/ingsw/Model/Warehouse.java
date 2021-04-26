@@ -24,10 +24,24 @@ public class Warehouse {
                 return false;
             }
         }else if(rowNumber == 1){
-            if((rows.get(1).getColor() == coloredMarble.getColorMarble())||(rows.get(2).getColor() == coloredMarble.getColorMarble()))){
+            if((rows.get(1).getColor() == coloredMarble.getColorMarble())||(rows.get(2).getColor() == coloredMarble.getColorMarble())){
                 return false;
             }
         }
+        else if (rowNumber == 2){
+            if((rows.get(0).getColor() == coloredMarble.getColorMarble())||(rows.get(2).getColor() == coloredMarble.getColorMarble())){
+                return false;
+            }
+        }
+        else if (rowNumber == 3){
+            if((rows.get(0).getColor() == coloredMarble.getColorMarble())||(rows.get(1).getColor() == coloredMarble.getColorMarble())){
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+
         return rows.get(rowNumber).addMarble(coloredMarble);
     } // The method adds a Marble int the WarehouseRow selected, the method returns true if it can be added and returns false if not. If the row is a Extrarow there is an extra check that controls if the Marble has the color of the WarehouseRow color
 

@@ -29,40 +29,40 @@ public class TurnManager {
     public void GetResourcesFromRow(int row,MarketTray marketTray) {
         MarketMarble[] NewResources = marketTray.GetMarketMarblesFromRow(row);
         marketTray.ShiftMatrixByRow(row);
-        for (MarketMarble newresource : NewResources ){
-            if (newresource.getColorMarble() == MarketMarble.ColorMarble.RED){
+        for (MarketMarble newresource : NewResources) {
+            if (newresource.getColorMarble() == MarketMarble.ColorMarble.RED) {
                 Currentplayer.getFaithTrack().setRedPosition(1);
-            }
-            else if (newresource.getColorMarble() == MarketMarble.ColorMarble.WHITE ) {
-                if (Currentplayer.getLeaderCards(0) instanceof LeaderCard1 && Currentplayer.getLeaderCards(0).isActivate()){
-                    if(Currentplayer.getLeaderCards(1) instanceof LeaderCard1 && Currentplayer.getLeaderCards(1).isActivate()){
-                        System.out.println("Choose between the color of resourcce of Leader Card 1 and the color of resource of LeaderCard2");
-                        System.out.println("Choose the row to put the Marble selected");
-                        //Chiama add marble passando la row e il colore scelto
-                    }
-                    {
-
-
-
-                }
-                System.out.println("What do you want to do with this Marble");
-               //Utente Clicca Bottone che chiama choose what to do whith colored Card
-            }
-            else if(newresource instanceof WhiteMarble){
-                if(Currentplayer.getLeaderCards(0).isActivate() && Currentplayer.getLeaderCards(0) instanceof LeaderCard1){
-                    if(!Currentplayer.getLeaderCards(1).isActivate() || !(Currentplayer.getLeaderCards(1) instanceof LeaderCard1)){
+            } else if (newresource.getColorMarble() == MarketMarble.ColorMarble.WHITE) {
+                if (Currentplayer.getLeaderCards(0) instanceof LeaderCard1 && Currentplayer.getLeaderCards(0).isActivate()) {
+                    if (Currentplayer.getLeaderCards(1) instanceof LeaderCard1 && Currentplayer.getLeaderCards(1).isActivate()) {
+                        System.out.println("Choose between the color of resource of Leader Card 1 and the color of resource of LeaderCard2");
                         System.out.println("What do you want to do with this Marble");
+
+                        // Crea nuova Marble con il colore scelto
+                        // Decide se tenela o scartarla
+                        // Chiama ChooseWhatToDoWithColoredMarble passando il boolean e la Marble nuova
+
+                    } else {
+                        System.out.println("What do you want to do with this Marble");
+                        // Crea nuova Marble con il colore in cui si trasforma la bianca, quello della LeaderCard
+                        // Decide se tenela o scartarla
+                        // Chiama ChooseWhatToDoWithColoredMarble passando il boolean e la Marble nuova
+
                     }
-                    else if(Currentplayer.getLeaderCards(1).isActivate() && (Currentplayer.getLeaderCards(1) instanceof LeaderCard1)){
-                        System.out.println("What do you want to do with this Marble and in which marble you want to Transform");
-                    }
-                }
-                else if (Currentplayer.getLeaderCards(1).isActivate() && (Currentplayer.getLeaderCards(1) instanceof LeaderCard1)){
+                } else if (Currentplayer.getLeaderCards(1) instanceof LeaderCard1 && Currentplayer.getLeaderCards(1).isActivate()) {
                     System.out.println("What do you want to do with this Marble");
+                    // Crea nuova Marble con il colore in cui si trasforma la bianca, quello della LeaderCard
+                    // Decide se tenela o scartarla
+                    // Chiama ChooseWhatToDoWithColoredMarble passando il boolean e la Marble nuova
+
+                } else {
+                    // Niente
                 }
-                else {
-                    //Nothing
-                }
+            }
+            else {
+                System.out.println("What do you want to do with this Marble");
+                // Decide se tenela o scartarla
+                // Chiama ChooseWhatToDoWithColoredMarble passando il boolean e la Marble nuova
             }
         }
     }
@@ -70,7 +70,7 @@ public class TurnManager {
         MarketMarble[] NewResources = marketTray.GetMarketMarblesFromCol(col);
         marketTray.ShiftMatrixByCol(col);
     }
-    public void ChooseWhatToDoWithColoredMarble(boolean keep, ColoredMarble coloredMarble){
+    public void ChooseWhatToDoWithColoredMarble(boolean keep, MarketMarble coloredMarble){
         if (keep){
             //ASPETTO CHE L'UTENTE MI PASSI RIGA(WarehouseRow) IN CUI METTERE PALLINA E FACCIO ADDTOROW
             // Currentplayer.getWarehouse().addToRow(coloredMarble,WarehouseRow);
@@ -82,8 +82,8 @@ public class TurnManager {
 
 
 
-    public void moveResourceFromWarehouse(Player player, int WarehouseRow1, int Warehouse2) {
-        player.getWarehouse().MoveResource(WarehouseRow1, Warehouse2);
+    public void moveResourceFromWarehouse(int WarehouseRow1, int Warehouse2) {
+        Currentplayer.getWarehouse().MoveResource(WarehouseRow1, Warehouse2);
     }
 
 
