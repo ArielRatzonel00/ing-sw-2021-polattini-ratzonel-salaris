@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Model.Deck;
 import it.polimi.ingsw.Model.DevCardSlot;
+import it.polimi.ingsw.Model.FaithTrack;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,7 @@ class PlayerTest {
     private Player player;
     private ArrayList<LeaderCard> leaderCards;
     private Deck deck;
+    private FaithTrack faithTrack;
 
     @BeforeEach
     void initialization(){
@@ -25,7 +27,7 @@ class PlayerTest {
         leaderCards.add(deck.SelectLeadFromId(2));
         leaderCards.add(deck.SelectLeadFromId(3));
         leaderCards.add(deck.SelectLeadFromId(4));
-        player = new Player("Jonny",leaderCards);
+        player = new Player("Jonny",leaderCards, faithTrack);
         player.DiscardLeaderCard(2); //tolgo quella con id = 3
         player.DiscardLeaderCard(2); //tolgo quella con id = 4
     }

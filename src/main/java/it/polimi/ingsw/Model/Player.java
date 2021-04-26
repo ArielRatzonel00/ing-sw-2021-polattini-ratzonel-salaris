@@ -2,8 +2,9 @@ package it.polimi.ingsw.Model;
 
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
-import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Model.Marble.ColoredMarble;
 
+import java.awt.image.ColorConvertOp;
 import java.util.ArrayList;
 
 // Class that represents the Player
@@ -35,9 +36,9 @@ public class Player {
         this.slotsBoard = new SlotsBoard();
         this.isFirst = false;
         ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
-        ProductionBasicCost.add(0, new CostOfCard(2, MarketMarble.ColorMarble.UNKNOWN));
+        ProductionBasicCost.add(0, new CostOfCard(2, ColoredMarble.ColorMarble.UNKNOWN));
         ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
-        ProductionBasicCost.add(0, new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+        ProductionBasicCost.add(0, new CostOfCard(1, ColoredMarble.ColorMarble.UNKNOWN));
         this.productionsAvaible.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
     }
 
@@ -71,22 +72,22 @@ public class Player {
 
     public boolean CheckResourcesForAcquisition(ArrayList<CostOfCard> cost) {
         for (CostOfCard costOfCard : cost){
-            if (costOfCard.getCostColor() == MarketMarble.ColorMarble.GREY){
+            if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.GREY){
                 if (costOfCard.getCostNumber() - DiscountGrey > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
                 }
             }
-            else if (costOfCard.getCostColor() == MarketMarble.ColorMarble.YELLOW){
+            else if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.YELLOW){
                 if (costOfCard.getCostNumber() - DiscountYellow > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
                 }
             }
-            else if (costOfCard.getCostColor() == MarketMarble.ColorMarble.BLUE){
+            else if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.BLUE){
                 if (costOfCard.getCostNumber() - DiscountBlue > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
                 }
             }
-            else if (costOfCard.getCostColor() == MarketMarble.ColorMarble.PURPLE){
+            else if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.PURPLE){
                 if (costOfCard.getCostNumber() - DiscountPurple > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
                 }
