@@ -21,7 +21,7 @@ public class Player {
     private int DiscountYellow = 0;
     private int DiscountPurple = 0;
     private int DiscountBlue = 0;
-    private ArrayList<Production> productionsAvaible = new ArrayList<>(4);
+    private ArrayList<Production> productionsAvailable = new ArrayList<>(4);
 
 
 
@@ -39,7 +39,7 @@ public class Player {
         ProductionBasicCost.add(0, new CostOfCard(2, ColoredMarble.ColorMarble.UNKNOWN));
         ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
         ProductionBasicCost.add(0, new CostOfCard(1, ColoredMarble.ColorMarble.UNKNOWN));
-        this.productionsAvaible.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
+        this.productionsAvailable.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
     }
 
     public String getNickname() {
@@ -138,10 +138,10 @@ public class Player {
     }
 
     public void setProductionsAvaible(int slot){
-        productionsAvaible.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
+        productionsAvailable.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
     }
     public void newProductionFromLeaderCard(Production production){
-        productionsAvaible.add(production);
+        productionsAvailable.add(production);
     }
     public void setDiscountGrey(int discountGrey) {
         DiscountGrey += discountGrey;
