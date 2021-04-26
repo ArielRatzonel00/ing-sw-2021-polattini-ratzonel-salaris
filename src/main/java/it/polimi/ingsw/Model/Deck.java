@@ -622,7 +622,6 @@ public class Deck {
         ArrLeaderCards = new LeaderCard[]{ExtraRsc1, ExtraRsc2, ExtraRsc3, ExtraRsc4, ReduceCost1, ReduceCost2, ReduceCost3, ReduceCost4, ExtraWarehouse1, ExtraWarehouse2, ExtraWarehouse3, ExtraWarehouse4, ConvertRsc1, ConvertRsc2, ConvertRsc3, ConvertRsc4};
 
     }
-    // mancano 4 leader cards quelle del discount perchè comunque le devo passare al player da scegliere all'inizio.
 
     //inserisco l'id e mi ritorna la carta
     public LeaderCard SelectLeadFromId(int IdLead) {
