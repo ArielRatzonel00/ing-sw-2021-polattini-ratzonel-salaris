@@ -19,8 +19,12 @@ public class Warehouse {
     } // returns the WarehouseRow selected
 
     public boolean addToRow(MarketMarble coloredMarble, int rowNumber){
-        if (rowNumber == 4 || rowNumber == 5  ){
+        if (rowNumber == 4 || rowNumber == 5){
             if (!(coloredMarble.getColorMarble().equals(getRow(rowNumber).getColor()))){
+                return false;
+            }
+        }else if(rowNumber == 1){
+            if((rows.get(1).getColor() == coloredMarble.getColorMarble())||(rows.get(2).getColor() == coloredMarble.getColorMarble()))){
                 return false;
             }
         }
