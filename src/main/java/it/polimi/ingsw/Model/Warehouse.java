@@ -14,9 +14,6 @@ public class Warehouse {
         this.rows.add(new WarehouseRow(3));
     } // The Warehouse is created whit 3 Warehouse row: one with space 1, one with space 2, one with space 3
 
-
-
-
     public WarehouseRow getRow(int rowNumber) {
         return rows.get(rowNumber);
     } // returns the WarehouseRow selected
@@ -27,7 +24,6 @@ public class Warehouse {
                 return false;
             }
         }
-
         return rows.get(rowNumber).addMarble(coloredMarble);
     } // The method adds a Marble int the WarehouseRow selected, the method returns true if it can be added and returns false if not. If the row is a Extrarow there is an extra check that controls if the Marble has the color of the WarehouseRow color
 

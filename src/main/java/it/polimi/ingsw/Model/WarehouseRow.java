@@ -14,7 +14,6 @@ public class WarehouseRow {
         this.space = space;
     } // A warehouse row is created by passing the number of maximum Marbles accepted
 
-
     public boolean addMarble(ColoredMarble coloredMarble){
         if(marbles.size() == 0) {
             marbles.add(coloredMarble);
@@ -29,7 +28,6 @@ public class WarehouseRow {
         }
         return false;
     } // Method that adds a Marble in the row, the method returns true if it can be done and false if not
-
 
     public boolean removeMarble(ColoredMarble coloredMarble){
         if(coloredMarble.getColorMarble().equals(color) && marbles.size()>0) {
