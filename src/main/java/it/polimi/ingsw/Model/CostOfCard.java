@@ -1,14 +1,14 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Model.Marble.ColoredMarble;
-
 // Class that represents a structure that has a number and a color
+
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 
 public class CostOfCard {
     private int costNumber;
-    private ColoredMarble.ColorMarble costColor;
+    private MarketMarble.ColorMarble costColor;
 
-    public CostOfCard(int costNumber, ColoredMarble.ColorMarble costColor) {
+    public CostOfCard(int costNumber, MarketMarble.ColorMarble costColor) {
         this.costNumber = costNumber;
         this.costColor = costColor;
     }
@@ -17,7 +17,7 @@ public class CostOfCard {
         return costNumber;
     }
 
-    public ColoredMarble.ColorMarble getCostColor() {
+    public MarketMarble.ColorMarble getCostColor() {
         return costColor;
     }
 }

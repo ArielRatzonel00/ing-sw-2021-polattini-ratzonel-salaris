@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Model.Marble.ColoredMarble;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 
 import java.util.ArrayList;
 // This class represent the Warehouse, every player has one Warehouse
@@ -21,7 +21,7 @@ public class Warehouse {
         return rows.get(rowNumber);
     } // returns the WarehouseRow selected
 
-    public boolean addToRow(ColoredMarble coloredMarble, int rowNumber){
+    public boolean addToRow(MarketMarble coloredMarble, int rowNumber){
         if (rowNumber == 4 || rowNumber == 5  ){
             if (!(coloredMarble.getColorMarble().equals(getRow(rowNumber).getColor()))){
                 return false;
@@ -31,7 +31,7 @@ public class Warehouse {
         return rows.get(rowNumber).addMarble(coloredMarble);
     } // The method adds a Marble int the WarehouseRow selected, the method returns true if it can be added and returns false if not. If the row is a Extrarow there is an extra check that controls if the Marble has the color of the WarehouseRow color
 
-    public boolean RemoveFromRow(ColoredMarble coloredMarble, int rowNumber){
+    public boolean RemoveFromRow(MarketMarble coloredMarble, int rowNumber){
         return rows.get(rowNumber).removeMarble(coloredMarble);
     } //The method removes a Marble int the WarehouseRow selected, the method returns true if it can be removed and returns false if not
 
@@ -51,7 +51,7 @@ public class Warehouse {
         return false;
     } // The method swap the marbles of two WarehouseRows, the method returns true if it can be done and returns false if not. The method does an extra check if one of the two rows in Extrarow and controls that the swap happens only if the color of the two WarehouseRow is the same
 
-    public int getNumberOfResource(ColoredMarble.ColorMarble color){
+    public int getNumberOfResource(MarketMarble.ColorMarble color){
         int i=0;
         for (WarehouseRow a: rows) {
             if(a.getColor().equals(color))
