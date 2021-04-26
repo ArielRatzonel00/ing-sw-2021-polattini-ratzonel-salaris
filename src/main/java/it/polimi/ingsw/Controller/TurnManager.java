@@ -2,15 +2,9 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard1;
-import it.polimi.ingsw.Model.Marble.ColoredMarble;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
-import it.polimi.ingsw.Model.Marble.RedMarble;
-import it.polimi.ingsw.Model.Marble.WhiteMarble;
-import java.io.*;
 
-import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class TurnManager {
     private Player Currentplayer;
@@ -36,10 +30,21 @@ public class TurnManager {
         MarketMarble[] NewResources = marketTray.GetMarketMarblesFromRow(row);
         marketTray.ShiftMatrixByRow(row);
         for (MarketMarble newresource : NewResources ){
-            if (newresource instanceof RedMarble){
+            if (newresource.getColorMarble() == MarketMarble.ColorMarble.RED){
                 Currentplayer.getFaithTrack().setRedPosition(1);
             }
-            else if (newresource instanceof ColoredMarble) {
+            else if (newresource.getColorMarble() == MarketMarble.ColorMarble.WHITE ) {
+                if (Currentplayer.getLeaderCards(0) instanceof LeaderCard1 && Currentplayer.getLeaderCards(0).isActivate()){
+                    if(Currentplayer.getLeaderCards(1) instanceof LeaderCard1 && Currentplayer.getLeaderCards(1).isActivate()){
+                        System.out.println("Choose between the color of resourcce of Leader Card 1 and the color of resource of LeaderCard2");
+                        System.out.println("Choose the row to put the Marble selected");
+                        //Chiama add marble passando la row e il colore scelto
+                    }
+                    {
+
+
+
+                }
                 System.out.println("What do you want to do with this Marble");
                //Utente Clicca Bottone che chiama choose what to do whith colored Card
             }

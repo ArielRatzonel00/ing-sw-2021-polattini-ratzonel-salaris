@@ -21,9 +21,13 @@ public class Player {
     private int DiscountYellow = 0;
     private int DiscountPurple = 0;
     private int DiscountBlue = 0;
-    private ArrayList<Production> productionsAvailable = new ArrayList<>(4);
+    private ArrayList<Production> productionsAvaible = new ArrayList<>(4);
+
+
+
 
     public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards, FaithTrack faithTrack) {
+
         this.nickname = nickname;
         this.faithTrack = faithTrack;
         this.warehouse = new Warehouse();
@@ -35,7 +39,7 @@ public class Player {
         ProductionBasicCost.add(0, new CostOfCard(2, ColoredMarble.ColorMarble.UNKNOWN));
         ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
         ProductionBasicCost.add(0, new CostOfCard(1, ColoredMarble.ColorMarble.UNKNOWN));
-        this.productionsAvailable.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
+        this.productionsAvaible.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
     }
 
     public String getNickname() {
@@ -91,8 +95,7 @@ public class Player {
         }
         return true;
     }
-
-    public boolean CheckResourcesForProduce(ArrayList<CostOfCard> cost) {
+    public boolean CheckResourcesForProudce(ArrayList<CostOfCard> cost) {
         for (CostOfCard costOfCard : cost){
                 if (costOfCard.getCostNumber() > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
@@ -101,11 +104,9 @@ public class Player {
             }
         return true;
     }
-
     public void DiscardLeaderCard(int index){
         leaderCards.remove(index);
     }
-
     public void CheckPositionPopeFavor(int RedPositionOfOtherPlayer){
         if (RedPositionOfOtherPlayer == 8){
             if (faithTrack.getRedPosition() >=5 ){
@@ -136,14 +137,12 @@ public class Player {
         }
     }
 
-    public void setProductionsAvailable(int slot){
-        productionsAvailable.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
+    public void setProductionsAvaible(int slot){
+        productionsAvaible.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
     }
-
     public void newProductionFromLeaderCard(Production production){
-        productionsAvailable.add(production);
+        productionsAvaible.add(production);
     }
-
     public void setDiscountGrey(int discountGrey) {
         DiscountGrey += discountGrey;
     }

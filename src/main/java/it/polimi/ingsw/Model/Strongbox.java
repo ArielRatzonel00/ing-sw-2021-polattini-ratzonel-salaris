@@ -1,7 +1,8 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Model.Marble.ColoredMarble;
 // class that represents the Strongbox. Every player has one Strongbox
+
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 
 public class Strongbox {
     private int servant;
@@ -16,7 +17,7 @@ public class Strongbox {
         this.stone = 0;
     } // Every resource is represented by a counter
 
-    public int CountResources(ColoredMarble.ColorMarble ColorOfResource) {
+    public int CountResources(MarketMarble.ColorMarble ColorOfResource) {
         switch (ColorOfResource) {
             case BLUE:
                 return shield;
@@ -53,7 +54,7 @@ public class Strongbox {
 // Methods that add #num Resources
 
 
-    public void RemoveResourcesFromStrongbox(int number, ColoredMarble.ColorMarble colorMarble) {
+    public void RemoveResourcesFromStrongbox(int number, MarketMarble.ColorMarble colorMarble) {
         switch (colorMarble) {
             case BLUE:
                 this.shield -= number;
