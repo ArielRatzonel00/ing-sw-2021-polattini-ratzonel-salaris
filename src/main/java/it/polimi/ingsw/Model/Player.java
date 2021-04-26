@@ -23,11 +23,7 @@ public class Player {
     private int DiscountBlue = 0;
     private ArrayList<Production> productionsAvailable = new ArrayList<>(4);
 
-
-
-
     public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards, FaithTrack faithTrack) {
-
         this.nickname = nickname;
         this.faithTrack = faithTrack;
         this.warehouse = new Warehouse();
@@ -95,7 +91,8 @@ public class Player {
         }
         return true;
     }
-    public boolean CheckResourcesForProudce(ArrayList<CostOfCard> cost) {
+
+    public boolean CheckResourcesForProduce(ArrayList<CostOfCard> cost) {
         for (CostOfCard costOfCard : cost){
                 if (costOfCard.getCostNumber() > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
@@ -104,9 +101,11 @@ public class Player {
             }
         return true;
     }
+
     public void DiscardLeaderCard(int index){
         leaderCards.remove(index);
     }
+
     public void CheckPositionPopeFavor(int RedPositionOfOtherPlayer){
         if (RedPositionOfOtherPlayer == 8){
             if (faithTrack.getRedPosition() >=5 ){
@@ -137,12 +136,14 @@ public class Player {
         }
     }
 
-    public void setProductionsAvaible(int slot){
+    public void setProductionsAvailable(int slot){
         productionsAvailable.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
     }
+
     public void newProductionFromLeaderCard(Production production){
         productionsAvailable.add(production);
     }
+
     public void setDiscountGrey(int discountGrey) {
         DiscountGrey += discountGrey;
     }
