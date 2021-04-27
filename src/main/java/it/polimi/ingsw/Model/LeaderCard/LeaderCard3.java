@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model.LeaderCard;
 
-import it.polimi.ingsw.Model.Marble.ColoredMarble;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.WarehouseRow;
 
@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class LeaderCard3 extends LeaderCard{ //extra warehouse
 
 
-private ColoredMarble.ColorMarble ColorCost;
+private MarketMarble.ColorMarble ColorCost;
 private int NumberCost = 5;
-private ColoredMarble.ColorMarble colorOfExtraWarehouse;
-private ArrayList<ColoredMarble> ExtraRow;
+private MarketMarble.ColorMarble colorOfExtraWarehouse;
+private ArrayList<MarketMarble> ExtraRow;
 
 
 
-    public LeaderCard3(int id, int victoryPoints, ColoredMarble.ColorMarble colorCost, ColoredMarble.ColorMarble ColorOfExtraWarehouse) {
+    public LeaderCard3(int id, int victoryPoints, MarketMarble.ColorMarble colorCost, MarketMarble.ColorMarble ColorOfExtraWarehouse) {
         super(id, victoryPoints);
         this.ColorCost = colorCost;
         this.colorOfExtraWarehouse = ColorOfExtraWarehouse;
@@ -36,11 +36,11 @@ private ArrayList<ColoredMarble> ExtraRow;
             return false;
         }
     }
-    public ArrayList<ColoredMarble> getExtraRow() {
+    public ArrayList<MarketMarble> getExtraRow() {
         return ExtraRow;
     }
 
-    public ColoredMarble.ColorMarble getColorCost() {
+    public MarketMarble.ColorMarble getColorCost() {
         return ColorCost;
     }
 
@@ -48,7 +48,7 @@ private ArrayList<ColoredMarble> ExtraRow;
         return NumberCost;
     }
 
-    public ColoredMarble.ColorMarble getColorOfExtraWarehouse() {
+    public MarketMarble.ColorMarble getColorOfExtraWarehouse() {
         return colorOfExtraWarehouse;
     }
     public void effect(Player player){

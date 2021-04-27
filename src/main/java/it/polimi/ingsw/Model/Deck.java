@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.LeaderCard.*;
-import it.polimi.ingsw.Model.Marble.ColoredMarble;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 
 // Class that contains the DevelopmentCards and the LeaderCards
 
@@ -56,418 +56,418 @@ public class Deck {
 
 
         ArrayList<CostOfCard> Green11Cost = new ArrayList<>();
-        Green11Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
+        Green11Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Green11ProductionCost = new ArrayList<>();
-        Green11ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Green11ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Green11ProductionProfit = new ArrayList<>();
-        Green11ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Green11ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         Green11 = new DevelopmentCard(Green11Cost, new Production(Green11ProductionCost, Green11ProductionProfit), 1, DevelopmentCard.colorCard.Green, 1, 1);
 
         ArrayList<CostOfCard> Green12Cost = new ArrayList<>();
-        Green12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
-        Green12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
+        Green12Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
+        Green12Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Green12ProductionCost = new ArrayList<>();
-        Green12ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Green12ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Green12ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Green12ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Green12ProductionProfit = new ArrayList<>();
-        Green12ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
-        Green12ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Green12ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
+        Green12ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         Green12 = new DevelopmentCard(Green12Cost, new Production(Green12ProductionCost, Green12ProductionProfit), 2, DevelopmentCard.colorCard.Green, 1, 4);
 
 
         ArrayList<CostOfCard> Green13Cost = new ArrayList<>();
-        Green13Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.BLUE));
+        Green13Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Green13ProductionCost = new ArrayList<>();
-        Green13ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
+        Green13ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Green13ProductionProfit = new ArrayList<>();
-        Green13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Green13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
-        Green13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Green13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Green13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
+        Green13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         Green13 = new DevelopmentCard(Green13Cost, new Production(Green13ProductionCost, Green13ProductionProfit), 3, DevelopmentCard.colorCard.Green, 1, 3);
 
 
         ArrayList<CostOfCard> Green14Cost = new ArrayList<>();
-        Green14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
-        Green14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Green14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Green14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
+        Green14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Green14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Green14ProductionCost = new ArrayList<>();
-        Green14ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Green14ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Green14ProductionProfit = new ArrayList<>();
-        Green14ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Green14ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         Green14 = new DevelopmentCard(Green14Cost, new Production(Green14ProductionCost, Green14ProductionProfit), 4, DevelopmentCard.colorCard.Green, 1, 2);
         cell00 = new GridCell(Green11, Green12, Green13, Green14);
 
 
         ArrayList<CostOfCard> Blue11Cost = new ArrayList<>();
-        Blue11Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
+        Blue11Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Blue11ProductionCost = new ArrayList<>();
-        Blue11ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Blue11ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Blue11ProductionProfit = new ArrayList<>();
-        Blue11ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Blue11ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         Blue11 = new DevelopmentCard(Blue11Cost, new Production(Blue11ProductionCost, Blue11ProductionProfit), 5, DevelopmentCard.colorCard.Blue, 1, 1);
 
         ArrayList<CostOfCard> Blue12Cost = new ArrayList<>();
-        Blue12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
-        Blue12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
+        Blue12Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
+        Blue12Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Blue12ProductionCost = new ArrayList<>();
-        Blue12ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
-        Blue12ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Blue12ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
+        Blue12ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Blue12ProductionProfit = new ArrayList<>();
-        Blue12ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
-        Blue12ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Blue12ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
+        Blue12ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Blue12 = new DevelopmentCard(Blue12Cost, new Production(Blue12ProductionCost, Blue12ProductionProfit), 6, DevelopmentCard.colorCard.Blue, 1, 4);
 
 
         ArrayList<CostOfCard> Blue13Cost = new ArrayList<>();
-        Blue13Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.YELLOW));
+        Blue13Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Blue13ProductionCost = new ArrayList<>();
-        Blue13ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
+        Blue13ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Blue13ProductionProfit = new ArrayList<>();
-        Blue13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Blue13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
-        Blue13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Blue13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Blue13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
+        Blue13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         DevelopmentCard Blue13 = new DevelopmentCard(Blue13Cost, new Production(Blue13ProductionCost, Blue13ProductionProfit), 7, DevelopmentCard.colorCard.Blue, 1, 3);
 
 
         ArrayList<CostOfCard> Blue14Cost = new ArrayList<>();
-        Blue14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Blue14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Blue14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Blue14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Blue14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Blue14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Blue14ProductionCost = new ArrayList<>();
-        Blue14ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Blue14ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Blue14ProductionProfit = new ArrayList<>();
-        Blue14ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Blue14ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         DevelopmentCard Blue14 = new DevelopmentCard(Blue14Cost, new Production(Blue14ProductionCost, Blue14ProductionProfit), 8, DevelopmentCard.colorCard.Blue, 1, 2);
         cell01 = new GridCell(Blue11, Blue12, Blue13, Blue14);
 
 
         ArrayList<CostOfCard> Yellow11Cost = new ArrayList<>();
-        Yellow11Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
+        Yellow11Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Yellow11ProductionCost = new ArrayList<>();
-        Yellow11ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Yellow11ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Yellow11ProductionProfit = new ArrayList<>();
-        Yellow11ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Yellow11ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Yellow11 = new DevelopmentCard(Yellow11Cost, new Production(Yellow11ProductionCost, Yellow11ProductionProfit), 9, DevelopmentCard.colorCard.Yellow, 1, 1);
 
         ArrayList<CostOfCard> Yellow12Cost = new ArrayList<>();
-        Yellow12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
-        Yellow12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
+        Yellow12Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
+        Yellow12Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow12ProductionCost = new ArrayList<>();
-        Yellow12ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Yellow12ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Yellow12ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Yellow12ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Yellow12ProductionProfit = new ArrayList<>();
-        Yellow12ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
-        Yellow12ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Yellow12ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
+        Yellow12ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Yellow12 = new DevelopmentCard(Yellow12Cost, new Production(Yellow12ProductionCost, Yellow12ProductionProfit), 10, DevelopmentCard.colorCard.Yellow, 1, 4);
 
 
         ArrayList<CostOfCard> Yellow13Cost = new ArrayList<>();
-        Yellow13Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.GREY));
+        Yellow13Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Yellow13ProductionCost = new ArrayList<>();
-        Yellow13ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
+        Yellow13ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow13ProductionProfit = new ArrayList<>();
-        Yellow13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Yellow13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
-        Yellow13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Yellow13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Yellow13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
+        Yellow13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         DevelopmentCard Yellow13 = new DevelopmentCard(Yellow13Cost, new Production(Yellow13ProductionCost, Yellow13ProductionProfit), 11, DevelopmentCard.colorCard.Yellow, 1, 3);
 
 
         ArrayList<CostOfCard> Yellow14Cost = new ArrayList<>();
-        Yellow14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
-        Yellow14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Yellow14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Yellow14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
+        Yellow14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Yellow14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Yellow14ProductionCost = new ArrayList<>();
-        Yellow14ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Yellow14ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow14ProductionProfit = new ArrayList<>();
-        Yellow14ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Yellow14ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         DevelopmentCard Yellow14 = new DevelopmentCard(Yellow14Cost, new Production(Yellow14ProductionCost, Yellow14ProductionProfit), 12, DevelopmentCard.colorCard.Yellow, 1, 2);
         cell02 = new GridCell(Yellow11, Yellow12, Yellow13, Yellow14);
 
 
         ArrayList<CostOfCard> Purple11Cost = new ArrayList<>();
-        Purple11Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
+        Purple11Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Purple11ProductionCost = new ArrayList<>();
-        Purple11ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Purple11ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Purple11ProductionProfit = new ArrayList<>();
-        Purple11ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Purple11ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Purple11 = new DevelopmentCard(Purple11Cost, new Production(Purple11ProductionCost, Purple11ProductionProfit), 13, DevelopmentCard.colorCard.Purple, 1, 1);
 
         ArrayList<CostOfCard> Purple12Cost = new ArrayList<>();
-        Purple12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
-        Purple12Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
+        Purple12Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
+        Purple12Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Purple12ProductionCost = new ArrayList<>();
-        Purple12ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Purple12ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Purple12ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Purple12ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Purple12ProductionProfit = new ArrayList<>();
-        Purple12ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
-        Purple12ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Purple12ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
+        Purple12ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Purple12 = new DevelopmentCard(Purple12Cost, new Production(Purple12ProductionCost, Purple12ProductionProfit), 14, DevelopmentCard.colorCard.Purple, 1, 4);
 
 
         ArrayList<CostOfCard> Purple13Cost = new ArrayList<>();
-        Purple13Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.PURPLE));
+        Purple13Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Purple13ProductionCost = new ArrayList<>();
-        Purple13ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
+        Purple13ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Purple13ProductionProfit = new ArrayList<>();
-        Purple13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
-        Purple13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
-        Purple13ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Purple13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
+        Purple13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
+        Purple13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         DevelopmentCard Purple13 = new DevelopmentCard(Purple13Cost, new Production(Purple13ProductionCost, Purple13ProductionProfit), 15, DevelopmentCard.colorCard.Purple, 1, 3);
 
 
         ArrayList<CostOfCard> Purple14Cost = new ArrayList<>();
-        Purple14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
-        Purple14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Purple14Cost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Purple14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
+        Purple14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Purple14Cost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Purple14ProductionCost = new ArrayList<>();
-        Purple14ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Purple14ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Purple14ProductionProfit = new ArrayList<>();
-        Purple14ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Purple14ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         DevelopmentCard Purple14 = new DevelopmentCard(Purple14Cost, new Production(Purple14ProductionCost, Purple14ProductionProfit), 16, DevelopmentCard.colorCard.Purple, 1, 2);
         cell03 = new GridCell(Purple11, Purple12, Purple13, Purple14);
 
 
         ArrayList<CostOfCard> Green21Cost = new ArrayList<>();
-        Green21Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.BLUE));
+        Green21Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Green21ProductionCost = new ArrayList<>();
-        Green21ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Green21ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Green21ProductionProfit = new ArrayList<>();
-        Green21ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Green21ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         Green21 = new DevelopmentCard(Green21Cost, new Production(Green21ProductionCost, Green21ProductionProfit), 17, DevelopmentCard.colorCard.Green, 2, 5);
 
         ArrayList<CostOfCard> Green22Cost = new ArrayList<>();
-        Green22Cost.add(new CostOfCard(5, ColoredMarble.ColorMarble.BLUE));
+        Green22Cost.add(new CostOfCard(5, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Green22ProductionCost = new ArrayList<>();
-        Green22ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Green22ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Green22ProductionProfit = new ArrayList<>();
-        Green22ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
-        Green22ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Green22ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
+        Green22ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Green22 = new DevelopmentCard(Green22Cost, new Production(Green22ProductionCost, Green22ProductionProfit), 18, DevelopmentCard.colorCard.Green, 2, 7);
 
         ArrayList<CostOfCard> Green23Cost = new ArrayList<>();
-        Green23Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.BLUE));
-        Green23Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
+        Green23Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.BLUE));
+        Green23Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Green23ProductionCost = new ArrayList<>();
-        Green23ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
-        Green23ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Green23ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
+        Green23ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Green23ProductionProfit = new ArrayList<>();
-        Green23ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.GREY));
+        Green23ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.GREY));
         DevelopmentCard Green23 = new DevelopmentCard(Green23Cost, new Production(Green23ProductionCost, Green23ProductionProfit), 19, DevelopmentCard.colorCard.Green, 2, 6);
 
         ArrayList<CostOfCard> Green24Cost = new ArrayList<>();
-        Green24Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.BLUE));
-        Green24Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.YELLOW));
+        Green24Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.BLUE));
+        Green24Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Green24ProductionCost = new ArrayList<>();
-        Green24ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Green24ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Green24ProductionProfit = new ArrayList<>();
-        Green24ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
-        Green24ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Green24ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
+        Green24ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Green24 = new DevelopmentCard(Green24Cost, new Production(Green24ProductionCost, Green24ProductionProfit), 20, DevelopmentCard.colorCard.Green, 2, 8);
         cell10 = new GridCell(Green21, Green22, Green23, Green24);
 
 
         ArrayList<CostOfCard> Blue21Cost = new ArrayList<>();
-        Blue21Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.YELLOW));
+        Blue21Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Blue21ProductionCost = new ArrayList<>();
-        Blue21ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Blue21ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Blue21ProductionProfit = new ArrayList<>();
-        Blue21ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Blue21ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Blue21 = new DevelopmentCard(Blue21Cost, new Production(Blue21ProductionCost, Blue21ProductionProfit), 21, DevelopmentCard.colorCard.Blue, 2, 5);
 
         ArrayList<CostOfCard> Blue22Cost = new ArrayList<>();
-        Blue22Cost.add(new CostOfCard(5, ColoredMarble.ColorMarble.YELLOW));
+        Blue22Cost.add(new CostOfCard(5, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Blue22ProductionCost = new ArrayList<>();
-        Blue22ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
+        Blue22ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Blue22ProductionProfit = new ArrayList<>();
-        Blue22ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
-        Blue22ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Blue22ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
+        Blue22ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Blue22 = new DevelopmentCard(Blue22Cost, new Production(Blue22ProductionCost, Blue22ProductionProfit), 22, DevelopmentCard.colorCard.Blue, 2, 7);
 
         ArrayList<CostOfCard> Blue23Cost = new ArrayList<>();
-        Blue23Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.YELLOW));
-        Blue23Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
+        Blue23Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.YELLOW));
+        Blue23Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Blue23ProductionCost = new ArrayList<>();
-        Blue23ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Blue23ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Blue23ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Blue23ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Blue23ProductionProfit = new ArrayList<>();
-        Blue23ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.PURPLE));
+        Blue23ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.PURPLE));
         DevelopmentCard Blue23 = new DevelopmentCard(Blue23Cost, new Production(Blue23ProductionCost, Blue23ProductionProfit), 23, DevelopmentCard.colorCard.Blue, 2, 6);
 
         ArrayList<CostOfCard> Blue24Cost = new ArrayList<>();
-        Blue24Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.YELLOW));
-        Blue24Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.GREY));
+        Blue24Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.YELLOW));
+        Blue24Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Blue24ProductionCost = new ArrayList<>();
-        Blue24ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Blue24ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Blue24ProductionProfit = new ArrayList<>();
-        Blue24ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
-        Blue24ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Blue24ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
+        Blue24ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Blue24 = new DevelopmentCard(Blue24Cost, new Production(Blue24ProductionCost, Blue24ProductionProfit), 24, DevelopmentCard.colorCard.Blue, 2, 8);
         cell11 = new GridCell(Blue21, Blue22, Blue23, Blue24);
 
 
         ArrayList<CostOfCard> Yellow21Cost = new ArrayList<>();
-        Yellow21Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.GREY));
+        Yellow21Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Yellow21ProductionCost = new ArrayList<>();
-        Yellow21ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Yellow21ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow21ProductionProfit = new ArrayList<>();
-        Yellow21ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Yellow21ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Yellow21 = new DevelopmentCard(Yellow21Cost, new Production(Yellow21ProductionCost, Yellow21ProductionProfit), 25, DevelopmentCard.colorCard.Yellow, 2, 5);
 
         ArrayList<CostOfCard> Yellow22Cost = new ArrayList<>();
-        Yellow22Cost.add(new CostOfCard(5, ColoredMarble.ColorMarble.GREY));
+        Yellow22Cost.add(new CostOfCard(5, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Yellow22ProductionCost = new ArrayList<>();
-        Yellow22ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
+        Yellow22ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow22ProductionProfit = new ArrayList<>();
-        Yellow22ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
-        Yellow22ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Yellow22ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
+        Yellow22ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Yellow22 = new DevelopmentCard(Yellow22Cost, new Production(Yellow22ProductionCost, Yellow22ProductionProfit), 26, DevelopmentCard.colorCard.Yellow, 2, 7);
 
         ArrayList<CostOfCard> Yellow23Cost = new ArrayList<>();
-        Yellow23Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.GREY));
-        Yellow23Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
+        Yellow23Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.GREY));
+        Yellow23Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow23ProductionCost = new ArrayList<>();
-        Yellow23ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Yellow23ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Yellow23ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Yellow23ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow23ProductionProfit = new ArrayList<>();
-        Yellow23ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.YELLOW));
+        Yellow23ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.YELLOW));
         DevelopmentCard Yellow23 = new DevelopmentCard(Yellow23Cost, new Production(Yellow23ProductionCost, Yellow23ProductionProfit), 27, DevelopmentCard.colorCard.Yellow, 2, 6);
 
         ArrayList<CostOfCard> Yellow24Cost = new ArrayList<>();
-        Yellow24Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.GREY));
-        Yellow24Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.PURPLE));
+        Yellow24Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.GREY));
+        Yellow24Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Yellow24ProductionCost = new ArrayList<>();
-        Yellow24ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Yellow24ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow24ProductionProfit = new ArrayList<>();
-        Yellow24ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
-        Yellow24ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Yellow24ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
+        Yellow24ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Yellow24 = new DevelopmentCard(Yellow24Cost, new Production(Yellow24ProductionCost, Yellow24ProductionProfit), 28, DevelopmentCard.colorCard.Yellow, 2, 8);
         cell12 = new GridCell(Yellow21, Yellow22, Yellow23, Yellow24);
 
 
         ArrayList<CostOfCard> Purple21Cost = new ArrayList<>();
-        Purple21Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.PURPLE));
+        Purple21Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Purple21ProductionCost = new ArrayList<>();
-        Purple21ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Purple21ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Purple21ProductionProfit = new ArrayList<>();
-        Purple21ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Purple21ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Purple21 = new DevelopmentCard(Purple21Cost, new Production(Purple21ProductionCost, Purple21ProductionProfit), 29, DevelopmentCard.colorCard.Purple, 2, 5);
 
         ArrayList<CostOfCard> Purple22Cost = new ArrayList<>();
-        Purple22Cost.add(new CostOfCard(5, ColoredMarble.ColorMarble.PURPLE));
+        Purple22Cost.add(new CostOfCard(5, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Purple22ProductionCost = new ArrayList<>();
-        Purple22ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
+        Purple22ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Purple22ProductionProfit = new ArrayList<>();
-        Purple22ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
-        Purple22ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Purple22ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
+        Purple22ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Purple22 = new DevelopmentCard(Purple22Cost, new Production(Purple22ProductionCost, Purple22ProductionProfit), 30, DevelopmentCard.colorCard.Purple, 2, 7);
 
         ArrayList<CostOfCard> Purple23Cost = new ArrayList<>();
-        Purple23Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.PURPLE));
-        Purple23Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
+        Purple23Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.PURPLE));
+        Purple23Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Purple23ProductionCost = new ArrayList<>();
-        Purple23ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Purple23ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Purple23ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Purple23ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Purple23ProductionProfit = new ArrayList<>();
-        Purple23ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.BLUE));
+        Purple23ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.BLUE));
         DevelopmentCard Purple23 = new DevelopmentCard(Purple23Cost, new Production(Purple23ProductionCost, Purple23ProductionProfit), 31, DevelopmentCard.colorCard.Purple, 2, 6);
 
         ArrayList<CostOfCard> Purple24Cost = new ArrayList<>();
-        Purple24Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.PURPLE));
-        Purple24Cost.add(new CostOfCard(3, ColoredMarble.ColorMarble.BLUE));
+        Purple24Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.PURPLE));
+        Purple24Cost.add(new CostOfCard(3, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Purple24ProductionCost = new ArrayList<>();
-        Purple24ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Purple24ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Purple24ProductionProfit = new ArrayList<>();
-        Purple24ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
-        Purple24ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Purple24ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
+        Purple24ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Purple24 = new DevelopmentCard(Purple24Cost, new Production(Purple24ProductionCost, Purple24ProductionProfit), 32, DevelopmentCard.colorCard.Purple, 2, 8);
         cell13 = new GridCell(Purple21, Purple22, Purple23, Purple24);
 
         ArrayList<CostOfCard> Green31Cost = new ArrayList<>();
-        Green31Cost.add(new CostOfCard(7, ColoredMarble.ColorMarble.BLUE));
+        Green31Cost.add(new CostOfCard(7, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Green31ProductionCost = new ArrayList<>();
-        Green31ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Green31ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Green31ProductionProfit = new ArrayList<>();
-        Green31ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Green31ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.RED));
+        Green31ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Green31ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.RED));
         Green31 = new DevelopmentCard(Green31Cost, new Production(Green31ProductionCost, Green31ProductionProfit), 33, DevelopmentCard.colorCard.Green, 3, 11);
 
 
         ArrayList<CostOfCard> Green32Cost = new ArrayList<>();
-        Green32Cost.add(new CostOfCard(6, ColoredMarble.ColorMarble.BLUE));
+        Green32Cost.add(new CostOfCard(6, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Green32ProductionCost = new ArrayList<>();
-        Green32ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
+        Green32ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Green32ProductionProfit = new ArrayList<>();
-        Green32ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.GREY));
-        Green32ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Green32ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.GREY));
+        Green32ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Green32 = new DevelopmentCard(Green32Cost, new Production(Green32ProductionCost, Green32ProductionProfit), 34, DevelopmentCard.colorCard.Green, 3, 9);
 
 
         ArrayList<CostOfCard> Green33Cost = new ArrayList<>();
-        Green33Cost.add(new CostOfCard(5, ColoredMarble.ColorMarble.BLUE));
-        Green33Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
+        Green33Cost.add(new CostOfCard(5, MarketMarble.ColorMarble.BLUE));
+        Green33Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Green33ProductionCost = new ArrayList<>();
-        Green33ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Green33ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Green33ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Green33ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Green33ProductionProfit = new ArrayList<>();
-        Green33ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
-        Green33ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
-        Green33ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Green33ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
+        Green33ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
+        Green33ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Green33 = new DevelopmentCard(Green33Cost, new Production(Green33ProductionCost, Green33ProductionProfit), 35, DevelopmentCard.colorCard.Green, 3, 10);
 
 
         ArrayList<CostOfCard> Green34Cost = new ArrayList<>();
-        Green34Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.BLUE));
-        Green34Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.YELLOW));
+        Green34Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.BLUE));
+        Green34Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Green34ProductionCost = new ArrayList<>();
-        Green34ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Green34ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Green34ProductionProfit = new ArrayList<>();
-        Green34ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
-        Green34ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.YELLOW));
+        Green34ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
+        Green34ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.YELLOW));
         DevelopmentCard Green34 = new DevelopmentCard(Green34Cost, new Production(Green34ProductionCost, Green34ProductionProfit), 36, DevelopmentCard.colorCard.Green, 3, 12);
         cell20 = new GridCell(Green31, Green32, Green33, Green34);
 
 
         ArrayList<CostOfCard> Blue31Cost = new ArrayList<>();
-        Blue31Cost.add(new CostOfCard(7, ColoredMarble.ColorMarble.YELLOW));
+        Blue31Cost.add(new CostOfCard(7, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Blue31ProductionCost = new ArrayList<>();
-        Blue31ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        Blue31ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Blue31ProductionProfit = new ArrayList<>();
-        Blue31ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
-        Blue31ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.RED));
+        Blue31ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
+        Blue31ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.RED));
         DevelopmentCard Blue31 = new DevelopmentCard(Blue31Cost, new Production(Blue31ProductionCost, Blue31ProductionProfit), 37, DevelopmentCard.colorCard.Blue, 3, 11);
 
 
         ArrayList<CostOfCard> Blue32Cost = new ArrayList<>();
-        Blue32Cost.add(new CostOfCard(6, ColoredMarble.ColorMarble.YELLOW));
+        Blue32Cost.add(new CostOfCard(6, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Blue32ProductionCost = new ArrayList<>();
-        Blue32ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
+        Blue32ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Blue32ProductionProfit = new ArrayList<>();
-        Blue32ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.BLUE));
-        Blue32ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Blue32ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.BLUE));
+        Blue32ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Blue32 = new DevelopmentCard(Blue32Cost, new Production(Blue32ProductionCost, Blue32ProductionProfit), 38, DevelopmentCard.colorCard.Blue, 3, 9);
 
 
         ArrayList<CostOfCard> Blue33Cost = new ArrayList<>();
-        Blue33Cost.add(new CostOfCard(5, ColoredMarble.ColorMarble.YELLOW));
-        Blue33Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
+        Blue33Cost.add(new CostOfCard(5, MarketMarble.ColorMarble.YELLOW));
+        Blue33Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Blue33ProductionCost = new ArrayList<>();
-        Blue33ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Blue33ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Blue33ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Blue33ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Blue33ProductionProfit = new ArrayList<>();
-        Blue33ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
-        Blue33ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
-        Blue33ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Blue33ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
+        Blue33ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
+        Blue33ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Blue33 = new DevelopmentCard(Blue33Cost, new Production(Blue33ProductionCost, Blue33ProductionProfit), 39, DevelopmentCard.colorCard.Blue, 3, 10);
 
 
         ArrayList<CostOfCard> Blue34Cost = new ArrayList<>();
-        Blue34Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.YELLOW));
-        Blue34Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.GREY));
+        Blue34Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.YELLOW));
+        Blue34Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Blue34ProductionCost = new ArrayList<>();
-        Blue34ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        Blue34ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Blue34ProductionProfit = new ArrayList<>();
-        Blue34ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
-        Blue34ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.BLUE));
+        Blue34ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
+        Blue34ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.BLUE));
         DevelopmentCard Blue34 = new DevelopmentCard(Blue34Cost, new Production(Blue34ProductionCost, Blue34ProductionProfit), 40, DevelopmentCard.colorCard.Blue, 3, 12);
         cell21 = new GridCell(Blue31, Blue32, Blue33, Blue34);
 
@@ -475,92 +475,92 @@ public class Deck {
 
 
         ArrayList<CostOfCard> Yellow31Cost = new ArrayList<>();
-        Yellow31Cost.add(new CostOfCard(7, ColoredMarble.ColorMarble.GREY));
+        Yellow31Cost.add(new CostOfCard(7, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Yellow31ProductionCost = new ArrayList<>();
-        Yellow31ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Yellow31ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow31ProductionProfit = new ArrayList<>();
-        Yellow31ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
-        Yellow31ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.RED));
+        Yellow31ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
+        Yellow31ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.RED));
         DevelopmentCard Yellow31 = new DevelopmentCard(Yellow31Cost, new Production(Yellow31ProductionCost, Yellow31ProductionProfit), 41, DevelopmentCard.colorCard.Yellow, 3, 11);
 
 
         ArrayList<CostOfCard> Yellow32Cost = new ArrayList<>();
-        Yellow32Cost.add(new CostOfCard(6, ColoredMarble.ColorMarble.GREY));
+        Yellow32Cost.add(new CostOfCard(6, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Yellow32ProductionCost = new ArrayList<>();
-        Yellow32ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
+        Yellow32ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow32ProductionProfit = new ArrayList<>();
-        Yellow32ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.PURPLE));
-        Yellow32ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Yellow32ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.PURPLE));
+        Yellow32ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Yellow32 = new DevelopmentCard(Yellow32Cost, new Production(Yellow32ProductionCost, Yellow32ProductionProfit), 42, DevelopmentCard.colorCard.Yellow, 3, 9);
 
 
         ArrayList<CostOfCard> Yellow33Cost = new ArrayList<>();
-        Yellow33Cost.add(new CostOfCard(5, ColoredMarble.ColorMarble.GREY));
-        Yellow33Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
+        Yellow33Cost.add(new CostOfCard(5, MarketMarble.ColorMarble.GREY));
+        Yellow33Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Yellow33ProductionCost = new ArrayList<>();
-        Yellow33ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Yellow33ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Yellow33ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Yellow33ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Yellow33ProductionProfit = new ArrayList<>();
-        Yellow33ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
-        Yellow33ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.BLUE));
-        Yellow33ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Yellow33ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
+        Yellow33ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
+        Yellow33ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Yellow33 = new DevelopmentCard(Yellow33Cost, new Production(Yellow33ProductionCost, Yellow33ProductionProfit), 43, DevelopmentCard.colorCard.Yellow, 3, 10);
 
 
         ArrayList<CostOfCard> Yellow34Cost = new ArrayList<>();
-        Yellow34Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.GREY));
-        Yellow34Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.PURPLE));
+        Yellow34Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.GREY));
+        Yellow34Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Yellow34ProductionCost = new ArrayList<>();
-        Yellow34ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Yellow34ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Yellow34ProductionProfit = new ArrayList<>();
-        Yellow34ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Yellow34ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.PURPLE));
+        Yellow34ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Yellow34ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.PURPLE));
         DevelopmentCard Yellow34 = new DevelopmentCard(Yellow34Cost, new Production(Yellow34ProductionCost, Yellow34ProductionProfit), 44, DevelopmentCard.colorCard.Yellow, 3, 12);
         cell22 = new GridCell(Yellow31, Yellow32, Yellow33, Yellow34);
 
 
 
         ArrayList<CostOfCard> Purple31Cost = new ArrayList<>();
-        Purple31Cost.add(new CostOfCard(7, ColoredMarble.ColorMarble.PURPLE));
+        Purple31Cost.add(new CostOfCard(7, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Purple31ProductionCost = new ArrayList<>();
-        Purple31ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Purple31ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Purple31ProductionProfit = new ArrayList<>();
-        Purple31ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Purple31ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.RED));
+        Purple31ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Purple31ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.RED));
         DevelopmentCard Purple31 = new DevelopmentCard(Purple31Cost, new Production(Purple31ProductionCost, Purple31ProductionProfit), 45, DevelopmentCard.colorCard.Purple, 3, 11);
 
 
         ArrayList<CostOfCard> Purple32Cost = new ArrayList<>();
-        Purple32Cost.add(new CostOfCard(6, ColoredMarble.ColorMarble.PURPLE));
+        Purple32Cost.add(new CostOfCard(6, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> Purple32ProductionCost = new ArrayList<>();
-        Purple32ProductionCost.add(new CostOfCard(2, ColoredMarble.ColorMarble.GREY));
+        Purple32ProductionCost.add(new CostOfCard(2, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> Purple32ProductionProfit = new ArrayList<>();
-        Purple32ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.YELLOW));
-        Purple32ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.RED));
+        Purple32ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.YELLOW));
+        Purple32ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.RED));
         DevelopmentCard Purple32 = new DevelopmentCard(Purple32Cost, new Production(Purple32ProductionCost, Purple32ProductionProfit), 46, DevelopmentCard.colorCard.Purple, 3, 9);
 
 
         ArrayList<CostOfCard> Purple33Cost = new ArrayList<>();
-        Purple33Cost.add(new CostOfCard(5, ColoredMarble.ColorMarble.PURPLE));
-        Purple33Cost.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
+        Purple33Cost.add(new CostOfCard(5, MarketMarble.ColorMarble.PURPLE));
+        Purple33Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Purple33ProductionCost = new ArrayList<>();
-        Purple33ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Purple33ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        Purple33ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Purple33ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Purple33ProductionProfit = new ArrayList<>();
-        Purple33ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.YELLOW));
-        Purple33ProductionProfit.add(new CostOfCard(2, ColoredMarble.ColorMarble.PURPLE));
-        Purple33ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        Purple33ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.YELLOW));
+        Purple33ProductionProfit.add(new CostOfCard(2, MarketMarble.ColorMarble.PURPLE));
+        Purple33ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         DevelopmentCard Purple33 = new DevelopmentCard(Purple33Cost, new Production(Purple33ProductionCost, Purple33ProductionProfit), 47, DevelopmentCard.colorCard.Purple, 3, 10);
 
 
         ArrayList<CostOfCard> Purple34Cost = new ArrayList<>();
-        Purple34Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.PURPLE));
-        Purple34Cost.add(new CostOfCard(4, ColoredMarble.ColorMarble.BLUE));
+        Purple34Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.PURPLE));
+        Purple34Cost.add(new CostOfCard(4, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> Purple34ProductionCost = new ArrayList<>();
-        Purple34ProductionCost.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        Purple34ProductionCost.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> Purple34ProductionProfit = new ArrayList<>();
-        Purple34ProductionProfit.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
-        Purple34ProductionProfit.add(new CostOfCard(3, ColoredMarble.ColorMarble.PURPLE));
+        Purple34ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
+        Purple34ProductionProfit.add(new CostOfCard(3, MarketMarble.ColorMarble.PURPLE));
         DevelopmentCard Purple34 = new DevelopmentCard(Purple34Cost, new Production(Purple34ProductionCost, Purple34ProductionProfit), 48, DevelopmentCard.colorCard.Purple, 3, 12);
         cell23 = new GridCell(Purple31, Purple32, Purple33, Purple34);
 
@@ -576,48 +576,48 @@ public class Deck {
 
         //Array con tutte le LeaderCards posizionate in base al loro ID (la carta con ID = 1 è posta in posizione ArrayLeaderCards[0]).
 
-        ExtraRsc1 = new LeaderCard1(1, 5, DevelopmentCard.colorCard.Blue, DevelopmentCard.colorCard.Yellow, ColoredMarble.ColorMarble.PURPLE); //pallina bianca in viola
-        ExtraRsc2 = new LeaderCard1(2, 5, DevelopmentCard.colorCard.Purple, DevelopmentCard.colorCard.Green, ColoredMarble.ColorMarble.BLUE); //pallina bianca in blu
-        ExtraRsc3 = new LeaderCard1(3, 5, DevelopmentCard.colorCard.Green, DevelopmentCard.colorCard.Purple, ColoredMarble.ColorMarble.YELLOW); //pallina bianca in giallo
-        ExtraRsc4 = new LeaderCard1(4, 5, DevelopmentCard.colorCard.Yellow, DevelopmentCard.colorCard.Blue, ColoredMarble.ColorMarble.GREY); //pallina bianca in grigio
+        ExtraRsc1 = new LeaderCard1(1, 5, DevelopmentCard.colorCard.Blue, DevelopmentCard.colorCard.Yellow, MarketMarble.ColorMarble.PURPLE); //pallina bianca in viola
+        ExtraRsc2 = new LeaderCard1(2, 5, DevelopmentCard.colorCard.Purple, DevelopmentCard.colorCard.Green, MarketMarble.ColorMarble.BLUE); //pallina bianca in blu
+        ExtraRsc3 = new LeaderCard1(3, 5, DevelopmentCard.colorCard.Green, DevelopmentCard.colorCard.Purple, MarketMarble.ColorMarble.YELLOW); //pallina bianca in giallo
+        ExtraRsc4 = new LeaderCard1(4, 5, DevelopmentCard.colorCard.Yellow, DevelopmentCard.colorCard.Blue, MarketMarble.ColorMarble.GREY); //pallina bianca in grigio
 
-        ReduceCost1 = new LeaderCard2(5, 2, DevelopmentCard.colorCard.Yellow, DevelopmentCard.colorCard.Green, ColoredMarble.ColorMarble.PURPLE); //meno un viola nel costo
-        ReduceCost2 = new LeaderCard2(6, 2, DevelopmentCard.colorCard.Purple, DevelopmentCard.colorCard.Blue, ColoredMarble.ColorMarble.BLUE); //meno un blu nel costo
-        ReduceCost3 = new LeaderCard2(7, 2, DevelopmentCard.colorCard.Yellow, DevelopmentCard.colorCard.Purple, ColoredMarble.ColorMarble.YELLOW); //meno un giallo nel costo
-        ReduceCost4 = new LeaderCard2(8, 2, DevelopmentCard.colorCard.Green, DevelopmentCard.colorCard.Blue, ColoredMarble.ColorMarble.GREY); //meno un grigio nel costo
+        ReduceCost1 = new LeaderCard2(5, 2, DevelopmentCard.colorCard.Yellow, DevelopmentCard.colorCard.Green, MarketMarble.ColorMarble.PURPLE); //meno un viola nel costo
+        ReduceCost2 = new LeaderCard2(6, 2, DevelopmentCard.colorCard.Purple, DevelopmentCard.colorCard.Blue, MarketMarble.ColorMarble.BLUE); //meno un blu nel costo
+        ReduceCost3 = new LeaderCard2(7, 2, DevelopmentCard.colorCard.Yellow, DevelopmentCard.colorCard.Purple, MarketMarble.ColorMarble.YELLOW); //meno un giallo nel costo
+        ReduceCost4 = new LeaderCard2(8, 2, DevelopmentCard.colorCard.Green, DevelopmentCard.colorCard.Blue, MarketMarble.ColorMarble.GREY); //meno un grigio nel costo
 
-        ExtraWarehouse1 = new LeaderCard3(9, 3, ColoredMarble.ColorMarble.GREY, ColoredMarble.ColorMarble.PURPLE); //più 2 spazi viola nel warehouse
-        ExtraWarehouse2 = new LeaderCard3(10, 3, ColoredMarble.ColorMarble.PURPLE, ColoredMarble.ColorMarble.PURPLE); //più 2 spazi blu nel warehouse
-        ExtraWarehouse3 = new LeaderCard3(11, 3, ColoredMarble.ColorMarble.BLUE, ColoredMarble.ColorMarble.YELLOW); //più 2 spazi gialli nel warehouse
-        ExtraWarehouse4 = new LeaderCard3(12, 3, ColoredMarble.ColorMarble.YELLOW, ColoredMarble.ColorMarble.GREY); //più 2 spazi grigi nel warehouse
+        ExtraWarehouse1 = new LeaderCard3(9, 3, MarketMarble.ColorMarble.GREY, MarketMarble.ColorMarble.PURPLE); //più 2 spazi viola nel warehouse
+        ExtraWarehouse2 = new LeaderCard3(10, 3, MarketMarble.ColorMarble.PURPLE, MarketMarble.ColorMarble.PURPLE); //più 2 spazi blu nel warehouse
+        ExtraWarehouse3 = new LeaderCard3(11, 3, MarketMarble.ColorMarble.BLUE, MarketMarble.ColorMarble.YELLOW); //più 2 spazi gialli nel warehouse
+        ExtraWarehouse4 = new LeaderCard3(12, 3, MarketMarble.ColorMarble.YELLOW, MarketMarble.ColorMarble.GREY); //più 2 spazi grigi nel warehouse
 
         ArrayList<CostOfCard> ProductionCost1 = new ArrayList<>();
-        ProductionCost1.add(new CostOfCard(1, ColoredMarble.ColorMarble.PURPLE));
+        ProductionCost1.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> ProductionProfit1 = new ArrayList<>();
-        ProductionCost1.add(new CostOfCard(1, ColoredMarble.ColorMarble.UNKNOWN));
-        ProductionCost1.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        ProductionCost1.add(new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+        ProductionCost1.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         ConvertRsc1 = new LeaderCard4(13, DevelopmentCard.colorCard.Blue, 4, new Production(ProductionCost1, ProductionProfit1)); //converte un viola in una risorsa a scelta e 1 punto fede
 
         ArrayList<CostOfCard> ProductionCost2 = new ArrayList<>();
-        ProductionCost2.add(new CostOfCard(1, ColoredMarble.ColorMarble.BLUE));
+        ProductionCost2.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> ProductionProfit2 = new ArrayList<>();
-        ProductionCost2.add(new CostOfCard(1, ColoredMarble.ColorMarble.UNKNOWN));
-        ProductionCost2.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        ProductionCost2.add(new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+        ProductionCost2.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         ConvertRsc2 = new LeaderCard4(14, DevelopmentCard.colorCard.Yellow, 4, new Production(ProductionCost2, ProductionProfit2)); //converte un blu in una risorsa a scelta e 1 punto fede
 
         ArrayList<CostOfCard> ProductionCost3 = new ArrayList<>();
-        ProductionCost3.add(new CostOfCard(1, ColoredMarble.ColorMarble.YELLOW));
+        ProductionCost3.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> ProductionProfit3 = new ArrayList<>();
-        ProductionCost3.add(new CostOfCard(1, ColoredMarble.ColorMarble.UNKNOWN));
-        ProductionCost3.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        ProductionCost3.add(new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+        ProductionCost3.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         ConvertRsc3 = new LeaderCard4(15,DevelopmentCard.colorCard.Green,4, new Production(ProductionCost3, ProductionProfit3)); //converte un giallo in una risorsa a scelta e 1 punto fede
 
 
         ArrayList<CostOfCard> ProductionCost4 = new ArrayList<>();
-        ProductionCost4.add(new CostOfCard(1, ColoredMarble.ColorMarble.GREY));
+        ProductionCost4.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> ProductionProfit4 = new ArrayList<>();
-        ProductionCost4.add(new CostOfCard(1, ColoredMarble.ColorMarble.UNKNOWN));
-        ProductionCost4.add(new CostOfCard(1, ColoredMarble.ColorMarble.RED));
+        ProductionCost4.add(new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+        ProductionCost4.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         ConvertRsc4 = new LeaderCard4(16,  DevelopmentCard.colorCard.Purple,4, new Production(ProductionCost4, ProductionProfit4)); //converte un grigio in una risorsa a scelta e 1 punto fede
         ArrLeaderCards = new LeaderCard[]{ExtraRsc1, ExtraRsc2, ExtraRsc3, ExtraRsc4, ReduceCost1, ReduceCost2, ReduceCost3, ReduceCost4, ExtraWarehouse1, ExtraWarehouse2, ExtraWarehouse3, ExtraWarehouse4, ConvertRsc1, ConvertRsc2, ConvertRsc3, ConvertRsc4};
 

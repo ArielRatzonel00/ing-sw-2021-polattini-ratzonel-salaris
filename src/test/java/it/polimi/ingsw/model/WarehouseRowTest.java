@@ -36,6 +36,7 @@ class WarehouseRowTest {
     void addMarble() {
        assertTrue(Row1.addMarble(Grey), "La grey è in Row1 -> 1");
        assertFalse(Row1.addMarble(Grey), "La grey è in Row1 -> 2");
+       assertFalse(Row2.addMarble(Grey), "La grey è in Row2-> 1");
     }
 
     @Test

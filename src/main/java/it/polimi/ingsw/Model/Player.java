@@ -2,7 +2,7 @@ package it.polimi.ingsw.Model;
 
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
-import it.polimi.ingsw.Model.Marble.ColoredMarble;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 
 import java.awt.image.ColorConvertOp;
 import java.util.ArrayList;
@@ -21,9 +21,13 @@ public class Player {
     private int DiscountYellow = 0;
     private int DiscountPurple = 0;
     private int DiscountBlue = 0;
-    private ArrayList<Production> productionsAvailable = new ArrayList<>(4);
+    private ArrayList<Production> productionsAvaible = new ArrayList<>(4);
+
+
+
 
     public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards, FaithTrack faithTrack) {
+
         this.nickname = nickname;
         this.faithTrack = faithTrack;
         this.warehouse = new Warehouse();
@@ -32,10 +36,10 @@ public class Player {
         this.slotsBoard = new SlotsBoard();
         this.isFirst = false;
         ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
-        ProductionBasicCost.add(0, new CostOfCard(2, ColoredMarble.ColorMarble.UNKNOWN));
+        ProductionBasicCost.add(0, new CostOfCard(2, MarketMarble.ColorMarble.UNKNOWN));
         ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
-        ProductionBasicCost.add(0, new CostOfCard(1, ColoredMarble.ColorMarble.UNKNOWN));
-        this.productionsAvailable.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
+        ProductionBasicCost.add(0, new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+        this.productionsAvaible.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
     }
 
     public String getNickname() {
@@ -68,22 +72,22 @@ public class Player {
 
     public boolean CheckResourcesForAcquisition(ArrayList<CostOfCard> cost) {
         for (CostOfCard costOfCard : cost){
-            if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.GREY){
+            if (costOfCard.getCostColor() == MarketMarble.ColorMarble.GREY){
                 if (costOfCard.getCostNumber() - DiscountGrey > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
                 }
             }
-            else if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.YELLOW){
+            else if (costOfCard.getCostColor() == MarketMarble.ColorMarble.YELLOW){
                 if (costOfCard.getCostNumber() - DiscountYellow > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
                 }
             }
-            else if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.BLUE){
+            else if (costOfCard.getCostColor() == MarketMarble.ColorMarble.BLUE){
                 if (costOfCard.getCostNumber() - DiscountBlue > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
                 }
             }
-            else if (costOfCard.getCostColor() == ColoredMarble.ColorMarble.PURPLE){
+            else if (costOfCard.getCostColor() == MarketMarble.ColorMarble.PURPLE){
                 if (costOfCard.getCostNumber() - DiscountPurple > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
                 }
@@ -91,8 +95,7 @@ public class Player {
         }
         return true;
     }
-
-    public boolean CheckResourcesForProduce(ArrayList<CostOfCard> cost) {
+    public boolean CheckResourcesForProudce(ArrayList<CostOfCard> cost) {
         for (CostOfCard costOfCard : cost){
                 if (costOfCard.getCostNumber() > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
@@ -101,11 +104,9 @@ public class Player {
             }
         return true;
     }
-
     public void DiscardLeaderCard(int index){
         leaderCards.remove(index);
     }
-
     public void CheckPositionPopeFavor(int RedPositionOfOtherPlayer){
         if (RedPositionOfOtherPlayer == 8){
             if (faithTrack.getRedPosition() >=5 ){
@@ -136,14 +137,12 @@ public class Player {
         }
     }
 
-    public void setProductionsAvailable(int slot){
-        productionsAvailable.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
+    public void setProductionsAvaible(int slot){
+        productionsAvaible.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
     }
-
     public void newProductionFromLeaderCard(Production production){
-        productionsAvailable.add(production);
+        productionsAvaible.add(production);
     }
-
     public void setDiscountGrey(int discountGrey) {
         DiscountGrey += discountGrey;
     }
