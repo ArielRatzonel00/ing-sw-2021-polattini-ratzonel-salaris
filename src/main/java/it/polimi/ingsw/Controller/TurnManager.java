@@ -40,20 +40,20 @@ public class TurnManager {
 
                         // Crea nuova Marble con il colore scelto
                         // Decide se tenela o scartarla
-                        // Chiama ChooseWhatToDoWithColoredMarble passando il boolean e la Marble nuova
+                        // Chiama ChooseWhatToDoWithColoredMarble passando la riga dove vuole mettere la Marble e la Marble nuova. Se la riga è >= 6 vuol dire che la scarta
 
                     } else {
                         System.out.println("What do you want to do with this Marble");
                         // Crea nuova Marble con il colore in cui si trasforma la bianca, quello della LeaderCard
                         // Decide se tenela o scartarla
-                        // Chiama ChooseWhatToDoWithColoredMarble passando il boolean e la Marble nuova
+                        // Chiama ChooseWhatToDoWithColoredMarble passando la riga dove vuole mettere e la Marble nuova. Se la riga è >= a 6 vuol dire che la scarta
 
                     }
                 } else if (Currentplayer.getLeaderCards(1) instanceof LeaderCard1 && Currentplayer.getLeaderCards(1).isActivate()) {
                     System.out.println("What do you want to do with this Marble");
                     // Crea nuova Marble con il colore in cui si trasforma la bianca, quello della LeaderCard
                     // Decide se tenela o scartarla
-                    // Chiama ChooseWhatToDoWithColoredMarble passando il boolean e la Marble nuova
+                    // Chiama ChooseWhatToDoWithColoredMarble passando la riga dove vuole mettere e la Marble nuova. Se la riga è >= a 6 vuol dire che la scarta
 
                 } else {
                     // Niente
@@ -62,7 +62,7 @@ public class TurnManager {
             else {
                 System.out.println("What do you want to do with this Marble");
                 // Decide se tenela o scartarla
-                // Chiama ChooseWhatToDoWithColoredMarble passando il boolean e la Marble nuova
+                // Chiama ChooseWhatToDoWithColoredMarble passando la riga dove vuole mettere e la Marble
             }
         }
     }
@@ -70,14 +70,16 @@ public class TurnManager {
         MarketMarble[] NewResources = marketTray.GetMarketMarblesFromCol(col);
         marketTray.ShiftMatrixByCol(col);
     }
-    public void ChooseWhatToDoWithColoredMarble(boolean keep, MarketMarble coloredMarble){
-        if (keep){
-            //ASPETTO CHE L'UTENTE MI PASSI RIGA(WarehouseRow) IN CUI METTERE PALLINA E FACCIO ADDTOROW
-            // Currentplayer.getWarehouse().addToRow(coloredMarble,WarehouseRow);
+    public boolean ChooseWhatToDoWithColoredMarble(int row, MarketMarble coloredMarble){
+        if (row >= 6){
+            for (Player otherplayer : OtherPlayers){
+                otherplayer.getFaithTrack().setRedPosition(1);
+            }
         }
         else{
-            //otherplayers.faithTrak.setRedPosition
+            return Currentplayer.getWarehouse().addToRow(coloredMarble, row);
         }
+        return true;
     }
 
 
