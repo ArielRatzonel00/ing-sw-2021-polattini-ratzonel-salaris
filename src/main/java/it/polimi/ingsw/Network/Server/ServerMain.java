@@ -6,7 +6,7 @@ public class ServerMain
 {
     public static void main( String[] args )
     {
-        MultiEchoServer server = new MultiEchoServer(1337);
+        Server server = new Server(1337);
         try {
             server.startServer();
         } catch(IOException e) {

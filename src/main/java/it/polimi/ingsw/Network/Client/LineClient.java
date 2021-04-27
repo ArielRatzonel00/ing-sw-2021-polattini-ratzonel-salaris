@@ -19,9 +19,10 @@ public class LineClient {
 
         Socket socket = new Socket(ip, port);
         System.out.println("Connection established");
-        Scanner socketIn = new Scanner(socket.getInputStream());
-        PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
-        Scanner stdin = new Scanner(System.in);
+        Scanner socketIn = new Scanner(socket.getInputStream()); //Usato per ricevere dal server
+        PrintWriter socketOut = new PrintWriter(socket.getOutputStream()); //Usato per inviare al server
+        Scanner stdin = new Scanner(System.in);                            //Usato per ricevere da tastiera
+
         try{
             while (true){
                 String inputLine = stdin.nextLine();

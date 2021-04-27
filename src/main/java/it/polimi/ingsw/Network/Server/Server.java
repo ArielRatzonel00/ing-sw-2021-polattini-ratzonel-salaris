@@ -3,14 +3,13 @@ package it.polimi.ingsw.Network.Server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MultiEchoServer {
+public class Server {
     private int port;
 
-    public MultiEchoServer(int port){
+    public Server(int port){
         this.port = port;
     }
 
@@ -28,7 +27,7 @@ public class MultiEchoServer {
         while (true){
             try{
                 Socket socket = serverSocket.accept();
-                executor.submit(new EchoServerClientHandler(socket));
+                executor.submit(new ClientHandler(socket));
             }catch(IOException e){
                 break; //In case the serverSocket gets closed
             }
