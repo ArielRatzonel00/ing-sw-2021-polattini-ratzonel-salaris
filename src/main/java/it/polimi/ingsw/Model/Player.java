@@ -95,7 +95,7 @@ public class Player {
         }
         return true;
     }
-    public boolean CheckResourcesForProudce(ArrayList<CostOfCard> cost) {
+    public boolean CheckResourcesForProduce(ArrayList<CostOfCard> cost) {
         for (CostOfCard costOfCard : cost){
                 if (costOfCard.getCostNumber() > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
                     return false;
