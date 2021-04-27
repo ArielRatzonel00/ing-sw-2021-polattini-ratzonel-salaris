@@ -1,11 +1,11 @@
 package it.polimi.ingsw.Network.Server;
-
 import java.io.IOException;
 
 public class ServerMain
 {
     public static void main( String[] args )
     {
+        //Lobby Lobby=new Lobby;
         Server server = new Server(1337);
         try {
             server.startServer();
