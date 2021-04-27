@@ -29,7 +29,17 @@ public class TurnManager {
     public void GetResourcesFromRow(int row,MarketTray marketTray) {
         MarketMarble[] NewResources = marketTray.GetMarketMarblesFromRow(row);
         marketTray.ShiftMatrixByRow(row);
-        for (MarketMarble newresource : NewResources) {
+        EffectOfTheNewResources(NewResources);
+
+    }
+
+    public void GetResourcesFromCol(int col,MarketTray marketTray) {
+        MarketMarble[] NewResources = marketTray.GetMarketMarblesFromCol(col);
+        marketTray.ShiftMatrixByCol(col);
+        EffectOfTheNewResources(NewResources);
+    }
+    public void EffectOfTheNewResources(MarketMarble[] newResources){
+        for (MarketMarble newresource : newResources) {
             if (newresource.getColorMarble() == MarketMarble.ColorMarble.RED) {
                 Currentplayer.getFaithTrack().setRedPosition(1);
             } else if (newresource.getColorMarble() == MarketMarble.ColorMarble.WHITE) {
@@ -65,10 +75,7 @@ public class TurnManager {
                 // Chiama ChooseWhatToDoWithColoredMarble passando la riga dove vuole mettere e la Marble
             }
         }
-    }
-    public void GetResourcesFromCol(int col,MarketTray marketTray) {
-        MarketMarble[] NewResources = marketTray.GetMarketMarblesFromCol(col);
-        marketTray.ShiftMatrixByCol(col);
+
     }
     public boolean ChooseWhatToDoWithColoredMarble(int row, MarketMarble coloredMarble){
         if (row >= 6){
