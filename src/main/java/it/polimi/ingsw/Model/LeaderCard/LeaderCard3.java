@@ -51,10 +51,9 @@ private ArrayList<MarketMarble> ExtraRow;
     public MarketMarble.ColorMarble getColorOfExtraWarehouse() {
         return colorOfExtraWarehouse;
     }
+
     public void effect(Player player){
         player.getWarehouse().getRows().add(new WarehouseRow(2));
         player.getWarehouse().getRows().get(player.getWarehouse().getRows().size()-1).setColor(colorOfExtraWarehouse);
-
-
     }
 }

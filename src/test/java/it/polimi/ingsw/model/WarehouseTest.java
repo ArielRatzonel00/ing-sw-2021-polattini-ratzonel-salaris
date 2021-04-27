@@ -1,13 +1,19 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Model.Warehouse;
+import it.polimi.ingsw.Model.WarehouseRow;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WarehouseTest {
+    private Warehouse Warehousetest;
 
-    @Test
-    void getRow() {
+    @BeforeEach
+    void initialization(){
+        Warehousetest = new Warehouse();
     }
 
     @Test
