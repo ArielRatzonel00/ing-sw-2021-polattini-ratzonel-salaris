@@ -39,7 +39,7 @@ public class MultiplayerGameManager {
         int WarehouseRow1 = 0;
         int WarehouseRow2 = 0;
         boolean LeaderAction = false;
-        int LeaderAcrionType = 0;
+        int LeaderActionType = 0;
 
         ArrayList<Integer> productions = new ArrayList<>();
         ArrayList<CostOfCard> ResourcesFromWarehosue = new ArrayList<>();
@@ -53,9 +53,10 @@ public class MultiplayerGameManager {
                 System.out.println("Mossa non valida");
             }
         }
-        //Vuoi fare un azione Leader prima del turno? setta LeaderAction se si cosa? setta Leader ActionType
+        //Vuoi fare un azione Leader prima del turno? setta LeaderAction
+        // se si cosa? setta Leader ActionType
         if (LeaderAction){
-            LeaderAction(LeaderAcrionType);
+            LeaderAction(LeaderActionType);
         }
         switch (type) {
             case 0: //Prendere le risorse dal MarketTray
