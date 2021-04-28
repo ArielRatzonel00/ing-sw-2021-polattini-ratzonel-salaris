@@ -3,7 +3,6 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
-import jdk.internal.loader.Resource;
 
 import java.awt.image.ColorConvertOp;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class Player {
     private int DiscountPurple = 0;
     private int DiscountBlue = 0;
     private int TotalPoints = 0;
-    private ArrayList<Production> productionsAvaible = new ArrayList<>(4);
+    private ArrayList<Production> productionsAvailable = new ArrayList<>(4);
 
 
 
@@ -41,7 +40,7 @@ public class Player {
         ProductionBasicCost.add(0, new CostOfCard(2, MarketMarble.ColorMarble.UNKNOWN));
         ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
         ProductionBasicCost.add(0, new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
-        this.productionsAvaible.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
+        this.productionsAvailable.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
     }
     public void AssignFourLeaderCard(ArrayList<LeaderCard> FourLeaderCards){
         this.leaderCards = FourLeaderCards;
@@ -112,6 +111,7 @@ public class Player {
     public void DiscardLeaderCard(int index){
         leaderCards.remove(index);
     }
+
     public void CheckPositionPopeFavor(int RedPositionOfOtherPlayer){
         if (RedPositionOfOtherPlayer == 8){
             if (faithTrack.getRedPosition() >=5 ){
@@ -143,10 +143,10 @@ public class Player {
     }
 
     public void setProductionsAvaible(int slot){
-        productionsAvaible.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
+        productionsAvailable.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
     }
     public void newProductionFromLeaderCard(Production production){
-        productionsAvaible.add(production);
+        productionsAvailable.add(production);
     }
     public void setDiscountGrey(int discountGrey) {
         DiscountGrey += discountGrey;
@@ -178,7 +178,7 @@ public class Player {
     }
     public Integer PointsFromWarehouseAndStrongbox(){
         int Points;
-        int Resources = warehouse.getNumberOfTotalResoucesInWarehouse() + strongbox.getNumberOfTotalResoucesInStrongbox();
+        int Resources = warehouse.getNumberOfTotalResourcesInWarehouse() + strongbox.getNumberOfTotalResoucesInStrongbox();
         Points = Resources / 5;
         return Points;
     }
@@ -189,7 +189,7 @@ public class Player {
     }
 
     public ArrayList<Production> getProductionsAvaible() {
-        return productionsAvaible;
+        return productionsAvailable;
     }
 }
 

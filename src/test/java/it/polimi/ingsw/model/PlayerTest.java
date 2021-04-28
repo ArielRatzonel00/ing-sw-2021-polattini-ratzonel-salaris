@@ -23,13 +23,14 @@ class PlayerTest {
     void initialization(){
         deck = new Deck();
         leaderCards = new ArrayList<>();
-        leaderCards.add(deck.SelectLeadFromId(1));
-        leaderCards.add(deck.SelectLeadFromId(2));
-        leaderCards.add(deck.SelectLeadFromId(3));
-        leaderCards.add(deck.SelectLeadFromId(4));
-        player = new Player("Jonny",leaderCards, faithTrack);
+        leaderCards.add(deck.getExtraRsc1());
+        leaderCards.add(deck.getExtraRsc2());
+        leaderCards.add(deck.getExtraRsc3());
+        leaderCards.add(deck.getExtraRsc4());
+        player = new Player("Jonny", faithTrack);
         player.DiscardLeaderCard(2); //tolgo quella con id = 3
         player.DiscardLeaderCard(2); //tolgo quella con id = 4
+        //da rivedere
     }
 
     @Test
