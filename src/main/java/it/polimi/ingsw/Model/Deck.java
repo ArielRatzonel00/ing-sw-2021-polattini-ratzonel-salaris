@@ -6,9 +6,10 @@ import it.polimi.ingsw.Model.Marble.MarketMarble;
 // Class that contains the DevelopmentCards and the LeaderCards
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck {
-    private LeaderCard[] ArrLeaderCards;
+    private ArrayList<LeaderCard> ArrLeaderCards = new ArrayList<>();
 
     private LeaderCard ExtraRsc1; //pallina bianca in viola
     private LeaderCard ExtraRsc2; //pallina bianca in blu
@@ -619,14 +620,31 @@ public class Deck {
         ProductionCost4.add(new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
         ProductionCost4.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         ConvertRsc4 = new LeaderCard4(16,  DevelopmentCard.colorCard.Purple,4, new Production(ProductionCost4, ProductionProfit4)); //converte un grigio in una risorsa a scelta e 1 punto fede
-        ArrLeaderCards = new LeaderCard[]{ExtraRsc1, ExtraRsc2, ExtraRsc3, ExtraRsc4, ReduceCost1, ReduceCost2, ReduceCost3, ReduceCost4, ExtraWarehouse1, ExtraWarehouse2, ExtraWarehouse3, ExtraWarehouse4, ConvertRsc1, ConvertRsc2, ConvertRsc3, ConvertRsc4};
+        //ArrLeaderCards = new LeaderCard[]{ExtraRsc1, ExtraRsc2, ExtraRsc3, ExtraRsc4, ReduceCost1, ReduceCost2, ReduceCost3, ReduceCost4, ExtraWarehouse1, ExtraWarehouse2, ExtraWarehouse3, ExtraWarehouse4, ConvertRsc1, ConvertRsc2, ConvertRsc3, ConvertRsc4};
+        ArrLeaderCards.add(ExtraRsc1);
+        ArrLeaderCards.add(ExtraRsc2);
+        ArrLeaderCards.add(ExtraRsc3);
+        ArrLeaderCards.add(ExtraRsc4);
+        ArrLeaderCards.add(ReduceCost1);
+        ArrLeaderCards.add(ReduceCost2);
+        ArrLeaderCards.add(ReduceCost3);
+        ArrLeaderCards.add(ReduceCost4);
+        ArrLeaderCards.add(ExtraWarehouse1);
+        ArrLeaderCards.add(ExtraWarehouse2);
+        ArrLeaderCards.add(ExtraWarehouse3);
+        ArrLeaderCards.add(ExtraWarehouse4);
+        ArrLeaderCards.add(ConvertRsc1);
+        ArrLeaderCards.add(ConvertRsc2);
+        ArrLeaderCards.add(ConvertRsc3);
+        ArrLeaderCards.add(ConvertRsc4);
+        Collections.shuffle(ArrLeaderCards);
 
     }
 
     //inserisco l'id e mi ritorna la carta
-    public LeaderCard SelectLeadFromId(int IdLead) {
+    /*public LeaderCard SelectLeadFromId(int IdLead) {
         return ArrLeaderCards[IdLead - 1];
-    }
+    }*/
 
     public GridCell getCell00() {
         return cell00;
@@ -704,8 +722,20 @@ public class Deck {
         return Green31;
     }
 
-
+    public ArrayList<LeaderCard> getTopFourLeaderCard() {
+        ArrayList<LeaderCard> FourLeaderCardArray  = new ArrayList<>();
+        FourLeaderCardArray.add(ArrLeaderCards.get(ArrLeaderCards.size()-1));
+        ArrLeaderCards.remove(ArrLeaderCards.size()-1);
+        FourLeaderCardArray.add(ArrLeaderCards.get(ArrLeaderCards.size()-1));
+        ArrLeaderCards.remove(ArrLeaderCards.size()-1);
+        FourLeaderCardArray.add(ArrLeaderCards.get(ArrLeaderCards.size()-1));
+        ArrLeaderCards.remove(ArrLeaderCards.size()-1);
+        FourLeaderCardArray.add(ArrLeaderCards.get(ArrLeaderCards.size()-1));
+        ArrLeaderCards.remove(ArrLeaderCards.size()-1);
+        return FourLeaderCardArray;
+    }
 }
+
 /*
      */
 

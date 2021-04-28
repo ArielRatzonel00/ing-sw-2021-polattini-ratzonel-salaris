@@ -19,14 +19,12 @@ public class Production {
         return ProductionProfit;
     }
 
-    public boolean Produce(Player player) {
+    public void Produce(ArrayList<CostOfCard> ResoucesFromWarehouse, ArrayList<Integer> Rows, ArrayList<CostOfCard> ResoucesFromStrongobox, Player player) {
         // Le resources from Warehouse e from Strongbox me le deve passare il Player
-        if (!(player.CheckResourcesForProduce(ProductionCost))){
-            return false;
-        }
         // chiede quanti da Strogobx e quanti da Warehosue
-        return true;
-
+        for (CostOfCard costOfCard : ProductionProfit){
+            player.getStrongbox().AddResource(costOfCard.getCostNumber(), costOfCard.getCostColor());
+        }
     }
 
 }

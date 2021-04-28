@@ -126,7 +126,10 @@ public class DevelopmentGrid {
 
 
     public DevelopmentCard remove(int a, int b){
-        return  CardMatrix[a][b].getTopCard();
+        return  CardMatrix[a][b].RemoveTopCard();
     } // Method that removes and returns the top card of the cell selected
+    public DevelopmentCard get(int a, int b){
+        return CardMatrix[a][b].getTopCard();
+    } // Method that returns the top card of the cell selected
 
 }

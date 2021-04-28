@@ -35,23 +35,23 @@ public class Strongbox {
                 return 0;
         }
     } // Method that returns the number of the resources that has the color of the parameter passed
+    public void AddResource(int num, MarketMarble.ColorMarble ColorOfResource){
+        switch (ColorOfResource) {
+            case BLUE:
+                this.shield += num;
 
-    public void AddShield(int num) {
-        this.shield += num;
-    }
+            case GREY:
+                this.stone += num;
 
-    public void AddCoin(int num) {
-        this.coin += num;
-    }
+            case PURPLE:
+                this.servant += num;
 
-    public void AddServant(int num) {
-        this.servant += num;
-    }
+            case YELLOW:
+                this.coin += num;
 
-    public void AddStone(int num) {
-        this.stone += num;
+        }
     }
-// Methods that add #num Resources
+// Methods that add #num Resources of colorMarble
 
 
     public void RemoveResourcesFromStrongbox(int number, MarketMarble.ColorMarble colorMarble) {
@@ -69,6 +69,14 @@ public class Strongbox {
                 this.coin -= number;
         }
     } // Method that removes #number resouces
+
+    public Integer getNumberOfTotalResoucesInStrongbox(){
+        int Resources;
+        Resources = servant + stone + shield + coin;
+        return Resources;
+    }
+
+
 }
 /*
     public int[] getTotalResourcesStrongbox(){

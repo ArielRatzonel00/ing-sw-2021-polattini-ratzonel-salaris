@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import jdk.internal.loader.Resource;
 
 import java.awt.image.ColorConvertOp;
 import java.util.ArrayList;
@@ -21,18 +22,19 @@ public class Player {
     private int DiscountYellow = 0;
     private int DiscountPurple = 0;
     private int DiscountBlue = 0;
+    private int TotalPoints = 0;
     private ArrayList<Production> productionsAvaible = new ArrayList<>(4);
 
 
 
 
-    public Player(String nickname, ArrayList<LeaderCard> FourLeaderCards, FaithTrack faithTrack) {
+    public Player(String nickname,  FaithTrack faithTrack) {
 
         this.nickname = nickname;
         this.faithTrack = faithTrack;
         this.warehouse = new Warehouse();
         this.strongbox = new Strongbox();
-        this.leaderCards = FourLeaderCards;
+        //this.leaderCards = FourLeaderCards;
         this.slotsBoard = new SlotsBoard();
         this.isFirst = false;
         ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
@@ -40,6 +42,9 @@ public class Player {
         ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
         ProductionBasicCost.add(0, new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
         this.productionsAvaible.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
+    }
+    public void AssignFourLeaderCard(ArrayList<LeaderCard> FourLeaderCards){
+        this.leaderCards = FourLeaderCards;
     }
 
     public String getNickname() {
@@ -157,6 +162,34 @@ public class Player {
 
     public void setDiscountPurple(int discountPurple) {
         DiscountPurple += discountPurple;
+    }
+
+    public boolean isFirst() {
+        return isFirst;
+    }
+    public Integer PointsFromLeaderCard(){
+        int PointsFromLeaderCard = 0;
+        for (LeaderCard leaderCard : leaderCards){
+            if (leaderCard.isActivate()) {
+                PointsFromLeaderCard += leaderCard.getVictoryPoints();
+            }
+        }
+        return PointsFromLeaderCard;
+    }
+    public Integer PointsFromWarehouseAndStrongbox(){
+        int Points;
+        int Resources = warehouse.getNumberOfTotalResoucesInWarehouse() + strongbox.getNumberOfTotalResoucesInStrongbox();
+        Points = Resources / 5;
+        return Points;
+    }
+
+    public Integer GetTotalPoints(){
+        TotalPoints = slotsBoard.countVictoryPoints() + faithTrack.TotalPoints() + faithTrack.getPoints() + PointsFromLeaderCard() + PointsFromWarehouseAndStrongbox();
+        return TotalPoints;
+    }
+
+    public ArrayList<Production> getProductionsAvaible() {
+        return productionsAvaible;
     }
 }
 

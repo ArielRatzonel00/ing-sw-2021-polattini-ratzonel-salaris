@@ -20,7 +20,7 @@ public class GridCell {
         Collections.shuffle(cell);
     }
 
-    public DevelopmentCard getTopCard() { // mi ridà la prima carta non nulla
+    public DevelopmentCard RemoveTopCard() { // mi ridà la prima carta non nulla
         if (cell.size() > 0) {
             DevelopmentCard temp = cell.get(cell.size() - 1);
             cell.remove(cell.size() - 1);
@@ -28,6 +28,14 @@ public class GridCell {
         } else {
             return null;
         }
+    } // Method that removes the top card of the cell
+    public DevelopmentCard getTopCard(){
+        if (cell.size() > 0) {
+            return cell.get(cell.size() - 1);
+        } else {
+            return null;
+        }
+
     } // Method that returns the top card of the cell
 
     public boolean RemoveFirstCard() {
