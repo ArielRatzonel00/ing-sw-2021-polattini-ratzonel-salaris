@@ -116,7 +116,7 @@ public class MultiplayerGameManager {
         }
         //Vuoi fare un azione Leader dopo il turno? setta LeaderAction se si cosa? setta Leader ActionType
         if (LeaderAction){
-            LeaderAction(LeaderAcrionType);
+            LeaderAction(LeaderActionType);
         }
         // Gestione del cambiamento di CurrentPlayer e OtherPlayers
 
