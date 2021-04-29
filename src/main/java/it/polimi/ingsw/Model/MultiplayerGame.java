@@ -75,9 +75,9 @@ public class MultiplayerGame {
             }
         }
         for (Player player : PlayersWithMorePoints) {
-            if (player.getWarehouse().getNumberOfTotalResoucesInWarehouse() + player.getStrongbox().getNumberOfTotalResoucesInStrongbox() > MaxResources) {
+            if (player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResoucesInStrongbox() > MaxResources) {
                 winner = player;
-                MaxResources = player.getWarehouse().getNumberOfTotalResoucesInWarehouse() + player.getStrongbox().getNumberOfTotalResoucesInStrongbox();
+                MaxResources = player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResoucesInStrongbox();
             }
         }
         return winner;

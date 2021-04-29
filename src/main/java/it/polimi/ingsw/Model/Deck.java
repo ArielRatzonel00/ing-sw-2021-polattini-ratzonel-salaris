@@ -718,8 +718,23 @@ public class Deck {
     public DevelopmentCard getGreen21() {
         return Green21;
     }
+
     public DevelopmentCard getGreen31() {
         return Green31;
+    }
+
+    public LeaderCard getExtraRsc1(){
+        return ExtraRsc1;
+    }
+
+    public LeaderCard getExtraRsc2(){
+        return ExtraRsc2;
+    }
+    public LeaderCard getExtraRsc3(){
+        return ExtraRsc3;
+    }
+    public LeaderCard getExtraRsc4(){
+        return ExtraRsc4;
     }
 
     public ArrayList<LeaderCard> getTopFourLeaderCard() {
