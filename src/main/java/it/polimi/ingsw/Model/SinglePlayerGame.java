@@ -37,7 +37,9 @@ public class SinglePlayerGame {
         return markers;
     }
 
-
+    public Deck getDeck() {
+        return deck;
+    }
 }
 
  /*   public void startgame(){
