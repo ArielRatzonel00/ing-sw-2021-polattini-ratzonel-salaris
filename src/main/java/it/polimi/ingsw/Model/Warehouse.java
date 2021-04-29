@@ -68,8 +68,10 @@ public class Warehouse {
     public int getNumberOfResource(MarketMarble.ColorMarble color){
         int i=0;
         for (WarehouseRow a: rows) {
-            if(a.getColor().equals(color))
-                i += a.getMarbles().size();
+            if (a.getMarbles().size() > 0) {
+                if (a.getColor().equals(color))
+                    i += a.getMarbles().size();
+            }
         }
         return i;
     } // the method returns the number of Resources in the Warehouse that have the color selected
