@@ -240,6 +240,7 @@ public class MultiplayerGameManager {
                 //Che carta Leader vuoi attivare? setta Leader Card
                 if (CurrentPlayer.getLeaderCards(LeaderCard).canBeActivated(CurrentPlayer)){
                     CurrentPlayer.getLeaderCards(LeaderCard).setActivate(true);
+                    CurrentPlayer.getLeaderCards(LeaderCard).effect(CurrentPlayer);
                 }
             case 1: // Scartare solo una carta Leader
                 //Che carta Leader vuoi scartare? setta Leader Card
@@ -256,6 +257,7 @@ public class MultiplayerGameManager {
                 //Che carta Leader vuoi attivare? setta Leader Card
                 if (CurrentPlayer.getLeaderCards(LeaderCard).canBeActivated(CurrentPlayer)){
                     CurrentPlayer.getLeaderCards(LeaderCard).setActivate(true);
+                    CurrentPlayer.getLeaderCards(LeaderCard).effect(CurrentPlayer);
                 }
                 //Che carta Leader vuoi scartare? setta Leader Card
                 if (CurrentPlayer.getLeaderCards(LeaderCard).isActivate()){
@@ -271,9 +273,11 @@ public class MultiplayerGameManager {
 
                 if (CurrentPlayer.getLeaderCards(0).canBeActivated(CurrentPlayer)){
                     CurrentPlayer.getLeaderCards(0).setActivate(true);
+                    CurrentPlayer.getLeaderCards(0).effect(CurrentPlayer);
                 }
                 if (CurrentPlayer.getLeaderCards(1).canBeActivated(CurrentPlayer)){
                     CurrentPlayer.getLeaderCards(1).setActivate(true);
+                    CurrentPlayer.getLeaderCards(1).effect(CurrentPlayer);
                 }
             case 4: // scartare due carte Leader
                 if (CurrentPlayer.getLeaderCards(0).isActivate()){
