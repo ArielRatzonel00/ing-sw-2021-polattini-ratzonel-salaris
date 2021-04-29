@@ -13,16 +13,18 @@ public class DevCardSlot  {
 
 
     public void addCard(DevelopmentCard card){
+        cards.add(card);
+        }
+    //Method that adds card above the top card if it's level is higher and the Slot isn't full
+    public boolean CanBeAddedInTheSlot(DevelopmentCard card){
         if (getTopCard() != null) {
-
             if (card.getLevel() == getTopCard().getLevel() + 1 && cards.size() < 3)
-                cards.add(card);
+                return true;
+            else return false;
+        } else {
+            return true;
         }
-        else {
-            cards.add(card);
-        }
-    } //Method that adds card above the top card if it's level is higher and the Slot isn't full
-
+    }
 
 
     public DevelopmentCard getTopCard() {

@@ -72,7 +72,7 @@ public class TurnManager {
             else {
                 System.out.println("What do you want to do with this Marble");
                 // Decide se tenela o scartarla
-                // Chiama ChooseWhatToDoWithColoredMarble passando la riga dove vuole mettere e la Marble
+                // Chiama ChooseWhatToDoWithColoredMarble passando la riga dove vuole mettere e la Marble Se la riga è >= a 6 vuol dire che la scarta
             }
         }
 
@@ -91,8 +91,8 @@ public class TurnManager {
 
 
 
-    public void moveResourceFromWarehouse(int WarehouseRow1, int Warehouse2) {
-        Currentplayer.getWarehouse().MoveResource(WarehouseRow1, Warehouse2);
+    public boolean moveResourceFromWarehouse(int WarehouseRow1, int Warehouse2) {
+        return Currentplayer.getWarehouse().MoveResource(WarehouseRow1, Warehouse2);
     }
 
 
@@ -129,12 +129,15 @@ public class TurnManager {
         if (!(Currentplayer.CheckResourcesForAcquisition(cost))){
             return false;
         }
+        if (!Currentplayer.getSlotsBoard().getSlots().get(slot-1).CanBeAddedInTheSlot(developmentGrid.get(cellRowNumber,cellColNumber))){
+            return false;
+        }
 
         //Quante risorse dallo Strongbox? andrà in ResourcesFromStrongbox
         //ArrayList<CostOfCard> ResourcesFromStrongbox
-
-        // Quante risorse da ogni riga
-
+        // Quante risorse da ogni rigaDelWarehouse
+        //ArrayList<CostOfCard> ResourcesFromStrongbox
+        //ChiamoRemoveDiWarehouse e Remove di Strongbox
 
         Currentplayer.getSlotsBoard().getSlots().get(slot - 1).addCard(developmentGrid.remove(cellRowNumber, cellColNumber));
 
@@ -144,17 +147,39 @@ public class TurnManager {
 
 
 
-    public void discardLeaderCard(int num) {
-        Currentplayer.DiscardLeaderCard(num);
-        Currentplayer.getFaithTrack().setRedPosition(1);
+    public boolean discardLeaderCard(int num) {
+        if (Currentplayer.getLeaderCards(num) == null) {
+            return false;
+        } else {
+            Currentplayer.DiscardLeaderCard(num);
+            Currentplayer.getFaithTrack().setRedPosition(1);
+            return true;
+        }
     }
-    public void activateLeaderCard(int num) {
+    public boolean activateLeaderCard(int num) {
         if (Currentplayer.getLeaderCards(num).canBeActivated(Currentplayer) == true) {
             Currentplayer.getLeaderCards(num).setActivate(true);
+            return true;
         }
+        else return false;
     }
     //public void productionByDevCard
     //
+public boolean produce(ArrayList<Integer> Productions){
+        for (Integer i : Productions ){
+            if (Currentplayer.getProductionsAvaible().get(i) == null || !(Currentplayer.CheckResourcesForProduce(Currentplayer.getProductionsAvaible().get(i).getProductionCost()))){
+                return false;
+            }
+        }
+    for (Integer i : Productions ){
+        //Chiedo quanti da Warehouse, da che riga e quanti da Strongbox
+        //Currentplayer.getProductionsAvaible().get(i).Produce(3 array,CurrentPlayer);
+    }
+        return true;
+
+}
+
+
 }
 //Aggiungere Production
 

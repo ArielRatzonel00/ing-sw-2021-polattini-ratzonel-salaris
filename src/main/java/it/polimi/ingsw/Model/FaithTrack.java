@@ -40,7 +40,7 @@ public abstract class FaithTrack {
 
     public int getPoints() {
       return points;
-  } // get punti totalizzati
+  } // get punti totalizzati dai favori papali
 
     public popeFavorState getPopeFavor1() {
         return popeFavor1;
@@ -82,7 +82,11 @@ public abstract class FaithTrack {
     public void setPoints(int points) {
         this.points += points;
     }
+    public Integer TotalPoints(){
+        return 0;
+    }
 }
+
 
 
 

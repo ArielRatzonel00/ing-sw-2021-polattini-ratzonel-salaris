@@ -45,4 +45,33 @@ public class MultipleyerFaithTrack extends FaithTrack{
             }
         }
     }
+    public Integer TotalPoints(){
+        if (RedPosition >= 3 && RedPosition < 6){
+            return 1;
+        }
+        else if (RedPosition >= 6 && RedPosition < 9){
+            return 2;
+        }
+        else if (RedPosition >= 9 && RedPosition < 12){
+            return 4;
+        }
+        else if (RedPosition >= 12 && RedPosition < 15){
+            return 6;
+        }
+        else if (RedPosition >= 15 && RedPosition < 18){
+            return 9;
+        }
+        else if (RedPosition >= 18 && RedPosition < 21){
+            return 12;
+        }
+        else if (RedPosition >= 21 && RedPosition < 24){
+            return 16;
+        }
+        else if (RedPosition == 24){
+            return 20;
+        } else {
+            return 0;
+        }
+
+    }
 }

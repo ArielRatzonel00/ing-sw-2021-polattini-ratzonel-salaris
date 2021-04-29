@@ -19,21 +19,21 @@ public class Warehouse {
     } // returns the WarehouseRow selected
 
     public boolean addToRow(MarketMarble coloredMarble, int rowNumber){
-        if (rowNumber == 4 || rowNumber == 5){
+        if (rowNumber == 3 || rowNumber == 4){
             if (!(coloredMarble.getColorMarble().equals(getRow(rowNumber).getColor()))){
                 return false;
             }
-        }else if(rowNumber == 1){
+        }else if(rowNumber == 0){
             if((rows.get(1).getColor() == coloredMarble.getColorMarble())||(rows.get(2).getColor() == coloredMarble.getColorMarble())){
                 return false;
             }
         }
-        else if (rowNumber == 2){
+        else if (rowNumber == 1){
             if((rows.get(0).getColor() == coloredMarble.getColorMarble())||(rows.get(2).getColor() == coloredMarble.getColorMarble())){
                 return false;
             }
         }
-        else if (rowNumber == 3){
+        else if (rowNumber == 2){
             if((rows.get(0).getColor() == coloredMarble.getColorMarble())||(rows.get(1).getColor() == coloredMarble.getColorMarble())){
                 return false;
             }
@@ -43,14 +43,14 @@ public class Warehouse {
         }
 
         return rows.get(rowNumber).addMarble(coloredMarble);
-    } // The method adds a Marble int the WarehouseRow selected, the method returns true if it can be added and returns false if not. If the row is a Extrarow there is an extra check that controls if the Marble has the color of the WarehouseRow color
+    } // The method adds a Marble into the WarehouseRow selected, the method returns true if it can be added and returns false if not. If the row is a Extrarow there is an extra check that controls if the Marble has the color of the WarehouseRow color
 
     public boolean RemoveFromRow(MarketMarble coloredMarble, int rowNumber){
         return rows.get(rowNumber).removeMarble(coloredMarble);
     } //The method removes a Marble int the WarehouseRow selected, the method returns true if it can be removed and returns false if not
 
     public boolean MoveResource(int rowNumber1, int rowNumber2){
-        if (rowNumber1 == 4 || rowNumber1 == 5 || rowNumber2 == 4 ||rowNumber2 == 5 ){
+        if (rowNumber1 == 3 || rowNumber1 == 4 || rowNumber2 == 3 ||rowNumber2 == 4 ){
             if (!(rows.get(rowNumber1).getColor().equals(rows.get(rowNumber2).getColor()))){
                 return false;
             }
@@ -72,8 +72,13 @@ public class Warehouse {
                 i += a.getMarbles().size();
         }
         return i;
-    } // the method returns the number of Resorces in the Warehouse that have the color selected
+    } // the method returns the number of Resources in the Warehouse that have the color selected
 
+    public Integer getNumberOfTotalResourcesInWarehouse(){
+        int Resources = 0;
+        Resources = getNumberOfResource(MarketMarble.ColorMarble.BLUE) + getNumberOfResource(MarketMarble.ColorMarble.GREY) + getNumberOfResource(MarketMarble.ColorMarble.PURPLE) + getNumberOfResource(MarketMarble.ColorMarble.YELLOW);
+        return Resources;
+    }
     public ArrayList<WarehouseRow> getRows() {
         return rows;
     } // the method returns all the WarehouseRows in the Warehouse
