@@ -17,6 +17,7 @@ public class Server {
         //It creates threads when necessary, otherwise it re-uses existing one when possible
         ExecutorService executor = Executors.newCachedThreadPool();
         ServerSocket serverSocket;
+
         try{
             serverSocket = new ServerSocket(port);
         }catch (IOException e){
@@ -24,6 +25,7 @@ public class Server {
             return;
         }
         System.out.println("Server ready");
+
         while (true){
             try{
                 Socket socket = serverSocket.accept();

@@ -5,8 +5,7 @@ public class ServerMain
 {
     public static void main( String[] args )
     {
-        //Lobby Lobby=new Lobby;
-        Server server = new Server(1337);
+        Server server = new Server(1336);
         try {
             server.startServer();
         } catch(IOException e) {

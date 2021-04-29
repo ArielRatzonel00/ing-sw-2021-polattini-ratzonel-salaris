@@ -1,5 +1,52 @@
 package it.polimi.ingsw.Model;
 
+import java.util.ArrayList;
+
+public class Lobby{
+    private static Lobby instance;
+    private boolean isFull = true;
+    private int nextGameNPlayers;
+    private ArrayList<Player> Players = new ArrayList<>();
+    private MultiplayerGame MultiGame;
+    private SinglePlayerGame singleGame;
+
+
+    //synchronized method to control simultaneous access
+
+    private Lobby() {
+    }
+
+    synchronized public static Lobby getInstance()
+    {
+        if (instance == null)
+        {
+            // if instance is null, initialize
+            instance = new Lobby();
+        }
+        return instance;
+    }
+
+    public boolean isFull() {
+        return isFull;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return Players;
+    }
+
+    public void setFull(boolean full) {
+        isFull = full;
+    }
+
+    public void setNextGameNPlayers(int nextGameNPlayers) {
+        this.nextGameNPlayers = nextGameNPlayers;
+    }
+}
+
+
+
+
+
 /*import it.polimi.ingsw.Controller.GameManager;
 
 import java.util.ArrayList;
