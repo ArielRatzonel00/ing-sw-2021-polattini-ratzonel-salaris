@@ -70,7 +70,7 @@ public class Strongbox {
         }
     } // Method that removes #number resouces
 
-    public Integer getNumberOfTotalResoucesInStrongbox(){
+    public int getNumberOfTotalResoucesInStrongbox(){
         int Resources;
         Resources = servant + stone + shield + coin;
         return Resources;

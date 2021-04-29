@@ -39,12 +39,14 @@ public class MultiplayerGameManager {
         int WarehouseRow1 = 0;
         int WarehouseRow2 = 0;
         boolean LeaderAction = false;
-        int LeaderAcrionType = 0;
-
+        int LeaderActionType = 0;
+        ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
+        ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
         ArrayList<Integer> productions = new ArrayList<>();
         ArrayList<CostOfCard> ResourcesFromWarehosue = new ArrayList<>();
         ArrayList<Integer> Rows = new ArrayList<>();
         ArrayList<CostOfCard> ResourcesFromStrongbox = new ArrayList<>();
+        MarketMarble.ColorMarble ProductionLeaderCardProfit = MarketMarble.ColorMarble.UNKNOWN;
 
         //Vuoi Muovere le tue risorse prima di iniziare il turno? setta MoveResouces
         if(MoveResources){
@@ -53,9 +55,10 @@ public class MultiplayerGameManager {
                 System.out.println("Mossa non valida");
             }
         }
-        //Vuoi fare un azione Leader prima del turno? setta LeaderAction se si cosa? setta Leader ActionType
+        //Vuoi fare un azione Leader prima del turno? setta LeaderAction
+        // se si cosa? setta Leader ActionType
         if (LeaderAction){
-            LeaderAction(LeaderAcrionType);
+            LeaderAction(LeaderActionType);
         }
         switch (type) {
             case 0: //Prendere le risorse dal MarketTray
@@ -96,10 +99,32 @@ public class MultiplayerGameManager {
             case 2: //Attivare la produzione
 
                 //scegliere le produzioni da attivare e setta productions
+                if (productions.contains(0)){
+                    // Per la produzione base di che colore vuoi che siano le prime due palline? setta ProductionBasicCost
+                    // Quale profitto vuoi ottenere? setta ProductionBasicProfit
+                    CurrentPlayer.getProductionsAvaible().get(0).setProductionCost(ProductionBasicCost);
+                    CurrentPlayer.getProductionsAvaible().get(0).setProductionCost(ProductionBasicProfit);
+                }
                 for (Integer i : productions) {
                     if (CurrentPlayer.getProductionsAvaible().get(i) == null || !(CurrentPlayer.CheckResourcesForProduce(CurrentPlayer.getProductionsAvaible().get(i).getProductionCost()))) {
                         return false;
                     }
+                }
+                if (productions.contains(4)){
+                    if (CurrentPlayer.getProductionsAvaible().get(4).getProductionProfit().size()>1) {
+                        CurrentPlayer.getProductionsAvaible().get(4).getProductionProfit().remove(1);
+                    }
+                    //Scegli che risorsa ottenere dalla produzione della LeaderCard
+                    //setta ProductionLeaderCardProfit
+                    CurrentPlayer.getProductionsAvaible().get(4).getProductionProfit().add(new CostOfCard(1,ProductionLeaderCardProfit));
+                }
+                if (productions.contains(5)){
+                    if (CurrentPlayer.getProductionsAvaible().get(5).getProductionProfit().size()>1) {
+                        CurrentPlayer.getProductionsAvaible().get(5).getProductionProfit().remove(1);
+                    }
+                    //Scegli che risorsa ottenere dalla produzione della LeaderCard
+                    //setta ProductionLeaderCardProfit
+                    CurrentPlayer.getProductionsAvaible().get(5).getProductionProfit().add(new CostOfCard(1,ProductionLeaderCardProfit));
                 }
                 for (Integer i : productions) {
 
@@ -107,7 +132,6 @@ public class MultiplayerGameManager {
                     //setta ResourcesFromWarehosue
                     //setta Rows
                     //setta ResoucesFromStrongbox
-
                     CurrentPlayer.getProductionsAvaible().get(i).Produce(ResourcesFromWarehosue, Rows, ResourcesFromStrongbox, CurrentPlayer);
                 }
                 return true;
@@ -115,7 +139,7 @@ public class MultiplayerGameManager {
         }
         //Vuoi fare un azione Leader dopo il turno? setta LeaderAction se si cosa? setta Leader ActionType
         if (LeaderAction){
-            LeaderAction(LeaderAcrionType);
+            LeaderAction(LeaderActionType);
         }
         // Gestione del cambiamento di CurrentPlayer e OtherPlayers
 
@@ -127,7 +151,6 @@ public class MultiplayerGameManager {
 
 
 
-    // TurnManager
 
 
     public void endGame(){
@@ -217,6 +240,7 @@ public class MultiplayerGameManager {
                 //Che carta Leader vuoi attivare? setta Leader Card
                 if (CurrentPlayer.getLeaderCards(LeaderCard).canBeActivated(CurrentPlayer)){
                     CurrentPlayer.getLeaderCards(LeaderCard).setActivate(true);
+                    CurrentPlayer.getLeaderCards(LeaderCard).effect(CurrentPlayer);
                 }
             case 1: // Scartare solo una carta Leader
                 //Che carta Leader vuoi scartare? setta Leader Card
@@ -233,6 +257,7 @@ public class MultiplayerGameManager {
                 //Che carta Leader vuoi attivare? setta Leader Card
                 if (CurrentPlayer.getLeaderCards(LeaderCard).canBeActivated(CurrentPlayer)){
                     CurrentPlayer.getLeaderCards(LeaderCard).setActivate(true);
+                    CurrentPlayer.getLeaderCards(LeaderCard).effect(CurrentPlayer);
                 }
                 //Che carta Leader vuoi scartare? setta Leader Card
                 if (CurrentPlayer.getLeaderCards(LeaderCard).isActivate()){
@@ -248,9 +273,11 @@ public class MultiplayerGameManager {
 
                 if (CurrentPlayer.getLeaderCards(0).canBeActivated(CurrentPlayer)){
                     CurrentPlayer.getLeaderCards(0).setActivate(true);
+                    CurrentPlayer.getLeaderCards(0).effect(CurrentPlayer);
                 }
                 if (CurrentPlayer.getLeaderCards(1).canBeActivated(CurrentPlayer)){
                     CurrentPlayer.getLeaderCards(1).setActivate(true);
+                    CurrentPlayer.getLeaderCards(1).effect(CurrentPlayer);
                 }
             case 4: // scartare due carte Leader
                 if (CurrentPlayer.getLeaderCards(0).isActivate()){

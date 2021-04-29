@@ -25,8 +25,6 @@ public class Player {
     private ArrayList<Production> productionsAvailable = new ArrayList<>(4);
 
 
-
-
     public Player(String nickname,  FaithTrack faithTrack) {
 
         this.nickname = nickname;
@@ -167,7 +165,7 @@ public class Player {
     public boolean isFirst() {
         return isFirst;
     }
-    public Integer PointsFromLeaderCard(){
+    public int PointsFromLeaderCard(){
         int PointsFromLeaderCard = 0;
         for (LeaderCard leaderCard : leaderCards){
             if (leaderCard.isActivate()) {
@@ -176,14 +174,14 @@ public class Player {
         }
         return PointsFromLeaderCard;
     }
-    public Integer PointsFromWarehouseAndStrongbox(){
+    public int PointsFromWarehouseAndStrongbox(){
         int Points;
         int Resources = warehouse.getNumberOfTotalResourcesInWarehouse() + strongbox.getNumberOfTotalResoucesInStrongbox();
         Points = Resources / 5;
         return Points;
     }
 
-    public Integer GetTotalPoints(){
+    public int GetTotalPoints(){
         TotalPoints = slotsBoard.countVictoryPoints() + faithTrack.TotalPoints() + faithTrack.getPoints() + PointsFromLeaderCard() + PointsFromWarehouseAndStrongbox();
         return TotalPoints;
     }
