@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ing-sw-2021-polattini-ratzonel-salaris" target="8" />
+      <module name="ing-sw-2021-polattini-ratzonel-salaris" target="14" />
       <module name="IngSw-Project-2021" target="1.7" />
     </bytecodeTargetLevel>
   </component>

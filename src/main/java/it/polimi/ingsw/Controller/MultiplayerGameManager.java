@@ -40,11 +40,13 @@ public class MultiplayerGameManager {
         int WarehouseRow2 = 0;
         boolean LeaderAction = false;
         int LeaderActionType = 0;
-
+        ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
+        ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
         ArrayList<Integer> productions = new ArrayList<>();
         ArrayList<CostOfCard> ResourcesFromWarehosue = new ArrayList<>();
         ArrayList<Integer> Rows = new ArrayList<>();
         ArrayList<CostOfCard> ResourcesFromStrongbox = new ArrayList<>();
+        MarketMarble.ColorMarble ProductionLeaderCardProfit = MarketMarble.ColorMarble.UNKNOWN;
 
         //Vuoi Muovere le tue risorse prima di iniziare il turno? setta MoveResouces
         if(MoveResources){
@@ -97,10 +99,32 @@ public class MultiplayerGameManager {
             case 2: //Attivare la produzione
 
                 //scegliere le produzioni da attivare e setta productions
+                if (productions.contains(0)){
+                    // Per la produzione base di che colore vuoi che siano le prime due palline? setta ProductionBasicCost
+                    // Quale profitto vuoi ottenere? setta ProductionBasicProfit
+                    CurrentPlayer.getProductionsAvaible().get(0).setProductionCost(ProductionBasicCost);
+                    CurrentPlayer.getProductionsAvaible().get(0).setProductionCost(ProductionBasicProfit);
+                }
                 for (Integer i : productions) {
                     if (CurrentPlayer.getProductionsAvaible().get(i) == null || !(CurrentPlayer.CheckResourcesForProduce(CurrentPlayer.getProductionsAvaible().get(i).getProductionCost()))) {
                         return false;
                     }
+                }
+                if (productions.contains(4)){
+                    if (CurrentPlayer.getProductionsAvaible().get(4).getProductionProfit().size()>1) {
+                        CurrentPlayer.getProductionsAvaible().get(4).getProductionProfit().remove(1);
+                    }
+                    //Scegli che risorsa ottenere dalla produzione della LeaderCard
+                    //setta ProductionLeaderCardProfit
+                    CurrentPlayer.getProductionsAvaible().get(4).getProductionProfit().add(new CostOfCard(1,ProductionLeaderCardProfit));
+                }
+                if (productions.contains(5)){
+                    if (CurrentPlayer.getProductionsAvaible().get(5).getProductionProfit().size()>1) {
+                        CurrentPlayer.getProductionsAvaible().get(5).getProductionProfit().remove(1);
+                    }
+                    //Scegli che risorsa ottenere dalla produzione della LeaderCard
+                    //setta ProductionLeaderCardProfit
+                    CurrentPlayer.getProductionsAvaible().get(5).getProductionProfit().add(new CostOfCard(1,ProductionLeaderCardProfit));
                 }
                 for (Integer i : productions) {
 
@@ -108,7 +132,6 @@ public class MultiplayerGameManager {
                     //setta ResourcesFromWarehosue
                     //setta Rows
                     //setta ResoucesFromStrongbox
-
                     CurrentPlayer.getProductionsAvaible().get(i).Produce(ResourcesFromWarehosue, Rows, ResourcesFromStrongbox, CurrentPlayer);
                 }
                 return true;

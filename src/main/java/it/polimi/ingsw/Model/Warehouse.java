@@ -74,7 +74,7 @@ public class Warehouse {
         return i;
     } // the method returns the number of Resources in the Warehouse that have the color selected
 
-    public Integer getNumberOfTotalResourcesInWarehouse(){
+    public int getNumberOfTotalResourcesInWarehouse(){
         int Resources = 0;
         Resources = getNumberOfResource(MarketMarble.ColorMarble.BLUE) + getNumberOfResource(MarketMarble.ColorMarble.GREY) + getNumberOfResource(MarketMarble.ColorMarble.PURPLE) + getNumberOfResource(MarketMarble.ColorMarble.YELLOW);
         return Resources;

@@ -595,21 +595,21 @@ public class Deck {
         ArrayList<CostOfCard> ProductionCost1 = new ArrayList<>();
         ProductionCost1.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         ArrayList<CostOfCard> ProductionProfit1 = new ArrayList<>();
-        ProductionCost1.add(new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+
         ProductionCost1.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         ConvertRsc1 = new LeaderCard4(13, DevelopmentCard.colorCard.Blue, 4, new Production(ProductionCost1, ProductionProfit1)); //converte un viola in una risorsa a scelta e 1 punto fede
 
         ArrayList<CostOfCard> ProductionCost2 = new ArrayList<>();
         ProductionCost2.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         ArrayList<CostOfCard> ProductionProfit2 = new ArrayList<>();
-        ProductionCost2.add(new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+
         ProductionCost2.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         ConvertRsc2 = new LeaderCard4(14, DevelopmentCard.colorCard.Yellow, 4, new Production(ProductionCost2, ProductionProfit2)); //converte un blu in una risorsa a scelta e 1 punto fede
 
         ArrayList<CostOfCard> ProductionCost3 = new ArrayList<>();
         ProductionCost3.add(new CostOfCard(1, MarketMarble.ColorMarble.YELLOW));
         ArrayList<CostOfCard> ProductionProfit3 = new ArrayList<>();
-        ProductionCost3.add(new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+
         ProductionCost3.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         ConvertRsc3 = new LeaderCard4(15,DevelopmentCard.colorCard.Green,4, new Production(ProductionCost3, ProductionProfit3)); //converte un giallo in una risorsa a scelta e 1 punto fede
 
@@ -617,7 +617,6 @@ public class Deck {
         ArrayList<CostOfCard> ProductionCost4 = new ArrayList<>();
         ProductionCost4.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
         ArrayList<CostOfCard> ProductionProfit4 = new ArrayList<>();
-        ProductionCost4.add(new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
         ProductionCost4.add(new CostOfCard(1, MarketMarble.ColorMarble.RED));
         ConvertRsc4 = new LeaderCard4(16,  DevelopmentCard.colorCard.Purple,4, new Production(ProductionCost4, ProductionProfit4)); //converte un grigio in una risorsa a scelta e 1 punto fede
         //ArrLeaderCards = new LeaderCard[]{ExtraRsc1, ExtraRsc2, ExtraRsc3, ExtraRsc4, ReduceCost1, ReduceCost2, ReduceCost3, ReduceCost4, ExtraWarehouse1, ExtraWarehouse2, ExtraWarehouse3, ExtraWarehouse4, ConvertRsc1, ConvertRsc2, ConvertRsc3, ConvertRsc4};

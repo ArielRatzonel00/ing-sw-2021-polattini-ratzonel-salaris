@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Model.Marble.MarketMarble;
+
 import java.util.ArrayList;
 
 public class Production {
@@ -19,12 +21,26 @@ public class Production {
         return ProductionProfit;
     }
 
+    public void setProductionCost(ArrayList<CostOfCard> productionCost) {
+        ProductionCost = productionCost;
+    }
+
+    public void setProductionProfit(ArrayList<CostOfCard> productionProfit) {
+        ProductionProfit = productionProfit;
+    }
+
     public void Produce(ArrayList<CostOfCard> ResoucesFromWarehouse, ArrayList<Integer> Rows, ArrayList<CostOfCard> ResoucesFromStrongobox, Player player) {
         // Le resources from Warehouse e from Strongbox me le deve passare il Player
         // chiede quanti da Strogobx e quanti da Warehosue
         for (CostOfCard costOfCard : ProductionProfit){
-            player.getStrongbox().AddResource(costOfCard.getCostNumber(), costOfCard.getCostColor());
+            if (costOfCard.getCostColor() != MarketMarble.ColorMarble.RED) {
+                player.getStrongbox().AddResource(costOfCard.getCostNumber(), costOfCard.getCostColor());
+            }
+            else {
+                player.getFaithTrack().setRedPosition(costOfCard.getCostNumber());
+            }
         }
+
     }
 
 }
