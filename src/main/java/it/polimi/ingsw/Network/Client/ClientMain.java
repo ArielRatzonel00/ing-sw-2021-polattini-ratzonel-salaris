@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Client;
 
+import it.polimi.ingsw.Controller.SinglePlayerManager;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SinglePlayerFaithTrack;
 import it.polimi.ingsw.Model.SinglePlayerGame;
@@ -16,12 +17,12 @@ public class ClientMain {
         System.out.println("Nickname:");
         nickname = stdin.nextLine();
 
-        System.out.println("Multiplayer (m) o Singleplayer (s) ?");
+        System.out.println("Welcome " + nickname + ", Multiplayer (m) o Singleplayer (s) ?");
 
         //SinglePlayerGame, doesn't connect to Server;
         if (stdin.nextLine().equalsIgnoreCase("s")) {
-            SinglePlayerGame SinglePlayer = new SinglePlayerGame(new Player(nickname, new SinglePlayerFaithTrack()));
-            System.out.println("Welcome " + nickname + ", let's start the game!");
+            SinglePlayerManager singlePlayerManager=new SinglePlayerManager(nickname);
+            System.out.println("Let's start the game!");
         }
         else{
             if((args.length>0 && args[0].equalsIgnoreCase("CLI")) || true){ // ||True l'ho messo ora solo perchè almeno per

@@ -12,10 +12,12 @@ public class MultiplayerGameManager {
     private ArrayList<Player> OtherPlayers;
     private boolean FinishGame = false;
 
-    public MultiplayerGameManager(MultiplayerGame game) {
-        this.game = game;
+    //Qua creiamo il game:
+    /*
+    public MultiplayerManager(){
+    game = new MultiplayerGame(get Players);
     }
-    //Constructor of game
+     */
 
     public void StartGame() {
         game.SetInitialResources();

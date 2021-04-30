@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Network.Client;
 
+import it.polimi.ingsw.Controller.MultiplayerGameManager;
+import it.polimi.ingsw.Model.MultiplayerGame;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SinglePlayerFaithTrack;
 import it.polimi.ingsw.Model.SinglePlayerGame;
@@ -29,7 +31,8 @@ public class Client {
             Socket socket = new Socket(ip, port);
             System.out.println("Multiplayer Connection established");
             Scanner socketIn = new Scanner(socket.getInputStream()); //Usato per ricevere dal server
-            PrintWriter socketOut = new PrintWriter(socket.getOutputStream()); //Usato per inviare al server
+            PrintWriter socketOut = new PrintWriter(socket.getOutputStream()); //Usato per inviare al
+            MultiplayerGameManager multiplayerGameManager=new MultiplayerGameManager();
 
             try {
                 while (true) {

@@ -1,11 +1,8 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Model.CostOfCard;
+import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard1;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
-import it.polimi.ingsw.Model.MarketTray;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.SinglePlayerGame;
 
 import java.util.ArrayList;
 
@@ -13,9 +10,8 @@ public class SinglePlayerManager {
     private SinglePlayerGame game;
     private Player player;
 
-    public SinglePlayerManager(SinglePlayerGame game) {
-        this.game = game;
-        this.player = game.getPlayer();
+    public SinglePlayerManager(String nickname) {
+        game = new SinglePlayerGame(new Player(nickname, new SinglePlayerFaithTrack()));
     }
     public void StartGame() {
         player.AssignFourLeaderCard(game.getDeck().getTopFourLeaderCard());
