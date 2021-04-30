@@ -41,6 +41,7 @@ class WarehouseTest {
     }
 
     @Test
+    @DisplayName("Move resources 1")
     void moveResource1() {
         Warehousetest.addToRow(Grey, 0);
         Warehousetest.addToRow(Blue, 1);
@@ -48,6 +49,7 @@ class WarehouseTest {
     }
 
     @Test
+    @DisplayName("Move resources 2")
     void moveResource2() {
         Warehousetest.addToRow(Grey, 0);
         Warehousetest.addToRow(Blue, 1);
@@ -56,14 +58,25 @@ class WarehouseTest {
     }
 
     @Test
+    @DisplayName("Get number of resources of one type in the warehouse")
     void getNumberOfResource() {
         Warehousetest.addToRow(Blue, 1);
         Warehousetest.addToRow(Blue, 1);
-        //assertEquals(0, Warehousetest.getNumberOfResource(MarketMarble.ColorMarble.BLUE));
-        //assertEquals(Warehousetest.getNumberOfResource(MarketMarble.ColorMarble.BLUE), 2);
+        assertEquals(2, Warehousetest.getNumberOfResource(MarketMarble.ColorMarble.BLUE));
+        assertEquals(0, Warehousetest.getNumberOfResource(MarketMarble.ColorMarble.GREY));
+        Warehousetest.addToRow(Grey, 2);
+        Warehousetest.addToRow(Grey, 2);
+        assertEquals(2, Warehousetest.getNumberOfResource(MarketMarble.ColorMarble.BLUE));
+        assertEquals(2, Warehousetest.getNumberOfResource(MarketMarble.ColorMarble.GREY));
+
     }
 
     @Test
-    void getRows() {
+    @DisplayName("Get number of total resources in the warehouse")
+    void getNumberOfTotalResourcesInWarehouse() {
+        Warehousetest.addToRow(Blue, 1);
+        Warehousetest.addToRow(Grey, 2);
+        Warehousetest.addToRow(Grey, 2);
+        assertEquals(3, Warehousetest.getNumberOfTotalResourcesInWarehouse());
     }
 }

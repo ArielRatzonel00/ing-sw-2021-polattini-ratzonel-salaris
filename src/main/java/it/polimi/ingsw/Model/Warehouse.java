@@ -81,6 +81,7 @@ public class Warehouse {
         Resources = getNumberOfResource(MarketMarble.ColorMarble.BLUE) + getNumberOfResource(MarketMarble.ColorMarble.GREY) + getNumberOfResource(MarketMarble.ColorMarble.PURPLE) + getNumberOfResource(MarketMarble.ColorMarble.YELLOW);
         return Resources;
     }
+
     public ArrayList<WarehouseRow> getRows() {
         return rows;
     } // the method returns all the WarehouseRows in the Warehouse
