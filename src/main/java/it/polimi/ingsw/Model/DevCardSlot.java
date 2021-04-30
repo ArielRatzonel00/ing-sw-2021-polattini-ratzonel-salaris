@@ -11,11 +11,13 @@ import java.util.stream.Collectors;
 public class DevCardSlot  {
     private ArrayList<DevelopmentCard> cards = new ArrayList<>();
 
-
     public void addCard(DevelopmentCard card){
-        cards.add(card);
+        if(CanBeAddedInTheSlot(card)) {
+            cards.add(card);
         }
-    //Method that adds card above the top card if it's level is higher and the Slot isn't full
+    }
+    //Method that adds card above the top card if its level is higher and the Slot isn't full
+
     public boolean CanBeAddedInTheSlot(DevelopmentCard card){
         if (getTopCard() != null) {
             if (card.getLevel() == getTopCard().getLevel() + 1 && cards.size() < 3)
@@ -26,7 +28,6 @@ public class DevCardSlot  {
         }
     }
 
-
     public DevelopmentCard getTopCard() {
         if (cards.size() == 0){
             return null;
@@ -35,8 +36,6 @@ public class DevCardSlot  {
             return (cards.get(cards.size() - 1));
         }
     } // Method that returns the TopCard of the slot
-
-
 
     public int countVictoryPoints(){
         int points=0;
