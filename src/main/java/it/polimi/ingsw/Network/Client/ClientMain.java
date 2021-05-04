@@ -1,9 +1,5 @@
 package it.polimi.ingsw.Network.Client;
 
-import it.polimi.ingsw.Controller.SinglePlayerManager;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.SinglePlayerFaithTrack;
-import it.polimi.ingsw.Model.SinglePlayerGame;
 import it.polimi.ingsw.View.CLI;
 
 import java.io.IOException;
@@ -19,9 +15,8 @@ public class ClientMain {
                                                                                      //ora parte sempre con la CLI
 
         CLI view = new CLI();
-        CLientController cLientController= new CLientController(view);
-        view.addObserver(cLientController);
         view.init();
+
         /*//SinglePlayerGame, doesn't connect to Server;
         if (stdin.nextLine().equalsIgnoreCase("s")) {
             SinglePlayerManager singlePlayerManager=new SinglePlayerManager(nickname);

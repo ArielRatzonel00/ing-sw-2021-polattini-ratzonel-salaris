@@ -41,6 +41,10 @@ public class Lobby{
     public void setNextGameNPlayers(int nextGameNPlayers) {
         this.nextGameNPlayers = nextGameNPlayers;
     }
+
+    public int getNextGameNPlayers() {
+        return nextGameNPlayers;
+    }
 }
 
 
