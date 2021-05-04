@@ -27,7 +27,6 @@ public class Client {
         Scanner stdin = new Scanner(System.in);                  //Usato per ricevere da tastiera
 
 
-        //MultiplayerGame, needs to connect to ServerSocket
             Socket socket = new Socket(ip, port);
             System.out.println("Multiplayer Connection established");
             Scanner socketIn = new Scanner(socket.getInputStream()); //Usato per ricevere dal server
