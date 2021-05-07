@@ -26,4 +26,23 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
             return false;
         }
     }
+    @Override
+    public void StampaCarta(){
+        System.out.println("POTERE: Trasforma palline bianche in palline : " + getNewColorMarble() + "\n" +
+                "NECESSITA: 1 devCard colore " + getColorCostOne() + ", 2 devCard colore " + getColorCostTwo() + "\n" +
+                "VICTORY POINTS: " + getVictoryPoints()
+        );
+    }
+
+    public DevelopmentCard.colorCard getColorCostOne() {
+        return colorCostOne;
+    }
+
+    public DevelopmentCard.colorCard getColorCostTwo() {
+        return colorCostTwo;
+    }
+
+    public MarketMarble.ColorMarble getNewColorMarble() {
+        return NewColorMarble;
+    }
 }

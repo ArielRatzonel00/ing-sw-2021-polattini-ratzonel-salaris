@@ -6,12 +6,13 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.View.ViewObserver;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
 public class ClientController implements Observer, ViewObserver {
     private String nickname;
-    private Boolean singleMulti;
+    private Boolean multiPlayer;
     View view;
     Lobby gameLobby= Lobby.getInstance();
 
@@ -22,9 +23,9 @@ public class ClientController implements Observer, ViewObserver {
 
     //If the game is multiplayer check the "state" of Lobby and if there are other Players with same nickname
     @Override
-    public void updateInit(String nickname,Boolean singleMulti) {
-        this.singleMulti=singleMulti;
-        if(singleMulti) {
+    public void updateInit(String nickname,Boolean multiPlayer) throws IOException {
+        this.multiPlayer =multiPlayer;
+        if(this.multiPlayer) {
             this.nickname = nickname;
             if(gameLobby.getPlayers().size()!=0) {
                 for (Player a : gameLobby.getPlayers()) {
@@ -43,7 +44,9 @@ public class ClientController implements Observer, ViewObserver {
             }
 
         }else{
-            //SERVER FA PARTIRE SINGLEPLAYER GAME
+            Client client=new Client("127.0.0.1",1336);
+            client.startClient(nickname, multiPlayer);
+
         }
     }
 

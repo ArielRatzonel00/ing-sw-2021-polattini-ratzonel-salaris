@@ -60,8 +60,12 @@ public class Player {
         return strongbox;
     }
 
-    public LeaderCard getLeaderCards(int num) {
+    public LeaderCard getLeaderCard(int num) {
         return leaderCards.get(num);
+    }
+
+    public ArrayList<LeaderCard> getLeaderCards() {
+        return leaderCards;
     }
 
     public SlotsBoard getSlotsBoard() {

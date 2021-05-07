@@ -10,8 +10,11 @@ public class SinglePlayerManager {
     private SinglePlayerGame game;
     private Player player;
 
+
     public SinglePlayerManager(String nickname) {
-        game = new SinglePlayerGame(new Player(nickname, new SinglePlayerFaithTrack()));
+        player=new Player(nickname,new SinglePlayerFaithTrack());
+        game = new SinglePlayerGame(player);
+        StartGame();
     }
     public void StartGame() {
         player.AssignFourLeaderCard(game.getDeck().getTopFourLeaderCard());
@@ -167,8 +170,8 @@ public class SinglePlayerManager {
             if (newresource.getColorMarble() == MarketMarble.ColorMarble.RED) {
                 player.getFaithTrack().setRedPosition(1);
             } else if (newresource.getColorMarble() == MarketMarble.ColorMarble.WHITE) {
-                if (player.getLeaderCards(0) instanceof LeaderCard1 && player.getLeaderCards(0).isActivate()) {
-                    if (player.getLeaderCards(1) instanceof LeaderCard1 && player.getLeaderCards(1).isActivate()) {
+                if (player.getLeaderCard(0) instanceof LeaderCard1 && player.getLeaderCard(0).isActivate()) {
+                    if (player.getLeaderCard(1) instanceof LeaderCard1 && player.getLeaderCard(1).isActivate()) {
                         System.out.println("Choose between the color of resource of Leader Card 1 and the color of resource of LeaderCard2");
                         System.out.println("What do you want to do with this Marble");
 
@@ -183,7 +186,7 @@ public class SinglePlayerManager {
                         // Chiama ChooseWhatToDoWithColoredMarble passando la riga dove vuole mettere e la Marble nuova. Se la riga è >= a 6 vuol dire che la scarta
 
                     }
-                } else if (player.getLeaderCards(1) instanceof LeaderCard1 && player.getLeaderCards(1).isActivate()) {
+                } else if (player.getLeaderCard(1) instanceof LeaderCard1 && player.getLeaderCard(1).isActivate()) {
                     System.out.println("What do you want to do with this Marble");
                     // Crea nuova Marble con il colore in cui si trasforma la bianca, quello della LeaderCard
                     // Decide se tenela o scartarla
@@ -230,13 +233,13 @@ public class SinglePlayerManager {
         switch (LeaderActionType){
             case 0: // attivare solo una carta Leader
                 //Che carta Leader vuoi attivare? setta Leader Card
-                if (player.getLeaderCards(LeaderCard).canBeActivated(player)){
-                    player.getLeaderCards(LeaderCard).setActivate(true);
-                    player.getLeaderCards(LeaderCard).effect(player);
+                if (player.getLeaderCard(LeaderCard).canBeActivated(player)){
+                    player.getLeaderCard(LeaderCard).setActivate(true);
+                    player.getLeaderCard(LeaderCard).effect(player);
                 }
             case 1: // Scartare solo una carta Leader
                 //Che carta Leader vuoi scartare? setta Leader Card
-                if (player.getLeaderCards(LeaderCard).isActivate()){
+                if (player.getLeaderCard(LeaderCard).isActivate()){
                     System.out.println("Non puoi scartare questa carta Leader perchè è stata giocata");
                 }
                 else {
@@ -245,12 +248,12 @@ public class SinglePlayerManager {
                 }
             case 2: // attivare solo una carta Leader e scartarne una
                 //Che carta Leader vuoi attivare? setta Leader Card
-                if (player.getLeaderCards(LeaderCard).canBeActivated(player)){
-                    player.getLeaderCards(LeaderCard).setActivate(true);
-                    player.getLeaderCards(LeaderCard).effect(player);
+                if (player.getLeaderCard(LeaderCard).canBeActivated(player)){
+                    player.getLeaderCard(LeaderCard).setActivate(true);
+                    player.getLeaderCard(LeaderCard).effect(player);
                 }
                 //Che carta Leader vuoi scartare? setta Leader Card
-                if (player.getLeaderCards(LeaderCard).isActivate()){
+                if (player.getLeaderCard(LeaderCard).isActivate()){
                     System.out.println("Non puoi scartare questa carta Leader perchè è stata giocata");
                 }
                 else {
@@ -259,23 +262,23 @@ public class SinglePlayerManager {
                 }
             case 3: //attivare due carte Leader
 
-                if (player.getLeaderCards(0).canBeActivated(player)){
-                    player.getLeaderCards(0).setActivate(true);
-                    player.getLeaderCards(0).effect(player);
+                if (player.getLeaderCard(0).canBeActivated(player)){
+                    player.getLeaderCard(0).setActivate(true);
+                    player.getLeaderCard(0).effect(player);
                 }
-                if (player.getLeaderCards(1).canBeActivated(player)){
-                    player.getLeaderCards(1).setActivate(true);
-                    player.getLeaderCards(1).effect(player);
+                if (player.getLeaderCard(1).canBeActivated(player)){
+                    player.getLeaderCard(1).setActivate(true);
+                    player.getLeaderCard(1).effect(player);
                 }
             case 4: // scartare due carte Leader
-                if (player.getLeaderCards(0).isActivate()){
+                if (player.getLeaderCard(0).isActivate()){
                     System.out.println("Non puoi scartare la prima carta Leader perchè è stata giocata");
                 }
                 else {
                     player.DiscardLeaderCard(0);
                     player.getFaithTrack().setBlackPosition(1);
                 }
-                if (player.getLeaderCards(1).isActivate()){
+                if (player.getLeaderCard(1).isActivate()){
                     System.out.println("Non puoi scartare la seconda carta Leader perchè è stata giocata");
                 }
                 else {
@@ -286,7 +289,9 @@ public class SinglePlayerManager {
         }
     }
 
-
+    public SinglePlayerGame getGame() {
+        return game;
+    }
 }
 
 

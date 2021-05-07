@@ -31,13 +31,11 @@ public class LeaderCard4 extends LeaderCard{ //converte in punto fede e materia 
         player.newProductionFromLeaderCard(production);
     }
 
-    /*public void effect(){
-        DevCardSlot leaderSlot = new DevCardSlot();
-        DevelopmentCard LeaderDevelopment = new DevelopmentCard(0,);
-
-        leaderSlot.addCard();
-        slotsboard.addSlot();
+    @Override
+    public void StampaCarta() {
+        System.out.println("POTERE: Aggiunge produzione da" + getProduction().getProductionCost().get(0).getCostNumber() + getProduction().getProductionCost().get(0).getCostColor() + " ad un punto fede e una risorsa a tua scelta\n " +
+                "NECESSITA: DevCard di livello 2 di colore" +getCostCardLevelTwo()+"\n"+
+                "VICTORY POINTS: " + getVictoryPoints());
     }
-    */
 }
 //

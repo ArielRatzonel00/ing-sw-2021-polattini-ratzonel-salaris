@@ -70,4 +70,7 @@ public  class LeaderCard {
     public int getLeadIdFromCard(LeaderCard LeadCard) { //prende in ingresso una carta e mi ritorna il suo id
         return LeadCard.Id;
     }
+
+    public void StampaCarta(){
+    }
 }

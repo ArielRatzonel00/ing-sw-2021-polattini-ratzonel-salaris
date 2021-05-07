@@ -22,16 +22,15 @@ public class Client {
         this.port = port;
     }
 
-    public void startClient() throws IOException {
+    public void startClient(String nickname, Boolean Multi) throws IOException {
 
         Scanner stdin = new Scanner(System.in);                  //Usato per ricevere da tastiera
-
-
             Socket socket = new Socket(ip, port);
-            System.out.println("Multiplayer Connection established");
+            System.out.println("Connection established");
             Scanner socketIn = new Scanner(socket.getInputStream()); //Usato per ricevere dal server
-            PrintWriter socketOut = new PrintWriter(socket.getOutputStream()); //Usato per inviare al
-            MultiplayerGameManager multiplayerGameManager=new MultiplayerGameManager();
+            PrintWriter socketOut = new PrintWriter(socket.getOutputStream()); //Usato per inviare al Server
+            socketOut.println(nickname);
+            socketOut.println(Multi);
 
             try {
                 while (true) {

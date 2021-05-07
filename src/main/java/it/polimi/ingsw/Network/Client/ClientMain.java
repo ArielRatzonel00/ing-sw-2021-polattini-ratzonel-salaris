@@ -15,7 +15,7 @@ public class ClientMain {
                                                                                      //ora parte sempre con la CLI
 
         CLI view = new CLI();
-        view.init();
+        view.run();
 
         /*//SinglePlayerGame, doesn't connect to Server;
         if (stdin.nextLine().equalsIgnoreCase("s")) {

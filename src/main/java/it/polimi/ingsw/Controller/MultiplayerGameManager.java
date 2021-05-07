@@ -173,8 +173,8 @@ public class MultiplayerGameManager {
             if (newresource.getColorMarble() == MarketMarble.ColorMarble.RED) {
                 CurrentPlayer.getFaithTrack().setRedPosition(1);
             } else if (newresource.getColorMarble() == MarketMarble.ColorMarble.WHITE) {
-                if (CurrentPlayer.getLeaderCards(0) instanceof LeaderCard1 && CurrentPlayer.getLeaderCards(0).isActivate()) {
-                    if (CurrentPlayer.getLeaderCards(1) instanceof LeaderCard1 && CurrentPlayer.getLeaderCards(1).isActivate()) {
+                if (CurrentPlayer.getLeaderCard(0) instanceof LeaderCard1 && CurrentPlayer.getLeaderCard(0).isActivate()) {
+                    if (CurrentPlayer.getLeaderCard(1) instanceof LeaderCard1 && CurrentPlayer.getLeaderCard(1).isActivate()) {
                         System.out.println("Choose between the color of resource of Leader Card 1 and the color of resource of LeaderCard2");
                         System.out.println("What do you want to do with this Marble");
 
@@ -189,7 +189,7 @@ public class MultiplayerGameManager {
                         // Chiama ChooseWhatToDoWithColoredMarble passando la riga dove vuole mettere e la Marble nuova. Se la riga è >= a 6 vuol dire che la scarta
 
                     }
-                } else if (CurrentPlayer.getLeaderCards(1) instanceof LeaderCard1 && CurrentPlayer.getLeaderCards(1).isActivate()) {
+                } else if (CurrentPlayer.getLeaderCard(1) instanceof LeaderCard1 && CurrentPlayer.getLeaderCard(1).isActivate()) {
                     System.out.println("What do you want to do with this Marble");
                     // Crea nuova Marble con il colore in cui si trasforma la bianca, quello della LeaderCard
                     // Decide se tenela o scartarla
@@ -240,13 +240,13 @@ public class MultiplayerGameManager {
         switch (LeaderActionType){
             case 0: // attivare solo una carta Leader
                 //Che carta Leader vuoi attivare? setta Leader Card
-                if (CurrentPlayer.getLeaderCards(LeaderCard).canBeActivated(CurrentPlayer)){
-                    CurrentPlayer.getLeaderCards(LeaderCard).setActivate(true);
-                    CurrentPlayer.getLeaderCards(LeaderCard).effect(CurrentPlayer);
+                if (CurrentPlayer.getLeaderCard(LeaderCard).canBeActivated(CurrentPlayer)){
+                    CurrentPlayer.getLeaderCard(LeaderCard).setActivate(true);
+                    CurrentPlayer.getLeaderCard(LeaderCard).effect(CurrentPlayer);
                 }
             case 1: // Scartare solo una carta Leader
                 //Che carta Leader vuoi scartare? setta Leader Card
-                if (CurrentPlayer.getLeaderCards(LeaderCard).isActivate()){
+                if (CurrentPlayer.getLeaderCard(LeaderCard).isActivate()){
                     System.out.println("Non puoi scartare questa carta Leader perchè è stata giocata");
                 }
                 else {
@@ -257,12 +257,12 @@ public class MultiplayerGameManager {
                 }
             case 2: // attivare solo una carta Leader e scartarne una
                 //Che carta Leader vuoi attivare? setta Leader Card
-                if (CurrentPlayer.getLeaderCards(LeaderCard).canBeActivated(CurrentPlayer)){
-                    CurrentPlayer.getLeaderCards(LeaderCard).setActivate(true);
-                    CurrentPlayer.getLeaderCards(LeaderCard).effect(CurrentPlayer);
+                if (CurrentPlayer.getLeaderCard(LeaderCard).canBeActivated(CurrentPlayer)){
+                    CurrentPlayer.getLeaderCard(LeaderCard).setActivate(true);
+                    CurrentPlayer.getLeaderCard(LeaderCard).effect(CurrentPlayer);
                 }
                 //Che carta Leader vuoi scartare? setta Leader Card
-                if (CurrentPlayer.getLeaderCards(LeaderCard).isActivate()){
+                if (CurrentPlayer.getLeaderCard(LeaderCard).isActivate()){
                     System.out.println("Non puoi scartare questa carta Leader perchè è stata giocata");
                 }
                 else {
@@ -273,16 +273,16 @@ public class MultiplayerGameManager {
                 }
             case 3: //attivare due carte Leader
 
-                if (CurrentPlayer.getLeaderCards(0).canBeActivated(CurrentPlayer)){
-                    CurrentPlayer.getLeaderCards(0).setActivate(true);
-                    CurrentPlayer.getLeaderCards(0).effect(CurrentPlayer);
+                if (CurrentPlayer.getLeaderCard(0).canBeActivated(CurrentPlayer)){
+                    CurrentPlayer.getLeaderCard(0).setActivate(true);
+                    CurrentPlayer.getLeaderCard(0).effect(CurrentPlayer);
                 }
-                if (CurrentPlayer.getLeaderCards(1).canBeActivated(CurrentPlayer)){
-                    CurrentPlayer.getLeaderCards(1).setActivate(true);
-                    CurrentPlayer.getLeaderCards(1).effect(CurrentPlayer);
+                if (CurrentPlayer.getLeaderCard(1).canBeActivated(CurrentPlayer)){
+                    CurrentPlayer.getLeaderCard(1).setActivate(true);
+                    CurrentPlayer.getLeaderCard(1).effect(CurrentPlayer);
                 }
             case 4: // scartare due carte Leader
-                if (CurrentPlayer.getLeaderCards(0).isActivate()){
+                if (CurrentPlayer.getLeaderCard(0).isActivate()){
                     System.out.println("Non puoi scartare la prima carta Leader perchè è stata giocata");
                 }
                 else {
@@ -291,7 +291,7 @@ public class MultiplayerGameManager {
                         otherplayer.getFaithTrack().setRedPosition(1);
                     }
                 }
-                if (CurrentPlayer.getLeaderCards(1).isActivate()){
+                if (CurrentPlayer.getLeaderCard(1).isActivate()){
                     System.out.println("Non puoi scartare la seconda carta Leader perchè è stata giocata");
                 }
                 else {
