@@ -1,13 +1,53 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Client.ClientController;
+import it.polimi.ingsw.Network.Server.ClientConnection;
+import it.polimi.ingsw.Observer.ObservableView;
 
 import java.io.IOException;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CLI extends ObservableView implements View{
+public class CLI extends View{
+    private ClientConnection clientConnection;
+    public CLI(Player player, ArrayList<Player> OtherPlayers, ClientConnection c){
+        super(player);
+        this.clientConnection = c;
+    }
+
+    @Override
+    protected void showMessage(Object message) {
+        clientConnection.asyncSend(message);
+    }
+    public void update(Mo)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ClientController cLientController= new ClientController(this);
     private String nickname;
     private Boolean singleMulti=false; //False represent singlePlayer, True represent Multiplayer

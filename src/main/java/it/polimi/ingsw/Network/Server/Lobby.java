@@ -1,4 +1,8 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Network.Server;
+
+import it.polimi.ingsw.Model.MultiplayerGame;
+import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.SinglePlayerGame;
 
 import java.util.ArrayList;
 
@@ -12,9 +16,6 @@ public class Lobby{
 
 
     //synchronized method to control simultaneous access
-
-    private Lobby() {
-    }
 
     synchronized public static Lobby getInstance()
     {

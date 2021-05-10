@@ -3,10 +3,11 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard1;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Observer.Observer;
 
 import java.util.ArrayList;
 
-public class SinglePlayerManager {
+public class SinglePlayerManager implements Observer<PlayerAction> {
     private SinglePlayerGame game;
     private Player player;
 
@@ -53,10 +54,11 @@ public class SinglePlayerManager {
         if (LeaderAction){
             LeaderAction(LeaderActionType);
         }
+
         switch (type) {
             case 0: //Prendere le risorse dal MarketTray
                 FromRow = false;
-                num = 0;
+                 num = 0;
                 //scegliere se da riga o da colonna e settare booleanFromRow
                 //scegliere il numero di riga/colonna e settare num
                 if (FromRow) {

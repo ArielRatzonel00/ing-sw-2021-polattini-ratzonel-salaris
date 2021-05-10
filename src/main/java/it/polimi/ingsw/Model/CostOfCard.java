@@ -17,7 +17,7 @@ public class CostOfCard {
         return costNumber;
     }
 
-    public MarketMarble.ColorMarble getCostColor() {
+    public MarketMarble .ColorMarble getCostColor() {
         return costColor;
     }
 }

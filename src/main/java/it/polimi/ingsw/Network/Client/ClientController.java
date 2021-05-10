@@ -1,6 +1,6 @@
-package it.polimi.ingsw.Network.Client;
+/*package it.polimi.ingsw.Network.Client;
 
-import it.polimi.ingsw.Model.Lobby;
+import it.polimi.ingsw.Network.Server.Lobby;
 import it.polimi.ingsw.Model.MultipleyerFaithTrack;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.View.View;
@@ -55,3 +55,4 @@ public class ClientController implements Observer, ViewObserver {
     public void update(Observable o, Object arg) {
     }
 }
+*/
