@@ -71,6 +71,7 @@ public  class LeaderCard {
         return LeadCard.Id;
     }
 
-    public void StampaCarta(){
+    public String StampaCarta(){
+        return "a";
     }
 }

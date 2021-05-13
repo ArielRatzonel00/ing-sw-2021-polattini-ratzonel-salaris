@@ -6,7 +6,7 @@ import it.polimi.ingsw.Model.Production;
 
 
 
-public class LeaderCard4 extends LeaderCard{ //converte in punto fede e materia a caso -> produzione extra
+public class LeaderCard4 extends LeaderCard { //converte in punto fede e materia a caso -> produzione extra
     private DevelopmentCard.colorCard CostCardLevelTwo;
     private Production production;
 
@@ -24,18 +24,19 @@ public class LeaderCard4 extends LeaderCard{ //converte in punto fede e materia 
         return CostCardLevelTwo;
     }
 
-    public Production getProduction () {
+    public Production getProduction() {
         return production;
     }
-    public void effect(Player player){
+
+    public void effect(Player player) {
         player.newProductionFromLeaderCard(production);
     }
 
     @Override
-    public void StampaCarta() {
-        System.out.println("POTERE: Aggiunge produzione da" + getProduction().getProductionCost().get(0).getCostNumber() + getProduction().getProductionCost().get(0).getCostColor() + " ad un punto fede e una risorsa a tua scelta\n " +
-                "NECESSITA: DevCard di livello 2 di colore" +getCostCardLevelTwo()+"\n"+
-                "VICTORY POINTS: " + getVictoryPoints());
+    public String StampaCarta() {
+        return "POTERE: Aggiunge produzione da" + getProduction().getProductionCost().get(0).getCostNumber() + getProduction().getProductionCost().get(0).getCostColor() + " ad un punto fede e una risorsa a tua scelta\n " +
+                "NECESSITA: DevCard di livello 2 di colore" + getCostCardLevelTwo() + "\n" +
+                "VICTORY POINTS: " + getVictoryPoints();
     }
 }
 //

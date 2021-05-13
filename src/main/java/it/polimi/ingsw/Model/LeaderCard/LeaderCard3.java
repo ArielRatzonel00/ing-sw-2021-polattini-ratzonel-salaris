@@ -38,11 +38,10 @@ private ArrayList<MarketMarble> ExtraRow;
     }
 
     @Override
-    public void StampaCarta() {
-        System.out.println("POTERE: Aggiunge un extra warehouse (di 2 spazi) di colore " + getColorOfExtraWarehouse() + "\n" +
+    public String StampaCarta() {
+        return "POTERE: Aggiunge un extra warehouse (di 2 spazi) di colore " + getColorOfExtraWarehouse() + "\n" +
                 "NECESSITA: 5 risorse di colore " + getColorCost() +  "\n" +
-                "VICTORY POINTS: " + getVictoryPoints()
-        );
+                "VICTORY POINTS: " + getVictoryPoints();
     }
 
     public ArrayList<MarketMarble> getExtraRow() {

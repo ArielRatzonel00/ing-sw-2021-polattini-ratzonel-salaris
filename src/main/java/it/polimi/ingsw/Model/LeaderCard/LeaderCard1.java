@@ -27,11 +27,10 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
         }
     }
     @Override
-    public void StampaCarta(){
-        System.out.println("POTERE: Trasforma palline bianche in palline : " + getNewColorMarble() + "\n" +
+    public String StampaCarta(){
+        return  "POTERE: Trasforma palline bianche in palline : " + getNewColorMarble() + "\n" +
                 "NECESSITA: 1 devCard colore " + getColorCostOne() + ", 2 devCard colore " + getColorCostTwo() + "\n" +
-                "VICTORY POINTS: " + getVictoryPoints()
-        );
+                "VICTORY POINTS: " + getVictoryPoints();
     }
 
     public DevelopmentCard.colorCard getColorCostOne() {

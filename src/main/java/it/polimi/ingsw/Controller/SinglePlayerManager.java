@@ -7,18 +7,19 @@ import it.polimi.ingsw.Observer.Observer;
 
 import java.util.ArrayList;
 
-public class SinglePlayerManager implements Observer<PlayerAction> {
+public class SinglePlayerManager  {
     private SinglePlayerGame game;
     private Player player;
 
 
-    public SinglePlayerManager(String nickname) {
-        player=new Player(nickname,new SinglePlayerFaithTrack());
+    public SinglePlayerManager(Player player) {
+        player= player;
         game = new SinglePlayerGame(player);
         StartGame();
     }
     public void StartGame() {
         player.AssignFourLeaderCard(game.getDeck().getTopFourLeaderCard());
+
         // scegli quali LeaderCard scartare, settaNumeroScelto1, settaNumeroScelto2
         //player.DiscardLeaderCard(NumeroScelto1);
         //player.DiscardLeaderCard(NumeroScelto2);

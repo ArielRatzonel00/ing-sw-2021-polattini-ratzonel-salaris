@@ -3,13 +3,14 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Observer.Observable;
 
 import java.awt.image.ColorConvertOp;
 import java.util.ArrayList;
 
 // Class that represents the Player
 
-public class Player {
+public class Player extends Observable {
     private String nickname;
     private FaithTrack faithTrack;
     private Warehouse warehouse;
@@ -42,6 +43,11 @@ public class Player {
     }
     public void AssignFourLeaderCard(ArrayList<LeaderCard> FourLeaderCards){
         this.leaderCards = FourLeaderCards;
+
+        notify(FourLeaderCards, 0);
+    }
+
+    private void notify(ArrayList<LeaderCard> fourLeaderCards, int codice) {
     }
 
     public String getNickname() {

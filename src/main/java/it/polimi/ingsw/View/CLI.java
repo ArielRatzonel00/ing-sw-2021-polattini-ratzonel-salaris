@@ -1,5 +1,141 @@
 package it.polimi.ingsw.View;
 
+
+import it.polimi.ingsw.Model.Player;
+
+//import it.polimi.ingsw.utils.gameMessage;
+
+public class CLI extends View {
+    private boolean SinglePlayer;
+
+    public CLI(Player player, boolean SinglePlayer) {
+        super(player);
+        this.SinglePlayer = SinglePlayer;
+    }
+
+    public void start() {
+        if (SinglePlayer) {
+            System.out.println("La partita Single Player è iniziata");
+            System.out.println("Scegli due carte tra queste LeaderCard, da scartare");
+
+
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+    private class MessageReceiver implements Observer<String> {
+
+        @Override
+        public void update(String message) {
+            System.out.println("Received: " + message);
+            try{
+                String[] inputs = message.split(",");
+                handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
+            }catch(IllegalArgumentException e){
+                clientConnection.asyncSend("Error!");
+            }
+        }
+
+    }
+
+    private ClientConnection clientConnection;
+
+    public RemoteView(Player player, String opponent, ClientConnection c) {
+        super(player);
+        this.clientConnection = c;
+        c.addObserver(new MessageReceiver());
+        c.asyncSend("Your opponent is: " + opponent);
+
+    }
+
+    @Override
+    protected void showMessage(Object message) {
+        clientConnection.asyncSend(message);
+    }
+
+    @Override
+    public void update(MoveMessage message)
+    {
+        showMessage(message.getBoard());
+        String resultMsg = "";
+        boolean gameOver = message.getBoard().isGameOver(message.getPlayer().getMarker());
+        boolean draw = message.getBoard().isFull();
+        if (gameOver) {
+            if (message.getPlayer() == getPlayer()) {
+                resultMsg = gameMessage.winMessage + "\n";
+            } else {
+                resultMsg = gameMessage.loseMessage + "\n";
+            }
+        }
+        else {
+            if (draw) {
+                resultMsg = gameMessage.drawMessage + "\n";
+            }
+        }
+        if(message.getPlayer() == getPlayer()){
+            resultMsg += gameMessage.waitMessage;
+        }
+        else{
+            resultMsg += gameMessage.moveMessage;
+        }
+
+        showMessage(resultMsg);
+    }
+
+}
+
+     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* package it.polimi.ingsw.View;
+
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Client.ClientController;
 import it.polimi.ingsw.Network.Server.ClientConnection;
@@ -18,12 +154,13 @@ public class CLI extends View{
     }
 
     @Override
-    protected void showMessage(Object message) {
+    protected void showMessage(String message) {
         clientConnection.asyncSend(message);
     }
     public void update(Mo)
 
 
+ */
 
 
 
@@ -48,6 +185,7 @@ public class CLI extends View{
 
 
 
+/*
     ClientController cLientController= new ClientController(this);
     private String nickname;
     private Boolean singleMulti=false; //False represent singlePlayer, True represent Multiplayer
@@ -66,3 +204,5 @@ public class CLI extends View{
         cLientController.updateInit(nickname,singleMulti);
     }
 }
+
+ */

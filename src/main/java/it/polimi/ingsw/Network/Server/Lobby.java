@@ -1,30 +1,63 @@
 package it.polimi.ingsw.Network.Server;
 
+import it.polimi.ingsw.Controller.MultiplayerGameManager;
+import it.polimi.ingsw.Controller.SinglePlayerManager;
 import it.polimi.ingsw.Model.MultiplayerGame;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.SinglePlayerFaithTrack;
 import it.polimi.ingsw.Model.SinglePlayerGame;
+import it.polimi.ingsw.View.CLI;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Lobby{
+public class Lobby {
     private static Lobby instance;
     private boolean isFull = true;
     private int nextGameNPlayers;
     private ArrayList<Player> Players = new ArrayList<>();
-    private MultiplayerGame MultiGame;
-    private SinglePlayerGame singleGame;
-
-
+    private SinglePlayerManager singleplayermanager;
+    private MultiplayerGameManager multiplayermanager;
+    Player player;
     //synchronized method to control simultaneous access
 
-    synchronized public static Lobby getInstance()
-    {
-        if (instance == null)
-        {
+    synchronized public static Lobby getInstance() {
+        if (instance == null) {
             // if instance is null, initialize
             instance = new Lobby();
         }
         return instance;
+    }
+    public void ManageNewPlayer(boolean multiplayer, String name){
+
+        if (multiplayer == false){
+            player = new Player(name, new SinglePlayerFaithTrack());
+            singleplayermanager = new SinglePlayerManager(player);
+
+        }
+    }
+
+
+
+
+
+
+
+}
+
+    /*
+
+
+    public void ManageNewPlayers(String choice, ClientConnection c, String name) throws IOException {
+        if (choice.equalsIgnoreCase( "S")){
+            Player player = new Player(name, new SinglePlayerFaithTrack());
+            new SinglePlayerManager(player);
+            new CLI(player, true);
+
+
+        }
+
+
     }
 
     public boolean isFull() {

@@ -5,17 +5,15 @@ import it.polimi.ingsw.Observer.Observable;
 
 import java.io.IOException;
 
-public abstract class View extends Observable<PlayerAction> implements Observer<Message>{
+public abstract class View {
     private Player player;
-    protected View(Player player){this.player = player};
+    public View(Player player){this.player = player;}
 
-    protected Player getPlayer() {
+    public Player getPlayer() {
         return player;
     }
-    protected abstract void showMessage(Object message);
-    void
+   // protected abstract void showMessage(String message);
 
-} {
 
-    public void run() throws IOException;
 }
+
