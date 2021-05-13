@@ -71,19 +71,22 @@ public class Client {
     }
 */
     public void run() throws IOException {
-        System.out.println("Connection established");
         Socket socket = new Socket(ip, port);
         System.out.println("Connection established");
         ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
         PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
         Scanner stdin = new Scanner(System.in);
-        while (true) {
             try {
+                while (true) {
+                    System.out.println(socketIn.readObject());
+                    socketOut.println(stdin.nextLine());
+                    socketOut.flush();
                 /*Thread t0 = asyncReadFromSocket(socketIn);
                 Thread t1 = asyncWriteToSocket(stdin, socketOut);
                 t0.join();
                 t1.join();*/
-            } catch (NoSuchElementException e) {
+                }
+            } catch (NoSuchElementException | ClassNotFoundException e) {
                 System.out.println("Connection closed from the client side");
             } finally {
                 stdin.close();
@@ -91,8 +94,6 @@ public class Client {
                 socketOut.close();
                 socket.close();
             }
-        }
-
     }
 }
 

@@ -32,19 +32,22 @@ public class SocketClientConnection implements Runnable, Observer{
     public void run(){
             Scanner in;
             String name;
-            Boolean multiPlayer;
+            Boolean multiPlayer=false;
             Lobby lobby = Lobby.getInstance();
             try{
                 in = new Scanner(socket.getInputStream());
                 out = new ObjectOutputStream(socket.getOutputStream());
                 send("Welcome!\nWhat is your name?");
-                String read = in.nextLine();
+                System.out.println("connessione affettuata");
+                String read = in.nextLine().toString();
                 name = read;
+                System.out.println("Nome ricevuto: "+name);
                 send("Do you want to play SinglePlayerGame(S) or MultiplayerGame(M)?");
                 read = in.nextLine();
                 if (read.equalsIgnoreCase("S")){
                     multiPlayer = false;
                 }
+                lobby.ManageNewPlayer(multiPlayer,name);
 
             } catch (IOException | NoSuchElementException e) {
                 System.err.println("Error!" + e.getMessage());
