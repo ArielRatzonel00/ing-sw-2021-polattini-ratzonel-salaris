@@ -5,7 +5,7 @@ import it.polimi.ingsw.Observer.Observable;
 
 import java.util.ArrayList;
 
-public class MultiplayerGame extends Observable<VirtualView> {
+public class MultiplayerGame extends Observable<MultiplayerGame> {
 
     // Class that represents the MultiplayerGame
 
@@ -18,8 +18,6 @@ public class MultiplayerGame extends Observable<VirtualView> {
         this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();
     }
-
-
     private int NumberOfPlayers = players.length;
 
     public Player[] getPlayers() {

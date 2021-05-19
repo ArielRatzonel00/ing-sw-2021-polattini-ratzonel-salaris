@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Controller.MultiplayerGameManager;
 import it.polimi.ingsw.Controller.SinglePlayerManager;
 import it.polimi.ingsw.Model.MultiplayerGame;
+import it.polimi.ingsw.Observer.Observer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -37,7 +38,11 @@ public class Server {
         SocketClientConnection socketConnection = new SocketClientConnection(socket, this,nextID);
         connections.add(socketConnection);
         nextID++;
-        VView.add(new VirtualView(socketConnection));
+        VirtualView nuovaVirtualView= new VirtualView(socketConnection);
+        nuovaVirtualView.setMultiplayerGameManager(multiplayerGameManager);
+        multiplayerGame.addObserver(nuovaVirtualView);
+        //VView.add(nuovaVirtualView);
+        socketConnection.addVirtualView(nuovaVirtualView);
         executor.submit(socketConnection);
     }
 
