@@ -30,6 +30,7 @@ public class Server {
         connections=new ArrayList<>();
         VView=new ArrayList<>();
         multiplayerGameManager=new MultiplayerGameManager();
+        multiplayerGame=new MultiplayerGame();
     }
     public void run() throws IOException {
         Socket socket = serverSocket.accept();
