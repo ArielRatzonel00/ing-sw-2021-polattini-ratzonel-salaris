@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Player extends Observable {
     private String nickname;
+    private int index;
     private FaithTrack faithTrack;
     private Warehouse warehouse;
     private Strongbox strongbox;
@@ -198,6 +199,10 @@ public class Player extends Observable {
 
     public ArrayList<Production> getProductionsAvaible() {
         return productionsAvailable;
+    }
+
+    public int getIndex() {
+        return index;
     }
 }
 
