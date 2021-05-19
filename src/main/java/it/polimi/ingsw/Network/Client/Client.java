@@ -15,6 +15,7 @@ public class Client {
     public Client(String ip, int port) {
         this.ip = ip;
         this.port = port;
+        
     }
 
     private boolean active = true;

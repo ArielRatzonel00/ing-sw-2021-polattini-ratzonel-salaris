@@ -15,10 +15,12 @@ public class SocketClientConnection implements Runnable, Observer{
     private ObjectOutputStream out;
     private Server server;
     int ID;
+    private VirtualView virtualView;
 
     public SocketClientConnection(Socket socket, Server server, int ID) {
         this.socket = socket;
         this.server = server;
+        this.ID=ID;
     }
     private synchronized void send(Object message) {
         try {
@@ -28,6 +30,10 @@ public class SocketClientConnection implements Runnable, Observer{
         } catch(IOException e){
             System.err.println(e.getMessage());
         }
+    }
+    public void addVirtualView(VirtualView vv){
+        virtualView=vv;
+
     }
     @Override
     public void run(){

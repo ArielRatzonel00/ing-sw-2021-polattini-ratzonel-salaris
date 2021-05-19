@@ -1,8 +1,11 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Network.Server.VirtualView;
+import it.polimi.ingsw.Observer.Observable;
+
 import java.util.ArrayList;
 
-public class MultiplayerGame {
+public class MultiplayerGame extends Observable<MultiplayerGame> {
 
     // Class that represents the MultiplayerGame
 
@@ -11,8 +14,7 @@ public class MultiplayerGame {
     private DevelopmentGrid developmentGrid;
     private MarkerStack markers ;
     private Deck deck = new Deck();
-    public MultiplayerGame(Player[] players) {
-        this.players = players;
+    public MultiplayerGame() {
         this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();
     }
