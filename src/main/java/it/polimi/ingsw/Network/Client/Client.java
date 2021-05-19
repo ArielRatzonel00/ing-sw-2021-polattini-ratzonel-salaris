@@ -76,6 +76,7 @@ public class Client {
         ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
         PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
         Scanner stdin = new Scanner(System.in);
+
             try {
                 while (true) {
                     System.out.println(socketIn.readObject());

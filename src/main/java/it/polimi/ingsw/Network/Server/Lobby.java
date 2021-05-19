@@ -33,8 +33,8 @@ public class Lobby {
         if (multiplayer == false){
             player = new Player(name, new SinglePlayerFaithTrack());
             singleplayermanager = new SinglePlayerManager(player);
-
         }
+
     }
 
 

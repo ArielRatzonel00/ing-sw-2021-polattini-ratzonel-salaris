@@ -14,8 +14,9 @@ public class SocketClientConnection implements Runnable, Observer{
     private Socket socket;
     private ObjectOutputStream out;
     private Server server;
+    int ID;
 
-    public SocketClientConnection(Socket socket, Server server) {
+    public SocketClientConnection(Socket socket, Server server, int ID) {
         this.socket = socket;
         this.server = server;
     }
@@ -37,13 +38,13 @@ public class SocketClientConnection implements Runnable, Observer{
             try{
                 in = new Scanner(socket.getInputStream());
                 out = new ObjectOutputStream(socket.getOutputStream());
+
                 send("Welcome!\nWhat is your name?");
-                System.out.println("connessione affettuata");
                 String read = in.nextLine().toString();
                 name = read;
-                System.out.println("Nome ricevuto: "+name);
                 send("Do you want to play SinglePlayerGame(S) or MultiplayerGame(M)?");
                 read = in.nextLine();
+
                 if (read.equalsIgnoreCase("S")){
                     multiPlayer = false;
                 }
