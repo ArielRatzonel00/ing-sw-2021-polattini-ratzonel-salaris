@@ -1,15 +1,12 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Controller.MultiplayerGameManager;
-import it.polimi.ingsw.Controller.SinglePlayerManager;
-import it.polimi.ingsw.Model.MultiplayerGame;
-import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.Controller.GameManager;
+import it.polimi.ingsw.Model.Model;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -18,8 +15,8 @@ public class Server {
     private int nextID=0;
     private ArrayList<SocketClientConnection> connections;
     private ArrayList<VirtualView> VView;
-    private MultiplayerGameManager multiplayerGameManager;
-    private MultiplayerGame multiplayerGame;
+    private GameManager multiplayerGameManager;
+    private Model multiplayerGame;
 
     ServerSocket serverSocket;
     ExecutorService executor = Executors.newCachedThreadPool();
@@ -30,8 +27,8 @@ public class Server {
         this.serverSocket = new ServerSocket(port);
         connections=new ArrayList<>();
         VView=new ArrayList<>();
-        multiplayerGameManager=new MultiplayerGameManager();
-        multiplayerGame=new MultiplayerGame();
+        multiplayerGameManager=new GameManager();
+        multiplayerGame=new Model();
     }
     public void run() throws IOException {
         Socket socket = serverSocket.accept();

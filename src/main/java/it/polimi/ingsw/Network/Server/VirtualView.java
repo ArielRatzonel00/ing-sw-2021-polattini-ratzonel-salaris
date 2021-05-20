@@ -1,15 +1,15 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Controller.MultiplayerGameManager;
-import it.polimi.ingsw.Model.MultiplayerGame;
+import it.polimi.ingsw.Controller.GameManager;
+import it.polimi.ingsw.Model.Model;
 import it.polimi.ingsw.Observer.Observer;
 
-public class VirtualView implements Observer<MultiplayerGame> {
+public class VirtualView implements Observer<Model> {
 
     private SocketClientConnection connection;
-    private MultiplayerGameManager multiplayerGameManager;
+    private GameManager multiplayerGameManager;
 
-    public void setMultiplayerGameManager(MultiplayerGameManager multiplayerGameManager) {
+    public void setMultiplayerGameManager(GameManager multiplayerGameManager) {
         this.multiplayerGameManager = multiplayerGameManager;
     }
 
@@ -18,7 +18,7 @@ public class VirtualView implements Observer<MultiplayerGame> {
     }
 
     @Override
-    public void update(MultiplayerGame message, int code) {
+    public void update(Model message, int code) {
 
     }
 }

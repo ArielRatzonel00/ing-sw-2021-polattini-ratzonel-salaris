@@ -1,26 +1,29 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Network.Server.VirtualView;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Observer.Observable;
 
 import java.util.ArrayList;
 
-public class MultiplayerGame extends Observable<MultiplayerGame> {
+public class Model extends Observable<Model> {
 
     // Class that represents the MultiplayerGame
 
-    private Player[] players;
+    private ArrayList<Player> players;
     private MarketTray marketTray;
     private DevelopmentGrid developmentGrid;
     private MarkerStack markers ;
     private Deck deck = new Deck();
-    public MultiplayerGame() {
+    private boolean IsSinglePlayerGame = false;
+    private Player CurrentPlayer;
+    public Model() {
         this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();
+        this.players = new ArrayList<>();
     }
-    private int NumberOfPlayers = players.length;
+    private int NumberOfPlayers = players.size();
 
-    public Player[] getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -36,31 +39,20 @@ public class MultiplayerGame extends Observable<MultiplayerGame> {
         return NumberOfPlayers;
     } // numero di giocatori
 
-    public void SetInitialResources(){
-        int i = 0;
-        for (Player player : players) {
-            if (i == 1) {
-                // Stampa all'utente 2 "scegli una risorsa a scelta con cui partire e in che riga la vuoi mettere,
-                // MarbleChosen = new Marble del colore scelto
-                //player.getWarehouse().addToRow(MarbleChosen,rowChosen)
-            } else if (i == 2) {
-                // Stampa all'utente 3 "scegli una risorsa a scelta con cui partire e in che riga la vuoi mettere,
-                // MarbleChosen = new Marble del colore scelto
-                //player.getWarehouse().addToRow(MarbleChosen,rowChosen)
-                player.getFaithTrack().setRedPosition(1);
-
-            } else if (i == 4) {
-                // Stampa all'utente 4 "scegli due risorse a scelta con cui partire e in che riga le vuoi mettere,
-                // MarbleChosen1 = new Marble del colore scelto
-                // MarbleChosen2 = new Marble del colore scelto
-                //player.getWarehouse().addToRow(MarbleChosen1,rowChosen1)
-                //player.getWarehouse().addToRow(MarbleChosen2,rowChosen2)
-                player.getFaithTrack().setRedPosition(1);
-
-            }
-            i++;
-        }
+    public void SetInitialResourcesForSecondPlayer(MarketMarble.ColorMarble colorMarble, int row) {
+        players.get(1).getWarehouse().addToRow(new MarketMarble(colorMarble), row);
     }
+    public void SetInitialResourcesForThirdPlayer(MarketMarble.ColorMarble colorMarble, int row) {
+        players.get(2).getWarehouse().addToRow(new MarketMarble(colorMarble), row);
+        players.get(2).getFaithTrack().setRedPosition(1);
+    }
+    public void SetInitialResourcesForForthPlayer(MarketMarble.ColorMarble colorMarble1, int row1,MarketMarble.ColorMarble colorMarble2, int row2 ) {
+        players.get(3).getWarehouse().addToRow(new MarketMarble(colorMarble1), row1);
+        players.get(3).getWarehouse().addToRow(new MarketMarble(colorMarble2), row2);
+        players.get(3).getFaithTrack().setRedPosition(1);
+    }
+
+
     public Player GetWinner() {
         int MaxPoints = 0;
         int MaxResources = 0;
