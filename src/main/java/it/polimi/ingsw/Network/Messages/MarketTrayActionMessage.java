@@ -1,4 +1,4 @@
-package it.polimi.ingsw.message;
+package it.polimi.ingsw.Network.Messages;
 
 public class MarketTrayActionMessage extends Message{
     private boolean isRow = false;

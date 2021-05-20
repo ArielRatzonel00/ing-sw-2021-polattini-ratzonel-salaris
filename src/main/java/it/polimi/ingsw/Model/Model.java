@@ -1,13 +1,17 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Observer.ModelObservable;
 import it.polimi.ingsw.Observer.Observable;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Model extends Observable<Model> {
+public class Model extends ModelObservable {
 
-    // Class that represents the MultiplayerGame
+    // Class that represents the Model
 
     private ArrayList<Player> players;
     private MarketTray marketTray;
@@ -16,6 +20,7 @@ public class Model extends Observable<Model> {
     private Deck deck = new Deck();
     private boolean IsSinglePlayerGame = false;
     private Player CurrentPlayer;
+    private int a;
     public Model() {
         this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();
@@ -80,7 +85,21 @@ public class Model extends Observable<Model> {
     public Deck getDeck() {
         return deck;
     }
+
+   /*
+    public int GetA() {
+        return a;
+    }
+    public void setA(int a) throws IOException {
+        this.a=a;
+        List<Integer> interi =new ArrayList<>();
+        interi.add(5);
+        interi.add(324);
+        notifyTest(new Message("abc",interi));
+    } */
 }
+
+
 
 
 

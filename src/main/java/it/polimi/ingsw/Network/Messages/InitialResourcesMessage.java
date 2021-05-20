@@ -1,4 +1,4 @@
-package it.polimi.ingsw.message;
+package it.polimi.ingsw.Network.Messages;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.Player;

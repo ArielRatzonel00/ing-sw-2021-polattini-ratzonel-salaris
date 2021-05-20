@@ -1,4 +1,4 @@
-package it.polimi.ingsw.message;
+package it.polimi.ingsw.Network.Messages;
 
 public class ResourcesFromStrongboxMessage extends Message{
     public ResourcesFromStrongboxMessage() {

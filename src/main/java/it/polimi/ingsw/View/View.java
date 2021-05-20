@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public abstract class View {
     private Player player;
-    public View(Player player){this.player = player;}
+    public View(){}
 
     public Player getPlayer() {
         return player;

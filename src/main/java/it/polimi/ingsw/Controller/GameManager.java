@@ -2,35 +2,41 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard1;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Network.Messages.*;
 import it.polimi.ingsw.Network.Server.VirtualView;
+import it.polimi.ingsw.Observer.ControllerObserver;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.Observer;
-import it.polimi.ingsw.message.*;
 
+import java.io.IOException;
 import java.util.*;
 
 
-public class GameManager extends Observable<Model> implements Observer<VirtualView> {
+public class GameManager extends Observable<Model> implements ControllerObserver<VirtualView> {
     private Model game;
     private Player CurrentPlayer;
     private ArrayList<Player> OtherPlayers;
     private boolean IsSinglePlayer = false;
     private boolean FinishGame = false;
+    private int a;
+
+    public GameManager(Model game) {
+        this.game = game;
+    }
 
     public void setSinglePlayer(boolean singlePlayer) {
         IsSinglePlayer = singlePlayer;
     }
+
     @Override
 
     public void updateInitialResource(InitialResourcesMessage initialResourcesMessage) {
-        if (initialResourcesMessage.getPlayerIndex() == 1){
+        if (initialResourcesMessage.getPlayerIndex() == 1) {
             game.getPlayers().get(1).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble1()), initialResourcesMessage.getRow1());
-        }
-        else if (initialResourcesMessage.getPlayerIndex() == 2){
+        } else if (initialResourcesMessage.getPlayerIndex() == 2) {
             game.getPlayers().get(2).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble1()), initialResourcesMessage.getRow1());
             game.getPlayers().get(2).getFaithTrack().setRedPosition(1);
-        }
-        else if (initialResourcesMessage.getPlayerIndex() == 3){
+        } else if (initialResourcesMessage.getPlayerIndex() == 3) {
             game.getPlayers().get(3).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble1()), initialResourcesMessage.getRow1());
             game.getPlayers().get(3).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble2()), initialResourcesMessage.getRow2());
             game.getPlayers().get(3).getFaithTrack().setRedPosition(1);
@@ -38,18 +44,31 @@ public class GameManager extends Observable<Model> implements Observer<VirtualVi
         game.getPlayers().get(initialResourcesMessage.getPlayerIndex()).AssignFourLeaderCard(game.getDeck().getTopFourLeaderCard());
     }
 
-    public void updateDiscardLeaderCards(DiscardLeaderCardMessage discardLeaderCardMessage){
-        game.getPlayers().get(discardLeaderCardMessage.getPlayerIndex()).DiscardLeaderCard(discardLeaderCardMessage.getIndexLeaderCard1());
-        game.getPlayers().get(discardLeaderCardMessage.getPlayerIndex()).DiscardLeaderCard(discardLeaderCardMessage.getIndexLeaderCard2()-1);
+    public void updateDiscardLeaderCards(DiscardInitialLeaderCardsMessage discardInitialLeaderCardsMessage) {
+        game.getPlayers().get(discardInitialLeaderCardsMessage.getPlayerIndex()).DiscardLeaderCard(discardInitialLeaderCardsMessage.getIndexLeaderCard1());
+        game.getPlayers().get(discardInitialLeaderCardsMessage.getPlayerIndex()).DiscardLeaderCard(discardInitialLeaderCardsMessage.getIndexLeaderCard2() - 1);
     }
 
 
-    public void updateActivateProduction(ActivateProductionMessage activateProductionMessage){
+    public void updateActivateProduction(ActivateProductionMessage activateProductionMessage) {
 
     }
-    public void updateWantToBuyCard(WantToBuyCardMessage wantToBuyCardMessage){
+
+    public void updateWantToBuyCard(WantToBuyCardMessage wantToBuyCardMessage) {
         ArrayList<CostOfCard> cost = game.getDevelopmentGrid().getSingleCell(wantToBuyCardMessage.getRow(), wantToBuyCardMessage.getCol()).getTopCard().getCost();
         game.getPlayers().get(wantToBuyCardMessage.getPlayerIndex()).CheckResourcesForAcquisition(cost);
+    }
+    public void updateBuyCard(BuyCardMessage buyCardMessage){
+        //game.getPlayers().get(buyCardMessage.getPlayerIndex()).getStrongbox().
+        //
+        int cont = 0;
+        for (CostOfCard c : buyCardMessage.getResourcesFromStrongbox()){
+            game.getPlayers().get(buyCardMessage.getPlayerIndex()).getStrongbox().RemoveResourcesFromStrongbox(c.getCostNumber(),c.getCostColor());
+        }
+        for (CostOfCard c2 : buyCardMessage.getResourcesFromWarehouse()){
+            game.getPlayers().get(buyCardMessage.getPlayerIndex()).getWarehouse().getRow(buyCardMessage.getRows().get(cont)).removeMarble(new MarketMarble(c2.getCostColor()), c2.getCostNumber());
+            cont ++;
+        }
     }
 
     public void updateMarketTrayAction(MarketTrayActionMessage marketTrayActionMessage) {
@@ -59,8 +78,10 @@ public class GameManager extends Observable<Model> implements Observer<VirtualVi
             game.getMarketTray().ShiftMatrixByCol(marketTrayActionMessage.getCol());
         }
     }
+
     public void updateDealWithAResourceFromMarketTray(DealWithAResourceFromMarketTrayMessage dealWithAResourceFromMarketTrayMessage) {
         if (dealWithAResourceFromMarketTrayMessage.isKeep()) {
+            game.getPlayers().get(dealWithAResourceFromMarketTrayMessage.getPlayerIndex()).getWarehouse().addToRow(new MarketMarble(dealWithAResourceFromMarketTrayMessage.getColorMarble()), dealWithAResourceFromMarketTrayMessage.getRowOfTheWarehouse());
 
         } else {
             for (Player otherplayer : game.getPlayers()) {
@@ -71,8 +92,25 @@ public class GameManager extends Observable<Model> implements Observer<VirtualVi
         }
     }
 
+    public void updateMoveResources(MoveResourcesMessage moveResourcesMessage) {
+        game.getPlayers().get(moveResourcesMessage.getPlayerIndex()).getWarehouse().MoveResource(moveResourcesMessage.getRow1(), moveResourcesMessage.getRow2());
+    }
 
+    public void updateDiscardLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage) {
 
+        if (game.getPlayers().get(leaderCardActionMessage.getPlayerIndex()).getLeaderCard(leaderCardActionMessage.getNLeaderCard()) != null) {
+            for (Player otherplayer : game.getPlayers()) {
+                if (!otherplayer.equals(game.getPlayers().get(leaderCardActionMessage.getPlayerIndex()))) {
+                    otherplayer.getFaithTrack().setRedPosition(1);
+                }
+            }
+        }
+        game.getPlayers().get(leaderCardActionMessage.getPlayerIndex()).DiscardLeaderCard(leaderCardActionMessage.getNLeaderCard());
+    }
+
+    public void updateActivateLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage) {
+        game.getPlayers().get(leaderCardActionMessage.getPlayerIndex()).getLeaderCard(leaderCardActionMessage.getNLeaderCard());
+    }
 
 
 
@@ -353,12 +391,23 @@ public class GameManager extends Observable<Model> implements Observer<VirtualVi
     }
 
 
-
+/*
     @Override
     public void update(VirtualView message, int code) {
 
     }
 
+
+    @Override
+    public void updateTest(SocketMessage message) throws IOException {
+
+    }
+
+ */
+
+    public void setA(int a) throws IOException {
+        game.setA(a);
+    }
 
 
 }
@@ -367,14 +416,8 @@ public class GameManager extends Observable<Model> implements Observer<VirtualVi
 
 
 
-    //metodo TURNO SUCCESSIVO
+//metodo TURNO SUCCESSIVO
 
-    //metodo FINISCI PARTITA
-    //metodo conta punti
-
-
-
-
-
-
+//metodo FINISCI PARTITA
+//metodo conta punti
 

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.message;
+package it.polimi.ingsw.Network.Messages;
 
     /**
      * Enum that contains all the possible types of message present

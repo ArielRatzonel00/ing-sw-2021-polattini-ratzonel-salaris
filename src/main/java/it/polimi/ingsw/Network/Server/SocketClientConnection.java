@@ -1,20 +1,30 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.Messanger;
+import it.polimi.ingsw.Network.Messages.SocketMessage;
 import it.polimi.ingsw.Observer.Observer;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class SocketClientConnection implements Runnable, Observer{
+public class SocketClientConnection extends Messanger implements Runnable, Observer{
     private Socket socket;
-    private ObjectOutputStream out;
+    protected ObjectOutputStream out;
+    private ObjectInputStream in;
     private Server server;
     int ID;
+
+    public Socket getSocket() {
+        return socket;
+    }
+
     private VirtualView virtualView;
 
     public SocketClientConnection(Socket socket, Server server, int ID) {
@@ -22,7 +32,7 @@ public class SocketClientConnection implements Runnable, Observer{
         this.server = server;
         this.ID=ID;
     }
-    private synchronized void send(Object message) {
+    public synchronized void send(Object message) {
         try {
             out.reset();
             out.writeObject(message);
@@ -35,28 +45,26 @@ public class SocketClientConnection implements Runnable, Observer{
         virtualView=vv;
 
     }
+
+    public ObjectOutputStream getOut() {
+        return out;
+    }
+
     @Override
     public void run(){
-            Scanner in;
             String name;
             Boolean multiPlayer=false;
             Lobby lobby = Lobby.getInstance();
             try{
-                in = new Scanner(socket.getInputStream());
+                in = new ObjectInputStream(socket.getInputStream());
                 out = new ObjectOutputStream(socket.getOutputStream());
+                int a=(int)in.readObject();
+                System.out.println("ricevuto:"+a);
+                virtualView.getGameManager().setA(a);
+                SocketMessage messaggio= (SocketMessage) in.readObject();
+                receiveMessage(messaggio);
 
-                send("Welcome!\nWhat is your name?");
-                String read = in.nextLine().toString();
-                name = read;
-                send("Do you want to play SinglePlayerGame(S) or MultiplayerGame(M)?");
-                read = in.nextLine();
-
-                if (read.equalsIgnoreCase("S")){
-                    multiPlayer = false;
-                }
-                lobby.ManageNewPlayer(multiPlayer,name);
-
-            } catch (IOException | NoSuchElementException e) {
+            } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
                 System.err.println("Error!" + e.getMessage());
             }finally{
 
@@ -80,6 +88,19 @@ public class SocketClientConnection implements Runnable, Observer{
             }
         }
 
+    }
+
+  /*  @Override
+    public void updateTest(Message message) throws IOException {
+    }
+*/
+    @Override
+    public void receiveMessage(SocketMessage message) throws IOException {
+        switch (message.getID()){
+            case "2Players":
+                System.out.println("funziona 2 player");
+                break;
+        }
     }
 }
 

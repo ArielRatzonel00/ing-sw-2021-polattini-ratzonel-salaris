@@ -21,7 +21,8 @@ public class SinglePlayerGame {
         this.marketTray = new MarketTray();
         this.markers = new MarkerStack(); // creare classe MarkerStack
     }
-    public it.polimi.ingsw.Model.Player getPlayer() {
+
+    public Player getPlayer() {
         return Player;
     }
 

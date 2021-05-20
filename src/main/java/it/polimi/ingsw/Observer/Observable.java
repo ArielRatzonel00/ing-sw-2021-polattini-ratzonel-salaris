@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Observer;
 
+import it.polimi.ingsw.Network.Messages.Message;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +38,13 @@ public class Observable<T> {
             }
         }
     }
+
+    /*protected void notifyTest(Message message) throws IOException {
+        synchronized (observers) {
+            for(Observer<T> observer : observers){
+                observer.updateTest(message);
+            }
+        }
+    }*/
 
 }

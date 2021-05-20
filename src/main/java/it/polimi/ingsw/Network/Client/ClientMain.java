@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Network.Client;
 
+import it.polimi.ingsw.View.Cli;
+
 import java.io.IOException;
 
 public class ClientMain {
@@ -11,6 +13,10 @@ public class ClientMain {
 
         Client client = new Client("127.0.0.1", 1336);
         try {
+            Cli cli=new Cli();
+            ClientView clientView=new ClientView();
+            client.setClientView(clientView);
+
             client.run();
         } catch (IOException e) {
             System.err.println(e.getMessage());

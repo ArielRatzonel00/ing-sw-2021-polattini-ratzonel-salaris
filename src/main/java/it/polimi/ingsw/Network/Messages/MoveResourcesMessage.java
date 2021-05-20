@@ -1,4 +1,4 @@
-package it.polimi.ingsw.message;
+package it.polimi.ingsw.Network.Messages;
 
 public class MoveResourcesMessage extends Message{
    private int PlayerIndex = 0;
