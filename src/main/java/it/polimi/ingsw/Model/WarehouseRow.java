@@ -31,10 +31,12 @@ public class WarehouseRow {
     } // Method that adds a Marble in the row, the method returns true if it can be done and false if not
 
 
-    public boolean removeMarble(MarketMarble MarketMarble){
-        if(MarketMarble.getColorMarble().equals(color) && marbles.size()>0) {
-            marbles.remove(marbles.size() - 1);
-            return true;
+    public boolean removeMarble(MarketMarble MarketMarble, int num){
+        for (int i = 0; i < num; i++) {
+            if (MarketMarble.getColorMarble().equals(color) && marbles.size() > 0) {
+                marbles.remove(marbles.size() - 1);
+                return true;
+            }
         }
         return false;
     } // Method that removes a Marble in the row, the method returns true if it can be done and false if not

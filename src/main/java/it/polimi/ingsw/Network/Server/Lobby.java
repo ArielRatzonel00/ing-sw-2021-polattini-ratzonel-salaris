@@ -1,14 +1,10 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Controller.MultiplayerGameManager;
+import it.polimi.ingsw.Controller.GameManager;
 import it.polimi.ingsw.Controller.SinglePlayerManager;
-import it.polimi.ingsw.Model.MultiplayerGame;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SinglePlayerFaithTrack;
-import it.polimi.ingsw.Model.SinglePlayerGame;
-import it.polimi.ingsw.View.CLI;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Lobby {
@@ -17,7 +13,7 @@ public class Lobby {
     private int nextGameNPlayers;
     private ArrayList<Player> Players = new ArrayList<>();
     private SinglePlayerManager singleplayermanager;
-    private MultiplayerGameManager multiplayermanager;
+    private GameManager multiplayermanager;
     Player player;
     //synchronized method to control simultaneous access
 

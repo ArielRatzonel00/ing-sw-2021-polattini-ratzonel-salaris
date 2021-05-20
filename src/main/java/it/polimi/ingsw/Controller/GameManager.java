@@ -2,34 +2,82 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard1;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Network.Server.VirtualView;
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.message.*;
 
 import java.util.*;
 
 
-public class MultiplayerGameManager {
-    private MultiplayerGame game;
+public class GameManager extends Observable<Model> implements Observer<VirtualView> {
+    private Model game;
     private Player CurrentPlayer;
     private ArrayList<Player> OtherPlayers;
+    private boolean IsSinglePlayer = false;
     private boolean FinishGame = false;
 
-    //Qua creiamo il game:
-    /*
-    public MultiplayerManager(){
-    game = new MultiplayerGame(get Players);
+    public void setSinglePlayer(boolean singlePlayer) {
+        IsSinglePlayer = singlePlayer;
     }
-     */
+    @Override
 
-    public void StartGame() {
-        game.SetInitialResources();
-        for (Player player : game.getPlayers()) {
-            player.AssignFourLeaderCard(game.getDeck().getTopFourLeaderCard());
+    public void updateInitialResource(InitialResourcesMessage initialResourcesMessage) {
+        if (initialResourcesMessage.getPlayerIndex() == 1){
+            game.getPlayers().get(1).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble1()), initialResourcesMessage.getRow1());
         }
-        for (Player player : game.getPlayers()) {
-            // scegli quali LeaderCard scartare
-            //player.DiscardLeaderCard(NumeroScelto1);
-            //player.DiscardLeaderCard(NumeroScelto2);
+        else if (initialResourcesMessage.getPlayerIndex() == 2){
+            game.getPlayers().get(2).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble1()), initialResourcesMessage.getRow1());
+            game.getPlayers().get(2).getFaithTrack().setRedPosition(1);
+        }
+        else if (initialResourcesMessage.getPlayerIndex() == 3){
+            game.getPlayers().get(3).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble1()), initialResourcesMessage.getRow1());
+            game.getPlayers().get(3).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble2()), initialResourcesMessage.getRow2());
+            game.getPlayers().get(3).getFaithTrack().setRedPosition(1);
+        }
+        game.getPlayers().get(initialResourcesMessage.getPlayerIndex()).AssignFourLeaderCard(game.getDeck().getTopFourLeaderCard());
+    }
+
+    public void updateDiscardLeaderCards(DiscardLeaderCardMessage discardLeaderCardMessage){
+        game.getPlayers().get(discardLeaderCardMessage.getPlayerIndex()).DiscardLeaderCard(discardLeaderCardMessage.getIndexLeaderCard1());
+        game.getPlayers().get(discardLeaderCardMessage.getPlayerIndex()).DiscardLeaderCard(discardLeaderCardMessage.getIndexLeaderCard2()-1);
+    }
+
+
+    public void updateActivateProduction(ActivateProductionMessage activateProductionMessage){
+
+    }
+    public void updateWantToBuyCard(WantToBuyCardMessage wantToBuyCardMessage){
+        ArrayList<CostOfCard> cost = game.getDevelopmentGrid().getSingleCell(wantToBuyCardMessage.getRow(), wantToBuyCardMessage.getCol()).getTopCard().getCost();
+        game.getPlayers().get(wantToBuyCardMessage.getPlayerIndex()).CheckResourcesForAcquisition(cost);
+    }
+
+    public void updateMarketTrayAction(MarketTrayActionMessage marketTrayActionMessage) {
+        if (marketTrayActionMessage.isRow()) {
+            game.getMarketTray().ShiftMatrixByRow(marketTrayActionMessage.getRow());
+        } else {
+            game.getMarketTray().ShiftMatrixByCol(marketTrayActionMessage.getCol());
         }
     }
+    public void updateDealWithAResourceFromMarketTray(DealWithAResourceFromMarketTrayMessage dealWithAResourceFromMarketTrayMessage) {
+        if (dealWithAResourceFromMarketTrayMessage.isKeep()) {
+
+        } else {
+            for (Player otherplayer : game.getPlayers()) {
+                if (!otherplayer.equals(game.getPlayers().get(dealWithAResourceFromMarketTrayMessage.getPlayerIndex()))) {
+                    otherplayer.getFaithTrack().setRedPosition(1);
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 
     public boolean PlayTurn(int type) {
         boolean MoveResources = false;
@@ -303,6 +351,14 @@ public class MultiplayerGameManager {
 
         }
     }
+
+
+
+    @Override
+    public void update(VirtualView message, int code) {
+
+    }
+
 
 
 }
