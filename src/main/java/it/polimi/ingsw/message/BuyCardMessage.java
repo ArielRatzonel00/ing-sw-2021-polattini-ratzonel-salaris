@@ -4,13 +4,17 @@ import it.polimi.ingsw.Model.CostOfCard;
 
 import java.util.ArrayList;
 
-public class BuyCardMessage {
+public class BuyCardMessage extends Message{
+    private int PlayerIndex = 0;
     private ArrayList<CostOfCard> ResourcesFromStrongbox;
     private ArrayList<CostOfCard> ResourcesFromWarehouse;
     private ArrayList<Integer> rows;
-
     public ArrayList<CostOfCard> getResourcesFromStrongbox() {
         return ResourcesFromStrongbox;
+    }
+
+    public BuyCardMessage() {
+        this.typeOfMessage = "BuyCardMessage";
     }
 
     public void setResourcesFromStrongbox(ArrayList<CostOfCard> resourcesFromStrongbox) {
@@ -31,5 +35,13 @@ public class BuyCardMessage {
 
     public void setRows(ArrayList<Integer> rows) {
         this.rows = rows;
+    }
+
+    public int getPlayerIndex() {
+        return PlayerIndex;
+    }
+
+    public void setPlayerIndex(int playerIndex) {
+        PlayerIndex = playerIndex;
     }
 }

@@ -5,12 +5,16 @@ import it.polimi.ingsw.Model.Player;
 
 import java.util.ArrayList;
 
-public class InitialResourcesMessage {
+public class InitialResourcesMessage extends Message{
     private int PlayerIndex = 0;
     private MarketMarble.ColorMarble colorMarble1;
     private int row1;
     private MarketMarble.ColorMarble colorMarble2;
     private int row2;
+
+    public InitialResourcesMessage() {
+        this.typeOfMessage = "InitialResourcesMessage";
+    }
 
     public void setPlayerIndex(int playerIndex) {
         PlayerIndex = playerIndex;

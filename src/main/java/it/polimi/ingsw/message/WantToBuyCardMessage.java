@@ -4,7 +4,11 @@ import it.polimi.ingsw.Model.CostOfCard;
 
 import java.util.ArrayList;
 
-public class WantToBuyCardMessage {
+public class WantToBuyCardMessage extends Message {
+    public WantToBuyCardMessage() {
+        this.typeOfMessage = "WantToBuyCardMessage";
+    }
+
     int PlayerIndex = 0;
     int row = 0;
     int col = 0;

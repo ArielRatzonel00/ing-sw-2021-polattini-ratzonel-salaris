@@ -45,9 +45,7 @@ public class Warehouse {
         return rows.get(rowNumber).addMarble(coloredMarble);
     } // The method adds a Marble into the WarehouseRow selected, the method returns true if it can be added and returns false if not. If the row is a Extrarow there is an extra check that controls if the Marble has the color of the WarehouseRow color
 
-    public boolean RemoveFromRow(MarketMarble coloredMarble, int rowNumber){
-        return rows.get(rowNumber).removeMarble(coloredMarble);
-    } //The method removes a Marble int the WarehouseRow selected, the method returns true if it can be removed and returns false if not
+
 
     public boolean MoveResource(int rowNumber1, int rowNumber2){
         if (rowNumber1 == 3 || rowNumber1 == 4 || rowNumber2 == 3 ||rowNumber2 == 4 ){

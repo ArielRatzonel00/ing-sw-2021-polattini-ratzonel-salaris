@@ -5,13 +5,16 @@ import it.polimi.ingsw.Model.Marble.MarketMarble;
 
 import java.util.ArrayList;
 
-public class ActivateProductionMessage {
+public class ActivateProductionMessage extends Message {
     private int PlayerIndex = 0;
     private ArrayList<Integer> productions;
     private ArrayList<CostOfCard> ProductionBasicCost;
     private MarketMarble.ColorMarble ProductionBasicProfit;
     private ArrayList<CostOfCard> Production4Profit;
     private ArrayList<CostOfCard> Production5Profit;
+    public ActivateProductionMessage(){
+        this.typeOfMessage = "ActivateProductionMessage";
+    }
 
     public void setProductions(ArrayList<Integer> productions) {
         this.productions = productions;

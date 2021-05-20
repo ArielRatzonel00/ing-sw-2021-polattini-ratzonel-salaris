@@ -1,9 +1,13 @@
 package it.polimi.ingsw.message;
 
-public class MarketTrayActionMessage {
+public class MarketTrayActionMessage extends Message{
     private boolean isRow = false;
     int row = 0;
     int col = 0;
+
+    public MarketTrayActionMessage() {
+        this.typeOfMessage = "MarketTrayActionMessage";
+    }
 
     public boolean isRow() {
         return isRow;

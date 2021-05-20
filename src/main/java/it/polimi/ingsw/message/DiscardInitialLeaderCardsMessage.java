@@ -1,9 +1,13 @@
 package it.polimi.ingsw.message;
 
-public class DiscardLeaderCardMessage {
+public class DiscardInitialLeaderCardsMessage extends Message{
     private int PlayerIndex = 0;
     private int IndexLeaderCard1 = 0;
     private int IndexLeaderCard2 = 0;
+
+    public DiscardInitialLeaderCardsMessage() {
+        this.typeOfMessage = "DiscardInitialLeaderCardsMessage";
+    }
 
     public int getPlayerIndex() {
         return PlayerIndex;

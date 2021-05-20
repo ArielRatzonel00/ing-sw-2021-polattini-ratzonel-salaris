@@ -2,11 +2,15 @@ package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
-public class DealWithAResourceFromMarketTrayMessage {
+public class DealWithAResourceFromMarketTrayMessage extends Message{
     private int PlayerIndex = 0;
     private boolean keep = false;
     private int rowOfTheWarehouse = 0;
-    private MarketMarble.ColorMarble colorChangeWhite;
+    private MarketMarble.ColorMarble colorMarble;
+
+    public DealWithAResourceFromMarketTrayMessage() {
+        this.typeOfMessage = "DealWithAResourceFromMarketTrayMessage";
+    }
 
     public boolean isKeep() {
         return keep;
@@ -24,12 +28,12 @@ public class DealWithAResourceFromMarketTrayMessage {
         this.rowOfTheWarehouse = rowOfTheWarehouse;
     }
 
-    public MarketMarble.ColorMarble getColorChangeWhite() {
-        return colorChangeWhite;
+    public MarketMarble.ColorMarble getColorMarble() {
+        return colorMarble;
     }
 
-    public void setColorChangeWhite(MarketMarble.ColorMarble colorChangeWhite) {
-        this.colorChangeWhite = colorChangeWhite;
+    public void setColorMarble(MarketMarble.ColorMarble colorMarble) {
+        this.colorMarble = colorMarble;
     }
 
     public int getPlayerIndex() {
