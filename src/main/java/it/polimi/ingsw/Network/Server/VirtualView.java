@@ -23,11 +23,10 @@ public class VirtualView extends Observable implements ModelObserver<Model> {
         this.connection = connection;
     }
 
-    @Override
+   @Override
     public void update(Model message, int code) {
         System.out.println("A updated");
-        System.out.println("A vale"+message.GetA());
-        connection.send(message.GetA());
+
     }
 
    /* @Override
