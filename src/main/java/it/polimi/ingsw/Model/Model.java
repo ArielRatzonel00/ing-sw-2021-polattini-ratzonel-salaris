@@ -26,7 +26,6 @@ public class Model extends ModelObservable {
         this.marketTray = new MarketTray();
         this.players = new ArrayList<>();
     }
-    private int NumberOfPlayers = players.size();
 
     public ArrayList<Player> getPlayers() {
         return players;
@@ -41,7 +40,10 @@ public class Model extends ModelObservable {
     }
 
     public int getNumberOfPlayers() {
-        return NumberOfPlayers;
+        if (players!=null)
+        return players.size();
+        else
+            return 0;
     } // numero di giocatori
 
     public void SetInitialResourcesForSecondPlayer(MarketMarble.ColorMarble colorMarble, int row) {

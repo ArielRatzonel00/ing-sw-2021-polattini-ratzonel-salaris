@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -19,6 +20,7 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
     protected ObjectOutputStream out;
     private ObjectInputStream in;
     private Server server;
+    boolean first;
     int ID;
 
     public Socket getSocket() {
@@ -54,15 +56,19 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
     public void run(){
             String name;
             Boolean multiPlayer=false;
-            Lobby lobby = Lobby.getInstance();
+
             try{
                 in = new ObjectInputStream(socket.getInputStream());
                 out = new ObjectOutputStream(socket.getOutputStream());
-                int a=(int)in.readObject();
-                System.out.println("ricevuto:"+a);
-                virtualView.getGameManager().setA(a);
-                SocketMessage messaggio= (SocketMessage) in.readObject();
-                receiveMessage(messaggio);
+                server.handleConnections(this);
+
+                SocketMessage message=(SocketMessage) in.readObject();
+                receiveMessage(message);
+                //virtualView.getGameManager().setA(a);
+                while(true) {
+                    SocketMessage messaggio = (SocketMessage) in.readObject();
+                    receiveMessage(messaggio);
+                }
 
             } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
                 System.err.println("Error!" + e.getMessage());
@@ -97,9 +103,29 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
     @Override
     public void receiveMessage(SocketMessage message) throws IOException {
         switch (message.getID()){
-            case "2Players":
-                System.out.println("funziona 2 player");
+            case "newMulti":
+                String sender= message.getSender();
+                if(message.getValue()==0) {
+                    System.out.println("singleplayer chosen, start the game...");
+                    server.handleNewPlayer(false, message.getSender(),this);
+                }
+                else {
+                    System.out.println("multiplayer chosen, check lobby...");
+                    server.handleNewPlayer(true, sender,this);
+                    if(first) {//CASO IN CUI SI E' il primo giocatore
+                        System.out.println("first connection, let's ask how many players");
+                        sendMessage(getOut(), new SocketMessage("numberOfPlayers", 0, Collections.singletonList(sender), "server"));
+                    }
+                    sendMessage(getOut(),new SocketMessage("waiting",0,Collections.singletonList(sender),"server"));
+                }
                 break;
+            case "numberOfPlayersReply":
+                server.setNextGameNPlayers(message.getValue());
+                break;
+            default:
+                System.out.println("errore nell'id del messaggio");
+                break;
+
         }
     }
 }

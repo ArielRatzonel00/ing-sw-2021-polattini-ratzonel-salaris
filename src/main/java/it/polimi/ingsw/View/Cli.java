@@ -1,23 +1,83 @@
 package it.polimi.ingsw.View;
 
 
-import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Network.Client.UserInterface;
+import it.polimi.ingsw.Observer.ViewObservable;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 //import it.polimi.ingsw.utils.gameMessage;
 
-public class CLI extends View {
+public class Cli extends ViewObservable implements UserInterface {
     private boolean SinglePlayer;
+    private final PrintStream out;
+    String response;
 
-    public CLI(Player player, boolean SinglePlayer) {
-        super(player);
-        this.SinglePlayer = SinglePlayer;
+    public Cli() {
+        out=System.out;
+    }
+
+
+    @Override
+    public void askOnline(Scanner scanner){
+    out.println("Would you like to play Online or Offline? (ON/OFF)");
+    response=scanner.nextLine();
+    Boolean online=false;
+    if(response.equalsIgnoreCase("ON"))
+        online=true;
+    final boolean onlineFinal=online;  //lambda expression require final parameter
+        notifyObserver(obs -> {
+            try {
+                obs.updateOnline(onlineFinal);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void askMultiplayer(Scanner scanner){
+        out.println("Would you play SinglePlayer or Multiplayer? (S/M)");
+        response=scanner.nextLine();
+        boolean multiplayer=true;
+        if(response.equalsIgnoreCase("S"))
+            multiplayer=false;
+        final boolean multiplayerFinal=multiplayer;
+        notifyObserver(obs-> {
+            try {
+                obs.updateMultiplayer(multiplayerFinal);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void askNickname(Scanner scanner) {
+        out.println("Insert your nickname:");
+        String name= scanner.nextLine();
+        notifyObserver(obs->obs.updateNickname(name));
+    }
+
+    @Override
+    public void askNumberOfPlayers(Scanner scanner) {
+        System.out.println("How many players in the game (2-4)?");
+        int numberOfPlayers=scanner.nextInt();
+        notifyObserver(obs-> {
+            try {
+                obs.updateNumberOfPlayers(numberOfPlayers);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void start() {
         if (SinglePlayer) {
             System.out.println("La partita Single Player è iniziata");
             System.out.println("Scegli due carte tra queste LeaderCard, da scartare");
-
 
         }
 

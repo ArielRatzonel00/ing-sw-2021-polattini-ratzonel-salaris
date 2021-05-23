@@ -44,7 +44,7 @@ class WarehouseRowTest {
         assertFalse(Row3.addMarble(Grey), "La grey è in Row3 -> 4");//no perchè spazio pieno
     }
 
-    @Test
+   /* @Test
     @DisplayName("Remove marbles from rows")
     void removeMarble() {
         assertFalse(Row1.removeMarble(Grey),"La grey non c'è quindi non può essere rimossa");
@@ -60,5 +60,5 @@ class WarehouseRowTest {
     @Test
     void changeMarbles() { //i controlli avvengono in warehouse quindi inutile testare qui
 
-    }
+    }*/
 }

@@ -9,10 +9,9 @@ import java.net.Socket;
 public abstract class  Messanger {
 
     public synchronized void sendMessage(ObjectOutputStream out, SocketMessage message) throws IOException {
-        System.out.println("Stream creato");
         out.reset();
         out.writeObject(message);
-        System.out.println("inviato");
+        System.out.println("Messaggio inviato");
         out.flush();
     }
 

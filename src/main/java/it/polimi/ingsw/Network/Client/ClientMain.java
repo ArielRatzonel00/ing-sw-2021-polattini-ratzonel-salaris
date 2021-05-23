@@ -11,11 +11,11 @@ public class ClientMain {
             if(true)
                 GUI=false;
 
-        Client client = new Client("127.0.0.1", 1336);
+
         try {
             Cli cli=new Cli();
-            ClientView clientView=new ClientView();
-            client.setClientView(clientView);
+            Client client = new Client("127.0.0.1", 1336,cli);
+            cli.addObserver(client);
 
             client.run();
         } catch (IOException e) {

@@ -405,9 +405,9 @@ public class GameManager extends Observable<Model> implements ControllerObserver
 
  */
 
-    public void setA(int a) throws IOException {
+    /*public void setA(int a) throws IOException {
         game.setA(a);
-    }
+    }*/
 
 
 }
