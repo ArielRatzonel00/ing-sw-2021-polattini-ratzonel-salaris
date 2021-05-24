@@ -18,19 +18,19 @@ public class Player extends Observable {
     private Strongbox strongbox;
     private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
     private SlotsBoard slotsBoard;
+    private boolean IsYourTurn = false;
     private boolean isFirst;
     private int DiscountGrey = 0;
     private int DiscountYellow = 0;
     private int DiscountPurple = 0;
     private int DiscountBlue = 0;
     private int TotalPoints = 0;
+    private boolean SinglePlayer = false;
     private ArrayList<Production> productionsAvailable = new ArrayList<>(4);
 
 
-    public Player(String nickname,  FaithTrack faithTrack) {
-
+    public Player(String nickname) {
         this.nickname = nickname;
-        this.faithTrack = faithTrack;
         this.warehouse = new Warehouse();
         this.strongbox = new Strongbox();
         //this.leaderCards = FourLeaderCards;
@@ -108,13 +108,19 @@ public class Player extends Observable {
         }
         return true;
     }
-    public boolean CheckResourcesForProduce(ArrayList<CostOfCard> cost) {
-        for (CostOfCard costOfCard : cost){
-                if (costOfCard.getCostNumber() > this.getWarehouse().getNumberOfResource(costOfCard.getCostColor()) + this.getStrongbox().CountResources(costOfCard.getCostColor())){
-                    return false;
-                }
-
-            }
+    public boolean CheckResourcesForProduce(int[] cost) {
+        if (cost[0] > this.getWarehouse().getNumberOfResource(MarketMarble.ColorMarble.BLUE) + this.getStrongbox().CountResources(MarketMarble.ColorMarble.BLUE)){
+            return false;
+        }
+        if (cost[1] > this.getWarehouse().getNumberOfResource(MarketMarble.ColorMarble.GREY) + this.getStrongbox().CountResources(MarketMarble.ColorMarble.GREY)){
+            return false;
+        }
+        if (cost[2] > this.getWarehouse().getNumberOfResource(MarketMarble.ColorMarble.PURPLE) + this.getStrongbox().CountResources(MarketMarble.ColorMarble.PURPLE)){
+            return false;
+        }
+        if (cost[3] > this.getWarehouse().getNumberOfResource(MarketMarble.ColorMarble.YELLOW) + this.getStrongbox().CountResources(MarketMarble.ColorMarble.YELLOW)){
+            return false;
+        }
         return true;
     }
     public void DiscardLeaderCard(int index){
@@ -153,6 +159,12 @@ public class Player extends Observable {
 
     public void setProductionsAvaible(int slot){
         productionsAvailable.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
+    }
+    public boolean ProductionIsAvailable(int index){
+        return productionsAvailable.get(index) != null;
+    }
+    public void buyCard(DevelopmentCard card, int slot){
+        slotsBoard.getSlots().get(slot).addCard(card);
     }
     public void newProductionFromLeaderCard(Production production){
         productionsAvailable.add(production);
@@ -203,6 +215,22 @@ public class Player extends Observable {
 
     public int getIndex() {
         return index;
+    }
+
+    public boolean isSinglePlayer() {
+        return SinglePlayer;
+    }
+
+    public void setSinglePlayer(boolean singlePlayer) {
+        SinglePlayer = singlePlayer;
+    }
+
+    public boolean isYourTurn() {
+        return IsYourTurn;
+    }
+
+    public void setYourTurn(boolean yourTurn) {
+        IsYourTurn = yourTurn;
     }
 }
 

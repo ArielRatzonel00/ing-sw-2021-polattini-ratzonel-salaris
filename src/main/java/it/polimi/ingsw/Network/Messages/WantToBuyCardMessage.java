@@ -8,7 +8,7 @@ public class WantToBuyCardMessage extends Message {
     public WantToBuyCardMessage() {
         this.typeOfMessage = "WantToBuyCardMessage";
     }
-
+    int slot;
     int PlayerIndex = 0;
     int row = 0;
     int col = 0;
@@ -44,5 +44,13 @@ public class WantToBuyCardMessage extends Message {
 
     public void setPlayerIndex(int playerIndex) {
         PlayerIndex = playerIndex;
+    }
+
+    public int getSlot() {
+        return slot;
+    }
+
+    public void setSlot(int slot) {
+        this.slot = slot;
     }
 }

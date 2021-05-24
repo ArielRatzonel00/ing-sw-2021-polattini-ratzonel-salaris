@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Warehouse {
 
     private ArrayList<WarehouseRow> rows = new ArrayList<>();
+    private int ExtraWarehouseRows = 0;
 
     public Warehouse() {
         this.rows.add(new WarehouseRow(1));
@@ -18,12 +19,23 @@ public class Warehouse {
         return rows.get(rowNumber);
     } // returns the WarehouseRow selected
 
-    public boolean addToRow(MarketMarble coloredMarble, int rowNumber){
-        if (rowNumber == 3 || rowNumber == 4){
-            if (!(coloredMarble.getColorMarble().equals(getRow(rowNumber).getColor()))){
+    public boolean addToRow(MarketMarble coloredMarble, int rowNumber) {
+        if (rowNumber < 0 || rowNumber > 4){
+            return false;
+        }
+        else if (rowNumber == 3){
+            if (ExtraWarehouseRows == 0)
                 return false;
-            }
-        }else if(rowNumber == 0){
+            else if (!(coloredMarble.getColorMarble().equals(getRow(rowNumber).getColor())))
+                return false;
+        }
+        else if (rowNumber == 4){
+            if (ExtraWarehouseRows < 2)
+                return false;
+            else if (!(coloredMarble.getColorMarble().equals(getRow(rowNumber).getColor())))
+                return false;
+        }
+        else if(rowNumber == 0){
             if((rows.get(1).getColor() == coloredMarble.getColorMarble())||(rows.get(2).getColor() == coloredMarble.getColorMarble())){
                 return false;
             }
@@ -38,13 +50,8 @@ public class Warehouse {
                 return false;
             }
         }
-        else {
-            return false;
-        }
-
         return rows.get(rowNumber).addMarble(coloredMarble);
     } // The method adds a Marble into the WarehouseRow selected, the method returns true if it can be added and returns false if not. If the row is a Extrarow there is an extra check that controls if the Marble has the color of the WarehouseRow color
-
 
 
     public boolean MoveResource(int rowNumber1, int rowNumber2){
@@ -73,6 +80,26 @@ public class Warehouse {
         }
         return i;
     } // the method returns the number of Resources in the Warehouse that have the color selected
+    public boolean CheckRow(int row, int NumberOfMarbles, MarketMarble.ColorMarble colorMarble){
+        if (row < 0 || row > 4){
+            return false;
+        }
+        else if (row == 3){
+            if (ExtraWarehouseRows == 0)
+                return false;
+            else if (!(colorMarble.equals(getRow(row).getColor())))
+                return false;
+        }
+        else if (row == 4){
+            if (ExtraWarehouseRows < 2)
+                return false;
+        }
+
+        if (!colorMarble.equals(getRow(row).getColor())){
+            return false;
+        }
+        else return getRow(row).getNumberOfMarbles() >= NumberOfMarbles;
+    }
 
     public int getNumberOfTotalResourcesInWarehouse(){
         int Resources = 0;

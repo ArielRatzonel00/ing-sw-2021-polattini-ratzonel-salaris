@@ -2,8 +2,7 @@ package it.polimi.ingsw.Network.Messages;
 
 public class MarketTrayActionMessage extends Message{
     private boolean isRow = false;
-    int row = 0;
-    int col = 0;
+    int index = 0;
 
     public MarketTrayActionMessage() {
         this.typeOfMessage = "MarketTrayActionMessage";
@@ -17,19 +16,11 @@ public class MarketTrayActionMessage extends Message{
         isRow = row;
     }
 
-    public int getRow() {
-        return row;
+    public int getIndex() {
+        return index;
     }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

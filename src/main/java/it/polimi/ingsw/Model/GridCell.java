@@ -21,13 +21,10 @@ public class GridCell {
     }
 
     public DevelopmentCard RemoveTopCard() { // mi ridà la prima carta non nulla
-        if (cell.size() > 0) {
             DevelopmentCard temp = cell.get(cell.size() - 1);
             cell.remove(cell.size() - 1);
             return temp;
-        } else {
-            return null;
-        }
+
     } // Method that removes the top card of the cell
     public DevelopmentCard getTopCard(){
         if (cell.size() > 0) {

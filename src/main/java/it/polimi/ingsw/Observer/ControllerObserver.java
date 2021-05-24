@@ -3,11 +3,11 @@ package it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Network.Messages.*;
 
 public interface ControllerObserver<T>{
+    void updateAssignFourLeaderCards(FourLeaderCardsMessage fourLeaderCardsMessage);
     void updateInitialResource(InitialResourcesMessage message);
-
     void updateDiscardLeaderCards(DiscardInitialLeaderCardsMessage discardInitialLeaderCardsMessage);
 
-    void updateActivateProduction(ActivateProductionMessage activateProductionMessage);
+    void updateWantActivateProduction(WantActivateProductionMessage wantActivateProductionMessage);
 
     void updateWantToBuyCard(WantToBuyCardMessage wantToBuyCardMessage);
 
@@ -20,4 +20,8 @@ public interface ControllerObserver<T>{
     void updateDiscardLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage);
 
     void updateActivateLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage);
+    void updateBuyCard(BuyCardMessage buyCardMessage);
+    void updateProduce(ProduceMessage produceMessage);
+    void updateEndOfTurn(EndOfTurnMessage endOfTurnMessage);
+
 }

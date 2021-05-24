@@ -5,6 +5,9 @@ import it.polimi.ingsw.Model.CostOfCard;
 import java.util.ArrayList;
 
 public class BuyCardMessage extends Message{
+    private int Cellrow;
+    private int Cellcol;
+    private int slot;
     private int PlayerIndex = 0;
     private ArrayList<CostOfCard> ResourcesFromStrongbox;
     private ArrayList<CostOfCard> ResourcesFromWarehouse;
@@ -43,5 +46,29 @@ public class BuyCardMessage extends Message{
 
     public void setPlayerIndex(int playerIndex) {
         PlayerIndex = playerIndex;
+    }
+
+    public int getCellrow() {
+        return Cellrow;
+    }
+
+    public void setCellrow(int cellrow) {
+        Cellrow = cellrow;
+    }
+
+    public int getCellcol() {
+        return Cellcol;
+    }
+
+    public void setCellcol(int cellcol) {
+        Cellcol = cellcol;
+    }
+
+    public int getSlot() {
+        return slot;
+    }
+
+    public void setSlot(int slot) {
+        this.slot = slot;
     }
 }

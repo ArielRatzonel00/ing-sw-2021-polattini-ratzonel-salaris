@@ -1,12 +1,12 @@
 package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard1;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Network.Messages.*;
 import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.Observer.ControllerObserver;
 import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.Observer.Observer;
 
 import java.io.IOException;
 import java.util.*;
@@ -29,95 +29,86 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     }
 
     @Override
-
-    public void updateInitialResource(InitialResourcesMessage initialResourcesMessage) {
-        if (initialResourcesMessage.getPlayerIndex() == 1) {
-            game.getPlayers().get(1).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble1()), initialResourcesMessage.getRow1());
-        } else if (initialResourcesMessage.getPlayerIndex() == 2) {
-            game.getPlayers().get(2).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble1()), initialResourcesMessage.getRow1());
-            game.getPlayers().get(2).getFaithTrack().setRedPosition(1);
-        } else if (initialResourcesMessage.getPlayerIndex() == 3) {
-            game.getPlayers().get(3).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble1()), initialResourcesMessage.getRow1());
-            game.getPlayers().get(3).getWarehouse().addToRow(new MarketMarble(initialResourcesMessage.getColorMarble2()), initialResourcesMessage.getRow2());
-            game.getPlayers().get(3).getFaithTrack().setRedPosition(1);
-        }
-        game.getPlayers().get(initialResourcesMessage.getPlayerIndex()).AssignFourLeaderCard(game.getDeck().getTopFourLeaderCard());
+    public void updateAssignFourLeaderCards(FourLeaderCardsMessage fourLeaderCardsMessage) {
+        game.AssignFourLeaderCards(fourLeaderCardsMessage.getPlayerIndex());
     }
 
     public void updateDiscardLeaderCards(DiscardInitialLeaderCardsMessage discardInitialLeaderCardsMessage) {
-        game.getPlayers().get(discardInitialLeaderCardsMessage.getPlayerIndex()).DiscardLeaderCard(discardInitialLeaderCardsMessage.getIndexLeaderCard1());
-        game.getPlayers().get(discardInitialLeaderCardsMessage.getPlayerIndex()).DiscardLeaderCard(discardInitialLeaderCardsMessage.getIndexLeaderCard2() - 1);
+        game.DiscardInitialLeaderCards(discardInitialLeaderCardsMessage.getPlayerIndex(), discardInitialLeaderCardsMessage.getIndexLeaderCard1(), discardInitialLeaderCardsMessage.getIndexLeaderCard2() - 1);
     }
 
-
-    public void updateActivateProduction(ActivateProductionMessage activateProductionMessage) {
-
+    public void updateInitialResource(InitialResourcesMessage initialResourcesMessage) {
+        if (initialResourcesMessage.getPlayerIndex() == 1) {
+            game.SetInitialResourcesForSecondPlayer(initialResourcesMessage.getColorMarble1(), initialResourcesMessage.getRow1());
+        } else if (initialResourcesMessage.getPlayerIndex() == 2) {
+            game.SetInitialResourcesForThirdPlayer(initialResourcesMessage.getColorMarble1(), initialResourcesMessage.getRow1());
+        } else if (initialResourcesMessage.getPlayerIndex() == 3) {
+            game.SetInitialResourcesForForthPlayer(initialResourcesMessage.getColorMarble1(), initialResourcesMessage.getRow1(), initialResourcesMessage.getColorMarble2(), initialResourcesMessage.getRow2());
+        }
     }
 
     public void updateWantToBuyCard(WantToBuyCardMessage wantToBuyCardMessage) {
-        ArrayList<CostOfCard> cost = game.getDevelopmentGrid().getSingleCell(wantToBuyCardMessage.getRow(), wantToBuyCardMessage.getCol()).getTopCard().getCost();
-        game.getPlayers().get(wantToBuyCardMessage.getPlayerIndex()).CheckResourcesForAcquisition(cost);
+        game.WantToBuyCard(wantToBuyCardMessage.getPlayerIndex(), wantToBuyCardMessage.getRow(), wantToBuyCardMessage.getCol(), wantToBuyCardMessage.getSlot());
     }
-    public void updateBuyCard(BuyCardMessage buyCardMessage){
-        //game.getPlayers().get(buyCardMessage.getPlayerIndex()).getStrongbox().
-        //
-        int cont = 0;
-        for (CostOfCard c : buyCardMessage.getResourcesFromStrongbox()){
-            game.getPlayers().get(buyCardMessage.getPlayerIndex()).getStrongbox().RemoveResourcesFromStrongbox(c.getCostNumber(),c.getCostColor());
-        }
-        for (CostOfCard c2 : buyCardMessage.getResourcesFromWarehouse()){
-            game.getPlayers().get(buyCardMessage.getPlayerIndex()).getWarehouse().getRow(buyCardMessage.getRows().get(cont)).removeMarble(new MarketMarble(c2.getCostColor()), c2.getCostNumber());
-            cont ++;
-        }
+
+    public void updateBuyCard(BuyCardMessage buyCardMessage) {
+        game.BuyCard(buyCardMessage.getPlayerIndex(), buyCardMessage.getResourcesFromStrongbox(), buyCardMessage.getResourcesFromWarehouse(), buyCardMessage.getRows(), buyCardMessage.getCellrow(), buyCardMessage.getCellcol(), buyCardMessage.getSlot());
     }
 
     public void updateMarketTrayAction(MarketTrayActionMessage marketTrayActionMessage) {
-        if (marketTrayActionMessage.isRow()) {
-            game.getMarketTray().ShiftMatrixByRow(marketTrayActionMessage.getRow());
-        } else {
-            game.getMarketTray().ShiftMatrixByCol(marketTrayActionMessage.getCol());
-        }
+        game.MarketTrayAction(marketTrayActionMessage.isRow(), marketTrayActionMessage.getIndex());
     }
 
     public void updateDealWithAResourceFromMarketTray(DealWithAResourceFromMarketTrayMessage dealWithAResourceFromMarketTrayMessage) {
-        if (dealWithAResourceFromMarketTrayMessage.isKeep()) {
-            game.getPlayers().get(dealWithAResourceFromMarketTrayMessage.getPlayerIndex()).getWarehouse().addToRow(new MarketMarble(dealWithAResourceFromMarketTrayMessage.getColorMarble()), dealWithAResourceFromMarketTrayMessage.getRowOfTheWarehouse());
-
-        } else {
-            for (Player otherplayer : game.getPlayers()) {
-                if (!otherplayer.equals(game.getPlayers().get(dealWithAResourceFromMarketTrayMessage.getPlayerIndex()))) {
-                    otherplayer.getFaithTrack().setRedPosition(1);
-                }
-            }
-        }
+        game.DealWithAResource(dealWithAResourceFromMarketTrayMessage.getPlayerIndex(), dealWithAResourceFromMarketTrayMessage.isKeep(), dealWithAResourceFromMarketTrayMessage.getMarble(), dealWithAResourceFromMarketTrayMessage.getRowOfTheWarehouse());
     }
 
     public void updateMoveResources(MoveResourcesMessage moveResourcesMessage) {
-        game.getPlayers().get(moveResourcesMessage.getPlayerIndex()).getWarehouse().MoveResource(moveResourcesMessage.getRow1(), moveResourcesMessage.getRow2());
+        game.MoveResources(moveResourcesMessage.getPlayerIndex(), moveResourcesMessage.getRow1(), moveResourcesMessage.getRow2());
+    }
+
+    public void updateWantActivateProduction(WantActivateProductionMessage wantActivateProductionMessage) {
+        game.CanProduce(wantActivateProductionMessage.getPlayerIndex(), wantActivateProductionMessage.getProductions(), wantActivateProductionMessage.getProductionBasicCost());
+    }
+
+    public void updateProduce(ProduceMessage produceMessage) {
+        int last1 = produceMessage.getProductions().size() - 1;
+        boolean last2 = false;
+        for (int i : produceMessage.getProductions()) {
+            if (i == last1) {
+                last2 = true;
+            }
+            switch (i) {
+                case 0 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox0(), produceMessage.getResourcesFromWarehouse0(), produceMessage.getRows0(), last2);
+                case 1 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox1(), produceMessage.getResourcesFromWarehouse1(), produceMessage.getRows1(), last2);
+                case 2 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox2(), produceMessage.getResourcesFromWarehouse2(), produceMessage.getRows2(), last2);
+                case 3 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox3(), produceMessage.getResourcesFromWarehouse3(), produceMessage.getRows3(), last2);
+                case 4 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox4(), produceMessage.getResourcesFromWarehouse4(), produceMessage.getRows4(), last2);
+                case 5 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox5(), produceMessage.getResourcesFromWarehouse5(), produceMessage.getRows5(), last2);
+            }
+        }
     }
 
     public void updateDiscardLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage) {
-
-        if (game.getPlayers().get(leaderCardActionMessage.getPlayerIndex()).getLeaderCard(leaderCardActionMessage.getNLeaderCard()) != null) {
-            for (Player otherplayer : game.getPlayers()) {
-                if (!otherplayer.equals(game.getPlayers().get(leaderCardActionMessage.getPlayerIndex()))) {
-                    otherplayer.getFaithTrack().setRedPosition(1);
-                }
-            }
-        }
-        game.getPlayers().get(leaderCardActionMessage.getPlayerIndex()).DiscardLeaderCard(leaderCardActionMessage.getNLeaderCard());
+        game.DiscardLeaderCardAction(leaderCardActionMessage.getPlayerIndex(), leaderCardActionMessage.getNLeaderCard());
     }
 
     public void updateActivateLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage) {
-        game.getPlayers().get(leaderCardActionMessage.getPlayerIndex()).getLeaderCard(leaderCardActionMessage.getNLeaderCard());
+        game.ActivateLeaderCardAction(leaderCardActionMessage.getPlayerIndex(), leaderCardActionMessage.getNLeaderCard());
     }
 
+    public void updateEndOfTurn(EndOfTurnMessage endOfTurnMessage) {
+        game.EndTurn(endOfTurnMessage.getPlayerIndex());
+    }
+}
 
 
 
 
 
-    public boolean PlayTurn(int type) {
+
+/*
+  public boolean PlayTurn(int type) {
         boolean MoveResources = false;
         boolean FromRow = false;
         int num = 0;
@@ -136,6 +127,8 @@ public class GameManager extends Observable<Model> implements ControllerObserver
         ArrayList<CostOfCard> ResourcesFromStrongbox = new ArrayList<>();
         MarketMarble.ColorMarble ProductionLeaderCardProfit = MarketMarble.ColorMarble.UNKNOWN;
 
+ */
+    /*
         //Vuoi Muovere le tue risorse prima di iniziare il turno? setta MoveResouces
         if(MoveResources){
             //chiedi da che riga a che riga, setta WarehouseRow1 e WarehouseRow2
@@ -391,6 +384,8 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     }
 
 
+     */
+
 /*
     @Override
     public void update(VirtualView message, int code) {
@@ -403,7 +398,6 @@ public class GameManager extends Observable<Model> implements ControllerObserver
 
     }
 
- */
 
     /*public void setA(int a) throws IOException {
         game.setA(a);
@@ -411,6 +405,8 @@ public class GameManager extends Observable<Model> implements ControllerObserver
 
 
 }
+
+ */
 
 
 
