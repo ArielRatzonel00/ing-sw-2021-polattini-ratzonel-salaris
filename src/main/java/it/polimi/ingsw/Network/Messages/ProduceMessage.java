@@ -9,7 +9,7 @@ public class ProduceMessage extends Message{
     public ProduceMessage() {
         this.typeOfMessage = "ProduceMessage";
     }
-    private int PlayerIndex = 0;
+
     private ArrayList<Integer> productions = new ArrayList<>();
     private ArrayList<CostOfCard> ProductionBasicCost;
     private MarketMarble.ColorMarble ProductionBasicProfit;
@@ -62,13 +62,7 @@ public class ProduceMessage extends Message{
         Production5Profit = production5Profit;
     }
 
-    public int getPlayerIndex() {
-        return PlayerIndex;
-    }
 
-    public void setPlayerIndex(int playerIndex) {
-        PlayerIndex = playerIndex;
-    }
 
     public ArrayList<Integer> getProductions() {
         return productions;

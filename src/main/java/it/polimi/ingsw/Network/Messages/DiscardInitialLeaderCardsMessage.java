@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Network.Messages;
 
 public class DiscardInitialLeaderCardsMessage extends Message{
-    private int PlayerIndex = 0;
+
     private int IndexLeaderCard1 = 0;
     private int IndexLeaderCard2 = 0;
 
@@ -9,13 +9,7 @@ public class DiscardInitialLeaderCardsMessage extends Message{
         this.typeOfMessage = "DiscardInitialLeaderCardsMessage";
     }
 
-    public int getPlayerIndex() {
-        return PlayerIndex;
-    }
 
-    public void setPlayerIndex(int playerIndex) {
-        PlayerIndex = playerIndex;
-    }
 
     public int getIndexLeaderCard1() {
         return IndexLeaderCard1;

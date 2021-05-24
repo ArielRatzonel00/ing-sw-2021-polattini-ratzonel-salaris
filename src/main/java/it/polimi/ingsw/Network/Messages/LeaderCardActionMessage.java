@@ -8,13 +8,7 @@ public class LeaderCardActionMessage extends Message{
         this.typeOfMessage = "LeaderCardActionMessage";
     }
 
-    public int getPlayerIndex() {
-        return PlayerIndex;
-    }
 
-    public void setPlayerIndex(int playerIndex) {
-        PlayerIndex = playerIndex;
-    }
 
     public int getNLeaderCard() {
         return NLeaderCard;

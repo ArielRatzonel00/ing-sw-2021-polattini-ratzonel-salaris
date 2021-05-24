@@ -9,7 +9,7 @@ public class WantToBuyCardMessage extends Message {
         this.typeOfMessage = "WantToBuyCardMessage";
     }
     int slot;
-    int PlayerIndex = 0;
+
     int row = 0;
     int col = 0;
     ArrayList<CostOfCard> costOfCards;
@@ -36,14 +36,6 @@ public class WantToBuyCardMessage extends Message {
 
     public void setCostOfCards(ArrayList<CostOfCard> costOfCards) {
         this.costOfCards = costOfCards;
-    }
-
-    public int getPlayerIndex() {
-        return PlayerIndex;
-    }
-
-    public void setPlayerIndex(int playerIndex) {
-        PlayerIndex = playerIndex;
     }
 
     public int getSlot() {

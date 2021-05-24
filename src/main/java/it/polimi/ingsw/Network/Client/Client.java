@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Network.Client;
 
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Network.Messages.FourLeaderCardResponse;
+import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.Messanger;
 import it.polimi.ingsw.Network.Messages.SocketMessage;
 import it.polimi.ingsw.Observer.ViewObserver;
@@ -69,12 +73,32 @@ public class Client extends Messanger implements ViewObserver{
                 case "GameStarted":
                     System.out.println("   MAESTRI DEL MEDIOEVO!    \n" +
                             "(game started!) ");
-                    break;
+                    sendMessage(socketOut, new SocketMessage("Fine",0, null, null));
+                    System.out.println("Premi S per iniziare\n");
+                    userInterface.FourLeaderCards(stdin);
+
                 default:
                     break;
             }
         }
     }
+    public void receiveMessageFromServer(Message message){
+
+        //if(message.getPlayerIndex()==null || message.getPlayerIndex().contains(this.nickname)){
+            switch (message.getTypeOfMessage()){
+                case ("FourLeaderCardResponse"):
+                    FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse();
+                    fourLeaderCardResponse = (FourLeaderCardResponse) message;
+                    if (fourLeaderCardResponse.getPlayers().get(fourLeaderCardResponse.getPlayerIndex()).getNickname().equals(this.nickname)){
+                        for (LeaderCard l : fourLeaderCardResponse.getPlayers().get(fourLeaderCardResponse.getPlayerIndex()).getLeaderCards()){
+                            l.StampaCarta();
+                        }
+                    }
+
+
+        }
+    }
+
 
     /*public Thread asyncReadFromSocket(final ObjectInputStream socketIn) {
         Thread t = new Thread(new Runnable() {
@@ -179,6 +203,10 @@ public class Client extends Messanger implements ViewObserver{
     public void updateNumberOfPlayers(int numberOfPlayers) throws IOException {
         System.out.println("Number of players set, waiting for them to connect...");
         sendMessage(this.socketOut,new SocketMessage("numberOfPlayersReply",numberOfPlayers,null,nickname));
+    }
+    public void updateMessage(Message message) throws IOException {
+        message.setPlayerIndex(0);
+        sendMessage(this.socketOut, message);
     }
 }
 

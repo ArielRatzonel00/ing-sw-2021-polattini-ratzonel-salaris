@@ -49,7 +49,7 @@ public class Model extends ModelObservable {
 
     public void AssignFourLeaderCards(int PlayerIndex){
         players.get(PlayerIndex).AssignFourLeaderCard(deck.getTopFourLeaderCard());
-        // Notify
+        notifyFourLeaderCards(PlayerIndex, players);
     }
 
     public void DiscardInitialLeaderCards(int PlayerIndex, int LeaderCard1Index, int LeaderCard2Index){

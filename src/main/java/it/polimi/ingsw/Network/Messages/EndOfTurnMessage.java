@@ -6,11 +6,5 @@ public class EndOfTurnMessage extends Message{
     }
     private int PlayerIndex = 0;
 
-    public int getPlayerIndex() {
-        return PlayerIndex;
-    }
 
-    public void setPlayerIndex(int playerIndex) {
-        PlayerIndex = playerIndex;
-    }
 }

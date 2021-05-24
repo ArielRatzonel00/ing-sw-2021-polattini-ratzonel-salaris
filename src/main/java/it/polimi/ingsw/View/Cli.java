@@ -2,6 +2,7 @@ package it.polimi.ingsw.View;
 
 
 import it.polimi.ingsw.Network.Client.UserInterface;
+import it.polimi.ingsw.Network.Messages.FourLeaderCardsMessage;
 import it.polimi.ingsw.Observer.ViewObservable;
 
 import java.io.IOException;
@@ -72,6 +73,19 @@ public class Cli extends ViewObservable implements UserInterface {
                 e.printStackTrace();
             }
         });
+    }
+    public void  FourLeaderCards(Scanner scanner){
+            System.out.println("entra");
+            FourLeaderCardsMessage fourLeaderCardsMessage = new FourLeaderCardsMessage();
+            notifyObserver(obs-> {
+                try {
+                    obs.updateMessage(fourLeaderCardsMessage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+
     }
 
     public void start() {

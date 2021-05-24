@@ -2,31 +2,29 @@ package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameManager;
 import it.polimi.ingsw.Model.Model;
+import it.polimi.ingsw.Network.Messages.FourLeaderCardResponse;
 import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.SocketMessage;
-import it.polimi.ingsw.Observer.ModelObserver;
-import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.Observer.*;
 
 import java.io.IOException;
 
-public class VirtualView extends Observable implements ModelObserver<Model> {
+public class VirtualView extends VirtualViewObservable implements VirtualViewObserver {
 
     private SocketClientConnection connection;
-    private GameManager GameManager;
+    //private GameManager GameManager;
 
-    public void setGameManager(GameManager GameManager) {
+    /*public void setGameManager(GameManager GameManager) {
         this.GameManager = GameManager;
     }
+
+     */
 
     public VirtualView(SocketClientConnection connection) {
         this.connection = connection;
     }
-
-   @Override
-    public void update(Model message, int code) {
-        System.out.println("A updated");
-
+    public void updateFourLeaderCardsResponse(FourLeaderCardResponse fourLeaderCardResponse){
+        connection.send(fourLeaderCardResponse);
     }
 
    /* @Override
@@ -34,7 +32,9 @@ public class VirtualView extends Observable implements ModelObserver<Model> {
         connection.sendMessage(connection.getOut(), message);
     }*/
 
-    public GameManager getGameManager() {
+    /*public GameManager getGameManager() {
         return GameManager;
     }
+
+     */
 }

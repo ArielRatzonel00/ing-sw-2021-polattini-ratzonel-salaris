@@ -8,7 +8,7 @@ public class BuyCardMessage extends Message{
     private int Cellrow;
     private int Cellcol;
     private int slot;
-    private int PlayerIndex = 0;
+
     private ArrayList<CostOfCard> ResourcesFromStrongbox;
     private ArrayList<CostOfCard> ResourcesFromWarehouse;
     private ArrayList<Integer> rows;
@@ -40,13 +40,8 @@ public class BuyCardMessage extends Message{
         this.rows = rows;
     }
 
-    public int getPlayerIndex() {
-        return PlayerIndex;
-    }
 
-    public void setPlayerIndex(int playerIndex) {
-        PlayerIndex = playerIndex;
-    }
+
 
     public int getCellrow() {
         return Cellrow;

@@ -404,9 +404,9 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     }*/
 
 
-}
 
- */
+
+
 
 
 

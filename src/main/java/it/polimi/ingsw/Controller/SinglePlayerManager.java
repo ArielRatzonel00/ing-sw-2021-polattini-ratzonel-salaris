@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.*;
@@ -296,5 +297,7 @@ public class SinglePlayerManager  {
         return game;
     }
 }
+
+ */
 
 

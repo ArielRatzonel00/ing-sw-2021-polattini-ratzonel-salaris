@@ -6,7 +6,7 @@ import it.polimi.ingsw.Model.Player;
 import java.util.ArrayList;
 
 public class InitialResourcesMessage extends Message{
-    private int PlayerIndex = 0;
+
     private MarketMarble.ColorMarble colorMarble1;
     private int row1;
     private MarketMarble.ColorMarble colorMarble2;
@@ -16,9 +16,7 @@ public class InitialResourcesMessage extends Message{
         this.typeOfMessage = "InitialResourcesMessage";
     }
 
-    public void setPlayerIndex(int playerIndex) {
-        PlayerIndex = playerIndex;
-    }
+
 
     public void setColorMarble1(MarketMarble.ColorMarble colorMarble1) {
         this.colorMarble1 = colorMarble1;
@@ -36,9 +34,6 @@ public class InitialResourcesMessage extends Message{
         this.row2 = row2;
     }
 
-    public int getPlayerIndex() {
-        return PlayerIndex;
-    }
 
     public MarketMarble.ColorMarble getColorMarble1() {
         return colorMarble1;

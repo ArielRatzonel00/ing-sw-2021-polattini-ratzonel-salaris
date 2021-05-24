@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+import it.polimi.ingsw.Network.Messages.FourLeaderCardsMessage;
 import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.Messanger;
 import it.polimi.ingsw.Network.Messages.SocketMessage;
@@ -64,9 +65,13 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
                 SocketMessage message=(SocketMessage) in.readObject();
                 receiveMessage(message);
                 //virtualView.getGameManager().setA(a);
-                while(true) {
-                    SocketMessage messaggio = (SocketMessage) in.readObject();
-                    receiveMessage(messaggio);
+                while(!message.getID().equalsIgnoreCase("Fine")) {
+                    message = (SocketMessage) in.readObject();
+                    receiveMessage(message);
+                }
+                while(true){
+                    Message playerMessage=(Message) in.readObject();
+                    receiveMessageFromPlayer(playerMessage);
                 }
 
             } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
@@ -111,16 +116,27 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
                 else {
                     System.out.println("multiplayer chosen, check lobby...");
                     startGame=server.handleNewPlayer(true, name,this);
-                    sendMessage(getOut(),new SocketMessage("waiting",0,Collections.singletonList(name),"server"));
+                    //sendMessage(getOut(),new SocketMessage("waiting",0,Collections.singletonList(name),"server"));
                 }
                 break;
             case "numberOfPlayersReply":
                 startGame=server.setNextGameNPlayers(message.getValue());
                 break;
+            case "Fine":
+                System.out.println("Ciao");
+                break;
             default:
                 System.out.println("errore nell'id del messaggio");
                 break;
 
+        }
+    }
+    public void receiveMessageFromPlayer(Message message){
+        switch (message.getTypeOfMessage()){
+            case "Four Leader Cards":
+                System.out.println("Ricevuto FourLeaderCardsMessage");
+                virtualView.AssignFourLeaderCard((FourLeaderCardsMessage) message);
+                break;
         }
     }
 

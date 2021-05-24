@@ -5,7 +5,7 @@ import it.polimi.ingsw.Model.Marble.MarketMarble;
 import java.util.ArrayList;
 
 public class DealWithAResourceFromMarketTrayMessage extends Message{
-    private int PlayerIndex = 0;
+
     private boolean Keep = false;
     private int rowOfTheWarehouse = 0;
     private MarketMarble.ColorMarble marble;
@@ -14,13 +14,6 @@ public class DealWithAResourceFromMarketTrayMessage extends Message{
         this.typeOfMessage = "DealWithAResourceFromMarketTrayMessage";
     }
 
-    public int getPlayerIndex() {
-        return PlayerIndex;
-    }
-
-    public void setPlayerIndex(int playerIndex) {
-        PlayerIndex = playerIndex;
-    }
 
     public boolean isKeep() {
         return Keep;

@@ -7,4 +7,5 @@ public interface UserInterface {
     void askMultiplayer(Scanner scanner);
     void askNickname(Scanner scanner);
     void askNumberOfPlayers(Scanner scanner);
+    void FourLeaderCards(Scanner scanner);
 }

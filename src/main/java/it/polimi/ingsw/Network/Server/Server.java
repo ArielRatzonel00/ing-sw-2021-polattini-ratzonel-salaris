@@ -24,7 +24,7 @@ public class Server {
     private ArrayList<SocketClientConnection> inGameConnections;
     private ArrayList<SocketClientConnection> waitingConnections;
     private ArrayList<VirtualView> virtualViews;
-    private GameManager GameManager;
+    private GameManager gameManager;
     private Model Model;
     private Player player;
     private List<Player> players = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Server {
         inGameConnections=new ArrayList<>();
         virtualViews =new ArrayList<>();
         Model=new Model();
-        GameManager=new GameManager(Model);
+        gameManager=new GameManager(Model);
     }
     public void handleConnections(SocketClientConnection conn) throws IOException {
         conn.sendMessage(conn.getOut(),new SocketMessage("connected",0,null,"server"));
@@ -58,7 +58,8 @@ public class Server {
             nextID++;
             VirtualView newVirtualView = new VirtualView(socketConnection);
             virtualViews.add(newVirtualView);
-            newVirtualView.setGameManager(GameManager);
+            newVirtualView.addObserver(gameManager);
+            //newVirtualView.setGameManager(gameManager);
             socketConnection.addVirtualView(newVirtualView);
             Model.addObserver(newVirtualView);
             executor.submit(socketConnection);
@@ -70,13 +71,15 @@ public class Server {
 
         //Singleplayer game selected
         if (multiplayer == false){
-            player = new Player(name, new SinglePlayerFaithTrack());
+            player = new Player(name);
+            player.setSinglePlayer(true);
             return false;
         }
 
         //Multiplayer Game Selected
         else {
-            player = new Player(name, new MultipleyerFaithTrack());
+            player = new Player(name);
+            player.setSinglePlayer(false);
 
             //If player is not the first to get in
             if(waitingConnections!=null && waitingConnections.size()!=0){

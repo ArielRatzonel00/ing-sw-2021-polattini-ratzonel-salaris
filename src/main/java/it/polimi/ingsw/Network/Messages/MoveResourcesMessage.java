@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Network.Messages;
 
 public class MoveResourcesMessage extends Message{
-   private int PlayerIndex = 0;
+
    private int row1 = 0;
    private int row2 = 0;
 
@@ -25,11 +25,5 @@ public class MoveResourcesMessage extends Message{
         this.row2 = row2;
     }
 
-    public int getPlayerIndex() {
-        return PlayerIndex;
-    }
 
-    public void setPlayerIndex(int playerIndex) {
-        PlayerIndex = playerIndex;
-    }
 }

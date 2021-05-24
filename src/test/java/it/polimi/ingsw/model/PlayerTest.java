@@ -27,7 +27,8 @@ class PlayerTest {
         leaderCards.add(deck.getExtraRsc2());
         leaderCards.add(deck.getExtraRsc3());
         leaderCards.add(deck.getExtraRsc4());
-        player = new Player("Jonny", faithTrack);
+        player = new Player("Jonny");
+
         player.DiscardLeaderCard(2); //tolgo quella con id = 3
         player.DiscardLeaderCard(2); //tolgo quella con id = 4
         //da rivedere
