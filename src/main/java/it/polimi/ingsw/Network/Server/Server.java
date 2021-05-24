@@ -13,6 +13,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,13 +21,15 @@ import java.util.concurrent.Executors;
 public class Server {
     private int port;
     private int nextID=0;
-    private ArrayList<SocketClientConnection> connections;
+    private ArrayList<SocketClientConnection> inGameConnections;
     private ArrayList<SocketClientConnection> waitingConnections;
     private ArrayList<VirtualView> virtualViews;
     private GameManager GameManager;
     private Model Model;
     private Player player;
-    private ArrayList<Player> players = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
+    private List<SocketClientConnection> temp=new ArrayList<>();
+
 
 
     ServerSocket serverSocket;
@@ -37,8 +40,8 @@ public class Server {
     public Server(int port) throws IOException {
         this.port = port;
         this.serverSocket = new ServerSocket(port);
-        connections=new ArrayList<>();
         waitingConnections=new ArrayList<>();
+        inGameConnections=new ArrayList<>();
         virtualViews =new ArrayList<>();
         Model=new Model();
         GameManager=new GameManager(Model);
@@ -53,7 +56,6 @@ public class Server {
             Socket socket = serverSocket.accept(); //Correggere assegnazione ID connection
             SocketClientConnection socketConnection = new SocketClientConnection(socket, this, nextID);
             nextID++;
-            waitingConnections.add(socketConnection);
             VirtualView newVirtualView = new VirtualView(socketConnection);
             virtualViews.add(newVirtualView);
             newVirtualView.setGameManager(GameManager);
@@ -64,7 +66,7 @@ public class Server {
         }
     }
 
-    public synchronized boolean handleNewPlayer(boolean multiplayer, String name, SocketClientConnection socket){ //return true se è il primo giocatore, se no false
+    public synchronized boolean handleNewPlayer(boolean multiplayer, String name, SocketClientConnection socket) throws IOException { //return true se è il primo giocatore, se no false
 
         //Singleplayer game selected
         if (multiplayer == false){
@@ -77,39 +79,62 @@ public class Server {
             player = new Player(name, new MultipleyerFaithTrack());
 
             //If player is not the first to get in
-            if(players!=null && players.size()!=0){
-                players.add(player);
-                System.out.println(name+" aggiunto alla lista d'attesa, ci sono ora "+players.size()+" Giocatori in attesa");
+            if(waitingConnections!=null && waitingConnections.size()!=0){
+                waitingConnections.add(socket);
+                System.out.println(name+" aggiunto alla lista d'attesa, ci sono ora "+waitingConnections.size()+" Giocatori in attesa");
                 //if the Lobby is full, time to start the game
-                if(players.size()>=nextGameNPlayers && nextGameNPlayers!=0)
+                if(waitingConnections.size()>=nextGameNPlayers && nextGameNPlayers!=0){
                     System.out.println("Numero di giocatori raggiunto("+nextGameNPlayers+"), inizio partita");
-                List<Player> temp=new ArrayList<Player>();
-                for (int i=0; i<nextGameNPlayers;i++){
-                    temp.add(players.get(players.size()-1));
-                    players.remove(players.size()-1);
+                    for (int i=0; i<nextGameNPlayers;i++){
+                        temp.add(waitingConnections.get(waitingConnections.size()-1));
+                        waitingConnections.remove(waitingConnections.size()-1);
+                    }
+                    startGame(temp);
                 }
-                startGame(temp);
+
                 return false;
             }
 
             //If Player IS the first one to get in the Lobby
             else{
-                players.add(player);
+                waitingConnections.add(socket);
                 System.out.println(name+" aggiunto alla lista d'attesa");
+                System.out.println("first connection, let's ask how many players");
+                socket.sendMessage(socket.getOut(), new SocketMessage("numberOfPlayers", 0, Collections.singletonList(name), "server"));
                 return true;
             }
         }
     }
 
 
-    public void setNextGameNPlayers(int nextGameNPlayers) {
+    public boolean setNextGameNPlayers(int nextGameNPlayers) throws IOException {
         this.nextGameNPlayers = nextGameNPlayers;
         System.out.println("Numero di giocatori assegnato: "+nextGameNPlayers);
-        if(players.size()>=nextGameNPlayers)
-            System.out.println("Numero di giocatori raggiunto("+nextGameNPlayers+"), inizio partita");
+
+        //If there are already enough players waiting, return True (Start Game)
+        if(waitingConnections.size()>=nextGameNPlayers) {
+            System.out.println("Numero di giocatori raggiunto(" + nextGameNPlayers + "), inizio partita");
+            for (int i=0; i<nextGameNPlayers;i++){
+                temp.add(waitingConnections.get(waitingConnections.size()-1));
+                waitingConnections.remove(waitingConnections.size()-1);
+            }
+            startGame(temp);
+            return true;
+        }
+        return false;
     }
 
-    public synchronized void startGame(List<Player> players){
+    public synchronized void startGame(List<SocketClientConnection> connections) throws IOException {
+        List<String> names=new ArrayList<>();
+        System.out.println("STARTGAME CON "+connections.size()+" PERSONE");
 
+        for (SocketClientConnection conn:connections
+             ) {
+            names.add(conn.getName());
+            inGameConnections.add(conn);
+            conn.sendMessage(conn.getOut(),new SocketMessage("GameStarted",0,null,"server"));
+        }
+        connections.removeAll(connections);
     }
+
 }

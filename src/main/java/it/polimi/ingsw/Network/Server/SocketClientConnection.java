@@ -20,13 +20,13 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
     protected ObjectOutputStream out;
     private ObjectInputStream in;
     private Server server;
-    boolean first;
+    boolean startGame;
     int ID;
 
     public Socket getSocket() {
         return socket;
     }
-
+    private String name;
     private VirtualView virtualView;
 
     public SocketClientConnection(Socket socket, Server server, int ID) {
@@ -54,7 +54,6 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
 
     @Override
     public void run(){
-            String name;
             Boolean multiPlayer=false;
 
             try{
@@ -104,29 +103,29 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
     public void receiveMessage(SocketMessage message) throws IOException {
         switch (message.getID()){
             case "newMulti":
-                String sender= message.getSender();
+                name= message.getSender();
                 if(message.getValue()==0) {
                     System.out.println("singleplayer chosen, start the game...");
                     server.handleNewPlayer(false, message.getSender(),this);
                 }
                 else {
                     System.out.println("multiplayer chosen, check lobby...");
-                    server.handleNewPlayer(true, sender,this);
-                    if(first) {//CASO IN CUI SI E' il primo giocatore
-                        System.out.println("first connection, let's ask how many players");
-                        sendMessage(getOut(), new SocketMessage("numberOfPlayers", 0, Collections.singletonList(sender), "server"));
-                    }
-                    sendMessage(getOut(),new SocketMessage("waiting",0,Collections.singletonList(sender),"server"));
+                    startGame=server.handleNewPlayer(true, name,this);
+                    sendMessage(getOut(),new SocketMessage("waiting",0,Collections.singletonList(name),"server"));
                 }
                 break;
             case "numberOfPlayersReply":
-                server.setNextGameNPlayers(message.getValue());
+                startGame=server.setNextGameNPlayers(message.getValue());
                 break;
             default:
                 System.out.println("errore nell'id del messaggio");
                 break;
 
         }
+    }
+
+    public String getName() {
+        return name;
     }
 }
 

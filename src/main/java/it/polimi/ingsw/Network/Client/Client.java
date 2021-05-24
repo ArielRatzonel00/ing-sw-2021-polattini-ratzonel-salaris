@@ -54,8 +54,8 @@ public class Client extends Messanger implements ViewObserver{
     }
 
     public synchronized void receiveMessage(SocketMessage message) throws IOException {
+        System.out.println("messaggio ricevuto: " + message.getID() + "destinato a: "+ message.getReceiver());
         if(message.getReceiver()==null || message.getReceiver().contains(this.nickname)){
-            System.out.println("entra nello switch");
             switch (message.getID()){
                 case "connected":
                     userInterface.askMultiplayer(stdin);
@@ -64,8 +64,12 @@ public class Client extends Messanger implements ViewObserver{
                     userInterface.askNumberOfPlayers(stdin);
                     break;
                 case "waiting":
-                    System.out.println("WELCOME TO Maestri del Medioevo! (multiplayer)\n " +
-                            "Waiting for other players...");
+                    System.out.println("Waiting for other players...");
+                    break;
+                case "GameStarted":
+                    System.out.println("   MAESTRI DEL MEDIOEVO!    \n" +
+                            "(game started!) ");
+                    break;
                 default:
                     break;
             }
