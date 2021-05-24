@@ -4,7 +4,9 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
-public class CostOfCard {
+import java.io.Serializable;
+
+public class CostOfCard implements Serializable {
     private int costNumber;
     private MarketMarble.ColorMarble costColor;
 

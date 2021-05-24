@@ -2,9 +2,10 @@ package it.polimi.ingsw.Model.LeaderCard;
 
 import it.polimi.ingsw.Model.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public  class LeaderCard {
+public  class LeaderCard implements Serializable {
     //private int Type; // 1=TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
     private boolean Activate = false;
     private int Id;
@@ -73,5 +74,9 @@ public  class LeaderCard {
 
     public String StampaCarta(){
         return "a";
+    }
+    @Override
+    public String toString(){
+        return "leadercard";
     }
 }

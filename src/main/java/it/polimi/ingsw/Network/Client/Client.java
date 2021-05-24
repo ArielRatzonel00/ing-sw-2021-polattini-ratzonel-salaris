@@ -89,11 +89,15 @@ public class Client extends Messanger implements ViewObserver{
                 case ("FourLeaderCardResponse"):
                     FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse();
                     fourLeaderCardResponse = (FourLeaderCardResponse) message;
-                    if (fourLeaderCardResponse.getPlayers().get(fourLeaderCardResponse.getPlayerIndex()).getNickname().equals(this.nickname)){
+                    System.out.println("IL nickname è "+this.nickname + "quello che ci riceve" +((FourLeaderCardResponse) message).getPlayers().get(message.getPlayerIndex()));
+                    if(fourLeaderCardResponse.getPlayers().get(fourLeaderCardResponse.getPlayerIndex())==null)
+                        System.out.println("NOLEADERS");
+                    int cont=0;
                         for (LeaderCard l : fourLeaderCardResponse.getPlayers().get(fourLeaderCardResponse.getPlayerIndex()).getLeaderCards()){
                             l.StampaCarta();
+                            System.out.println(cont);
+                            cont++;
                         }
-                    }
 
 
         }
@@ -154,9 +158,13 @@ public class Client extends Messanger implements ViewObserver{
                 message=(SocketMessage)socketIn.readObject();
                 receiveMessage(message);
 
-                while(true){
+                while(!message.getID().equalsIgnoreCase("GameStarted")){
                     message=(SocketMessage)socketIn.readObject();
                     receiveMessage(message);
+                }
+                while(true){
+                    Message message2=(Message)socketIn.readObject();
+                    receiveMessageFromServer(message2);
                 }
                 /*System.out.println("Quanto vuoi che valga A?");
                 int a=stdin.nextInt();

@@ -24,6 +24,7 @@ public class VirtualView extends VirtualViewObservable implements VirtualViewObs
         this.connection = connection;
     }
     public void updateFourLeaderCardsResponse(FourLeaderCardResponse fourLeaderCardResponse){
+        System.out.println("E lo invia a: "+connection.getName());
         connection.send(fourLeaderCardResponse);
     }
 

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Model;
 
-public class DevelopmentGrid {
+import java.io.Serializable;
+
+public class DevelopmentGrid implements Serializable {
 
     // Method that represents the DevelopmentGrid. It is a Matrix of GridCell and it contains all the DevelopmentCard
 

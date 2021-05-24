@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
@@ -8,7 +9,7 @@ import java.util.stream.Collectors;
 
 // Method that represents a single slots where the player adds the bought cards
 
-public class DevCardSlot  {
+public class DevCardSlot implements Serializable {
     private ArrayList<DevelopmentCard> cards = new ArrayList<>();
 
     public void addCard(DevelopmentCard card){

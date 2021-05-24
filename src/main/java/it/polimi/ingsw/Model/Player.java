@@ -6,11 +6,13 @@ import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Observer.Observable;
 
 import java.awt.image.ColorConvertOp;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 // Class that represents the Player
 
-public class Player extends Observable {
+public class Player implements Serializable {
     private String nickname;
     private int index;
     private FaithTrack faithTrack;
@@ -44,11 +46,6 @@ public class Player extends Observable {
     }
     public void AssignFourLeaderCard(ArrayList<LeaderCard> FourLeaderCards){
         this.leaderCards = FourLeaderCards;
-
-        notify(FourLeaderCards, 0);
-    }
-
-    private void notify(ArrayList<LeaderCard> fourLeaderCards, int codice) {
     }
 
     public String getNickname() {
@@ -231,6 +228,12 @@ public class Player extends Observable {
 
     public void setYourTurn(boolean yourTurn) {
         IsYourTurn = yourTurn;
+    }
+
+    @Override
+    public String toString() {
+
+        return nickname;
     }
 }
 

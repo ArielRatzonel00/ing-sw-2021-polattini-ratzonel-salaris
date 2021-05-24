@@ -4,7 +4,9 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
-public class Strongbox {
+import java.io.Serializable;
+
+public class Strongbox implements Serializable {
     private int servant;
     private int shield;
     private int coin;

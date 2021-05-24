@@ -2,9 +2,10 @@ package it.polimi.ingsw.Model;
 
 //Method that Represents the Faith Traick. Every Player has one
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class FaithTrack {
+public abstract class FaithTrack implements Serializable {
     protected int RedPosition = 0;
     protected int points = 0;
     public enum popeFavorState{

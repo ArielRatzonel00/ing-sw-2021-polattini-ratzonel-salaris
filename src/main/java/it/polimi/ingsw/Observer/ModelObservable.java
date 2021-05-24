@@ -17,6 +17,7 @@ public class ModelObservable extends Observable<VirtualView> {
         }
     }
     public void notifyFourLeaderCards(int PlayerIndex, ArrayList<Player> players){
+        System.out.println("E LE CREA PURE");
         FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse();
         fourLeaderCardResponse.setPlayerIndex(PlayerIndex);
         fourLeaderCardResponse.setPlayers(players);

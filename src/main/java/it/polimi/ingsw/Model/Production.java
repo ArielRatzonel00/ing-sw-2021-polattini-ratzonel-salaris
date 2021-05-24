@@ -2,9 +2,10 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Production {
+public class Production implements Serializable {
     private ArrayList<CostOfCard> ProductionCost = new ArrayList<>();
     private ArrayList<CostOfCard> ProductionProfit = new ArrayList<>();
 

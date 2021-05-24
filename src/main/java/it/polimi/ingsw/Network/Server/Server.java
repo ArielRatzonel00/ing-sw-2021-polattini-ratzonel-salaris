@@ -25,7 +25,6 @@ public class Server {
     private ArrayList<SocketClientConnection> waitingConnections;
     private ArrayList<VirtualView> virtualViews;
     private GameManager gameManager;
-    private Model Model;
     private Player player;
     private List<Player> players = new ArrayList<>();
     private List<SocketClientConnection> temp=new ArrayList<>();
@@ -43,8 +42,6 @@ public class Server {
         waitingConnections=new ArrayList<>();
         inGameConnections=new ArrayList<>();
         virtualViews =new ArrayList<>();
-        Model=new Model();
-        gameManager=new GameManager(Model);
     }
     public void handleConnections(SocketClientConnection conn) throws IOException {
         conn.sendMessage(conn.getOut(),new SocketMessage("connected",0,null,"server"));
@@ -58,10 +55,8 @@ public class Server {
             nextID++;
             VirtualView newVirtualView = new VirtualView(socketConnection);
             virtualViews.add(newVirtualView);
-            newVirtualView.addObserver(gameManager);
             //newVirtualView.setGameManager(gameManager);
             socketConnection.addVirtualView(newVirtualView);
-            Model.addObserver(newVirtualView);
             executor.submit(socketConnection);
             System.out.println("Connessione effettuata con ID " + nextID);
         }
@@ -128,16 +123,33 @@ public class Server {
     }
 
     public synchronized void startGame(List<SocketClientConnection> connections) throws IOException {
+        int indice=0;
+        ArrayList<Player> players=new ArrayList<>();
         List<String> names=new ArrayList<>();
+        ArrayList<VirtualView>virtualviews=new ArrayList<>();
         System.out.println("STARTGAME CON "+connections.size()+" PERSONE");
 
         for (SocketClientConnection conn:connections
              ) {
+            conn.setID(indice);
+            virtualviews.add(conn.getVirtualView());
+            players.add(conn.getPlayer());
+            indice++;
             names.add(conn.getName());
             inGameConnections.add(conn);
             conn.sendMessage(conn.getOut(),new SocketMessage("GameStarted",0,null,"server"));
         }
+
         connections.removeAll(connections);
+        Model model=new Model(players);
+        gameManager=new GameManager(model);
+
+        for (VirtualView virtual:virtualviews) {
+            virtual.addObserver(gameManager);
+            model.addObserver(virtual);
+        }
+        System.out.println("Creata partita con:"+players);
+
     }
 
 }

@@ -2,9 +2,10 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 // This class represent the Warehouse, every player has one Warehouse
-public class Warehouse {
+public class Warehouse implements Serializable {
 
     private ArrayList<WarehouseRow> rows = new ArrayList<>();
     private int ExtraWarehouseRows = 0;

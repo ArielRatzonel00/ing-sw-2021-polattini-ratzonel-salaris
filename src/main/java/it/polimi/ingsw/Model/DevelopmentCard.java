@@ -3,9 +3,10 @@ package it.polimi.ingsw.Model;
 // Method that represents a DevelopmentCard.
 // Da cambiare inserendo una istanza di Production
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DevelopmentCard {
+public class DevelopmentCard implements Serializable {
     private ArrayList<CostOfCard> Cost; //purple, blue, yellow, grey
     private Production Production;
     private int Id;

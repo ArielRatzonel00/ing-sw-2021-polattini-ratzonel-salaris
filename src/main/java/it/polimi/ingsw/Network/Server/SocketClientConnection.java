@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Messages.FourLeaderCardsMessage;
 import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.Messanger;
@@ -23,6 +24,7 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
     private Server server;
     boolean startGame;
     int ID;
+    private Player player;
 
     public Socket getSocket() {
         return socket;
@@ -46,7 +48,14 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
     }
     public void addVirtualView(VirtualView vv){
         virtualView=vv;
+    }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public ObjectOutputStream getOut() {
@@ -109,18 +118,19 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
         switch (message.getID()){
             case "newMulti":
                 name= message.getSender();
+                player=new Player(name);
                 if(message.getValue()==0) {
                     System.out.println("singleplayer chosen, start the game...");
                     server.handleNewPlayer(false, message.getSender(),this);
                 }
                 else {
                     System.out.println("multiplayer chosen, check lobby...");
-                    startGame=server.handleNewPlayer(true, name,this);
+                    server.handleNewPlayer(true, name,this);
                     //sendMessage(getOut(),new SocketMessage("waiting",0,Collections.singletonList(name),"server"));
                 }
                 break;
             case "numberOfPlayersReply":
-                startGame=server.setNextGameNPlayers(message.getValue());
+                server.setNextGameNPlayers(message.getValue());
                 break;
             case "Fine":
                 System.out.println("Ciao");
@@ -142,6 +152,14 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
 
     public String getName() {
         return name;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public VirtualView getVirtualView() {
+        return virtualView;
     }
 }
 

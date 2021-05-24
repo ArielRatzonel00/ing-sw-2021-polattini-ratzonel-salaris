@@ -21,10 +21,10 @@ public class Model extends ModelObservable {
     private boolean IsSinglePlayerGame = false;
     private Player CurrentPlayer;
     private int a;
-    public Model() {
+    public Model(ArrayList<Player> players) {
         this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();
-        this.players = new ArrayList<>();
+        this.players = players;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -48,6 +48,7 @@ public class Model extends ModelObservable {
 
 
     public void AssignFourLeaderCards(int PlayerIndex){
+        System.out.println("Asssegna 4leader nel game");
         players.get(PlayerIndex).AssignFourLeaderCard(deck.getTopFourLeaderCard());
         notifyFourLeaderCards(PlayerIndex, players);
     }

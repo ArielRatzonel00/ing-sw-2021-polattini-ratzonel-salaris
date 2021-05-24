@@ -2,10 +2,11 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 // Class that represents a single row of the Warehosue
-public class WarehouseRow {
+public class WarehouseRow implements Serializable {
     private ArrayList<MarketMarble> marbles = new ArrayList<>();
     private int space;
     private MarketMarble.ColorMarble color;

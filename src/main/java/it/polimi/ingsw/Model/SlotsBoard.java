@@ -1,11 +1,12 @@
 package it.polimi.ingsw.Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 // class that represents the board of the slots. Every player has one SlotsBoard
 
-public class SlotsBoard {
+public class SlotsBoard implements Serializable {
     private ArrayList<DevCardSlot> slots = new ArrayList<>();
 
 
