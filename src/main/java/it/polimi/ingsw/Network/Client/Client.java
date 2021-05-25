@@ -71,6 +71,7 @@ public class Client extends Messanger implements ViewObserver{
                     System.out.println("Waiting for other players...");
                     break;
                 case "GameStarted":
+                    ID=message.getValue();
                     System.out.println("   MAESTRI DEL MEDIOEVO!    \n" +
                             "(game started!) ");
                     sendMessage(socketOut, new SocketMessage("Fine",0, null, null));
@@ -87,18 +88,23 @@ public class Client extends Messanger implements ViewObserver{
         //if(message.getPlayerIndex()==null || message.getPlayerIndex().contains(this.nickname)){
             switch (message.getTypeOfMessage()){
                 case ("FourLeaderCardResponse"):
-                    FourLeaderCardResponse fourLeaderCardResponse = (FourLeaderCardResponse) message;
-                    fourLeaderCardResponse = (FourLeaderCardResponse) message;
-                    System.out.println("IL nickname è "+this.nickname + "quello che ci riceve");
-                    if(fourLeaderCardResponse.getLeaderCards()==null)
-                        System.out.println("NOLEADERS");
-                    int cont=0;
-                        for (String l : fourLeaderCardResponse.getLeaderCards()){
-                            System.out.println(l);
+                    if(message.getPlayerIndex()==ID) {
+                        FourLeaderCardResponse fourLeaderCardResponse = (FourLeaderCardResponse) message;
+                        fourLeaderCardResponse = (FourLeaderCardResponse) message;
+                        System.out.println("IL nickname è " + this.nickname + "quello che ci riceve");
+                        if (fourLeaderCardResponse.getLeaderCards() == null)
+                            System.out.println("NOLEADERS");
+                        int cont = 0;
+                        for (LeaderCard l : fourLeaderCardResponse.getLeaderCards()) {
+                            userInterface.ShowCard(l);
+                            //System.out.println(l);
                             System.out.println(cont);
                             cont++;
-                        }
+                            System.out.println("\n");
 
+                        }
+                    }
+                    else{System.out.println("Messaggio destinato ad altri \n");};
 
         }
     }
@@ -213,7 +219,7 @@ public class Client extends Messanger implements ViewObserver{
         sendMessage(this.socketOut,new SocketMessage("numberOfPlayersReply",numberOfPlayers,null,nickname));
     }
     public void updateMessage(Message message) throws IOException {
-        message.setPlayerIndex(0);
+        message.setPlayerIndex(ID);
         sendMessage(this.socketOut, message);
     }
 }

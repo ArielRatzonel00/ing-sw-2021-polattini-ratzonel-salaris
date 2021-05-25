@@ -134,10 +134,14 @@ public class Server {
             conn.setID(indice);
             virtualviews.add(conn.getVirtualView());
             players.add(conn.getPlayer());
-            indice++;
+            System.out.println("Player: "+conn.getName()+
+                    "ID: "+indice
+            +"\n\n");
+
             names.add(conn.getName());
             inGameConnections.add(conn);
-            conn.sendMessage(conn.getOut(),new SocketMessage("GameStarted",0,null,"server"));
+            conn.sendMessage(conn.getOut(),new SocketMessage("GameStarted",indice,null,"server"));
+            indice++;
         }
 
         connections.removeAll(connections);

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Network.Client;
 
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard1;
+
 import java.util.Scanner;
 
 public interface UserInterface {
@@ -8,4 +11,5 @@ public interface UserInterface {
     void askNickname(Scanner scanner);
     void askNumberOfPlayers(Scanner scanner);
     void FourLeaderCards(Scanner scanner);
+    void ShowCard(LeaderCard leaderCard);
 }

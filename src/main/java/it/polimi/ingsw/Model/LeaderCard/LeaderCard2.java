@@ -5,12 +5,14 @@ import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.Player;
 
 public class LeaderCard2 extends LeaderCard { //metodo per leader cards che diminuisce costo
+    private int type;
     private DevelopmentCard.colorCard FirstcolorCost;
     private DevelopmentCard.colorCard SecondcolorCost;
     private MarketMarble.ColorMarble Discount;
 
     public LeaderCard2(int id, int victoryPoints, DevelopmentCard.colorCard FirstcolorCost, DevelopmentCard.colorCard SecondcolorCost, MarketMarble.ColorMarble Discount) {
         super(id, victoryPoints);
+        type=2;
         this.FirstcolorCost = FirstcolorCost;
         this.SecondcolorCost = SecondcolorCost;
         this.Discount = Discount;
@@ -65,6 +67,10 @@ public class LeaderCard2 extends LeaderCard { //metodo per leader cards che dimi
                 ",secondColorCost="+getSecondcolorCost()+
                 ",discount"+getDiscount()+
                 '}';
+    }
+    @Override
+    public int getType() {
+        return 2;
     }
     }
 

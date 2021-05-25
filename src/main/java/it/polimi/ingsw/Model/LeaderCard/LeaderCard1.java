@@ -53,4 +53,9 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
                 ",colorMarble"+getNewColorMarble()+
                 '}';
     }
+
+    @Override
+    public int getType() {
+        return 1;
+    }
 }

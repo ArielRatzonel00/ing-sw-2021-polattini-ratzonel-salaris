@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public  class LeaderCard implements Serializable {
     //private int Type; // 1=TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
     private boolean Activate = false;
+
     private int Id;
 
     public LeaderCard(int id,int victoryPoints ) {
@@ -79,5 +80,9 @@ public  class LeaderCard implements Serializable {
     @Override
     public String toString(){
         return "leadercard";
+    }
+
+    public int getType() {
+        return 0;
     }
 }

@@ -7,17 +7,17 @@ import it.polimi.ingsw.Model.WarehouseRow;
 import java.util.ArrayList;
 
 public class LeaderCard3 extends LeaderCard{ //extra warehouse
-
-
-private MarketMarble.ColorMarble ColorCost;
-private int NumberCost = 5;
-private MarketMarble.ColorMarble colorOfExtraWarehouse;
-private ArrayList<MarketMarble> ExtraRow;
+    private int type;
+    private MarketMarble.ColorMarble ColorCost;
+    private int NumberCost = 5;
+    private MarketMarble.ColorMarble colorOfExtraWarehouse;
+    private ArrayList<MarketMarble> ExtraRow;
 
 
 
     public LeaderCard3(int id, int victoryPoints, MarketMarble.ColorMarble colorCost, MarketMarble.ColorMarble ColorOfExtraWarehouse) {
         super(id, victoryPoints);
+        type=3;
         this.ColorCost = colorCost;
         this.colorOfExtraWarehouse = ColorOfExtraWarehouse;
     }
@@ -71,5 +71,9 @@ private ArrayList<MarketMarble> ExtraRow;
                 ", colorCost="+getColorCost() +
                 ",colorOfExtraWarehouse="+getColorOfExtraWarehouse()+
                 '}';
+    }
+    @Override
+    public int getType() {
+        return 3;
     }
 }

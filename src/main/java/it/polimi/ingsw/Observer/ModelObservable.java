@@ -18,17 +18,21 @@ public class ModelObservable extends Observable<VirtualView> {
         }
     }
     public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards){
-        System.out.println("E LE CREA PURE");
         ArrayList<String>leaderCardsString=new ArrayList<>();
         leaderCardsString.add(leaderCards.get(0).toString());
         leaderCardsString.add(leaderCards.get(1).toString());
         leaderCardsString.add(leaderCards.get(2).toString());
         leaderCardsString.add(leaderCards.get(3).toString());
 
-        FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse(leaderCardsString);
+        FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse(leaderCards);
         fourLeaderCardResponse.setPlayerIndex(PlayerIndex);
+        System.out.println("le crea e le invia all'indice: "+fourLeaderCardResponse.getPlayerIndex());
+
         //fourLeaderCardResponse.setLeaderCards(leaderCards);
-        observers.get(0).updateFourLeaderCardsResponse(fourLeaderCardResponse);
+        for (VirtualView obs:observers
+             ) {
+            obs.updateFourLeaderCardsResponse(fourLeaderCardResponse);
+        }
     }
 
 

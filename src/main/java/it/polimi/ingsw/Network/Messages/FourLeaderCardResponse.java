@@ -6,8 +6,8 @@ import it.polimi.ingsw.Model.Player;
 import java.util.ArrayList;
 
 public class FourLeaderCardResponse extends Message{
-    ArrayList<String> leaderCards;
-    public FourLeaderCardResponse(ArrayList<String> leaderCards) {
+    ArrayList<LeaderCard> leaderCards;
+    public FourLeaderCardResponse(ArrayList<LeaderCard> leaderCards) {
         this.leaderCards=leaderCards;
         this.typeOfMessage = "FourLeaderCardResponse";
     }
@@ -18,7 +18,7 @@ public class FourLeaderCardResponse extends Message{
     }
      */
 
-    public ArrayList<String> getLeaderCards() {
+    public ArrayList<LeaderCard> getLeaderCards() {
         return leaderCards;
     }
 

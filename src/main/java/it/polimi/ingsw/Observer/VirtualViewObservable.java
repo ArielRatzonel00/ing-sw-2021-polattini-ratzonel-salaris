@@ -14,7 +14,10 @@ public class VirtualViewObservable extends Observable<GameManager>{
 
     public void AssignFourLeaderCard(FourLeaderCardsMessage fourLeaderCardsMessage){
         System.out.println("Dentro VVObserv");
-        observers.get(0).updateAssignFourLeaderCards(fourLeaderCardsMessage);
+        for (GameManager obs:observers
+             ) {
+            obs.updateAssignFourLeaderCards(fourLeaderCardsMessage);
+        }
     }
     public void notifyBuyCard(BuyCardMessage buyCardMessage) {
         observers.get(0).updateBuyCard(buyCardMessage);

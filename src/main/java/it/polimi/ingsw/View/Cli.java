@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View;
 
 
+import it.polimi.ingsw.Model.LeaderCard.*;
 import it.polimi.ingsw.Network.Client.UserInterface;
 import it.polimi.ingsw.Network.Messages.FourLeaderCardsMessage;
 import it.polimi.ingsw.Observer.ViewObservable;
@@ -75,7 +76,7 @@ public class Cli extends ViewObservable implements UserInterface {
         });
     }
     public void  FourLeaderCards(Scanner scanner){
-            System.out.println("entra");
+            String s=scanner.nextLine();
             FourLeaderCardsMessage fourLeaderCardsMessage = new FourLeaderCardsMessage();
             notifyObserver(obs-> {
                 try {
@@ -84,8 +85,35 @@ public class Cli extends ViewObservable implements UserInterface {
                     e.printStackTrace();
                 }
             });
-
-
+    }
+    @Override
+    public void ShowCard(LeaderCard l){
+        switch (l.getType()){
+            case 1:
+                LeaderCard1 l1=(LeaderCard1)l;
+                System.out.println("POTERE: Trasforma palline bianche in palline : " + l1.getNewColorMarble() + "\n" +
+                    "NECESSITA: 1 devCard colore " + l1.getColorCostOne() + ", 2 devCard colore " + l1.getColorCostTwo() + "\n" +
+                    "VICTORY POINTS: " + l1.getVictoryPoints());
+            break;
+            case 2:
+                LeaderCard2 l2=(LeaderCard2)l;
+                System.out.println("POTERE: Riduce costo delle DevCard di una risorsa di tipo: " + l2.getDiscount() + "\n" +
+                        "NECESSITA: 1 devCard colore " + l2.getFirstcolorCost() + ", 1 devCard colore " + l2.getSecondcolorCost() + "\n" +
+                        "VICTORY POINTS: " + l2.getVictoryPoints());
+                break;
+            case 3:
+                LeaderCard3 l3=(LeaderCard3) l;
+                System.out.println("POTERE: Aggiunge un extra warehouse (di 2 spazi) di colore " + l3.getColorOfExtraWarehouse() + "\n" +
+                        "NECESSITA: 5 risorse di colore " + l3.getColorCost() +  "\n" +
+                        "VICTORY POINTS: " + l3.getVictoryPoints());
+                break;
+            case 4:
+                LeaderCard4 l4=(LeaderCard4) l;
+                System.out.println( "POTERE: Aggiunge produzione da" + l4.getProduction().getProductionCost().get(0).getCostNumber() + l4.getProduction().getProductionCost().get(0).getCostColor() + " ad un punto fede e una risorsa a tua scelta\n " +
+                    "NECESSITA: DevCard di livello 2 di colore" + l4.getCostCardLevelTwo() + "\n" +
+                    "VICTORY POINTS: " + l4.getVictoryPoints());
+                break;
+        }
     }
 
     public void start() {

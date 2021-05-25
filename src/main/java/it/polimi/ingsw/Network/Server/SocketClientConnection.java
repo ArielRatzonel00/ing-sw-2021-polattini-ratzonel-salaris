@@ -133,7 +133,6 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
                 server.setNextGameNPlayers(message.getValue());
                 break;
             case "Fine":
-                System.out.println("Ciao");
                 break;
             default:
                 System.out.println("errore nell'id del messaggio");
