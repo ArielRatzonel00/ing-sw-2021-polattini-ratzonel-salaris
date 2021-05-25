@@ -48,26 +48,31 @@ public class Model extends ModelObservable {
 
 
     public void AssignFourLeaderCards(int PlayerIndex){
+        Player currentplayer = players.get(PlayerIndex);
         System.out.println("Asssegna 4leader nel game");
-        players.get(PlayerIndex).AssignFourLeaderCard(deck.getTopFourLeaderCard());
-        notifyFourLeaderCards(PlayerIndex, players);
+        currentplayer.AssignFourLeaderCard(deck.getTopFourLeaderCard());
+        notifyFourLeaderCards(PlayerIndex, currentplayer.getLeaderCards());
     }
 
     public void DiscardInitialLeaderCards(int PlayerIndex, int LeaderCard1Index, int LeaderCard2Index){
-        players.get(PlayerIndex).DiscardLeaderCard(LeaderCard1Index);
-        players.get(PlayerIndex).DiscardLeaderCard(LeaderCard2Index);
-        //Notify
+        Player currentplayer = players.get(PlayerIndex);
+        currentplayer.DiscardLeaderCard(LeaderCard1Index);
+        currentplayer.DiscardLeaderCard(LeaderCard2Index);
+        notifyLeaderCardsAfterFirstDiscard(PlayerIndex,currentplayer.getLeaderCards());
     }
     public void SetInitialResourcesForSecondPlayer(MarketMarble.ColorMarble colorMarble, int row) {
-        players.get(1).getWarehouse().addToRow(new MarketMarble(colorMarble), row);
-        //Notify
+        Player currentplayer = players.get(1);
+        currentplayer.getWarehouse().addToRow(new MarketMarble(colorMarble), row);
+        notifyNewWarehouse(1, currentplayer.getWarehouse());
     }
     public void SetInitialResourcesForThirdPlayer(MarketMarble.ColorMarble colorMarble, int row) {
-        players.get(2).getWarehouse().addToRow(new MarketMarble(colorMarble), row);
-        players.get(2).getFaithTrack().setRedPosition(1);
-        //Notify
+        Player currentplayer = players.get(2);
+        currentplayer.getWarehouse().addToRow(new MarketMarble(colorMarble), row);
+        currentplayer.getFaithTrack().setRedPosition(1);
+        notifyNewWarehouseFaithtrack(2, currentplayer.getWarehouse(), currentplayer.getFaithTrack());
     }
     public void SetInitialResourcesForForthPlayer(MarketMarble.ColorMarble colorMarble1, int row1,MarketMarble.ColorMarble colorMarble2, int row2 ) {
+        Player currentplayer = players.get(3);
         if (row1 == row2 && (!colorMarble1.equals(colorMarble2) || row1 == 0)){
             //NotifyErrorMessage
         }
@@ -75,35 +80,36 @@ public class Model extends ModelObservable {
             //NotifyErrorMessage
         }
         else {
-            players.get(3).getWarehouse().addToRow(new MarketMarble(colorMarble1), row1);
-            players.get(3).getWarehouse().addToRow(new MarketMarble(colorMarble2), row2);
-            players.get(3).getFaithTrack().setRedPosition(1);
-            //Notify
+            currentplayer.getWarehouse().addToRow(new MarketMarble(colorMarble1), row1);
+            currentplayer.getWarehouse().addToRow(new MarketMarble(colorMarble2), row2);
+            currentplayer.getFaithTrack().setRedPosition(1);
+            notifyNewWarehouseFaithtrack(3, currentplayer.getWarehouse(), currentplayer.getFaithTrack());
         }
     }
-    public void MarketTrayAction(boolean isRow, int index){
+    public void MarketTrayAction(int PlayerIndex, boolean isRow, int index){
+        ArrayList<MarketMarble> returnedMarbles = new ArrayList<>();
         if (isRow) {
             if (index >= 0 && index < 3){
-                marketTray.ShiftMatrixByRow(index);
+                returnedMarbles = marketTray.ShiftMatrixByRow(index);
             }
             else {
                 //NotifyErrorMessage
             }
         } else {
             if (index >= 0 && index < 4){
-                marketTray.ShiftMatrixByCol(index);
+                returnedMarbles = marketTray.ShiftMatrixByCol(index);
             }
             else {
                 //NotifyErrorMessage
             }
         }
-        //Notify
+        notifyMarketTrayActionResponse(PlayerIndex,marketTray,returnedMarbles);
     }
     public void DealWithAResource(int PlayerIndex,  boolean keepResource, MarketMarble.ColorMarble marble, int rowOfWarehouse){
         Player currentPlayer = players.get(PlayerIndex);
         if (keepResource){
             if (currentPlayer.getWarehouse().addToRow(new MarketMarble(marble), rowOfWarehouse)){
-                //NotifyAddedMarble
+                notifyNewWarehouse(PlayerIndex, currentPlayer.getWarehouse());
             }
             else {
                 for (Player otherplayer : players) {
@@ -131,7 +137,7 @@ public class Model extends ModelObservable {
             }
             else {
                 if (players.get(PlayerIndex).CheckResourcesForAcquisition(cost)) {
-                    //NotifyCanBuyCard
+                    notifyTextMessage(PlayerIndex, "Card available and purchasable");
                 } else {
                     //NotifyDoesn't have resources to buyCard
                 }

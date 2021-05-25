@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Player implements Serializable {
     private String nickname;
     private int index;
-    private FaithTrack faithTrack;
+    private MultipleyerFaithTrack faithTrack;
     private Warehouse warehouse;
     private Strongbox strongbox;
     private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
@@ -52,7 +52,7 @@ public class Player implements Serializable {
         return nickname;
     }
 
-    public FaithTrack getFaithTrack() {
+    public MultipleyerFaithTrack getFaithTrack() {
         return faithTrack;
     }
 

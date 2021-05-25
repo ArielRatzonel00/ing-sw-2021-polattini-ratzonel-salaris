@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -77,23 +78,33 @@ public class MarketTray  {
     } // Method that returns 3 marbles by selecting a column in the MarketTray
 
 
-    public void ShiftMatrixByRow(int rig) {
+    public ArrayList<MarketMarble> ShiftMatrixByRow(int rig) {
+        ArrayList<MarketMarble> returnedMarbles = new ArrayList<>();
+        returnedMarbles.add(MarketMatrix[rig][0]);
+        returnedMarbles.add(MarketMatrix[rig][1]);
+        returnedMarbles.add(MarketMatrix[rig][2]);
+        returnedMarbles.add(MarketMatrix[rig][3]);
         MarketMarble temp = OustideMarble;
         OustideMarble = MarketMatrix[rig][0];
         MarketMatrix[rig][0] = MarketMatrix[rig][1];
         MarketMatrix[rig][1] = MarketMatrix[rig][2];
         MarketMatrix[rig][2] = MarketMatrix[rig][3];
         MarketMatrix[rig][3] =  temp;
-
+        return returnedMarbles;
     } //Method that shift the MarketTray after choosing to get Marbles by selected a row in the MarketTray
 
 
-    public void ShiftMatrixByCol(int col) {
+    public ArrayList<MarketMarble> ShiftMatrixByCol(int col) {
+        ArrayList<MarketMarble> returnedMarbles = new ArrayList<>();
+        returnedMarbles.add(MarketMatrix[2][col]);
+        returnedMarbles.add(MarketMatrix[1][col]);
+        returnedMarbles.add(MarketMatrix[0][col]);
         MarketMarble temp2 = OustideMarble;
         OustideMarble = MarketMatrix[2][col];
         MarketMatrix[2][col] = MarketMatrix[1][col];
         MarketMatrix[1][col] = MarketMatrix[0][col];
         MarketMatrix[0][col] = temp2;
+        return returnedMarbles;
 
     } //Method that shift the MarketTray after choosing to get Marbles by selected a column in the MarketTray
 }

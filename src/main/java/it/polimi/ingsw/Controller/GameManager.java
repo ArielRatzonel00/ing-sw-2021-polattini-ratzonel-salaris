@@ -56,7 +56,7 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     }
 
     public void updateMarketTrayAction(MarketTrayActionMessage marketTrayActionMessage) {
-        game.MarketTrayAction(marketTrayActionMessage.isRow(), marketTrayActionMessage.getIndex());
+        game.MarketTrayAction(marketTrayActionMessage.getPlayerIndex(), marketTrayActionMessage.isRow(), marketTrayActionMessage.getIndex());
     }
 
     public void updateDealWithAResourceFromMarketTray(DealWithAResourceFromMarketTrayMessage dealWithAResourceFromMarketTrayMessage) {
