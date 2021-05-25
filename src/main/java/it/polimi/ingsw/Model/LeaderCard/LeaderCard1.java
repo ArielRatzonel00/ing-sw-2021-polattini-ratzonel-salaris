@@ -44,4 +44,13 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
     public MarketMarble.ColorMarble getNewColorMarble() {
         return NewColorMarble;
     }
+    @Override
+    public String toString() {
+        return "LeaderCard1{" +
+                "victoryPoints=" + getVictoryPoints() +
+                ", colorCostOne="+getColorCostOne() +
+                ",colorCostTwo="+getColorCostTwo()+
+                ",colorMarble"+getNewColorMarble()+
+                '}';
+    }
 }

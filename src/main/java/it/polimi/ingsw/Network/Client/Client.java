@@ -87,14 +87,14 @@ public class Client extends Messanger implements ViewObserver{
         //if(message.getPlayerIndex()==null || message.getPlayerIndex().contains(this.nickname)){
             switch (message.getTypeOfMessage()){
                 case ("FourLeaderCardResponse"):
-                    FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse();
+                    FourLeaderCardResponse fourLeaderCardResponse = (FourLeaderCardResponse) message;
                     fourLeaderCardResponse = (FourLeaderCardResponse) message;
-                    System.out.println("IL nickname è "+this.nickname + "quello che ci riceve" +((FourLeaderCardResponse) message).getPlayers().get(message.getPlayerIndex()));
-                    if(fourLeaderCardResponse.getPlayers().get(fourLeaderCardResponse.getPlayerIndex())==null)
+                    System.out.println("IL nickname è "+this.nickname + "quello che ci riceve");
+                    if(fourLeaderCardResponse.getLeaderCards()==null)
                         System.out.println("NOLEADERS");
                     int cont=0;
-                        for (LeaderCard l : fourLeaderCardResponse.getPlayers().get(fourLeaderCardResponse.getPlayerIndex()).getLeaderCards()){
-                            l.StampaCarta();
+                        for (String l : fourLeaderCardResponse.getLeaderCards()){
+                            System.out.println(l);
                             System.out.println(cont);
                             cont++;
                         }

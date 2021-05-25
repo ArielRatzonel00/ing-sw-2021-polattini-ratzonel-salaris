@@ -5,7 +5,9 @@ import it.polimi.ingsw.Model.Model;
 import it.polimi.ingsw.Network.Messages.FourLeaderCardResponse;
 import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.SocketMessage;
+import it.polimi.ingsw.Network.Messages.TwoLeaderCardsResponse;
 import it.polimi.ingsw.Observer.*;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 
@@ -26,6 +28,11 @@ public class VirtualView extends VirtualViewObservable implements VirtualViewObs
     public void updateFourLeaderCardsResponse(FourLeaderCardResponse fourLeaderCardResponse){
         System.out.println("E lo invia a: "+connection.getName());
         connection.send(fourLeaderCardResponse);
+    }
+
+    @Override
+    public void updateLeaderCardsAfterFirstDiscard(TwoLeaderCardsResponse twoLeaderCardsResponse) {
+
     }
 
    /* @Override

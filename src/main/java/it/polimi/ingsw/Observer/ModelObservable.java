@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Network.Messages.*;
 import it.polimi.ingsw.Network.Server.VirtualView;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +19,19 @@ public class ModelObservable extends Observable<VirtualView> {
     }
     public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards){
         System.out.println("E LE CREA PURE");
-        FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse();
+        ArrayList<String>leaderCardsString=new ArrayList<>();
+        leaderCardsString.add(leaderCards.get(0).toString());
+        leaderCardsString.add(leaderCards.get(1).toString());
+        leaderCardsString.add(leaderCards.get(2).toString());
+        leaderCardsString.add(leaderCards.get(3).toString());
+
+        FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse(leaderCardsString);
         fourLeaderCardResponse.setPlayerIndex(PlayerIndex);
-        fourLeaderCardResponse.setLeaderCards(leaderCards);
+        //fourLeaderCardResponse.setLeaderCards(leaderCards);
         observers.get(0).updateFourLeaderCardsResponse(fourLeaderCardResponse);
     }
+
+
     public void notifyLeaderCardsAfterFirstDiscard(int PlayerIndex, ArrayList<LeaderCard> leaderCards){
         TwoLeaderCardsResponse twoLeaderCardsResponse = new TwoLeaderCardsResponse();
         twoLeaderCardsResponse.setPlayerIndex(PlayerIndex);

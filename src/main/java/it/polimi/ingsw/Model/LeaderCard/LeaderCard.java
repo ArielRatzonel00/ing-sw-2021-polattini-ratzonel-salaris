@@ -75,6 +75,7 @@ public  class LeaderCard implements Serializable {
     public String StampaCarta(){
         return "a";
     }
+
     @Override
     public String toString(){
         return "leadercard";

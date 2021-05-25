@@ -64,4 +64,12 @@ private ArrayList<MarketMarble> ExtraRow;
         player.getWarehouse().getRows().add(new WarehouseRow(2));
         player.getWarehouse().getRows().get(player.getWarehouse().getRows().size()-1).setColor(colorOfExtraWarehouse);
     }
+    @Override
+    public String toString() {
+        return "LeaderCard4{" +
+                "victoryPoints=" + getVictoryPoints() +
+                ", colorCost="+getColorCost() +
+                ",colorOfExtraWarehouse="+getColorOfExtraWarehouse()+
+                '}';
+    }
 }

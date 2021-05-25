@@ -57,5 +57,14 @@ public class LeaderCard2 extends LeaderCard { //metodo per leader cards che dimi
             player.setDiscountPurple(1);
             }
         }
+    @Override
+    public String toString() {
+        return "LeaderCard2{" +
+                "victoryPoints=" + getVictoryPoints() +
+                ", firstColorCost="+getFirstcolorCost() +
+                ",secondColorCost="+getSecondcolorCost()+
+                ",discount"+getDiscount()+
+                '}';
+    }
     }
 
