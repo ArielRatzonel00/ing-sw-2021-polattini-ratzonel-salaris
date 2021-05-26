@@ -60,6 +60,7 @@ public class Model extends ModelObservable {
         currentplayer.DiscardLeaderCard(LeaderCard2Index);
         notifyLeaderCardsAfterFirstDiscard(PlayerIndex,currentplayer.getLeaderCards());
     }
+
     public void SetInitialResourcesForSecondPlayer(MarketMarble.ColorMarble colorMarble, int row) {
         Player currentplayer = players.get(1);
         currentplayer.getWarehouse().addToRow(new MarketMarble(colorMarble), row);
@@ -180,6 +181,7 @@ public class Model extends ModelObservable {
             }
             DevelopmentCard card = developmentGrid.remove(row, col);
             currentPlayer.buyCard(card,slot);
+            notifyCardBuyedResponse(PlayerIndex, currentPlayer.getWarehouse(), currentPlayer.getStrongbox(), currentPlayer.getSlotsBoard(),currentPlayer.getProductionsAvaible(), col, row);
 
             //NotifyNewStrongboxNewWarehouseNewDevelopmentGridNewSlotsBoardNewProductionsAvailable
         }
@@ -217,8 +219,9 @@ public class Model extends ModelObservable {
 
 
     public void MoveResources(int PlayerIndex, int row1, int row2) {
-        if (players.get(PlayerIndex).getWarehouse().MoveResource(row1, row2)) {
-            //NotifyNewWarehouse
+        Player currentplayer = players.get(PlayerIndex);
+        if (currentplayer.getWarehouse().MoveResource(row1, row2)) {
+            notifyNewWarehouse(PlayerIndex, currentplayer.getWarehouse());
         } else {
             //NotifyNotValidMove
         }
@@ -279,6 +282,7 @@ public class Model extends ModelObservable {
                 }
             }
             if(currentplayer.CheckResourcesForProduce(resources)){
+                notifyTextMessage(PlayerIndex, "You can produce everything that you selected ");
                 //NotifyCanProduceEverything
             }
             else {
@@ -293,22 +297,25 @@ public class Model extends ModelObservable {
             currentplayer.getStrongbox().RemoveResourcesFromStrongbox(c.getCostNumber(), c.getCostColor());
         }
         for (CostOfCard resourceFromWarehouse : ResourcesFromWarehouse) {
-            currentplayer.getWarehouse().getRow(contRow).removeMarble(resourceFromWarehouse.getCostColor(), resourceFromWarehouse.getCostNumber());
+            currentplayer.getWarehouse().getRow(rows.get(contRow)).removeMarble(resourceFromWarehouse.getCostColor(), resourceFromWarehouse.getCostNumber());
             contRow++;
         }
         if (lastproduction){
-            //NotifyTutto
+            notifyProductionResponse(PlayerIndex, currentplayer.getWarehouse(), currentplayer.getStrongbox(), currentplayer.getFaithTrack());
         }
     }
     public void EndTurn(int PlayerIndex){
+        int IndexNewTurn = 0;
         players.get(PlayerIndex).setYourTurn(false);
         if (PlayerIndex!= players.size()-1) {
             players.get(PlayerIndex + 1).setYourTurn(true);
+            IndexNewTurn = PlayerIndex + 1;
         }
         else {
+            IndexNewTurn = 0;
             players.get(0).setYourTurn(true);
         }
-        //Notify
+        notifyNewTurn(IndexNewTurn);
     }
 
 

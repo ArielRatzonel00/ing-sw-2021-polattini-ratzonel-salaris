@@ -5,6 +5,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Strongbox implements Serializable {
     private int servant;
@@ -76,6 +77,14 @@ public class Strongbox implements Serializable {
         int Resources;
         Resources = servant + stone + shield + coin;
         return Resources;
+    }
+    public ArrayList<Integer> getResources(){
+        ArrayList<Integer> resources = new ArrayList<>();
+        resources.add(shield); // Posizione 0 Shield
+        resources.add(stone); // Posizione 1 Stone
+        resources.add(servant); //Posizione 2 Servant
+        resources.add(coin); // Posizione 3 Servant
+        return resources;
     }
 
 
