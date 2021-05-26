@@ -75,7 +75,9 @@ public class Cli extends ViewObservable implements UserInterface {
             }
         });
     }
+    @Override
     public void  FourLeaderCards(Scanner scanner){
+            System.out.println("Premi un pulsante per inizializzare il gioco\n");
             String s=scanner.nextLine();
             FourLeaderCardsMessage fourLeaderCardsMessage = new FourLeaderCardsMessage();
             notifyObserver(obs-> {

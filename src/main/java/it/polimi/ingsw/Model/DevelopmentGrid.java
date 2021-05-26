@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class DevelopmentGrid implements Serializable {
 
@@ -21,6 +22,15 @@ public class DevelopmentGrid implements Serializable {
         CardMatrix[2][1] = deck.getCell21();
         CardMatrix[2][2] = deck.getCell22();
         CardMatrix[2][3] = deck.getCell23();
+    }
+    public ArrayList<DevelopmentCard> getTopcards(){
+        ArrayList<DevelopmentCard> topcards = new ArrayList<>();
+        for (int i = 0; i<3; i++){
+            for (int j=0;j<2;j++){
+                topcards.add(CardMatrix[i][j].getTopCard());
+            }
+        }
+        return topcards;
     }
 
     public GridCell[][] getCardMatrix() {

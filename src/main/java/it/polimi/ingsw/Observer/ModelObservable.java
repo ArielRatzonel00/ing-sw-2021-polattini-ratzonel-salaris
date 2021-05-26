@@ -17,14 +17,12 @@ public class ModelObservable extends Observable<VirtualView> {
             observers.add(observer);
         }
     }
-    public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards){
-        ArrayList<String>leaderCardsString=new ArrayList<>();
-        leaderCardsString.add(leaderCards.get(0).toString());
-        leaderCardsString.add(leaderCards.get(1).toString());
-        leaderCardsString.add(leaderCards.get(2).toString());
-        leaderCardsString.add(leaderCards.get(3).toString());
+    public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards, DevelopmentGrid developmentGrid, MarketTray marketTray){
+
 
         FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse(leaderCards);
+        fourLeaderCardResponse.setTopCards(developmentGrid.getTopcards());
+        fourLeaderCardResponse.setMarketTray(marketTray);
         fourLeaderCardResponse.setPlayerIndex(PlayerIndex);
         System.out.println("le crea e le invia all'indice: "+fourLeaderCardResponse.getPlayerIndex());
 

@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network.Client;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Network.Client.CModel.ClientModel;
 import it.polimi.ingsw.Network.Messages.FourLeaderCardResponse;
 import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.Messanger;
@@ -20,14 +21,14 @@ public class Client extends Messanger implements ViewObserver{
     private String ip;
     private String nickname;
     private int port;
-    private int ID=1;
+    private int ID;
     private Socket socket;
     Scanner stdin = new Scanner(System.in);
     private ObjectOutputStream socketOut;
     private ObjectInputStream socketIn;
     private UserInterface userInterface;
     private boolean active = true;
-
+    private ClientModel clientModel= new ClientModel();
 
     public Client(String ip, int port, UserInterface userInterface) {
         this.ip = ip;
@@ -75,7 +76,6 @@ public class Client extends Messanger implements ViewObserver{
                     System.out.println("   MAESTRI DEL MEDIOEVO!    \n" +
                             "(game started!) ");
                     sendMessage(socketOut, new SocketMessage("Fine",0, null, null));
-                    System.out.println("Premi S per iniziare\n");
                     userInterface.FourLeaderCards(stdin);
 
                 default:
@@ -88,14 +88,18 @@ public class Client extends Messanger implements ViewObserver{
         //if(message.getPlayerIndex()==null || message.getPlayerIndex().contains(this.nickname)){
             switch (message.getTypeOfMessage()){
                 case ("FourLeaderCardResponse"):
+
                     if(message.getPlayerIndex()==ID) {
                         FourLeaderCardResponse fourLeaderCardResponse = (FourLeaderCardResponse) message;
                         fourLeaderCardResponse = (FourLeaderCardResponse) message;
-                        System.out.println("IL nickname è " + this.nickname + "quello che ci riceve");
-                        if (fourLeaderCardResponse.getLeaderCards() == null)
+                        clientModel.getMarketTrayClient().setMarketMatrix(((FourLeaderCardResponse) message).getMarketTray().getMarketMatrix());
+                        clientModel.getMarketTrayClient().setOustideMarble(((FourLeaderCardResponse) message).getMarketTray().getOustideMarble());
+                        clientModel.setDevGrid(((FourLeaderCardResponse) message).getTopCards());
+                        clientModel.getPlayerBoards().get(ID).setLeaderCards(((FourLeaderCardResponse) message).getLeaderCards());
+                        if (clientModel.getPlayerBoards().get(ID).getLeaderCards() == null)
                             System.out.println("NOLEADERS");
                         int cont = 0;
-                        for (LeaderCard l : fourLeaderCardResponse.getLeaderCards()) {
+                        for (LeaderCard l : clientModel.getPlayerBoards().get(ID).getLeaderCards()) {
                             userInterface.ShowCard(l);
                             //System.out.println(l);
                             System.out.println(cont);
