@@ -171,7 +171,7 @@ public class Client extends Messanger implements ViewObserver{
                                 c = "a";
                                 while (!c.equalsIgnoreCase("P") && !c.equalsIgnoreCase("B") && !c.equalsIgnoreCase("G") && !c.equalsIgnoreCase("Y")) {
                                     System.out.println("SEI IL QUARTO, HAI 2 RISORSA A SCELTA, SCEGLI LA PRIMA TRA: SERVANT[P], SHIELD[B], STONE[G], COIN [Y]");
-                                    c = stdin.nextLine();
+                                    c = stdin.next();
                                 }
                                 switch (c) {
                                     case "Y", "y" -> message1.setColorMarble1(MarketMarble.ColorMarble.YELLOW);
@@ -181,7 +181,7 @@ public class Client extends Messanger implements ViewObserver{
                                 }
                                 a = 3;
                                 while (a < 0 || a > 2) {
-                                    System.out.println(" Scegli la riga in cui posizionarla [0-2]");
+                                    System.out.println(" Scegli la riga in cui posizionarla [0-2] 1");
                                     a = stdin.nextInt();
                                     if(a < 0 || a > 2)
                                         System.out.println("Indice Sbagliato");
@@ -189,9 +189,10 @@ public class Client extends Messanger implements ViewObserver{
                                 message1.setRow1(a);
                                 int i = 0;
                                 while (i == 0) {
+                                    c="a";
                                     while (!c.equalsIgnoreCase("P") && !c.equalsIgnoreCase("B") && !c.equalsIgnoreCase("G") && !c.equalsIgnoreCase("Y")) {
                                         System.out.println("SCEGLI LA SECONDA TRA: SERVANT[P], SHIELD[B], STONE[G], COIN [Y]");
-                                        c = stdin.nextLine();
+                                        c = stdin.next();
                                     }
                                     switch (c) {
                                         case "Y", "y" -> message1.setColorMarble2(MarketMarble.ColorMarble.YELLOW);
@@ -201,7 +202,7 @@ public class Client extends Messanger implements ViewObserver{
                                     }
                                     int b = 3;
                                     while (b < 0 || b > 2) {
-                                        System.out.println(" Scegli la riga in cui posizionarla [0-2]");
+                                        System.out.println(" Scegli la riga in cui posizionarla [0-2] 2");
                                         b = stdin.nextInt();
                                         if (b < 0 || b > 2)
                                             System.out.println("HAI SELIZONATO RIGA SBAGLIATA");
@@ -216,7 +217,6 @@ public class Client extends Messanger implements ViewObserver{
                                     }
                                 }
                         }
-                        System.out.println("INVIA IL MESSAGGIO");
                         sendMessage(socketOut, message1);
                         break;
                     }
