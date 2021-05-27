@@ -36,5 +36,5 @@ public class MarkerStack {
 
     public void Shuffle(){
         Collections.shuffle(markers);
-    } // Method that shuffle tha Markers in the Stack
+    } // Method that shuffle the Markers in the Stack
 }

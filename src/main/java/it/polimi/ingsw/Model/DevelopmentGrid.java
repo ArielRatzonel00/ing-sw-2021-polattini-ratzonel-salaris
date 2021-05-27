@@ -9,7 +9,6 @@ public class DevelopmentGrid implements Serializable {
 
     private GridCell[][] CardMatrix = new GridCell[3][4]; // Matrice che contiene tutte le developmentCard
     
-
     public DevelopmentGrid(Deck deck) {
         CardMatrix[0][0] = deck.getCell00();
         CardMatrix[0][1] = deck.getCell01();
@@ -24,6 +23,7 @@ public class DevelopmentGrid implements Serializable {
         CardMatrix[2][2] = deck.getCell22();
         CardMatrix[2][3] = deck.getCell23();
     }
+
     public ArrayList<DevelopmentCard> getTopcards(){
         ArrayList<DevelopmentCard> topcards = new ArrayList<>();
         for (int i = 0; i<3; i++){
@@ -44,7 +44,6 @@ public class DevelopmentGrid implements Serializable {
 
     public boolean RemoveCardByColor(DevelopmentCard.colorCard colorCard){
         switch(colorCard){
-
             case Green:if(CardMatrix[0][0].RemoveFirstCard() == true){
                 return true;
             }else if(CardMatrix[1][0].RemoveFirstCard() == true) {
@@ -136,11 +135,10 @@ public class DevelopmentGrid implements Serializable {
         return true;
     } // Method that removes the bottom card of the lowest level of the color that is still on the DevelopmentGrid (Used in the effect of the Marker that RemovesCard)
 
-
-
     public DevelopmentCard remove(int a, int b){
         return  CardMatrix[a][b].RemoveTopCard();
     } // Method that removes and returns the top card of the cell selected
+
     public DevelopmentCard get(int a, int b){
         return CardMatrix[a][b].getTopCard();
     } // Method that returns the top card of the cell selected
