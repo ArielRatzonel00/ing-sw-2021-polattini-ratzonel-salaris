@@ -7,7 +7,7 @@ public class ServerMain {
     {
         Server server;
         try {
-            server = new Server(1336);
+            server = new Server(1334);
             server.run();
         } catch (IOException e) {
             System.err.println("Impossible to initialize the server: " + e.getMessage() + "!");

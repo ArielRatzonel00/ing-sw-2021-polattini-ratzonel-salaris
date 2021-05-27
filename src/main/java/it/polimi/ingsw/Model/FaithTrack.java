@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public abstract class FaithTrack implements Serializable {
     protected int RedPosition = 0;
     protected int points = 0;
-    public enum popeFavorState{
+    public enum popeFavorState implements Serializable{
         Activate,
         Unabled,
         Deleted

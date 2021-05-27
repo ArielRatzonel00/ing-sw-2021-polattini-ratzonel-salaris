@@ -1,4 +1,5 @@
 package it.polimi.ingsw.Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -6,7 +7,7 @@ import java.util.List;
 
 //Method that represents a cell of the DevelopmentGrid and contains four DevelopmentCard
 
-public class GridCell {
+public class GridCell implements Serializable {
     private ArrayList<DevelopmentCard> cell = new ArrayList<>();
 
 

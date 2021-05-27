@@ -2,10 +2,7 @@ package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Network.Messages.FourLeaderCardsMessage;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.Messanger;
-import it.polimi.ingsw.Network.Messages.SocketMessage;
+import it.polimi.ingsw.Network.Messages.*;
 import it.polimi.ingsw.Observer.Observer;
 
 import java.io.IOException;
@@ -144,8 +141,20 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
         switch (message.getTypeOfMessage()){
             case "Four Leader Cards":
                 System.out.println("Ricevuto FourLeaderCardsMessage");
-                virtualView.AssignFourLeaderCard((FourLeaderCardsMessage) message);
+                virtualView.notifyObserver(obs->obs.updateAssignFourLeaderCards((FourLeaderCardsMessage) message));
+                //virtualView.AssignFourLeaderCard((FourLeaderCardsMessage) message);
                 break;
+
+            case "DiscardInitialLeaderCardsMessage":
+                System.out.println("Ricevuto DiscardInitialLeaderCardsMessage");
+               virtualView.notifyObserver(obs->obs.updateDiscardLeaderCards((DiscardInitialLeaderCardsMessage)message));
+               break;
+
+            case "InitialResourcesMessage":
+                System.out.println("Ricevuto InitialResources");
+                virtualView.notifyObserver(obs->obs.updateInitialResource((InitialResourcesMessage)message));
+                break;
+
         }
     }
 

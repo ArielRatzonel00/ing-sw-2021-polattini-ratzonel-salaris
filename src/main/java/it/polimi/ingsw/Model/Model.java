@@ -51,7 +51,9 @@ public class Model extends ModelObservable {
         Player currentplayer = players.get(PlayerIndex);
         System.out.println("Asssegna 4leader nel game");
         currentplayer.AssignFourLeaderCard(deck.getTopFourLeaderCard());
+        System.out.println(currentplayer.getLeaderCards().size());
         notifyFourLeaderCards(PlayerIndex, currentplayer.getLeaderCards(), developmentGrid, marketTray);
+
     }
 
     public void DiscardInitialLeaderCards(int PlayerIndex, int LeaderCard1Index, int LeaderCard2Index){

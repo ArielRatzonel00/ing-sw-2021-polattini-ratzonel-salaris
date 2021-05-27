@@ -32,7 +32,7 @@ public class VirtualView extends VirtualViewObservable implements VirtualViewObs
 
     @Override
     public void updateLeaderCardsAfterFirstDiscard(TwoLeaderCardsResponse twoLeaderCardsResponse) {
-
+        connection.send(twoLeaderCardsResponse);
     }
 
    /* @Override

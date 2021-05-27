@@ -14,7 +14,7 @@ public class FourLeaderCardResponse extends Message{
     private MarketTray marketTray;
 
     public FourLeaderCardResponse(ArrayList<LeaderCard> leaderCard) {
-        this.leaderCards=leaderCards;
+        this.leaderCards=leaderCard;
         this.typeOfMessage = "FourLeaderCardResponse";
     }
 

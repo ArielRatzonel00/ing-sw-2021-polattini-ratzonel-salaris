@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,7 +10,7 @@ import java.util.List;
 
 // Class the represents the Market Tray
 
-public class MarketTray  {
+public class MarketTray  implements Serializable {
     private MarketMarble[] ArrayMarble = new MarketMarble[13];
     private MarketMarble[][] MarketMatrix = new MarketMarble[3][4];
     private MarketMarble OustideMarble;

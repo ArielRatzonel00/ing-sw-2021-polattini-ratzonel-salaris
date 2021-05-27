@@ -19,8 +19,9 @@ public class ModelObservable extends Observable<VirtualView> {
     }
     public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards, DevelopmentGrid developmentGrid, MarketTray marketTray){
 
-
+        System.out.println("Entra nel NOTIFY");
         FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse(leaderCards);
+        System.out.println(fourLeaderCardResponse.getLeaderCards().size() + "in ModObs");
         fourLeaderCardResponse.setTopCards(developmentGrid.getTopcards());
         fourLeaderCardResponse.setMarketTray(marketTray);
         fourLeaderCardResponse.setPlayerIndex(PlayerIndex);
@@ -38,8 +39,10 @@ public class ModelObservable extends Observable<VirtualView> {
         TwoLeaderCardsResponse twoLeaderCardsResponse = new TwoLeaderCardsResponse();
         twoLeaderCardsResponse.setPlayerIndex(PlayerIndex);
         twoLeaderCardsResponse.setLeaderCards(leaderCards);
-        //update
-    }
+        for (VirtualView obs:observers
+        ) {
+            obs.updateLeaderCardsAfterFirstDiscard(twoLeaderCardsResponse);
+        }    }
     public void notifyNewWarehouse(int PlayerIndex, Warehouse newwarehouse){
         NewWarehouseResponse newWarehouseResponse = new NewWarehouseResponse();
         newWarehouseResponse.setPlayerIndex(PlayerIndex);

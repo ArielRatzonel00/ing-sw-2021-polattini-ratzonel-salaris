@@ -5,6 +5,7 @@ import it.polimi.ingsw.Network.Messages.BuyCardMessage;
 import it.polimi.ingsw.Network.Messages.FourLeaderCardsMessage;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class VirtualViewObservable extends Observable<GameManager>{
     protected final ArrayList<GameManager> observers = new ArrayList<>();
@@ -17,6 +18,11 @@ public class VirtualViewObservable extends Observable<GameManager>{
         for (GameManager obs:observers
              ) {
             obs.updateAssignFourLeaderCards(fourLeaderCardsMessage);
+        }
+    }
+    public synchronized void notifyObserver(Consumer<GameManager> lambda){
+        for (GameManager observer : observers) {
+            lambda.accept(observer);
         }
     }
     public void notifyBuyCard(BuyCardMessage buyCardMessage) {

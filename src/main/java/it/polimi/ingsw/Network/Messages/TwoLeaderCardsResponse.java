@@ -17,4 +17,5 @@ public class TwoLeaderCardsResponse extends Message {
     public void setLeaderCards(ArrayList<LeaderCard> leaderCards) {
         this.leaderCards = leaderCards;
     }
+
 }
