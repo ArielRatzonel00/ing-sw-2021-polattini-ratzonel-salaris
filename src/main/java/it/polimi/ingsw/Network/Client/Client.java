@@ -1,8 +1,10 @@
 package it.polimi.ingsw.Network.Client;
 
+import it.polimi.ingsw.Model.DevelopmentCard;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.WarehouseRow;
 import it.polimi.ingsw.Network.Client.CModel.ClientModel;
 import it.polimi.ingsw.Network.Client.CModel.PlayerBoard;
 import it.polimi.ingsw.Network.Messages.*;
@@ -90,10 +92,10 @@ public class Client extends Messanger implements ViewObserver{
                     if(message.getPlayerIndex()==ID) {
                         FourLeaderCardResponse fourLeaderCardResponse = (FourLeaderCardResponse) message;
                         fourLeaderCardResponse = (FourLeaderCardResponse) message;
-                        System.out.println(fourLeaderCardResponse.getLeaderCards().size());
                         clientModel.getMarketTrayClient().setMarketMatrix(((FourLeaderCardResponse) message).getMarketTray().getMarketMatrix());
                         clientModel.getMarketTrayClient().setOustideMarble(((FourLeaderCardResponse) message).getMarketTray().getOustideMarble());
                         clientModel.setDevGrid(((FourLeaderCardResponse) message).getTopCards());
+                        clientModel.getPlayerBoards().get(ID).setNickname(nickname);
                         clientModel.getPlayerBoards().get(ID).setLeaderCards(((FourLeaderCardResponse) message).getLeaderCards());
 
                         if (clientModel.getPlayerBoards().get(ID).getLeaderCards() == null)
@@ -134,12 +136,11 @@ public class Client extends Messanger implements ViewObserver{
 
                         TwoLeaderCardsResponse twoLeaderCardsResponse = (TwoLeaderCardsResponse) message;
                         clientModel.getPlayerBoards().get(ID).setLeaderCards(twoLeaderCardsResponse.getLeaderCards());
-                        System.out.println("Premi un bottone per scegliere le risorse");
                         InitialResourcesMessage message1 = new InitialResourcesMessage();
                         message1.setPlayerIndex(ID);
                         switch (ID) {
                             case 0:
-                                System.out.println("SEI IL PRIMO, NIENTE RISORSE");
+                                System.out.println("SEI IL PRIMO, NIENTE RISORSE\n Waiting for other players...");
                                 break;
                             case 1, 2:
                                 String c = "a";
@@ -150,7 +151,6 @@ public class Client extends Messanger implements ViewObserver{
                                         System.out.println("SEI IL TERZO, TI BECCHI 1 PUNTO FEDE E HAI 1 RISORSA A SCELTA, SCEGLI TRA: SERVANT[P], SHIELD[B], STONE[G], COIN [Y]");
                                     c = stdin.next();
                                 }
-                                System.out.println("ENTRA NELLO SWITCH");
                                 switch (c) {
                                     case "Y", "y" -> message1.setColorMarble1(MarketMarble.ColorMarble.YELLOW);
                                     case "B", "b" -> message1.setColorMarble1(MarketMarble.ColorMarble.BLUE);
@@ -222,7 +222,107 @@ public class Client extends Messanger implements ViewObserver{
                     }
                     else
                         break;
+                case ("initialResourcesSet"):
+                    InitialResourcesSet initialResourcesSet=(InitialResourcesSet) message;
+                    boolean start = initialResourcesSet.getStart();
+                    if(message.getPlayerIndex()==ID){
+                        clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setRedPosition(initialResourcesSet.getPosition());
+                        clientModel.getPlayerBoards().get(ID).getWarehosueClient().setWarehouseRows(initialResourcesSet.getWarehouse().getRows());
+                    }
+                    if (start){
+                        if (ID == 0){
+                            int i=0;
+                            while(i>4 || i<1) {
+                                MenuCli();
+                                i=stdin.nextInt();
+                                if(i>4 || i<1){
+                                    System.out.println("Inserisci un numero tra 1 e 4\n");
+                                }
+                            }
+                            switch (i){
+                                case 1:
+                                    System.out.println("Di che giocatore vuoi vederle?\n");
+                                    int index=0;
+                                    for (PlayerBoard p: clientModel.getPlayerBoards()
+                                         ) {
+                                        System.out.println("["+ index +"]"+p.getNickname()+"\n");
+                                        index++;
+                                    }
+                                    while(i<0 || i> clientModel.getPlayerBoards().size())
+                                    {
+                                        i=stdin.nextInt();
+                                        if(i<0 || i> clientModel.getPlayerBoards().size())
+                                            System.out.println("Inserisci un indice valido");
+                                    }
+
+                                        System.out.println(" ----STRONGBOX----\n" +
+                                                "SHIELDS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(0) +"\n" +
+                                                "STONES: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(1) +"\n" +
+                                                "SERVANTS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(2) +"\n" +
+                                                "COINS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(3) +"\n\n");
+                                        System.out.println(" ----WAREHOUSE----\n");
+                                        int indexRow=0;
+                                        for (WarehouseRow r:clientModel.getPlayerBoards().get(i).getWarehosueClient().getWarehouseRows()
+                                             ) {
+                                            System.out.println("ROW "+indexRow +": "+r.getMarbles());
+                                            //da controllare
+                                        }
+                                        System.out.println("-------FAITHTRACK--------");
+                                        for(int a=0;a<24;a++) {
+                                            if(clientModel.getPlayerBoards().get(i).getFaithTrackClient().getRedPosition()==a)
+                                            System.out.println("[ X ]");
+                                            else
+                                                System.out.println("[ ]");
+                                        }
+                                    System.out.println("\n POPE FAVORS 1:" +clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(0));
+                                    System.out.println("\n POPE FAVORS 2:" +clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(1));
+                                    System.out.println("\n POPE FAVORS 1:" +clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(2)+"\n\n");
+
+                                    System.out.println("---------DEVELOPMENT CARDS--------");
+                                    for (DevelopmentCard d:clientModel.getPlayerBoards().get(i).getDevSlotClient()
+                                         ) {
+                                        //Creare metodo SHOWDEVELOPMENTCARD, e stampare i vari contatori
+                                    }
+
+                                    if(i==ID){
+                                        System.out.println("----- LEADERCARDS -----");
+                                        for (LeaderCard l:clientModel.getPlayerBoards().get(i).getLeaderCards()
+                                             ) {
+                                            userInterface.ShowCard(l);
+                                        }
+                                    }
+                                    else{
+                                        System.out.println("------ ACTIVE LEADERCARDS -----");
+                                        for (LeaderCard l:clientModel.getPlayerBoards().get(i).getLeaderCards()
+                                        ) {
+                                            if(l.isActivate())
+                                            userInterface.ShowCard(l);
+                                        }
+                                    }
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
+
+                            }
+                        }
+                        else {
+                            System.out.println("non è il tuo turno");
+                        }
+
+                    }
+
         }
+    }
+    public void MenuCli(){
+        System.out.println("----------------Menù------------" +
+            "\n [1] Visualizza plancia giocatore." +
+            "\n [2] Muovi risorse." +
+            "\n [3] Azione" +
+            "\n [4] Azione Leader");
     }
 
 

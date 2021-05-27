@@ -43,6 +43,18 @@ public class ModelObservable extends Observable<VirtualView> {
         ) {
             obs.updateLeaderCardsAfterFirstDiscard(twoLeaderCardsResponse);
         }    }
+
+    public void notifyInitialResourcesSet(int playerIndex, boolean start, Warehouse warehouse, int faithTrackPosition){
+        InitialResourcesSet initialResourcesSet=new InitialResourcesSet();
+        initialResourcesSet.setPosition(faithTrackPosition);
+        initialResourcesSet.setStart(start);
+        initialResourcesSet.setWarehouse(warehouse);
+        initialResourcesSet.setPlayerIndex(playerIndex);
+        for (VirtualView obs:observers
+        ) {
+            obs.updateInitialResourcesSet(initialResourcesSet);
+        }
+    }
     public void notifyNewWarehouse(int PlayerIndex, Warehouse newwarehouse){
         NewWarehouseResponse newWarehouseResponse = new NewWarehouseResponse();
         newWarehouseResponse.setPlayerIndex(PlayerIndex);

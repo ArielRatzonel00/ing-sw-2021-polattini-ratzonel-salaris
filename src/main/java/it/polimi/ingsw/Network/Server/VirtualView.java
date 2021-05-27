@@ -2,10 +2,7 @@ package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameManager;
 import it.polimi.ingsw.Model.Model;
-import it.polimi.ingsw.Network.Messages.FourLeaderCardResponse;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.SocketMessage;
-import it.polimi.ingsw.Network.Messages.TwoLeaderCardsResponse;
+import it.polimi.ingsw.Network.Messages.*;
 import it.polimi.ingsw.Observer.*;
 
 
@@ -25,6 +22,8 @@ public class VirtualView extends VirtualViewObservable implements VirtualViewObs
     public VirtualView(SocketClientConnection connection) {
         this.connection = connection;
     }
+
+    @Override
     public void updateFourLeaderCardsResponse(FourLeaderCardResponse fourLeaderCardResponse){
         System.out.println("E lo invia a: "+connection.getName());
         connection.send(fourLeaderCardResponse);
@@ -35,6 +34,10 @@ public class VirtualView extends VirtualViewObservable implements VirtualViewObs
         connection.send(twoLeaderCardsResponse);
     }
 
+    @Override
+    public void updateInitialResourcesSet(InitialResourcesSet initialResourcesSet){
+        connection.send(initialResourcesSet);
+    }
    /* @Override
     public void updateTest(SocketMessage message) throws IOException {
         connection.sendMessage(connection.getOut(), message);

@@ -45,6 +45,8 @@ public class GameManager extends Observable<Model> implements ControllerObserver
         } else if (initialResourcesMessage.getPlayerIndex() == 3) {
             game.SetInitialResourcesForForthPlayer(initialResourcesMessage.getColorMarble1(), initialResourcesMessage.getRow1(), initialResourcesMessage.getColorMarble2(), initialResourcesMessage.getRow2());
         }
+        else if(initialResourcesMessage.getPlayerIndex()==0)
+            game.SetInitialResourcesForFirstPlayer();
     }
 
     public void updateWantToBuyCard(WantToBuyCardMessage wantToBuyCardMessage) {

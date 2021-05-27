@@ -19,6 +19,8 @@ public class Model extends ModelObservable {
     private MarkerStack markers ;
     private Deck deck = new Deck();
     private boolean IsSinglePlayerGame = false;
+    private boolean start;
+    private int contForStart;
     private Player CurrentPlayer;
     private int a;
     public Model(ArrayList<Player> players) {
@@ -62,20 +64,27 @@ public class Model extends ModelObservable {
         currentplayer.DiscardLeaderCard(LeaderCard2Index);
         notifyLeaderCardsAfterFirstDiscard(PlayerIndex,currentplayer.getLeaderCards());
     }
-
+    public void SetInitialResourcesForFirstPlayer() {
+        Player currentplayer = players.get(0);
+        incrementContForStart();
+        notifyInitialResourcesSet(0, start, currentplayer.getWarehouse(),0);
+    }
     public void SetInitialResourcesForSecondPlayer(MarketMarble.ColorMarble colorMarble, int row) {
         Player currentplayer = players.get(1);
         currentplayer.getWarehouse().addToRow(new MarketMarble(colorMarble), row);
-        notifyNewWarehouse(1, currentplayer.getWarehouse());
+        incrementContForStart();
+        notifyInitialResourcesSet(1, start, currentplayer.getWarehouse(),0);
     }
     public void SetInitialResourcesForThirdPlayer(MarketMarble.ColorMarble colorMarble, int row) {
         Player currentplayer = players.get(2);
         currentplayer.getWarehouse().addToRow(new MarketMarble(colorMarble), row);
         currentplayer.getFaithTrack().setRedPosition(1);
-        notifyNewWarehouseFaithtrack(2, currentplayer.getWarehouse(), currentplayer.getFaithTrack());
+        incrementContForStart();
+        notifyInitialResourcesSet(2, start, currentplayer.getWarehouse(), 1);
     }
     public void SetInitialResourcesForForthPlayer(MarketMarble.ColorMarble colorMarble1, int row1,MarketMarble.ColorMarble colorMarble2, int row2 ) {
         Player currentplayer = players.get(3);
+        incrementContForStart();
         if (row1 == row2 && (!colorMarble1.equals(colorMarble2) || row1 == 0)){
             //NotifyErrorMessage
         }
@@ -86,7 +95,7 @@ public class Model extends ModelObservable {
             currentplayer.getWarehouse().addToRow(new MarketMarble(colorMarble1), row1);
             currentplayer.getWarehouse().addToRow(new MarketMarble(colorMarble2), row2);
             currentplayer.getFaithTrack().setRedPosition(1);
-            notifyNewWarehouseFaithtrack(3, currentplayer.getWarehouse(), currentplayer.getFaithTrack());
+            notifyInitialResourcesSet(3, start, currentplayer.getWarehouse(),1);
         }
     }
     public void MarketTrayAction(int PlayerIndex, boolean isRow, int index){
@@ -349,16 +358,12 @@ public class Model extends ModelObservable {
         return deck;
     }
 
-
-
-
-
-
-
-
-
-
-   /*
+    public void incrementContForStart() {
+        this.contForStart ++;
+        if(contForStart==players.size())
+            start=true;
+    }
+    /*
     public int GetA() {
         return a;
     }

@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 public class PlayerBoard {
     private WarehouseClient warehosueClient = new WarehouseClient();
+    private String nickname;
     private ArrayList<Integer> strongBox = new ArrayList<>(); // [0] = SHIELD/BLUE, [1] = STONE/GREY, [2] = SERVANT/PURPLE, [3] = COIN/YELLOW
+    //Aggiungere contatori del colore e livello delle leaderCards
     private ArrayList<DevelopmentCard> devSlotClient = new ArrayList<>();
     private int devCardCounter=0;
     private ArrayList<Production> productions = new ArrayList<>();
@@ -18,6 +20,14 @@ public class PlayerBoard {
 
     public WarehouseClient getWarehosueClient() {
         return warehosueClient;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public void setWarehosueClient(WarehouseClient warehosueClient) {
