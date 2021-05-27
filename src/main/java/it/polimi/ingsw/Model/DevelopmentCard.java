@@ -38,7 +38,6 @@ public class DevelopmentCard implements Serializable {
         return Production;
     }
 
-
     public int getId() {
         return Id;
     }

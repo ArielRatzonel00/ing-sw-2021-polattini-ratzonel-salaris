@@ -649,7 +649,6 @@ public class Deck {
         return cell00;
     }
 
-
     public GridCell getCell01() {
         return cell01;
     }
