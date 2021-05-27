@@ -12,12 +12,20 @@ public class FourLeaderCardResponse extends Message{
     private ArrayList<LeaderCard> leaderCards;
     private ArrayList<DevelopmentCard> topCards;
     private MarketTray marketTray;
+    private String nickname;
 
     public FourLeaderCardResponse(ArrayList<LeaderCard> leaderCard) {
         this.leaderCards=leaderCard;
         this.typeOfMessage = "FourLeaderCardResponse";
     }
 
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
     /*
     public void setLeaderCards(ArrayList<LeaderCard> leaderCards) {
         this.leaderCards = leaderCards;

@@ -17,11 +17,11 @@ public class ModelObservable extends Observable<VirtualView> {
             observers.add(observer);
         }
     }
-    public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards, DevelopmentGrid developmentGrid, MarketTray marketTray){
+    public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards, DevelopmentGrid developmentGrid, MarketTray marketTray, String nickname){
 
-        System.out.println("Entra nel NOTIFY");
+
         FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse(leaderCards);
-        System.out.println(fourLeaderCardResponse.getLeaderCards().size() + "in ModObs");
+        fourLeaderCardResponse.setNickname(nickname);
         fourLeaderCardResponse.setTopCards(developmentGrid.getTopcards());
         fourLeaderCardResponse.setMarketTray(marketTray);
         fourLeaderCardResponse.setPlayerIndex(PlayerIndex);

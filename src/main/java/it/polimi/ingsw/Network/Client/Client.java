@@ -29,7 +29,7 @@ public class Client extends Messanger implements ViewObserver{
     private ObjectInputStream socketIn;
     private UserInterface userInterface;
     private boolean active = true;
-    private ClientModel clientModel= new ClientModel();
+    private ClientModel clientModel = new ClientModel();
 
     public Client(String ip, int port, UserInterface userInterface) {
         this.ip = ip;
@@ -88,15 +88,15 @@ public class Client extends Messanger implements ViewObserver{
         //if(message.getPlayerIndex()==null || message.getPlayerIndex().contains(this.nickname)){
             switch (message.getTypeOfMessage()){
                 case ("FourLeaderCardResponse"):
+                    FourLeaderCardResponse fourLeaderCardResponse = (FourLeaderCardResponse) message;
+
+                    clientModel.getPlayerBoards().get(fourLeaderCardResponse.getPlayerIndex()).setNickname(fourLeaderCardResponse.getNickname());
+                    clientModel.getPlayerBoards().get(fourLeaderCardResponse.getPlayerIndex()).setLeaderCards(fourLeaderCardResponse.getLeaderCards());
 
                     if(message.getPlayerIndex()==ID) {
-                        FourLeaderCardResponse fourLeaderCardResponse = (FourLeaderCardResponse) message;
-                        fourLeaderCardResponse = (FourLeaderCardResponse) message;
-                        clientModel.getMarketTrayClient().setMarketMatrix(((FourLeaderCardResponse) message).getMarketTray().getMarketMatrix());
-                        clientModel.getMarketTrayClient().setOustideMarble(((FourLeaderCardResponse) message).getMarketTray().getOustideMarble());
-                        clientModel.setDevGrid(((FourLeaderCardResponse) message).getTopCards());
-                        clientModel.getPlayerBoards().get(ID).setNickname(nickname);
-                        clientModel.getPlayerBoards().get(ID).setLeaderCards(((FourLeaderCardResponse) message).getLeaderCards());
+                        clientModel.getMarketTrayClient().setMarketMatrix(((fourLeaderCardResponse).getMarketTray().getMarketMatrix()));
+                        clientModel.getMarketTrayClient().setOustideMarble(((fourLeaderCardResponse).getMarketTray().getOustideMarble()));
+                        clientModel.setDevGrid(((fourLeaderCardResponse.getTopCards())));
 
                         if (clientModel.getPlayerBoards().get(ID).getLeaderCards() == null)
                             System.out.println("NOLEADERS");
@@ -131,11 +131,12 @@ public class Client extends Messanger implements ViewObserver{
                     break;
 
                 case ("Two leader card response"):
+                    TwoLeaderCardsResponse twoLeaderCardsResponse = (TwoLeaderCardsResponse) message;
+                    clientModel.getPlayerBoards().get(message.getPlayerIndex()).setLeaderCards(twoLeaderCardsResponse.getLeaderCards());
+
                     if(message.getPlayerIndex()==ID) {
                         System.out.println("RICEVUTO TWO LEADERCARD RESPONSE MESSAGE, ORA DI SCEGLIERE RISORSE");
 
-                        TwoLeaderCardsResponse twoLeaderCardsResponse = (TwoLeaderCardsResponse) message;
-                        clientModel.getPlayerBoards().get(ID).setLeaderCards(twoLeaderCardsResponse.getLeaderCards());
                         InitialResourcesMessage message1 = new InitialResourcesMessage();
                         message1.setPlayerIndex(ID);
                         switch (ID) {
@@ -224,10 +225,11 @@ public class Client extends Messanger implements ViewObserver{
                         break;
                 case ("initialResourcesSet"):
                     InitialResourcesSet initialResourcesSet=(InitialResourcesSet) message;
+                    clientModel.getPlayerBoards().get(initialResourcesSet.getPlayerIndex()).getFaithTrackClient().setRedPosition(initialResourcesSet.getPosition());
+                    clientModel.getPlayerBoards().get(initialResourcesSet.getPlayerIndex()).getWarehosueClient().setWarehouseRows(initialResourcesSet.getWarehouse().getRows());
                     boolean start = initialResourcesSet.getStart();
                     if(message.getPlayerIndex()==ID){
-                        clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setRedPosition(initialResourcesSet.getPosition());
-                        clientModel.getPlayerBoards().get(ID).getWarehosueClient().setWarehouseRows(initialResourcesSet.getWarehouse().getRows());
+
                     }
                     if (start){
                         if (ID == 0){
@@ -245,6 +247,7 @@ public class Client extends Messanger implements ViewObserver{
                                     int index=0;
                                     for (PlayerBoard p: clientModel.getPlayerBoards()
                                          ) {
+                                        if(p!=null)
                                         System.out.println("["+ index +"]"+p.getNickname()+"\n");
                                         index++;
                                     }
