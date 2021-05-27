@@ -14,6 +14,7 @@ public class CostOfCard implements Serializable {
         this.costNumber = costNumber;
         this.costColor = costColor;
     }
+
     @Override
     public String toString() {
         return "CostOfCard{" +
