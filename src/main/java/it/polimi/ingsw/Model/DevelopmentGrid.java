@@ -8,6 +8,7 @@ public class DevelopmentGrid implements Serializable {
     // Method that represents the DevelopmentGrid. It is a Matrix of GridCell and it contains all the DevelopmentCard
 
     private GridCell[][] CardMatrix = new GridCell[3][4]; // Matrice che contiene tutte le developmentCard
+    
 
     public DevelopmentGrid(Deck deck) {
         CardMatrix[0][0] = deck.getCell00();

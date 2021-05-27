@@ -7,7 +7,7 @@ import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.SocketMessage;
 import it.polimi.ingsw.Network.Messages.TwoLeaderCardsResponse;
 import it.polimi.ingsw.Observer.*;
-import org.codehaus.jackson.map.ObjectMapper;
+
 
 import java.io.IOException;
 

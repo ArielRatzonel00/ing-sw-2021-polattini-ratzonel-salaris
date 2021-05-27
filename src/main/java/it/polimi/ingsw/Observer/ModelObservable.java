@@ -5,7 +5,7 @@ import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Network.Messages.*;
 import it.polimi.ingsw.Network.Server.VirtualView;
-import org.codehaus.jackson.map.ObjectMapper;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +69,7 @@ public class ModelObservable extends Observable<VirtualView> {
         textMessage.setText(text);
 
     }
-    public void notifyCardBuyedResponse(int PlayerIndex, Warehouse newwarehouse, Strongbox newstrongbox, SlotsBoard slotsBoard, int col, int row){
+    public void notifyCardBuyedResponse(int PlayerIndex, Warehouse newwarehouse, Strongbox newstrongbox, SlotsBoard slotsBoard, ArrayList<Production> newproductionavailables, int col, int row){
         CardBuyedResponse cardBuyedResponse = new CardBuyedResponse();
         cardBuyedResponse.setPlayerIndex(PlayerIndex);
         cardBuyedResponse.setNewwarehouse(newwarehouse);
@@ -77,6 +77,19 @@ public class ModelObservable extends Observable<VirtualView> {
         cardBuyedResponse.setSlotsBoard(slotsBoard);
         cardBuyedResponse.setCol(col);
         cardBuyedResponse.setRow(row);
+        cardBuyedResponse.setNewproductionAvailables(newproductionavailables);
+    }
+    public void notifyProductionResponse(int PlayerIndex, Warehouse newwarehouse, Strongbox newstrongbox, MultipleyerFaithTrack faithTrack){
+        ProductionResponse productionResponse = new ProductionResponse();
+        productionResponse.setPlayerIndex(PlayerIndex);
+        productionResponse.setNewwarehouse(newwarehouse);
+        productionResponse.setNewstrongbox(newstrongbox);
+        productionResponse.setFaithTrack(faithTrack);
+
+    }
+    public void notifyNewTurn(int NewTurnPlayerIndex){
+        EndTurnMessage endTurnMessage = new EndTurnMessage();
+        endTurnMessage.setIndexNewTurn(NewTurnPlayerIndex);
     }
     /*protected void notify(T message, int code){
         synchronized (observers) {
