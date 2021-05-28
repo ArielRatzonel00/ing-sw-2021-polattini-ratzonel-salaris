@@ -1,34 +1,61 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Model.Deck;
-import it.polimi.ingsw.Model.DevCardSlot;
+import it.polimi.ingsw.Model.MarketTray;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.MarketTray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MarketTrayTest {
     private MarketTray MarketTest;
+    private MarketMarble[] returnedMarblesTest;
+    private MarketMarble[] returnedMarblesTest1;
+    private ArrayList<MarketMarble> returnedMarblesTest2;
 
     @BeforeEach
     void initialization(){
         MarketTest = new MarketTray();
+        MarketMarble[] returnedMarblesTest = new MarketMarble[4];
+        MarketMarble[] returnedMarblesTest1 = new MarketMarble[3];
+        returnedMarblesTest2 = new ArrayList<>();
     }
 
     @Test
-    void getMarketMarblesFromRow() {
+    void getMarketMarblesFromRowTest() {
+        returnedMarblesTest = MarketTest.GetMarketMarblesFromRow(2);
+        assertSame(MarketTest.getMarketMatrix()[2][0],returnedMarblesTest[0]);
+        assertSame(MarketTest.getMarketMatrix()[2][1],returnedMarblesTest[1]);
+        assertSame(MarketTest.getMarketMatrix()[2][2],returnedMarblesTest[2]);
+        assertSame(MarketTest.getMarketMatrix()[2][3],returnedMarblesTest[3]);
     }
 
     @Test
-    void getMarketMarblesFromCol() {
+    void getMarketMarblesFromColTest() {
+        returnedMarblesTest1 = MarketTest.GetMarketMarblesFromCol(2);
+        assertSame(MarketTest.getMarketMatrix()[0][2],returnedMarblesTest1[0]);
+        assertSame(MarketTest.getMarketMatrix()[1][2],returnedMarblesTest1[1]);
+        assertSame(MarketTest.getMarketMatrix()[2][2],returnedMarblesTest1[2]);
     }
 
     @Test
-    void shiftMatrixByRow() {
+    void shiftMatrixByRowTest() {
+        returnedMarblesTest2 = MarketTest.ShiftMatrixByRow(2);
+        assertSame(MarketTest.getMarketMatrix()[2][0],returnedMarblesTest2.get(1));
+        assertSame(MarketTest.getMarketMatrix()[2][1],returnedMarblesTest2.get(2));
+        assertSame(MarketTest.getMarketMatrix()[2][2],returnedMarblesTest2.get(3));
+        assertSame(MarketTest.getOustideMarble(),returnedMarblesTest2.get(0));
     }
 
     @Test
-    void shiftMatrixByCol() {
+    void shiftMatrixByColTest() {
+        returnedMarblesTest2 = MarketTest.ShiftMatrixByCol(2);
+        assertSame(MarketTest.getMarketMatrix()[2][2],returnedMarblesTest2.get(1));
+        assertSame(MarketTest.getMarketMatrix()[1][2],returnedMarblesTest2.get(2));
+        assertSame(MarketTest.getOustideMarble(),returnedMarblesTest2.get(0));
     }
 }
