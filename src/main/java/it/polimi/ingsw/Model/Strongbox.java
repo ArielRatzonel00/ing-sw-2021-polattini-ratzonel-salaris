@@ -38,6 +38,7 @@ public class Strongbox implements Serializable {
                 return 0;
         }
     } // Method that returns the number of the resources that has the color of the parameter passed
+
     public void AddResource(int num, MarketMarble.ColorMarble ColorOfResource){
         switch (ColorOfResource) {
             case BLUE:
@@ -54,8 +55,7 @@ public class Strongbox implements Serializable {
 
         }
     }
-// Methods that add #num Resources of colorMarble
-
+    // Methods that add #num Resources of colorMarble
 
     public void RemoveResourcesFromStrongbox(int number, MarketMarble.ColorMarble colorMarble) {
         switch (colorMarble) {
@@ -78,6 +78,7 @@ public class Strongbox implements Serializable {
         Resources = servant + stone + shield + coin;
         return Resources;
     }
+
     public ArrayList<Integer> getResources(){
         ArrayList<Integer> resources = new ArrayList<>();
         resources.add(shield); // Posizione 0 Shield
@@ -86,8 +87,6 @@ public class Strongbox implements Serializable {
         resources.add(coin); // Posizione 3 Servant
         return resources;
     }
-
-
 }
 /*
     public int[] getTotalResourcesStrongbox(){
