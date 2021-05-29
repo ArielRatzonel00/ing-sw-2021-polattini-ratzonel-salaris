@@ -2,16 +2,12 @@ package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameManager;
 import it.polimi.ingsw.Model.Model;
-import it.polimi.ingsw.Model.MultipleyerFaithTrack;
 import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.SinglePlayerFaithTrack;
-import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.SocketMessage;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

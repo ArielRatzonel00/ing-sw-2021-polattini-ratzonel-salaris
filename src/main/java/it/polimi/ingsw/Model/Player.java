@@ -3,10 +3,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
-import it.polimi.ingsw.Observer.Observable;
 
-import java.awt.image.ColorConvertOp;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -15,7 +12,7 @@ import java.util.ArrayList;
 public class Player implements Serializable {
     private String nickname;
     private int index;
-    private MultipleyerFaithTrack faithTrack;
+    private MultiplayerFaithTrack faithTrack;
     private Warehouse warehouse;
     private Strongbox strongbox;
     private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
@@ -30,7 +27,6 @@ public class Player implements Serializable {
     private boolean SinglePlayer = false;
     private ArrayList<Production> productionsAvailable = new ArrayList<>(4);
 
-
     public Player(String nickname) {
         this.nickname = nickname;
         this.warehouse = new Warehouse();
@@ -44,6 +40,7 @@ public class Player implements Serializable {
         ProductionBasicCost.add(0, new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
         this.productionsAvailable.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
     }
+
     public void AssignFourLeaderCard(ArrayList<LeaderCard> FourLeaderCards){
         this.leaderCards = FourLeaderCards;
     }
@@ -52,7 +49,7 @@ public class Player implements Serializable {
         return nickname;
     }
 
-    public MultipleyerFaithTrack getFaithTrack() {
+    public MultiplayerFaithTrack getFaithTrack() {
         return faithTrack;
     }
 
@@ -105,6 +102,7 @@ public class Player implements Serializable {
         }
         return true;
     }
+
     public boolean CheckResourcesForProduce(int[] cost) {
         if (cost[0] > this.getWarehouse().getNumberOfResource(MarketMarble.ColorMarble.BLUE) + this.getStrongbox().CountResources(MarketMarble.ColorMarble.BLUE)){
             return false;
@@ -120,6 +118,7 @@ public class Player implements Serializable {
         }
         return true;
     }
+
     public void DiscardLeaderCard(int index){
         leaderCards.remove(index);
     }
@@ -154,18 +153,22 @@ public class Player implements Serializable {
         }
     }
 
-    public void setProductionsAvaible(int slot){
+    public void setProductionsAvailable(int slot){
         productionsAvailable.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
     }
+
     public boolean ProductionIsAvailable(int index){
         return productionsAvailable.get(index) != null;
     }
+
     public void buyCard(DevelopmentCard card, int slot){
         slotsBoard.getSlots().get(slot).addCard(card);
     }
+
     public void newProductionFromLeaderCard(Production production){
         productionsAvailable.add(production);
     }
+
     public void setDiscountGrey(int discountGrey) {
         DiscountGrey += discountGrey;
     }
@@ -185,6 +188,7 @@ public class Player implements Serializable {
     public boolean isFirst() {
         return isFirst;
     }
+
     public int PointsFromLeaderCard(){
         int PointsFromLeaderCard = 0;
         for (LeaderCard leaderCard : leaderCards){
@@ -194,6 +198,7 @@ public class Player implements Serializable {
         }
         return PointsFromLeaderCard;
     }
+
     public int PointsFromWarehouseAndStrongbox(){
         int Points;
         int Resources = warehouse.getNumberOfTotalResourcesInWarehouse() + strongbox.getNumberOfTotalResoucesInStrongbox();
@@ -206,7 +211,7 @@ public class Player implements Serializable {
         return TotalPoints;
     }
 
-    public ArrayList<Production> getProductionsAvaible() {
+    public ArrayList<Production> getProductionsAvailable() {
         return productionsAvailable;
     }
 
@@ -232,7 +237,6 @@ public class Player implements Serializable {
 
     @Override
     public String toString() {
-
         return nickname;
     }
 }

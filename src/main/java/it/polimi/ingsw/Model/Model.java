@@ -1,13 +1,9 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
-import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Observer.ModelObservable;
-import it.polimi.ingsw.Observer.Observable;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Model extends ModelObservable {
 
@@ -192,7 +188,7 @@ public class Model extends ModelObservable {
             }
             DevelopmentCard card = developmentGrid.remove(row, col);
             currentPlayer.buyCard(card,slot);
-            notifyCardBuyedResponse(PlayerIndex, currentPlayer.getWarehouse(), currentPlayer.getStrongbox(), currentPlayer.getSlotsBoard(),currentPlayer.getProductionsAvaible(), col, row);
+            notifyCardBuyedResponse(PlayerIndex, currentPlayer.getWarehouse(), currentPlayer.getStrongbox(), currentPlayer.getSlotsBoard(),currentPlayer.getProductionsAvailable(), col, row);
 
             //NotifyNewStrongboxNewWarehouseNewDevelopmentGridNewSlotsBoardNewProductionsAvailable
         }
@@ -278,7 +274,7 @@ public class Model extends ModelObservable {
                     }
                 }
                 else{
-                    for (CostOfCard c: currentplayer.getProductionsAvaible().get(index).getProductionCost()){
+                    for (CostOfCard c: currentplayer.getProductionsAvailable().get(index).getProductionCost()){
                         switch (c.getCostColor()){
                             case BLUE:
                                 resources[0]+= c.getCostNumber();

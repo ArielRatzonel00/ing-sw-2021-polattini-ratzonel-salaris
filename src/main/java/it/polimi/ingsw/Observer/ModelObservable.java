@@ -61,7 +61,7 @@ public class ModelObservable extends Observable<VirtualView> {
         newWarehouseResponse.setNewwarehouse(newwarehouse);
         //update
     }
-    public void notifyNewWarehouseFaithtrack(int PlayerIndex, Warehouse newwarehouse, MultipleyerFaithTrack faithTrack){
+    public void notifyNewWarehouseFaithtrack(int PlayerIndex, Warehouse newwarehouse, MultiplayerFaithTrack faithTrack){
         NewWarehouseFaithtrackResponse newWarehouseFaithtrackResponse = new NewWarehouseFaithtrackResponse();
         newWarehouseFaithtrackResponse.setPlayerIndex(PlayerIndex);
         newWarehouseFaithtrackResponse.setNewwarehouse(newwarehouse);
@@ -91,7 +91,7 @@ public class ModelObservable extends Observable<VirtualView> {
         cardBuyedResponse.setRow(row);
         cardBuyedResponse.setNewproductionAvailables(newproductionavailables);
     }
-    public void notifyProductionResponse(int PlayerIndex, Warehouse newwarehouse, Strongbox newstrongbox, MultipleyerFaithTrack faithTrack){
+    public void notifyProductionResponse(int PlayerIndex, Warehouse newwarehouse, Strongbox newstrongbox, MultiplayerFaithTrack faithTrack){
         ProductionResponse productionResponse = new ProductionResponse();
         productionResponse.setPlayerIndex(PlayerIndex);
         productionResponse.setNewwarehouse(newwarehouse);

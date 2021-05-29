@@ -3,7 +3,7 @@ package it.polimi.ingsw.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MultipleyerFaithTrack extends FaithTrack implements Serializable {
+public class MultiplayerFaithTrack extends FaithTrack implements Serializable {
     private ArrayList<Player> OtherPlayers = new ArrayList<>();
 
     public void setOtherPlayers(ArrayList<Player> otherPlayers) {
