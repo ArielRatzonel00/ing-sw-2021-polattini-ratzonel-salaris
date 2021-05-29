@@ -16,7 +16,7 @@ class WarehouseRowTest {
     private MarketMarble Yellow;
     private MarketMarble Purple;
     private MarketMarble Blue;
-    private ArrayList<MarketMarble> marbles;
+    private ArrayList<MarketMarble> marblesTest;
 
     @BeforeEach
     void initialization(){
@@ -27,6 +27,7 @@ class WarehouseRowTest {
         Yellow = new MarketMarble(MarketMarble.ColorMarble.YELLOW);
         Purple = new MarketMarble(MarketMarble.ColorMarble.PURPLE);
         Blue = new MarketMarble(MarketMarble.ColorMarble.BLUE);
+        marblesTest = new ArrayList<>();
     }
 
     @Test
@@ -44,21 +45,34 @@ class WarehouseRowTest {
         assertFalse(Row3.addMarble(Grey), "La grey è in Row3 -> 4");//no perchè spazio pieno
     }
 
-   /* @Test
+    @Test
     @DisplayName("Remove marbles from rows")
     void removeMarble() {
-        assertFalse(Row1.removeMarble(Grey),"La grey non c'è quindi non può essere rimossa");
+        Row1.removeMarble(MarketMarble.ColorMarble.GREY, 1); // non fa niente perchè non ho palline
         Row1.addMarble(Grey);
-        assertTrue(Row1.removeMarble(Grey),"La grey è rimossa");
-        Row1.addMarble(Grey);
-        Row2.addMarble(Grey);
-        Row2.addMarble(Grey);
-        assertTrue(Row2.removeMarble(Grey),"La grey è rimossa");
-        assertFalse(Row2.removeMarble(Blue),"La blu non esiste");
+        marblesTest.add(Grey);
+        assertEquals(marblesTest,Row1.getMarbles());
+        assertEquals(marblesTest.size(),Row1.getNumberOfMarbles());
+        assertEquals(MarketMarble.ColorMarble.GREY,Row1.getColor());
+        assertEquals(1, Row1.getSpace());
+        Row1.removeMarble(MarketMarble.ColorMarble.GREY, 1);
+        marblesTest.remove(0);
+        assertEquals(marblesTest,Row1.getMarbles());
     }
 
     @Test
     void changeMarbles() { //i controlli avvengono in warehouse quindi inutile testare qui
+        Row2.addMarble(Grey);
+        Row2.addMarble(Grey);
+        marblesTest.add(Grey);
+        marblesTest.add(Grey);
+        assertEquals(marblesTest,Row2.getMarbles());
+        marblesTest.remove(1);
+        marblesTest.remove(0);
+        marblesTest.add(Blue);
+        marblesTest.add(Blue);
+        Row2.ChangeMarbles(marblesTest, MarketMarble.ColorMarble.BLUE);
+        assertEquals(marblesTest,Row2.getMarbles());
 
-    }*/
+    }
 }
