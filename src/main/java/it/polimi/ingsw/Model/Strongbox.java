@@ -12,6 +12,7 @@ public class Strongbox implements Serializable {
     private int shield;
     private int coin;
     private int stone;
+    private int TotalResources = 0;
 
     public Strongbox() {
         this.servant = 0;
@@ -53,6 +54,8 @@ public class Strongbox implements Serializable {
             case YELLOW:
                 this.coin += num;
 
+            default: break;
+
         }
     }
     // Methods that add #num Resources of colorMarble
@@ -70,13 +73,15 @@ public class Strongbox implements Serializable {
 
             case YELLOW:
                 this.coin -= number;
-        }
-    } // Method that removes #number resouces
 
-    public int getNumberOfTotalResoucesInStrongbox(){
-        int Resources;
-        Resources = servant + stone + shield + coin;
-        return Resources;
+            default:break;
+        }
+    } // Method that removes #number resources
+
+    public int getNumberOfTotalResourcesInStrongbox(){
+        TotalResources = 0;
+        TotalResources = servant; // + stone + shield + coin;
+        return TotalResources;
     }
 
     public ArrayList<Integer> getResources(){

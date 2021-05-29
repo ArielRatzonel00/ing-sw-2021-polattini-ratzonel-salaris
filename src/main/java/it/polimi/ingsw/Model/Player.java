@@ -201,7 +201,7 @@ public class Player implements Serializable {
 
     public int PointsFromWarehouseAndStrongbox(){
         int Points;
-        int Resources = warehouse.getNumberOfTotalResourcesInWarehouse() + strongbox.getNumberOfTotalResoucesInStrongbox();
+        int Resources = warehouse.getNumberOfTotalResourcesInWarehouse() + strongbox.getNumberOfTotalResourcesInStrongbox();
         Points = Resources / 5;
         return Points;
     }

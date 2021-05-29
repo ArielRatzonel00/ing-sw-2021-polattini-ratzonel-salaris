@@ -342,9 +342,9 @@ public class Model extends ModelObservable {
             }
         }
         for (Player player : PlayersWithMorePoints) {
-            if (player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResoucesInStrongbox() > MaxResources) {
+            if (player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResourcesInStrongbox() > MaxResources) {
                 winner = player;
-                MaxResources = player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResoucesInStrongbox();
+                MaxResources = player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResourcesInStrongbox();
             }
         }
         return winner;
