@@ -73,6 +73,5 @@ class WarehouseRowTest {
         marblesTest.add(Blue);
         Row2.ChangeMarbles(marblesTest, MarketMarble.ColorMarble.BLUE);
         assertEquals(marblesTest,Row2.getMarbles());
-
     }
 }

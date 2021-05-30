@@ -2,9 +2,12 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.Warehouse;
+import it.polimi.ingsw.Model.WarehouseRow;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,12 +15,20 @@ class WarehouseTest {
     private Warehouse WarehouseTest;
     private MarketMarble Grey;
     private MarketMarble Blue;
+    private ArrayList<WarehouseRow> RowsTest;
+    private WarehouseRow Row1;
+    private WarehouseRow Row2;
+    private WarehouseRow Row3;
 
     @BeforeEach
     void initialization(){
+        Row1 = new WarehouseRow(1);
+        Row2 = new WarehouseRow(2);
+        Row3 = new WarehouseRow(3);
         WarehouseTest = new Warehouse();
         Grey = new MarketMarble(MarketMarble.ColorMarble.GREY);
         Blue = new MarketMarble(MarketMarble.ColorMarble.BLUE);
+        RowsTest = new ArrayList<>();
     }
 
     @Test
@@ -70,7 +81,20 @@ class WarehouseTest {
         assertEquals(3, WarehouseTest.getNumberOfTotalResourcesInWarehouse());
     }
 
+    /*
     @Test
     void checkRowTest() {
+        WarehouseTest.addToRow(Grey, 0);
+        WarehouseTest.addToRow(Blue, 1);
+        Row1.addMarble(Grey);
+        Row2.addMarble(Blue);
+        RowsTest.add(Row1);
+        RowsTest.add(Row2);
+        RowsTest.add(Row3);
+        assertEquals(Row1, WarehouseTest.getRow(0));
+        assertSame(RowsTest,WarehouseTest.getRows());
+        assertFalse(WarehouseTest.CheckRow(0,0, MarketMarble.ColorMarble.BLUE));
     }
+
+     */
 }

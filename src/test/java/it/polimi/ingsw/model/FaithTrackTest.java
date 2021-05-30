@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MultiplayerFaithTrackTest {
+class FaithTrackTest {
+
     private int RedPositionTest;
     private FaithTrack Faith;
     private ArrayList<Player> OtherPlayersTest;

@@ -86,16 +86,16 @@ public class Warehouse implements Serializable {
         if (row < 0 || row > 4){
             return false;
         }
-        else if (row == 3){
-            if (ExtraWarehouseRows == 0)
-                return false;
-            else if (!(colorMarble.equals(getRow(row).getColor())))
-                return false;
-        }
-        else if (row == 4){
-            if (ExtraWarehouseRows < 2)
-                return false;
-        }
+          else if (row == 3){
+              if (ExtraWarehouseRows == 0)
+                  return false;
+              else if (!(colorMarble.equals(getRow(row).getColor())))
+                  return false;
+          }
+            else if (row == 4){
+                if (ExtraWarehouseRows < 2)
+                    return false;
+            }
 
         if (!colorMarble.equals(getRow(row).getColor())){
             return false;
