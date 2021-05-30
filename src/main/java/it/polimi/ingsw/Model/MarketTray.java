@@ -58,24 +58,20 @@ public class MarketTray  implements Serializable {
     }
 
     public MarketMarble[] GetMarketMarblesFromRow(int row){
-
         MarketMarble[] returnedMarbles = new MarketMarble[4];
         returnedMarbles[0] = MarketMatrix[row][0];
         returnedMarbles[1] = MarketMatrix[row][1];
         returnedMarbles[2] = MarketMatrix[row][2];
         returnedMarbles[3] = MarketMatrix[row][3];
         return returnedMarbles;
-
     } // Method that returns 4 marbles by selecting a row in the MarketTray
 
     public MarketMarble[] GetMarketMarblesFromCol(int col){
-
         MarketMarble[] returnedMarbles = new MarketMarble[3];
         returnedMarbles[0] = MarketMatrix[0][col];
         returnedMarbles[1] = MarketMatrix[1][col];
         returnedMarbles[2] = MarketMatrix[2][col];
         return returnedMarbles;
-
     } // Method that returns 3 marbles by selecting a column in the MarketTray
 
 

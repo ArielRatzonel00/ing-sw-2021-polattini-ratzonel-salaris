@@ -81,20 +81,21 @@ public class Warehouse implements Serializable {
         }
         return i;
     } // the method returns the number of Resources in the Warehouse that have the color selected
+
     public boolean CheckRow(int row, int NumberOfMarbles, MarketMarble.ColorMarble colorMarble){
         if (row < 0 || row > 4){
             return false;
         }
-        else if (row == 3){
-            if (ExtraWarehouseRows == 0)
-                return false;
-            else if (!(colorMarble.equals(getRow(row).getColor())))
-                return false;
-        }
-        else if (row == 4){
-            if (ExtraWarehouseRows < 2)
-                return false;
-        }
+          else if (row == 3){
+              if (ExtraWarehouseRows == 0)
+                  return false;
+              else if (!(colorMarble.equals(getRow(row).getColor())))
+                  return false;
+          }
+            else if (row == 4){
+                if (ExtraWarehouseRows < 2)
+                    return false;
+            }
 
         if (!colorMarble.equals(getRow(row).getColor())){
             return false;

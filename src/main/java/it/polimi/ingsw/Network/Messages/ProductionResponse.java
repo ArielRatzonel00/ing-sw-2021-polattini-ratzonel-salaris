@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Network.Messages;
 
 import it.polimi.ingsw.Model.FaithTrack;
-import it.polimi.ingsw.Model.MultipleyerFaithTrack;
 import it.polimi.ingsw.Model.Strongbox;
 import it.polimi.ingsw.Model.Warehouse;
 
@@ -11,7 +10,7 @@ public class ProductionResponse extends Message{
     }
     Warehouse newwarehouse;
     Strongbox newstrongbox;
-    MultipleyerFaithTrack faithTrack;
+    FaithTrack faithTrack;
 
     public Warehouse getNewwarehouse() {
         return newwarehouse;
@@ -33,7 +32,7 @@ public class ProductionResponse extends Message{
         return faithTrack;
     }
 
-    public void setFaithTrack(MultipleyerFaithTrack faithTrack) {
+    public void setFaithTrack(FaithTrack faithTrack) {
         this.faithTrack = faithTrack;
     }
 }

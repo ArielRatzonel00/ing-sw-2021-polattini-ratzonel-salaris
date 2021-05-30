@@ -14,24 +14,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class GridCellTest {
     private GridCell cell;
     private Deck deck;
+    private DevelopmentCard devCard;
 
     @BeforeEach
     void initialization(){
         deck = new Deck();
         cell = new GridCell(deck.getGreen11(), deck.getGreen12(), deck.getGreen13(), deck.getGreen14());
     }
-/*
-    @Test
-    @DisplayName("Get Top Card")
-    void getTopCardTest(){
-        assertSame(cell.getTopCard(), deck.getGreen14()); //il problema è che è shuffle quindi a volte esce giusto e a volte no.
-    }
 
     @Test
-    @DisplayName("Remove First Card")
-    void removeFirstCardTest() {
+    void removeTopCardTest() {
+        devCard = cell.getTopCard();
+        assertSame(devCard,cell.RemoveTopCard());
     }
-
- */
-
 }

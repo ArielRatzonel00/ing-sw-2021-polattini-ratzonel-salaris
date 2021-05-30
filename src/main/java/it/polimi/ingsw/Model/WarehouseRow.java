@@ -31,7 +31,6 @@ public class WarehouseRow implements Serializable {
         return false;
     } // Method that adds a Marble in the row, the method returns true if it can be done and false if not
 
-
     public void removeMarble(MarketMarble.ColorMarble colorMarble, int num){
         for (int i = 0; i < num; i++) {
             if (colorMarble.equals(color) && marbles.size() > 0) {
@@ -43,18 +42,19 @@ public class WarehouseRow implements Serializable {
     public ArrayList<MarketMarble> getMarbles() {
         return marbles;
     } // Method that returns the marbles in the row
+
     public int getNumberOfMarbles(){
         return marbles.size();
     }
-    public void ChangeMarbles(ArrayList<MarketMarble> newmarbles, MarketMarble.ColorMarble newcolor){
-        marbles = newmarbles;
-        color = newcolor;
-    } // Method that changes the marbles and the color of the row, it is useful for the method MoveResources in the Warehouse
 
+    public void ChangeMarbles(ArrayList<MarketMarble> newmarbles, MarketMarble.ColorMarble newcolor){
+        this.marbles = newmarbles;
+        this.color = newcolor;
+    } // Method that changes the marbles and the color of the row, it is useful for the method MoveResources in the Warehouse
 
     public int getSpace() {
         return space;
-    } // Method that returns the number of maximum Marbles accepted
+    } // Method that returns the number of maximum Marbles accepted in the full row without counting the marbles present
 
     public MarketMarble.ColorMarble getColor() {
         return color;

@@ -32,6 +32,9 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     public void updateAssignFourLeaderCards(FourLeaderCardsMessage fourLeaderCardsMessage) {
         game.AssignFourLeaderCards(fourLeaderCardsMessage.getPlayerIndex());
     }
+    public void MarkerStackAction(){
+        game.MarkerStackAction();
+    }
 
     public void updateDiscardLeaderCards(DiscardInitialLeaderCardsMessage discardInitialLeaderCardsMessage) {
         game.DiscardInitialLeaderCards(discardInitialLeaderCardsMessage.getPlayerIndex(), discardInitialLeaderCardsMessage.getIndexLeaderCard1(), discardInitialLeaderCardsMessage.getIndexLeaderCard2() - 1);
@@ -74,22 +77,9 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     }
 
     public void updateProduce(ProduceMessage produceMessage) {
-        int last1 = produceMessage.getProductions().size() - 1;
-        boolean last2 = false;
-        for (int i : produceMessage.getProductions()) {
-            if (i == last1) {
-                last2 = true;
-            }
-            switch (i) {
-                case 0 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox0(), produceMessage.getResourcesFromWarehouse0(), produceMessage.getRows0(), last2);
-                case 1 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox1(), produceMessage.getResourcesFromWarehouse1(), produceMessage.getRows1(), last2);
-                case 2 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox2(), produceMessage.getResourcesFromWarehouse2(), produceMessage.getRows2(), last2);
-                case 3 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox3(), produceMessage.getResourcesFromWarehouse3(), produceMessage.getRows3(), last2);
-                case 4 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox4(), produceMessage.getResourcesFromWarehouse4(), produceMessage.getRows4(), last2);
-                case 5 -> game.Produce(produceMessage.getPlayerIndex(), produceMessage.getResourcesFromStrongbox5(), produceMessage.getResourcesFromWarehouse5(), produceMessage.getRows5(), last2);
-            }
+        int i = produceMessage.getProduction();
+        game.Produce(produceMessage.getPlayerIndex(), i, produceMessage.getResourcesFromStrongbox(), produceMessage.getResourcesFromWarehouse(), produceMessage.getRows(), produceMessage.getProductionProfit());
         }
-    }
 
     public void updateDiscardLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage) {
         game.DiscardLeaderCardAction(leaderCardActionMessage.getPlayerIndex(), leaderCardActionMessage.getNLeaderCard());

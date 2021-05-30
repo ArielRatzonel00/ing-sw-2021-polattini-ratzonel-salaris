@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Network.Client.CModel;
 
 import it.polimi.ingsw.Model.DevelopmentCard;
-import it.polimi.ingsw.Model.FaithTrack;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Production;
 

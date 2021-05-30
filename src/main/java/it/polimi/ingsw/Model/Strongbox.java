@@ -12,6 +12,7 @@ public class Strongbox implements Serializable {
     private int shield;
     private int coin;
     private int stone;
+    private int TotalResources = 0;
 
     public Strongbox() {
         this.servant = 0;
@@ -38,6 +39,7 @@ public class Strongbox implements Serializable {
                 return 0;
         }
     } // Method that returns the number of the resources that has the color of the parameter passed
+
     public void AddResource(int num, MarketMarble.ColorMarble ColorOfResource){
         switch (ColorOfResource) {
             case BLUE:
@@ -52,10 +54,11 @@ public class Strongbox implements Serializable {
             case YELLOW:
                 this.coin += num;
 
+            default: break;
+
         }
     }
-// Methods that add #num Resources of colorMarble
-
+    // Methods that add #num Resources of colorMarble
 
     public void RemoveResourcesFromStrongbox(int number, MarketMarble.ColorMarble colorMarble) {
         switch (colorMarble) {
@@ -70,14 +73,17 @@ public class Strongbox implements Serializable {
 
             case YELLOW:
                 this.coin -= number;
-        }
-    } // Method that removes #number resouces
 
-    public int getNumberOfTotalResoucesInStrongbox(){
-        int Resources;
-        Resources = servant + stone + shield + coin;
-        return Resources;
+            default:break;
+        }
+    } // Method that removes #number resources
+
+    public int getNumberOfTotalResourcesInStrongbox(){
+        TotalResources = 0;
+        TotalResources = servant; // + stone + shield + coin;
+        return TotalResources;
     }
+
     public ArrayList<Integer> getResources(){
         ArrayList<Integer> resources = new ArrayList<>();
         resources.add(shield); // Posizione 0 Shield
@@ -86,8 +92,6 @@ public class Strongbox implements Serializable {
         resources.add(coin); // Posizione 3 Servant
         return resources;
     }
-
-
 }
 /*
     public int[] getTotalResourcesStrongbox(){

@@ -1,10 +1,14 @@
-/*package it.polimi.ingsw.model;
+package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Model.Deck;
-import it.polimi.ingsw.Model.DevCardSlot;
-import it.polimi.ingsw.Model.FaithTrack;
-import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.Warehouse;
+import it.polimi.ingsw.Model.Strongbox;
+import it.polimi.ingsw.Model.SlotsBoard;
+import it.polimi.ingsw.Model.Production;
+import it.polimi.ingsw.Model.CostOfCard;
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,41 +18,107 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
-    private Player player;
+    private Player gamer;
     private ArrayList<LeaderCard> leaderCards;
     private Deck deck;
-    private FaithTrack faithTrack;
+    private Warehouse warehouseTest;
+    private Strongbox strongboxTest;
+    private SlotsBoard slotsBoardTest;
+    private int TotalPointsTest = 0;
+    private ArrayList<Production> productionsTest;
+    private ArrayList<CostOfCard> costTest;
+    private CostOfCard costCard1;
+    private CostOfCard costCard2;
+    private CostOfCard costCard3;
+    private MarketMarble Yellow;
+    private MarketMarble Blue;
+
 
     @BeforeEach
     void initialization(){
+        costCard1 = new CostOfCard(2, MarketMarble.ColorMarble.BLUE);
+        costCard2 = new CostOfCard(2, MarketMarble.ColorMarble.YELLOW);
+        costCard3 = new CostOfCard(2, MarketMarble.ColorMarble.PURPLE);
+        costTest = new ArrayList<>();
+        warehouseTest = new Warehouse();
+        strongboxTest = new Strongbox();
+        slotsBoardTest = new SlotsBoard();
+        productionsTest = new ArrayList<>(4);
         deck = new Deck();
         leaderCards = new ArrayList<>();
         leaderCards.add(deck.getExtraRsc1());
         leaderCards.add(deck.getExtraRsc2());
         leaderCards.add(deck.getExtraRsc3());
         leaderCards.add(deck.getExtraRsc4());
-        player = new Player("Jonny");
-
-        player.DiscardLeaderCard(2); //tolgo quella con id = 3
-        player.DiscardLeaderCard(2); //tolgo quella con id = 4
-        //da rivedere
+        gamer = new Player("Jonny");
+        gamer.AssignFourLeaderCard(leaderCards);
+        Yellow = new MarketMarble(MarketMarble.ColorMarble.YELLOW);
+        Blue = new MarketMarble(MarketMarble.ColorMarble.BLUE);
     }
 
     @Test
-    @DisplayName("")
-    void checkResourcesForAcquisition() {
+    void assignFourLeaderCardTest() {
+        gamer.AssignFourLeaderCard(leaderCards);
+        assertTrue(leaderCards.equals(gamer.getLeaderCards()));
     }
 
     @Test
-    @DisplayName("")
-    void checkResourcesForProduce() {
+    void discardLeaderCardTest() {
+        gamer.AssignFourLeaderCard(leaderCards);
+        gamer.DiscardLeaderCard(2);
+        leaderCards.remove(2);
+        assertTrue(leaderCards.equals(gamer.getLeaderCards()));
     }
 
     @Test
-    @DisplayName("")
-    void checkPositionPopeFavor() {
+    void checkResourcesForAcquisitionTest() {
+        costTest.add(costCard1);
+        costTest.add(costCard2);
+        assertFalse(gamer.CheckResourcesForAcquisition(costTest));
+        costTest.add(costCard1);
+        costTest.add(costCard2);
+        gamer.getWarehouse().addToRow(Yellow,1);
+        gamer.getWarehouse().addToRow(Yellow,1);
+        gamer.getWarehouse().addToRow(Blue,2);
+        gamer.getWarehouse().addToRow(Blue,2);
+        assertTrue(gamer.CheckResourcesForAcquisition(costTest));
+        costTest.add(costCard3);
+        assertFalse(gamer.CheckResourcesForAcquisition(costTest));
     }
 
+    @Test
+    void checkResourcesForProduceTest() {
+    }
+
+    @Test
+    void checkPositionPopeFavorTest() {
+    }
+
+    @Test
+    void productionIsAvailableTest() {
+    }
+
+    @Test
+    void buyCardTest() {
+    }
+
+    @Test
+    void newProductionFromLeaderCardTest() {
+    }
+
+    @Test
+    void pointsFromLeaderCardTest() {
+    }
+
+    @Test
+    void pointsFromWarehouseAndStrongboxTest() {
+    }
+
+    @Test
+    void getTotalPointsTest() {
+    }
+
+    @Test
+    void getProductionsAvailableTest() {
+    }
 }
-
- */

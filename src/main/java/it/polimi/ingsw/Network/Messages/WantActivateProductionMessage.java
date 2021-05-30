@@ -9,7 +9,6 @@ public class WantActivateProductionMessage extends Message {
 
     private ArrayList<Integer> productions = new ArrayList<>();
     private ArrayList<CostOfCard> ProductionBasicCost;
-
     public WantActivateProductionMessage(){
         this.typeOfMessage = "WantActivateProductionMessage";
     }
