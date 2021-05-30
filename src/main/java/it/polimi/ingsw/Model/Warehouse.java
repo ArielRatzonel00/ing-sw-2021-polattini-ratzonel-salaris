@@ -81,6 +81,7 @@ public class Warehouse implements Serializable {
         }
         return i;
     } // the method returns the number of Resources in the Warehouse that have the color selected
+
     public boolean CheckRow(int row, int NumberOfMarbles, MarketMarble.ColorMarble colorMarble){
         if (row < 0 || row > 4){
             return false;
