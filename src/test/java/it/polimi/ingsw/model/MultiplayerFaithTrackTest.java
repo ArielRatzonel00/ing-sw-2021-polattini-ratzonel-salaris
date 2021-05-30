@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Model.MultiplayerFaithTrack;
+import it.polimi.ingsw.Model.FaithTrack;
 import it.polimi.ingsw.Model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MultiplayerFaithTrackTest {
     private int RedPositionTest;
-    private MultiplayerFaithTrack Faith;
+    private FaithTrack Faith;
     private ArrayList<Player> OtherPlayersTest;
     private Player Gamer;
 
     @BeforeEach
     void initialization(){
-        Faith = new MultiplayerFaithTrack();
+        Faith = new FaithTrack();
         OtherPlayersTest = new ArrayList<>();
         Gamer = new Player("Luca");
         OtherPlayersTest.add(Gamer);

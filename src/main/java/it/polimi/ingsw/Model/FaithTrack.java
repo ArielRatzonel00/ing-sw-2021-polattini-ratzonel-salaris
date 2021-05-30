@@ -1,109 +1,128 @@
 package it.polimi.ingsw.Model;
 
-//Method that Represents the Faith Traick. Every Player has one
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class FaithTrack implements Serializable {
-    protected int RedPosition = 0;
-    protected int points = 0;
-    public enum popeFavorState implements Serializable{
+public class FaithTrack  implements Serializable {
+    public enum PopeFavorState{
         Activate,
         Unabled,
         Deleted
     }
-    protected popeFavorState popeFavor1 = popeFavorState.Unabled;
-    protected popeFavorState popeFavor2 = popeFavorState.Unabled;
-    protected popeFavorState popeFavor3 = popeFavorState.Unabled;
-    //private ArrayList<Player> OtherPlayers = new ArrayList<>();
-    // private int BlackPosition = 0;
-    //private boolean Multiplayer;
+    private ArrayList<Player> OtherPlayers = new ArrayList<>();
+    private int redPosition = 0;
+    private int blackPosition = 0;
+    private PopeFavorState popeFavor1 = PopeFavorState.Unabled;
+    private PopeFavorState popeFavor2 = PopeFavorState.Unabled;
+    private PopeFavorState popeFavor3 = PopeFavorState.Unabled;
+    private int Points = 0;
 
-
-
-
-
-    public int getRedPosition() {
-        return RedPosition;
-    } // get posizione pedina rossa
-
-    public int getBlackPosition() {
-        return 1;
-    } // get posizione pedina nera
-
-
-  /*  public boolean isMultiplayer() {
-        return Multiplayer;
+    public ArrayList<Player> getOtherPlayers() {
+        return OtherPlayers;
     }
 
-   */
+    public int getRedPosition() {
+        return redPosition;
+    }
 
-    public int getPoints() {
-      return points;
-  } // get punti totalizzati dai favori papali
+    public int getBlackPosition() {
+        return blackPosition;
+    }
 
-    public popeFavorState getPopeFavor1() {
+    public PopeFavorState getPopeFavor1() {
         return popeFavor1;
     }
 
-    public popeFavorState getPopeFavor2() {
-        return popeFavor2;
-    }
-
-    public popeFavorState getPopeFavor3() {
-        return popeFavor3;
-    }
-/*
-    public void setMultiplayer(boolean multiplayer) {
-        Multiplayer = multiplayer;
-    }
-*/
-
-    public void setRedPosition(int redPosition) {
-
-    }
-
-   public void setBlackPosition(int blackPosition) { }
-
-
-
-    public void setPopeFavor1(popeFavorState popeFavor1) {
+    public void setPopeFavor1(PopeFavorState popeFavor1) {
         this.popeFavor1 = popeFavor1;
     }
 
-    public void setPopeFavor2(popeFavorState popeFavor2) {
+    public PopeFavorState getPopeFavor2() {
+        return popeFavor2;
+    }
+
+    public void setPopeFavor2(PopeFavorState popeFavor2) {
         this.popeFavor2 = popeFavor2;
     }
 
-    public void setPopeFavor3(popeFavorState popeFavor3) {
+    public PopeFavorState getPopeFavor3() {
+        return popeFavor3;
+    }
+
+    public void setPopeFavor3(PopeFavorState popeFavor3) {
         this.popeFavor3 = popeFavor3;
     }
 
-    public void setPoints(int points) {
-        this.points += points;
+    public void setOtherPlayers(ArrayList<Player> otherPlayers) {
+        OtherPlayers = otherPlayers;
     }
-    public Integer TotalPoints(){
+
+    public int getPoints() {
+        return Points;
+    }
+
+    public void setPoints(int points) {
+        Points += points;
+    }
+
+    public int setRedPosition(int RedPosition) {
+        redPosition  += RedPosition;
+        if (redPosition == 8 || redPosition == 16 || redPosition == 24){
+            if (redPosition == 8){
+                return 1;
+            }
+            else if (redPosition == 16){
+                return 2;
+            }
+            else {
+                return 3;
+            }
+        }
         return 0;
     }
-}
-
-
-
-
-    /*public void PopeSpaceAction(){
-        // cosa speciale
-    } // fai l'azione speciale
-
-}
- public void moveForwardRed(){
-        RedPosition++;
-        //if RedPosition = casella in cui c'è qualcosa di speciale, fai la cosa speciale chiamando pope space action
-        // if RedPosition = Numero, Points = points + valore casella
+    public int setBlackPosition(int BlackPosition){
+        blackPosition += BlackPosition;
+        if (blackPosition == 8 || blackPosition== 16 || blackPosition == 24){
+            if (blackPosition == 8){
+                return 1;
+            }
+            else if (blackPosition == 16){
+                return 2;
+            }
+            else {
+                return 3;
+            }
+        }
+        return 0;
     }
-    public void moveForwardBlack(){
-        BlackPosition++;
-        //if BlackPosition = casella in cui c'è qualcosa di speciale, fai la cosa speciale
+
+    public Integer TotalPoints(){
+        if (redPosition >= 3 && redPosition < 6){
+            return 1;
+        }
+        else if (redPosition >= 6 && redPosition < 9){
+            return 2;
+        }
+        else if (redPosition >= 9 && redPosition < 12){
+            return 4;
+        }
+        else if (redPosition >= 12 && redPosition < 15){
+            return 6;
+        }
+        else if (redPosition >= 15 && redPosition < 18){
+            return 9;
+        }
+        else if (redPosition >= 18 && redPosition < 21){
+            return 12;
+        }
+        else if (redPosition >= 21 && redPosition < 24){
+            return 16;
+        }
+        else if (redPosition == 24){
+            return 20;
+        } else {
+            return 0;
+        }
 
     }
-     */
+}

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Player implements Serializable {
     private String nickname;
     private int index;
-    private MultiplayerFaithTrack faithTrack;
+    private FaithTrack faithTrack;
     private Warehouse warehouse;
     private Strongbox strongbox;
     private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
@@ -49,7 +49,7 @@ public class Player implements Serializable {
         return nickname;
     }
 
-    public MultiplayerFaithTrack getFaithTrack() {
+    public FaithTrack getFaithTrack() {
         return faithTrack;
     }
 
@@ -123,32 +123,32 @@ public class Player implements Serializable {
         leaderCards.remove(index);
     }
 
-    public void CheckPositionPopeFavor(int RedPositionOfOtherPlayer){
-        if (RedPositionOfOtherPlayer == 8){
+    public void CheckPositionPopeFavor(int PopeFavor){
+        if (PopeFavor == 1){
             if (faithTrack.getRedPosition() >=5 ){
-                faithTrack.setPopeFavor1(FaithTrack.popeFavorState.Activate);
+                faithTrack.setPopeFavor1(FaithTrack.PopeFavorState.Activate);
                 faithTrack.setPoints(2);
             }
             else {
-                faithTrack.setPopeFavor1(FaithTrack.popeFavorState.Deleted);
+                faithTrack.setPopeFavor1(FaithTrack.PopeFavorState.Deleted);
             }
         }
-        else if (RedPositionOfOtherPlayer == 16){
+        else if (PopeFavor == 2){
             if (faithTrack.getRedPosition() >= 12){
-                faithTrack.setPopeFavor2(FaithTrack.popeFavorState.Activate);
+                faithTrack.setPopeFavor2(FaithTrack.PopeFavorState.Activate);
                 faithTrack.setPoints(3);
             }
             else {
-                faithTrack.setPopeFavor1(FaithTrack.popeFavorState.Deleted);
+                faithTrack.setPopeFavor1(FaithTrack.PopeFavorState.Deleted);
             }
         }
         else {
             if (faithTrack.getRedPosition() >= 19){
-                faithTrack.setPopeFavor3(FaithTrack.popeFavorState.Activate);
+                faithTrack.setPopeFavor3(FaithTrack.PopeFavorState.Activate);
                 faithTrack.setPoints(4);
             }
             else {
-                faithTrack.setPopeFavor3(FaithTrack.popeFavorState.Deleted);
+                faithTrack.setPopeFavor3(FaithTrack.PopeFavorState.Deleted);
             }
         }
     }

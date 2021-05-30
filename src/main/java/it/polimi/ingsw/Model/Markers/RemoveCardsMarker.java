@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model.Markers;
 
 import it.polimi.ingsw.Model.DevelopmentCard;
+import it.polimi.ingsw.Model.Model;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SinglePlayerGame;
 
@@ -13,8 +14,9 @@ public class RemoveCardsMarker extends Marker {
     }
 
     @Override
-    public void MarkerEffect(Player player, SinglePlayerGame singlePlayerGame) {
-        singlePlayerGame.getDevelopmentGrid().RemoveCardByColor(colorCard);
-        singlePlayerGame.getDevelopmentGrid().RemoveCardByColor(colorCard);
+    public int MarkerEffect(Model game) {
+        game.getDevelopmentGrid().RemoveCardByColor(colorCard);
+        game.getDevelopmentGrid().RemoveCardByColor(colorCard);
+        return 0;
     } // Method that removes the tow bottom card of the lowest level that are still in the DevelopmentGrif
 }

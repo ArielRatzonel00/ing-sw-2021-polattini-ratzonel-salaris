@@ -1,18 +1,17 @@
 package it.polimi.ingsw.Network.Client.CModel;
 
-import it.polimi.ingsw.Model.FaithTrack;
 
 import java.util.ArrayList;
 
 public class FaithTrackClient {
     private int redPosition=0;
     private int blackPosition = 0;
-    private ArrayList<FaithTrack.popeFavorState> popeFavors =new ArrayList<>();
+    private ArrayList<String> popeFavors =new ArrayList<>();
 
     public FaithTrackClient() {
-        popeFavors.add(FaithTrack.popeFavorState.Unabled);
-        popeFavors.add(FaithTrack.popeFavorState.Unabled);
-        popeFavors.add(FaithTrack.popeFavorState.Unabled);
+        popeFavors.add("U");
+        popeFavors.add("U");
+        popeFavors.add("U");
     }
 
     public int getRedPosition() {
@@ -31,11 +30,11 @@ public class FaithTrackClient {
         this.blackPosition = blackPosition;
     }
 
-    public ArrayList<FaithTrack.popeFavorState> getPopeFavors() {
+    public ArrayList<String> getPopeFavors() {
         return popeFavors;
     }
 
-    public void setPopeFavors(ArrayList<FaithTrack.popeFavorState> popeFavors) {
-        this.popeFavors = popeFavors;
+    public void setPopeFavors(String popeFavor) {
+        this.popeFavors.add(popeFavor);
     }
 }

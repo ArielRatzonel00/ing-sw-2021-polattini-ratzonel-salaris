@@ -1,11 +1,11 @@
 package it.polimi.ingsw.Network.Messages;
 
-import it.polimi.ingsw.Model.MultiplayerFaithTrack;
+import it.polimi.ingsw.Model.FaithTrack;
 import it.polimi.ingsw.Model.Warehouse;
 
 public class NewWarehouseFaithtrackResponse extends Message{
     Warehouse newwarehouse;
-    MultiplayerFaithTrack faithTrack;
+    FaithTrack faithTrack;
     public NewWarehouseFaithtrackResponse() {
         this.typeOfMessage = "New Warehouse Strongbox response";
     }
@@ -18,11 +18,11 @@ public class NewWarehouseFaithtrackResponse extends Message{
         this.newwarehouse = newwarehouse;
     }
 
-    public MultiplayerFaithTrack getFaithTrack() {
+    public FaithTrack getFaithTrack() {
         return faithTrack;
     }
 
-    public void setFaithTrack(MultiplayerFaithTrack faithTrack) {
+    public void setFaithTrack(FaithTrack faithTrack) {
         this.faithTrack = faithTrack;
     }
 }
