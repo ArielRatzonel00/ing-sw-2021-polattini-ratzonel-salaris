@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Model.Deck;
+import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Warehouse;
 import it.polimi.ingsw.Model.Strongbox;
@@ -23,13 +24,21 @@ class PlayerTest {
     private Warehouse warehouseTest;
     private Strongbox strongboxTest;
     private SlotsBoard slotsBoardTest;
-    private int TotalPointsTest;
+    private int TotalPointsTest = 0;
     private ArrayList<Production> productionsTest;
     private ArrayList<CostOfCard> costTest;
+    private CostOfCard costCard1;
+    private CostOfCard costCard2;
+    private CostOfCard costCard3;
+    private MarketMarble Yellow;
+    private MarketMarble Blue;
 
 
     @BeforeEach
     void initialization(){
+        costCard1 = new CostOfCard(2, MarketMarble.ColorMarble.BLUE);
+        costCard2 = new CostOfCard(2, MarketMarble.ColorMarble.YELLOW);
+        costCard3 = new CostOfCard(2, MarketMarble.ColorMarble.PURPLE);
         costTest = new ArrayList<>();
         warehouseTest = new Warehouse();
         strongboxTest = new Strongbox();
@@ -43,56 +52,73 @@ class PlayerTest {
         leaderCards.add(deck.getExtraRsc4());
         gamer = new Player("Jonny");
         gamer.AssignFourLeaderCard(leaderCards);
+        Yellow = new MarketMarble(MarketMarble.ColorMarble.YELLOW);
+        Blue = new MarketMarble(MarketMarble.ColorMarble.BLUE);
     }
 
     @Test
-    void assignFourLeaderCard() {
+    void assignFourLeaderCardTest() {
         gamer.AssignFourLeaderCard(leaderCards);
         assertTrue(leaderCards.equals(gamer.getLeaderCards()));
     }
 
     @Test
-    void checkResourcesForAcquisition() {
-
+    void discardLeaderCardTest() {
+        gamer.AssignFourLeaderCard(leaderCards);
+        gamer.DiscardLeaderCard(2);
+        leaderCards.remove(2);
+        assertTrue(leaderCards.equals(gamer.getLeaderCards()));
     }
 
     @Test
-    void checkResourcesForProduce() {
+    void checkResourcesForAcquisitionTest() {
+        costTest.add(costCard1);
+        costTest.add(costCard2);
+        assertFalse(gamer.CheckResourcesForAcquisition(costTest));
+        costTest.add(costCard1);
+        costTest.add(costCard2);
+        gamer.getWarehouse().addToRow(Yellow,1);
+        gamer.getWarehouse().addToRow(Yellow,1);
+        gamer.getWarehouse().addToRow(Blue,2);
+        gamer.getWarehouse().addToRow(Blue,2);
+        assertTrue(gamer.CheckResourcesForAcquisition(costTest));
+        costTest.add(costCard3);
+        assertFalse(gamer.CheckResourcesForAcquisition(costTest));
     }
 
     @Test
-    void discardLeaderCard() {
+    void checkResourcesForProduceTest() {
     }
 
     @Test
-    void checkPositionPopeFavor() {
+    void checkPositionPopeFavorTest() {
     }
 
     @Test
-    void productionIsAvailable() {
+    void productionIsAvailableTest() {
     }
 
     @Test
-    void buyCard() {
+    void buyCardTest() {
     }
 
     @Test
-    void newProductionFromLeaderCard() {
+    void newProductionFromLeaderCardTest() {
     }
 
     @Test
-    void pointsFromLeaderCard() {
+    void pointsFromLeaderCardTest() {
     }
 
     @Test
-    void pointsFromWarehouseAndStrongbox() {
+    void pointsFromWarehouseAndStrongboxTest() {
     }
 
     @Test
-    void getTotalPoints() {
+    void getTotalPointsTest() {
     }
 
     @Test
-    void getProductionsAvailable() {
+    void getProductionsAvailableTest() {
     }
 }
