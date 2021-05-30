@@ -18,6 +18,14 @@ public class PlayerBoard {
     private FaithTrackClient faithTrackClient = new FaithTrackClient();
     private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
 
+    public PlayerBoard() {
+        strongBox.add(new Integer(0));
+        strongBox.add(new Integer(0));
+        strongBox.add(new Integer(0));
+        strongBox.add(new Integer(0));
+
+    }
+
     public WarehouseClient getWarehosueClient() {
         return warehosueClient;
     }

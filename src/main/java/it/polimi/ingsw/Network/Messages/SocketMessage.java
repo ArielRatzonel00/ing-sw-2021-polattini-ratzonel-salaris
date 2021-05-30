@@ -19,7 +19,7 @@ public class SocketMessage implements Serializable {
     }
 
 
-    @Override
+   @Override
     public String toString() {
         String receiverString = receiver.toString();
 

@@ -236,81 +236,91 @@ public class Client extends Messanger implements ViewObserver{
                             int i=0;
                             while(i>4 || i<1) {
                                 MenuCli();
-                                i=stdin.nextInt();
-                                if(i>4 || i<1){
+                                i = stdin.nextInt();
+                                if (i > 4 || i < 1) {
                                     System.out.println("Inserisci un numero tra 1 e 4\n");
                                 }
-                            }
-                            switch (i){
-                                case 1:
-                                    System.out.println("Di che giocatore vuoi vederle?\n");
-                                    int index=0;
-                                    for (PlayerBoard p: clientModel.getPlayerBoards()
-                                         ) {
-                                        if(p!=null)
-                                        System.out.println("["+ index +"]"+p.getNickname()+"\n");
-                                        index++;
-                                    }
-                                    while(i<0 || i> clientModel.getPlayerBoards().size())
-                                    {
-                                        i=stdin.nextInt();
-                                        if(i<0 || i> clientModel.getPlayerBoards().size())
-                                            System.out.println("Inserisci un indice valido");
-                                    }
+                                switch (i) {
+                                    case 1:
+                                        System.out.println("Di che giocatore vuoi vederle?\n");
+                                        int index = 0;
+                                        for (PlayerBoard p : clientModel.getPlayerBoards()
+                                        ) {
+                                            if (p.getNickname() != null) {
+                                                System.out.println("[" + index + "]" + p.getNickname() + "\n");
+                                                index++;
+                                            }
+                                        }
+                                        index = 100;
+                                        while (index < 0 || index > clientModel.getPlayerBoards().size()) {
+                                            index = stdin.nextInt();
+                                            if (index < 0 || index > clientModel.getPlayerBoards().size())
+                                                System.out.println("Inserisci un indice valido");
+                                        }
 
                                         System.out.println(" ----STRONGBOX----\n" +
-                                                "SHIELDS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(0) +"\n" +
-                                                "STONES: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(1) +"\n" +
-                                                "SERVANTS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(2) +"\n" +
-                                                "COINS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(3) +"\n\n");
+                                                "SHIELDS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(0) + "\n" +
+                                                "STONES: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(1) + "\n" +
+                                                "SERVANTS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(2) + "\n" +
+                                                "COINS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(3) + "\n\n");
                                         System.out.println(" ----WAREHOUSE----\n");
-                                        int indexRow=0;
-                                        for (WarehouseRow r:clientModel.getPlayerBoards().get(i).getWarehosueClient().getWarehouseRows()
-                                             ) {
-                                            System.out.println("ROW "+indexRow +": "+r.getMarbles());
-                                            //da controllare
+                                        int indexRow = 0;
+                                        for (WarehouseRow r : clientModel.getPlayerBoards().get(i).getWarehosueClient().getWarehouseRows()
+                                        ) {
+                                            if(r.getMarbles()!=null && r.getMarbles().size()!=0)
+                                            System.out.println("ROW " + indexRow + ":" +r.getMarbles().size() + r.getMarbles().get(0).getColorMarble());
+                                            else
+                                            System.out.println("ROW " + indexRow + "; empty");
+                                            indexRow++;
                                         }
                                         System.out.println("-------FAITHTRACK--------");
-                                        for(int a=0;a<24;a++) {
-                                            if(clientModel.getPlayerBoards().get(i).getFaithTrackClient().getRedPosition()==a)
-                                            System.out.println("[ X ]");
+                                        for (int a = 0; a < 24; a++) {
+                                            if (clientModel.getPlayerBoards().get(i).getFaithTrackClient().getRedPosition() == a)
+                                                System.out.print("[ X ]");
                                             else
-                                                System.out.println("[ ]");
+                                                System.out.print("[ ]");
                                         }
-                                    System.out.println("\n POPE FAVORS 1:" +clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(0));
-                                    System.out.println("\n POPE FAVORS 2:" +clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(1));
-                                    System.out.println("\n POPE FAVORS 1:" +clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(2)+"\n\n");
+                                        System.out.println("\n POPE FAVORS 1:" + clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(0));
+                                        System.out.println("\n POPE FAVORS 2:" + clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(1));
+                                        System.out.println("\n POPE FAVORS 1:" + clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(2) + "\n\n");
 
-                                    System.out.println("---------DEVELOPMENT CARDS--------");
-                                    for (DevelopmentCard d:clientModel.getPlayerBoards().get(i).getDevSlotClient()
-                                         ) {
-                                        //Creare metodo SHOWDEVELOPMENTCARD, e stampare i vari contatori
-                                    }
-
-                                    if(i==ID){
-                                        System.out.println("----- LEADERCARDS -----");
-                                        for (LeaderCard l:clientModel.getPlayerBoards().get(i).getLeaderCards()
-                                             ) {
-                                            userInterface.ShowCard(l);
-                                        }
-                                    }
-                                    else{
-                                        System.out.println("------ ACTIVE LEADERCARDS -----");
-                                        for (LeaderCard l:clientModel.getPlayerBoards().get(i).getLeaderCards()
+                                        System.out.println("---------DEVELOPMENT CARDS--------");
+                                        for (DevelopmentCard d : clientModel.getPlayerBoards().get(i).getDevSlotClient()
                                         ) {
-                                            if(l.isActivate())
-                                            userInterface.ShowCard(l);
+                                            //Creare metodo SHOWDEVELOPMENTCARD, e stampare i vari contatori
                                         }
-                                    }
-                                    break;
-                                case 2:
-                                    break;
-                                case 3:
-                                    break;
-                                case 4:
-                                    break;
+                                        System.out.println("ID VALE: "+ID);
 
+                                        if (index == ID) {
+                                            System.out.println("----- LEADERCARDS -----");
+                                            for (LeaderCard l : clientModel.getPlayerBoards().get(i).getLeaderCards()
+                                            ) {
+                                                userInterface.ShowCard(l);
+                                                System.out.println("------------------");
+
+                                            }
+                                        }
+                                            System.out.println("------ ACTIVE LEADERCARDS -----");
+                                            for (LeaderCard l : clientModel.getPlayerBoards().get(i).getLeaderCards()
+                                            ) {
+                                                if (l.isActivate())
+                                                    userInterface.ShowCard(l);
+                                                System.out.println("------------------");
+                                            }
+
+                                        System.out.println("\n ");
+
+                                        break;
+                                    case 2:
+                                        break;
+                                    case 3:
+                                        break;
+                                    case 4:
+                                        break;
+                                }
+                                i=0;
                             }
+
                         }
                         else {
                             System.out.println("non è il tuo turno");

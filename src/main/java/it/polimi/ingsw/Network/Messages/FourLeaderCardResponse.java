@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Network.Messages;
 
 import it.polimi.ingsw.Model.DevelopmentCard;
-import it.polimi.ingsw.Model.DevelopmentGrid;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.MarketTray;
 import it.polimi.ingsw.Model.Player;

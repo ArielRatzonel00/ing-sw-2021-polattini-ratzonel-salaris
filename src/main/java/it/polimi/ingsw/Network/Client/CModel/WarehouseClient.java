@@ -7,6 +7,12 @@ import java.util.ArrayList;
 public class WarehouseClient {
     private ArrayList<WarehouseRow> warehouseRows = new ArrayList<>();
 
+    public WarehouseClient() {
+        warehouseRows.add(new WarehouseRow(1));
+        warehouseRows.add(new WarehouseRow(2));
+        warehouseRows.add(new WarehouseRow(3));
+    }
+
     public ArrayList<WarehouseRow> getWarehouseRows() {
         return warehouseRows;
     }
