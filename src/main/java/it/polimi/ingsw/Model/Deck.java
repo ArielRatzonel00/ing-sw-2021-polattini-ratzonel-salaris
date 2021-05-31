@@ -735,6 +735,10 @@ public class Deck {
         return ExtraRsc4;
     }
 
+    public LeaderCard getConvertRsc1() {
+        return ConvertRsc1;
+    }
+
     public ArrayList<LeaderCard> getTopFourLeaderCard() {
         ArrayList<LeaderCard> FourLeaderCardArray  = new ArrayList<>();
         FourLeaderCardArray.add(ArrLeaderCards.get(ArrLeaderCards.size()-1));
