@@ -120,6 +120,8 @@ class PlayerTest {
         gamer.getSlotsBoard().getSlots().get(2).addCard(deck.getGreen11());
         gamer.setProductionsAvailable(2);
         assertTrue(gamer.ProductionIsAvailable(3));
+        assertTrue(gamer.ProductionIsAvailable(0));
+        assertFalse(gamer.ProductionIsAvailable(1));
     }
 
     @Test
