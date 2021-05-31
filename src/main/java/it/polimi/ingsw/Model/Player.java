@@ -31,6 +31,7 @@ public class Player implements Serializable {
         this.nickname = nickname;
         this.warehouse = new Warehouse();
         this.strongbox = new Strongbox();
+        this.faithTrack = new FaithTrack();
         //this.leaderCards = FourLeaderCards;
         this.slotsBoard = new SlotsBoard();
         this.isFirst = false;

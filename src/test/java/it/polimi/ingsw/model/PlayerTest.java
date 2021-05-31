@@ -32,6 +32,7 @@ class PlayerTest {
     private CostOfCard costCard3;
     private MarketMarble Yellow;
     private MarketMarble Blue;
+    private int[] CostProduceTest = {0,0,0,0};
 
 
     @BeforeEach
@@ -87,16 +88,32 @@ class PlayerTest {
     }
 
     @Test
-    void checkResourcesForProduceTest() {
+    void checkResourcesForProduceTest() { //cost[0] = BLUE, cost[1] = GREY, cost[2] = PURPLE, cost[3] = YELLOW
+        //da verificare anche con risorse nello strongbox -> solo che strongbox non funziona
+        CostProduceTest[3]= 2;
+        assertFalse(gamer.CheckResourcesForProduce(CostProduceTest));
+        gamer.getWarehouse().addToRow(Yellow,1);
+        gamer.getWarehouse().addToRow(Yellow,1);
+        assertTrue(gamer.CheckResourcesForProduce(CostProduceTest));
+        CostProduceTest[2]=4;
+        assertFalse(gamer.CheckResourcesForProduce(CostProduceTest));
     }
 
     @Test
     void checkPositionPopeFavorTest() {
+        gamer.getFaithTrack().setRedPosition(14);
+        gamer.CheckPositionPopeFavor(2);
+        assertEquals(3,gamer.getFaithTrack().getPoints());
     }
 
+    /*
     @Test
     void productionIsAvailableTest() {
+        gamer.setProductionsAvailable(2);
+        assertTrue(gamer.ProductionIsAvailable(2));
     }
+
+     */
 
     @Test
     void buyCardTest() {

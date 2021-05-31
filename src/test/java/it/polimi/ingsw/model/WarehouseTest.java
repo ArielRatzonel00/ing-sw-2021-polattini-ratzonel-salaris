@@ -81,7 +81,6 @@ class WarehouseTest {
         assertEquals(3, WarehouseTest.getNumberOfTotalResourcesInWarehouse());
     }
 
-    /*
     @Test
     void checkRowTest() {
         WarehouseTest.addToRow(Grey, 0);
@@ -91,10 +90,13 @@ class WarehouseTest {
         RowsTest.add(Row1);
         RowsTest.add(Row2);
         RowsTest.add(Row3);
-        assertEquals(Row1, WarehouseTest.getRow(0));
-        assertSame(RowsTest,WarehouseTest.getRows());
-        assertFalse(WarehouseTest.CheckRow(0,0, MarketMarble.ColorMarble.BLUE));
+        System.out.print(Row1.getMarbles().get(0).getColorMarble());
+        System.out.print(WarehouseTest.getRow(0).getMarbles().get(0).getColorMarble());
+        //System.out.print(Row1.getMarbles().get(0).);
+        //System.out.print(WarehouseTest.getRow(0).getMarbles().get(0).getColorMarble());
+        //assertTrue(Row1.equals(WarehouseTest.getRow(0)));
+        //assertSame(RowsTest,WarehouseTest.getRows());
+        //assertFalse(WarehouseTest.CheckRow(0,0, MarketMarble.ColorMarble.BLUE));
+        assertFalse(WarehouseTest.CheckRow(1,2, MarketMarble.ColorMarble.BLUE));
     }
-
-     */
 }

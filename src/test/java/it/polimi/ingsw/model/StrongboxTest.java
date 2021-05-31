@@ -13,17 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StrongboxTest {
     private Strongbox strongboxTest;
-    private ArrayList<Integer> resources;
-    private ArrayList<Integer> resourcesTest;
 
     @BeforeEach
     void initialization(){
         strongboxTest = new Strongbox();
-        resources = new ArrayList<>();
-        resourcesTest = new ArrayList<>();
     }
 
-    /*
+
     @Test
     void countResourcesTest() {
         assertEquals(0, strongboxTest.CountResources(MarketMarble.ColorMarble.BLUE));
@@ -31,22 +27,16 @@ class StrongboxTest {
         assertEquals(0, strongboxTest.CountResources(MarketMarble.ColorMarble.PURPLE));
         assertEquals(0, strongboxTest.CountResources(MarketMarble.ColorMarble.YELLOW));
         strongboxTest.AddResource(4, MarketMarble.ColorMarble.BLUE);
-        //assertEquals(4, strongboxTest.CountResources(MarketMarble.ColorMarble.BLUE));
+        assertEquals(4, strongboxTest.CountResources(MarketMarble.ColorMarble.BLUE));
         strongboxTest.RemoveResourcesFromStrongbox(2, MarketMarble.ColorMarble.BLUE);
-        //assertEquals(2, strongboxTest.CountResources(MarketMarble.ColorMarble.BLUE));
-        //assertEquals(0, strongboxTest.CountResources(MarketMarble.ColorMarble.RED));
+        assertEquals(2, strongboxTest.CountResources(MarketMarble.ColorMarble.BLUE));
+        assertEquals(0, strongboxTest.CountResources(MarketMarble.ColorMarble.RED));
         strongboxTest.AddResource(4, MarketMarble.ColorMarble.PURPLE);
-        //assertEquals(4, strongboxTest.CountResources(MarketMarble.ColorMarble.PURPLE));
-        resources = strongboxTest.getResources();
-        resourcesTest.add(0);
-        resourcesTest.add(0);
-        resourcesTest.add(0);
-        resourcesTest.add(0);
-        assertSame(resourcesTest, resources);
-        //strongboxTest.AddResource(4, MarketMarble.ColorMarble.YELLOW);
-        //assertEquals(4, strongboxTest.CountResources(MarketMarble.ColorMarble.YELLOW));
-        //strongboxTest.AddResource(4, MarketMarble.ColorMarble.GREY);
-        //assertEquals(4, strongboxTest.CountResources(MarketMarble.ColorMarble.GREY));
+        assertEquals(4, strongboxTest.CountResources(MarketMarble.ColorMarble.PURPLE));
+        strongboxTest.AddResource(4, MarketMarble.ColorMarble.YELLOW);
+        assertEquals(4, strongboxTest.CountResources(MarketMarble.ColorMarble.YELLOW));
+        strongboxTest.AddResource(4, MarketMarble.ColorMarble.GREY);
+        assertEquals(4, strongboxTest.CountResources(MarketMarble.ColorMarble.GREY));
 
     }
 
@@ -59,5 +49,5 @@ class StrongboxTest {
         assertEquals(7, strongboxTest.getNumberOfTotalResourcesInStrongbox());
     }
 
- */
+
 }
