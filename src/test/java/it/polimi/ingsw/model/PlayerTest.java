@@ -1,14 +1,16 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Model.Deck;
+import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.Deck;
 import it.polimi.ingsw.Model.Warehouse;
-import it.polimi.ingsw.Model.Strongbox;
 import it.polimi.ingsw.Model.SlotsBoard;
+import it.polimi.ingsw.Model.Strongbox;
 import it.polimi.ingsw.Model.Production;
 import it.polimi.ingsw.Model.CostOfCard;
-import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+import it.polimi.ingsw.Model.DevCardSlot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,6 +35,10 @@ class PlayerTest {
     private MarketMarble Yellow;
     private MarketMarble Blue;
     private int[] CostProduceTest = {0,0,0,0};
+    private DevCardSlot SlotTest1;
+    private DevCardSlot SlotTest2;
+    private DevCardSlot SlotTest3;
+    private ArrayList<DevCardSlot> ArrayDevCardSlotTest;
 
 
     @BeforeEach
@@ -55,6 +61,10 @@ class PlayerTest {
         gamer.AssignFourLeaderCard(leaderCards);
         Yellow = new MarketMarble(MarketMarble.ColorMarble.YELLOW);
         Blue = new MarketMarble(MarketMarble.ColorMarble.BLUE);
+        SlotTest1 = new DevCardSlot();
+        SlotTest2 = new DevCardSlot();
+        SlotTest3 = new DevCardSlot();
+        ArrayDevCardSlotTest = new ArrayList<>();
     }
 
     @Test
@@ -89,7 +99,6 @@ class PlayerTest {
 
     @Test
     void checkResourcesForProduceTest() { //cost[0] = BLUE, cost[1] = GREY, cost[2] = PURPLE, cost[3] = YELLOW
-        //da verificare anche con risorse nello strongbox -> solo che strongbox non funziona
         CostProduceTest[3]= 2;
         assertFalse(gamer.CheckResourcesForProduce(CostProduceTest));
         gamer.getWarehouse().addToRow(Yellow,1);
@@ -106,14 +115,12 @@ class PlayerTest {
         assertEquals(3,gamer.getFaithTrack().getPoints());
     }
 
-    /*
     @Test
     void productionIsAvailableTest() {
+        gamer.getSlotsBoard().getSlots().get(2).addCard(deck.getGreen11());
         gamer.setProductionsAvailable(2);
-        assertTrue(gamer.ProductionIsAvailable(2));
+        assertTrue(gamer.ProductionIsAvailable(3));
     }
-
-     */
 
     @Test
     void buyCardTest() {

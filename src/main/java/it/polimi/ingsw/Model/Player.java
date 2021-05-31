@@ -26,6 +26,9 @@ public class Player implements Serializable {
     private int TotalPoints = 0;
     private boolean SinglePlayer = false;
     private ArrayList<Production> productionsAvailable = new ArrayList<>(4);
+    private ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
+    private ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
+    private Production BasicProduction = new Production(ProductionBasicCost, ProductionBasicProfit);
 
     public Player(String nickname) {
         this.nickname = nickname;
@@ -35,11 +38,14 @@ public class Player implements Serializable {
         //this.leaderCards = FourLeaderCards;
         this.slotsBoard = new SlotsBoard();
         this.isFirst = false;
-        ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
         ProductionBasicCost.add(0, new CostOfCard(2, MarketMarble.ColorMarble.UNKNOWN));
-        ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
-        ProductionBasicCost.add(0, new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
-        this.productionsAvailable.add(0, new Production(ProductionBasicCost, ProductionBasicProfit));
+        ProductionBasicProfit.add(0, new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
+        BasicProduction.setProductionCost(ProductionBasicCost);
+        BasicProduction.setProductionCost(ProductionBasicProfit);
+        this.productionsAvailable.add(BasicProduction);
+        this.productionsAvailable.add(BasicProduction);
+        this.productionsAvailable.add(BasicProduction);
+        this.productionsAvailable.add(BasicProduction);
     }
 
     public void AssignFourLeaderCard(ArrayList<LeaderCard> FourLeaderCards){
@@ -155,11 +161,19 @@ public class Player implements Serializable {
     }
 
     public void setProductionsAvailable(int slot){
-        productionsAvailable.set(slot, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
+        productionsAvailable.set(slot+1, this.slotsBoard.getSlots().get(slot).getTopCard().getProduction());
     }
 
     public boolean ProductionIsAvailable(int index){
-        return productionsAvailable.get(index) != null;
+        if ((index == 4 && productionsAvailable.size()<4) || (index == 5 && productionsAvailable.size()<5 )){
+            return false;
+        }
+        else if(index != 0 && productionsAvailable.get(index).equals(BasicProduction)){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     public void buyCard(DevelopmentCard card, int slot){
