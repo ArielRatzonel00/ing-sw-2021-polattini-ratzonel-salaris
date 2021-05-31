@@ -125,6 +125,8 @@ public class Client extends Messanger implements ViewObserver{
                         discardInitial.setIndexLeaderCard1(a);
                         discardInitial.setIndexLeaderCard2(b);
                         sendMessage(socketOut, discardInitial);
+                        System.out.println("Waiting for other playes...");
+
                         break;
                     }
                     else
@@ -218,6 +220,7 @@ public class Client extends Messanger implements ViewObserver{
                                     }
                                 }
                         }
+                        System.out.println("Waiting for other playes...");
                         sendMessage(socketOut, message1);
                         break;
                     }
@@ -259,13 +262,13 @@ public class Client extends Messanger implements ViewObserver{
                                         }
 
                                         System.out.println(" ----STRONGBOX----\n" +
-                                                "SHIELDS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(0) + "\n" +
-                                                "STONES: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(1) + "\n" +
-                                                "SERVANTS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(2) + "\n" +
-                                                "COINS: " + clientModel.getPlayerBoards().get(i).getStrongBox().get(3) + "\n\n");
+                                                "SHIELDS: " + clientModel.getPlayerBoards().get(index).getStrongBox().get(0) + "\n" +
+                                                "STONES: " + clientModel.getPlayerBoards().get(index).getStrongBox().get(1) + "\n" +
+                                                "SERVANTS: " + clientModel.getPlayerBoards().get(index).getStrongBox().get(2) + "\n" +
+                                                "COINS: " + clientModel.getPlayerBoards().get(index).getStrongBox().get(3) + "\n\n");
                                         System.out.println(" ----WAREHOUSE----\n");
                                         int indexRow = 0;
-                                        for (WarehouseRow r : clientModel.getPlayerBoards().get(i).getWarehosueClient().getWarehouseRows()
+                                        for (WarehouseRow r : clientModel.getPlayerBoards().get(index).getWarehosueClient().getWarehouseRows()
                                         ) {
                                             if(r.getMarbles()!=null && r.getMarbles().size()!=0)
                                             System.out.println("ROW " + indexRow + ":" +r.getMarbles().size() + r.getMarbles().get(0).getColorMarble());
@@ -275,25 +278,24 @@ public class Client extends Messanger implements ViewObserver{
                                         }
                                         System.out.println("-------FAITHTRACK--------");
                                         for (int a = 0; a < 24; a++) {
-                                            if (clientModel.getPlayerBoards().get(i).getFaithTrackClient().getRedPosition() == a)
+                                            if (clientModel.getPlayerBoards().get(index).getFaithTrackClient().getRedPosition() == a)
                                                 System.out.print("[ X ]");
                                             else
                                                 System.out.print("[ ]");
                                         }
-                                        System.out.println("\n POPE FAVORS 1:" + clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(0));
-                                        System.out.println("\n POPE FAVORS 2:" + clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(1));
-                                        System.out.println("\n POPE FAVORS 1:" + clientModel.getPlayerBoards().get(i).getFaithTrackClient().getPopeFavors().get(2) + "\n\n");
+                                        System.out.println("\n POPE FAVORS 1:" + clientModel.getPlayerBoards().get(index).getFaithTrackClient().getPopeFavors().get(0));
+                                        System.out.println("\n POPE FAVORS 2:" + clientModel.getPlayerBoards().get(index).getFaithTrackClient().getPopeFavors().get(1));
+                                        System.out.println("\n POPE FAVORS 1:" + clientModel.getPlayerBoards().get(index).getFaithTrackClient().getPopeFavors().get(2) + "\n\n");
 
                                         System.out.println("---------DEVELOPMENT CARDS--------");
                                         for (DevelopmentCard d : clientModel.getPlayerBoards().get(i).getDevSlotClient()
                                         ) {
                                             //Creare metodo SHOWDEVELOPMENTCARD, e stampare i vari contatori
                                         }
-                                        System.out.println("ID VALE: "+ID);
 
                                         if (index == ID) {
                                             System.out.println("----- LEADERCARDS -----");
-                                            for (LeaderCard l : clientModel.getPlayerBoards().get(i).getLeaderCards()
+                                            for (LeaderCard l : clientModel.getPlayerBoards().get(index).getLeaderCards()
                                             ) {
                                                 userInterface.ShowCard(l);
                                                 System.out.println("------------------");
@@ -301,11 +303,12 @@ public class Client extends Messanger implements ViewObserver{
                                             }
                                         }
                                             System.out.println("------ ACTIVE LEADERCARDS -----");
-                                            for (LeaderCard l : clientModel.getPlayerBoards().get(i).getLeaderCards()
+                                            for (LeaderCard l : clientModel.getPlayerBoards().get(index).getLeaderCards()
                                             ) {
-                                                if (l.isActivate())
+                                                if (l.isActivate()) {
                                                     userInterface.ShowCard(l);
-                                                System.out.println("------------------");
+                                                    System.out.println("------------------");
+                                                }
                                             }
 
                                         System.out.println("\n ");

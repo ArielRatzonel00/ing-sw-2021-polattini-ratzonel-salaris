@@ -28,7 +28,8 @@ public class Server {
 
 
     ServerSocket serverSocket;
-    ExecutorService executor = Executors.newCachedThreadPool();
+
+    //ExecutorService executor = Executors.newCachedThreadPool();
     private int nextGameNPlayers;
 
 
@@ -48,12 +49,14 @@ public class Server {
         while(true) {
             Socket socket = serverSocket.accept(); //Correggere assegnazione ID connection
             SocketClientConnection socketConnection = new SocketClientConnection(socket, this, nextID);
+            Thread thread=new Thread(socketConnection);
+            thread.start();
             nextID++;
             VirtualView newVirtualView = new VirtualView(socketConnection);
             virtualViews.add(newVirtualView);
             //newVirtualView.setGameManager(gameManager);
             socketConnection.addVirtualView(newVirtualView);
-            executor.submit(socketConnection);
+            //executor.submit(socketConnection);
             System.out.println("Connessione effettuata con ID " + nextID);
         }
     }
