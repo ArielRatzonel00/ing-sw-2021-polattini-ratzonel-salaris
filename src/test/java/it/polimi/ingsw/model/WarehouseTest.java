@@ -90,13 +90,7 @@ class WarehouseTest {
         RowsTest.add(Row1);
         RowsTest.add(Row2);
         RowsTest.add(Row3);
-        System.out.print(Row1.getMarbles().get(0).getColorMarble());
-        System.out.print(WarehouseTest.getRow(0).getMarbles().get(0).getColorMarble());
-        //System.out.print(Row1.getMarbles().get(0).);
-        //System.out.print(WarehouseTest.getRow(0).getMarbles().get(0).getColorMarble());
-        //assertTrue(Row1.equals(WarehouseTest.getRow(0)));
-        //assertSame(RowsTest,WarehouseTest.getRows());
-        //assertFalse(WarehouseTest.CheckRow(0,0, MarketMarble.ColorMarble.BLUE));
         assertFalse(WarehouseTest.CheckRow(1,2, MarketMarble.ColorMarble.BLUE));
+        assertTrue(WarehouseTest.CheckRow(1,1, MarketMarble.ColorMarble.BLUE));
     }
 }
