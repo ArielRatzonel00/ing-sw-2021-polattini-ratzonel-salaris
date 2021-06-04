@@ -93,27 +93,19 @@ public class Cli extends ViewObservable implements UserInterface {
         switch (l.getType()){
             case 1:
                 LeaderCard1 l1=(LeaderCard1)l;
-                System.out.println("POTERE: Trasforma palline bianche in palline : " + l1.getNewColorMarble() + "\n" +
-                    "NECESSITA: 1 devCard colore " + l1.getColorCostOne() + ", 2 devCard colore " + l1.getColorCostTwo() + "\n" +
-                    "VICTORY POINTS: " + l1.getVictoryPoints());
+                System.out.println(l1.StampaCarta());
             break;
             case 2:
                 LeaderCard2 l2=(LeaderCard2)l;
-                System.out.println("POTERE: Riduce costo delle DevCard di una risorsa di tipo: " + l2.getDiscount() + "\n" +
-                        "NECESSITA: 1 devCard colore " + l2.getFirstcolorCost() + ", 1 devCard colore " + l2.getSecondcolorCost() + "\n" +
-                        "VICTORY POINTS: " + l2.getVictoryPoints());
+                System.out.println(l2.StampaCarta());
                 break;
             case 3:
                 LeaderCard3 l3=(LeaderCard3) l;
-                System.out.println("POTERE: Aggiunge un extra warehouse (di 2 spazi) di colore " + l3.getColorOfExtraWarehouse() + "\n" +
-                        "NECESSITA: 5 risorse di colore " + l3.getColorCost() +  "\n" +
-                        "VICTORY POINTS: " + l3.getVictoryPoints());
+                System.out.println(l3.StampaCarta());
                 break;
             case 4:
                 LeaderCard4 l4=(LeaderCard4) l;
-                System.out.println( "POTERE: Aggiunge produzione da" + l4.getProduction().getProductionCost().get(0).getCostNumber() + l4.getProduction().getProductionCost().get(0).getCostColor() + " ad un punto fede e una risorsa a tua scelta\n " +
-                    "NECESSITA: DevCard di livello 2 di colore" + l4.getCostCardLevelTwo() + "\n" +
-                    "VICTORY POINTS: " + l4.getVictoryPoints());
+                System.out.println(l4.StampaCarta());
                 break;
         }
     }

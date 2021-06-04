@@ -287,22 +287,30 @@ public class Model extends ModelObservable {
                     switch (productionBasicCost.get(0).getCostColor()) {
                         case BLUE:
                             resources[0]++;
+                            break;
                         case GREY:
                             resources[1]++;
+                            break;
                         case PURPLE:
                             resources[2]++;
+                            break;
                         case YELLOW:
                             resources[3]++;
+                            break;
                     }
                     switch (productionBasicCost.get(1).getCostColor()) {
                         case BLUE:
                             resources[0]++;
+                            break;
                         case GREY:
                             resources[1]++;
+                            break;
                         case PURPLE:
                             resources[2]++;
+                            break;
                         case YELLOW:
                             resources[3]++;
+                            break;
                     }
                 }
                 else{
@@ -310,12 +318,16 @@ public class Model extends ModelObservable {
                         switch (c.getCostColor()){
                             case BLUE:
                                 resources[0]+= c.getCostNumber();
+                                break;
                             case GREY:
                                 resources[1]+= c.getCostNumber();
+                                break;
                             case PURPLE:
                                 resources[2]+= c.getCostNumber();
+                                break;
                             case YELLOW:
                                 resources[3]+= c.getCostNumber();
+                                break;
                         }
                     }
                 }
@@ -335,7 +347,6 @@ public class Model extends ModelObservable {
         int PopeFavorStateChanged = 0;
         int redPositions = 0;
         for (int i = 0; i < production.size(); i++) {
-
             for (CostOfCard c : ResourcesFromStrongbox.get(i)) {
                 currentplayer.getStrongbox().RemoveResourcesFromStrongbox(c.getCostNumber(), c.getCostColor());
             }
@@ -361,6 +372,7 @@ public class Model extends ModelObservable {
                     redPositions += 1;
                 } else {
                     currentplayer.getStrongbox().AddResource(1, profit.get(j));
+                    System.out.println(profit.get(j));
                 }
                 if (production.get(i) != 0) {
                     returnedValue = currentplayer.getFaithTrack().setRedPosition(1);

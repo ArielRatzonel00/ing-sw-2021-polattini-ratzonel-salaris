@@ -74,8 +74,8 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     }
 
     public void updateProduce(ProduceMessage produceMessage) {
-        //int i = produceMessage.getProduction();
-        //game.Produce(produceMessage.getPlayerIndex(), i, produceMessage.getResourcesFromStrongbox(), produceMessage.getResourcesFromWarehouse(), produceMessage.getRows(), produceMessage.getProductionProfit());
+
+        game.Produce(produceMessage.getPlayerIndex(),produceMessage.getProductions(),produceMessage.getResourcesFromStrongbox(),produceMessage.getResourcesFromWarehouse(),produceMessage.getRows(),produceMessage.getProductionProfit());
         }
 
     public void updateDiscardLeaderCardAction(DiscardLeaderCardActionMessage discardLeaderCardActionMessage) {

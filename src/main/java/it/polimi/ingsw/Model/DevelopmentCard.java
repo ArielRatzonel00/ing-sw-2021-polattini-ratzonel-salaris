@@ -58,11 +58,11 @@ public class DevelopmentCard implements Serializable {
         return VictoryPoints;
     }
     public void printCard(){
-        System.out.println("Color: " + Color+" " +
-                "Level" + Level +" " +
+        System.out.println("Color: " + Color+"   " +
+                "Level: " + Level +"   " +
                 "Cost:" + printCostofCard(Cost) +
                 "Production Cost:" + printCostofCard(Production.getProductionCost()) +
-                "Production Profit: " + printCostofCard(Production.getProductionProfit()) +
+                "Production Profit:" + printCostofCard(Production.getProductionProfit()) +
                 "Victory Points:" + VictoryPoints );
 
     }

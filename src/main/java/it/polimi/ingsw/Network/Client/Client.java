@@ -13,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -116,6 +117,7 @@ public class Client extends Messanger implements ViewObserver{
                             System.out.println("Which ones you want to discard? insert 2 index [0-3]");
                             a = stdin.nextInt();
                             b = stdin.nextInt();
+
                             if (a > 3 || b > 3 || a == b) {
                                 a = 4;
                                 System.out.println("wrong indexes, try again");
@@ -352,6 +354,7 @@ public class Client extends Messanger implements ViewObserver{
                     WantActivateProductionResponse wantActivateProductionResponse = (WantActivateProductionResponse) message;
                     if (wantActivateProductionResponse.getPlayerIndex() == ID) {
                         String c1 = "";
+                        ProduceMessage produceMessage = new ProduceMessage();
                         if (wantActivateProductionResponse.isOk()) {
                             System.out.println("You have the resources to produce\n");
                             clientModel.getPlayerBoards().get(ID).PrintWarehouse();
@@ -362,7 +365,6 @@ public class Client extends Messanger implements ViewObserver{
                                 ArrayList<Integer> rows = new ArrayList<>();
                                 System.out.println("Production number " + prod + ":\n");
                                 System.out.println(clientModel.getPlayerBoards().get(ID).getProductions().get(prod).printProduction());
-                                ProduceMessage produceMessage = new ProduceMessage();
                                 produceMessage.setPlayerIndex(ID);
                                 System.out.println("How do you want to pay it?\n");
                                 if (prod == 0) {
@@ -372,12 +374,14 @@ public class Client extends Messanger implements ViewObserver{
                                     produceMessage.setResourcesFromStrongbox(ResourcesFromStrongbox);
                                     produceMessage.setResourcesFromWarehouse(ResourcesFromWarehouse);
                                     produceMessage.setProductionProfit(marbleChoice(c1));
+                                    produceMessage.setRows(rows);
                                     c1 = "";
                                 }
                                 else {
                                     Payment(clientModel.getPlayerBoards().get(ID).getProductions().get(prod).getProductionCost(),ResourcesFromStrongbox,ResourcesFromWarehouse,rows,ID);
                                     produceMessage.setResourcesFromStrongbox(ResourcesFromStrongbox);
                                     produceMessage.setResourcesFromWarehouse(ResourcesFromWarehouse);
+                                    produceMessage.setRows(rows);
                                     if (prod == 4 || prod == 5){
                                         System.out.println("Choose the marble to get [P] [Y] [G] [B]\n");
                                         c1 = stdin.next();
@@ -387,8 +391,7 @@ public class Client extends Messanger implements ViewObserver{
                                 produceMessage.setPlayerIndex(ID);
 
                             }
-
-
+                            sendMessage(socketOut, produceMessage);
                         } else {
                             System.out.println("You don't have enough resources to produce all the productions that you selected");
                             MenuCli();
@@ -474,7 +477,7 @@ public class Client extends Messanger implements ViewObserver{
                     clientModel.getPlayerBoards().get(cardBuyedResponse.getPlayerIndex()).setStrongBox(cardBuyedResponse.getNewstrongbox());
                     clientModel.getPlayerBoards().get(cardBuyedResponse.getPlayerIndex()).getWarehosueClient().setWarehouseRows(cardBuyedResponse.getNewwarehouse());
                     clientModel.getPlayerBoards().get(cardBuyedResponse.getPlayerIndex()).setProductions(cardBuyedResponse.getNewproductionAvailables());
-                    if (clientModel.getPlayerBoards().get(cardBuyedResponse.getPlayerIndex()).getDevSlotClient().size() < cardBuyedResponse.getSlot()) {
+                    if (clientModel.getPlayerBoards().get(cardBuyedResponse.getPlayerIndex()).getDevSlotClient().size() <= cardBuyedResponse.getSlot()) {
                         clientModel.getPlayerBoards().get(cardBuyedResponse.getPlayerIndex()).getDevSlotClient().add(cardBuyedResponse.getSlot(), cardBuyedResponse.getCard());
                     }
                     else {
@@ -1022,5 +1025,6 @@ public class Client extends Messanger implements ViewObserver{
         message.setPlayerIndex(ID);
         sendMessage(this.socketOut, message);
     }
+
 }
 

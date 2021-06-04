@@ -9,48 +9,49 @@ public class ProduceMessage extends Message{
     public ProduceMessage() {
         this.typeOfMessage = "ProduceMessage";
     }
-    private int production = 0;
-
+    private ArrayList<Integer> productions = new ArrayList<>();
     private ArrayList<MarketMarble.ColorMarble> ProductionProfit = new ArrayList<>();
     private ArrayList<ArrayList<CostOfCard>> ResourcesFromStrongbox = new ArrayList<>();;
     private ArrayList<ArrayList<CostOfCard>> ResourcesFromWarehouse = new ArrayList<>();;
-    private ArrayList<ArrayList<Integer>> rows;
+    private ArrayList<ArrayList<Integer>> rows = new ArrayList<>();
 
-    public int getProduction() {
-        return production;
-    }
-
-    public void setProduction(int production) {
-        this.production = production;
+    public ArrayList<Integer> getProductions() {
+        return productions;
     }
 
-    public void setResourcesFromStrongbox(ArrayList<CostOfCard> resourcesFromStrongbox) {
-        this.ResourcesFromStrongbox.add(resourcesFromStrongbox);
-    }
-    public void setResourcesFromWarehouse(ArrayList<CostOfCard> resourcesFromWarehouse) {
-        this.ResourcesFromWarehouse .add(resourcesFromWarehouse);
-    }
-
-    public void setProductionProfit(MarketMarble.ColorMarble productionProfit) {
-        ProductionProfit.add(productionProfit);
-    }
-    public void setRows(ArrayList<Integer> rows) {
-        this.rows.add(rows);
+    public void setProductions(ArrayList<Integer> productions) {
+        this.productions = productions;
     }
 
     public ArrayList<MarketMarble.ColorMarble> getProductionProfit() {
         return ProductionProfit;
     }
 
+    public void setProductionProfit(MarketMarble.ColorMarble productionProfit) {
+        ProductionProfit.add(productionProfit);
+    }
+
     public ArrayList<ArrayList<CostOfCard>> getResourcesFromStrongbox() {
         return ResourcesFromStrongbox;
+    }
+
+    public void setResourcesFromStrongbox(ArrayList<CostOfCard> resourcesFromStrongbox) {
+        ResourcesFromStrongbox .add(resourcesFromStrongbox);
     }
 
     public ArrayList<ArrayList<CostOfCard>> getResourcesFromWarehouse() {
         return ResourcesFromWarehouse;
     }
 
+    public void setResourcesFromWarehouse(ArrayList<CostOfCard> resourcesFromWarehouse) {
+        ResourcesFromWarehouse .add(resourcesFromWarehouse);
+    }
+
     public ArrayList<ArrayList<Integer>> getRows() {
         return rows;
+    }
+
+    public void setRows(ArrayList<Integer> rows) {
+        this.rows.add(rows);
     }
 }

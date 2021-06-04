@@ -179,6 +179,9 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
             case "BuyCardMessage":
                 virtualView.notifyObserver(obs->obs.updateBuyCard((BuyCardMessage) message));
                 break;
+            case "ProduceMessage":
+                virtualView.notifyObserver(obs->obs.updateProduce((ProduceMessage) message));
+                break;
         }
     }
 
