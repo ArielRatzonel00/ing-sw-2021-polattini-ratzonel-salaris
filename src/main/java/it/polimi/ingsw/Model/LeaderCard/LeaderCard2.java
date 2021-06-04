@@ -29,9 +29,9 @@ public class LeaderCard2 extends LeaderCard { //metodo per leader cards che dimi
 
     @Override
     public String StampaCarta() {
-        return "POTERE: Riduce costo delle DevCard di una risorsa di tipo: " + getDiscount() + "\n" +
-                            "NECESSITA: 1 devCard colore " + getFirstcolorCost() + ", 1 devCard colore " + getSecondcolorCost() + "\n" +
-                            "VICTORY POINTS: " + getVictoryPoints();
+        return "Power: Discount -1 for devCard: " + getDiscount() + "\n" +
+                            "Requirements: 1 devCard " + getFirstcolorCost() + ", 1 devCard " + getSecondcolorCost() + "\n" +
+                            "VP: " + getVictoryPoints();
     }
 
     public DevelopmentCard.colorCard getFirstcolorCost() {

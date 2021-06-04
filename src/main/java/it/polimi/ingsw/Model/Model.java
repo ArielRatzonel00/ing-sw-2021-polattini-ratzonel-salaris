@@ -56,7 +56,7 @@ public class Model extends ModelObservable {
         System.out.println("Asssegna 4leader nel game");
         currentplayer.AssignFourLeaderCard(deck.getTopFourLeaderCard());
         System.out.println(currentplayer.getLeaderCards().size());
-        notifyFourLeaderCards(PlayerIndex, currentplayer.getLeaderCards(), developmentGrid, marketTray, currentplayer.getNickname());
+        notifyFourLeaderCards(PlayerIndex, currentplayer.getLeaderCards(), developmentGrid.getTopcards(), marketTray, currentplayer.getNickname());
 
     }
 
@@ -64,7 +64,7 @@ public class Model extends ModelObservable {
         Player currentplayer = players.get(PlayerIndex);
         currentplayer.DiscardLeaderCard(LeaderCard1Index);
         currentplayer.DiscardLeaderCard(LeaderCard2Index);
-        notifyLeaderCardsAfterFirstDiscard(PlayerIndex,currentplayer.getLeaderCards());
+        notifyLeaderCardsAfterFirstDiscard(PlayerIndex,currentplayer.getLeaderCards(),currentplayer.getProductionsAvailable());
     }
     public void SetInitialResourcesForFirstPlayer() {
         Player currentplayer = players.get(0);
@@ -101,43 +101,40 @@ public class Model extends ModelObservable {
         }
     }
     public void MarketTrayAction(int PlayerIndex, boolean isRow, int index){
+        Player currentplayer = players.get(PlayerIndex);
+
         ArrayList<MarketMarble> returnedMarbles = new ArrayList<>();
         if (isRow) {
-            if (index >= 0 && index < 3){
                 returnedMarbles = marketTray.ShiftMatrixByRow(index);
-            }
-            else {
-                //NotifyErrorMessage
-            }
         } else {
-            if (index >= 0 && index < 4){
                 returnedMarbles = marketTray.ShiftMatrixByCol(index);
-            }
-            else {
-                //NotifyErrorMessage
-            }
         }
-        notifyMarketTrayActionResponse(PlayerIndex,marketTray,returnedMarbles);
+        notifyMarketTrayActionResponse(PlayerIndex,marketTray.getMarketMatrix(),marketTray.getOustideMarble(),returnedMarbles, currentplayer.getChangeWhite1(),currentplayer.getChangeWhite2());
     }
-    public void DealWithAResource(int PlayerIndex,  boolean keepResource, MarketMarble.ColorMarble marble, int rowOfWarehouse){
+    public void DealWithResources(int PlayerIndex,  ArrayList<Boolean> keepResource, ArrayList<MarketMarble.ColorMarble> marbles, ArrayList<Integer> rowsOfWarehouse) {
         boolean NeedToCheckPopeFavorState1 = false;
         boolean NeedToCheckPopeFavorState2 = false;
         boolean NeedToCheckPopeFavorState3 = false;
+        int contIndexMarblesRows = 0;
+        boolean PopeFavorStateEvent = false;
+        int CurrPlayerAdvances = 0;
+        int OtherPlayerAdvances = 0;
         int returnedValue = 0;
         int PopeFavorStateChanged = 0;
+        ArrayList<PopeFavorState> popeFavorStates = null;
         Player currentPlayer = players.get(PlayerIndex);
-        if (keepResource && marble.equals(MarketMarble.ColorMarble.RED)){
-            returnedValue = currentPlayer.getFaithTrack().setRedPosition(1);
-            PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
-            if (PopeFavorStateChanged != 0){
-                //NotifyFaithTrackChanged And ArrayPopeFavorState
-            }
-        }
-        else if (keepResource && currentPlayer.getWarehouse().addToRow(new MarketMarble(marble),rowOfWarehouse)) {
-            notifyNewWarehouse(PlayerIndex, currentPlayer.getWarehouse());
-        }
-        else {
-                if (!IsSinglePlayerGame) {
+        for (Boolean k : keepResource) {
+            if (marbles.get(contIndexMarblesRows) == MarketMarble.ColorMarble.RED) {
+                CurrPlayerAdvances++;
+                returnedValue = currentPlayer.getFaithTrack().setRedPosition(1);
+                PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
+                if (PopeFavorStateChanged != 0) {
+                    PopeFavorStateEvent = true;
+                    popeFavorStates = getPopeFavorStates();
+                }
+            } else {
+                if (!k || !currentPlayer.getWarehouse().addToRow(new MarketMarble(marbles.get(contIndexMarblesRows)), rowsOfWarehouse.get(contIndexMarblesRows))) {
+                    OtherPlayerAdvances++;
                     for (Player otherplayer : players) {
                         if (!otherplayer.equals(currentPlayer)) {
                             returnedValue = otherplayer.getFaithTrack().setRedPosition(1);
@@ -148,128 +145,95 @@ public class Model extends ModelObservable {
                             } else if (returnedValue == 3) {
                                 NeedToCheckPopeFavorState3 = true;
                             }
+                            if (NeedToCheckPopeFavorState1 && !CheckedPopeFavorState1) {
+                                CheckPopeFavorState(1);
+                                CheckedPopeFavorState1 = true;
+                                PopeFavorStateEvent = true;
+                                popeFavorStates = getPopeFavorStates();
+                            } else if (NeedToCheckPopeFavorState2 && !CheckedPopeFavorState2) {
+                                CheckPopeFavorState(2);
+                                CheckedPopeFavorState2 = true;
+                                PopeFavorStateEvent = true;
+                                popeFavorStates = getPopeFavorStates();
+
+                            } else if (NeedToCheckPopeFavorState3 && !CheckedPopeFavorState3) {
+                                CheckPopeFavorState(2);
+                                CheckedPopeFavorState3 = true;
+                                PopeFavorStateEvent = true;
+                                popeFavorStates = getPopeFavorStates();
+                            }
                         }
-                        //NotifyInvalidAdd, OtherPlayers Advance by on
-                    }
-                    if (NeedToCheckPopeFavorState1 && !CheckedPopeFavorState1){
-                    CheckPopeFavorState(1);
-                    CheckedPopeFavorState1 = true;
-                    //NotifyFaithTrackChanged And ArrayPopeFavorState
-                    }
-                    else if (NeedToCheckPopeFavorState2 && !CheckedPopeFavorState2){
-                    CheckPopeFavorState(2);
-                    CheckedPopeFavorState2 = true;
-                    //NotifyFaithTrackChanged And ArrayPopeFavorState
-                    }
-                    else if (NeedToCheckPopeFavorState3 && !CheckedPopeFavorState3){
-                    CheckPopeFavorState(2);
-                    CheckedPopeFavorState3 = true;
-                    //NotifyFaithTrackChanged And ArrayPopeFavorState
-                    }
-                }
-                else {
-                    returnedValue = players.get(0).getFaithTrack().setBlackPosition(1);
-                    PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
-                    if (PopeFavorStateChanged!=0){
-                        //NotifyFaithTrackChanged And PopeFavorState, Black Advance by one
                     }
                 }
             }
+            contIndexMarblesRows++;
         }
+        notifyDealWithResourceFromMarketTrayresponse(PlayerIndex, currentPlayer.getWarehouse(), CurrPlayerAdvances, OtherPlayerAdvances, PopeFavorStateEvent, popeFavorStates);
+    }
 
     public void WantToBuyCard(int PlayerIndex, int row, int col, int slot){
+        String phrasetoShow = "";
+        ArrayList<CostOfCard> cost = new ArrayList<>();
+        ArrayList<Boolean> problems = new ArrayList<>();
         if (developmentGrid.getSingleCell(row,col)!= null && row>=0 && row <=2 && col>=0 && col <= 3 && developmentGrid.getSingleCell(row,col).getTopCard()!= null){
-            ArrayList<CostOfCard> cost = developmentGrid.getSingleCell(row, col).getTopCard().getCost();
+            cost = developmentGrid.getSingleCell(row, col).getTopCard().getCost();
             if (slot < 0 || slot > 3 || !players.get(PlayerIndex).getSlotsBoard().getSlots().get(slot).CanBeAddedInTheSlot(developmentGrid.getSingleCell(row,col).getTopCard())){
-                //NotifyCan'tBeAddedIntThatSlot
+                phrasetoShow = "The card can't be added in the slot that you selected";
             }
             else {
                 if (players.get(PlayerIndex).CheckResourcesForAcquisition(cost)) {
-                    notifyTextMessage(PlayerIndex, "Card available and purchasable");
+                    phrasetoShow = "You have the resources to add the card and you can add it in the slot that you selected";
                 } else {
-                    //NotifyDoesn't have resources to buyCard
+                    phrasetoShow = "You don't have enough resources to buy this card";
                 }
             }
         }
         else{
-            //Notify Card Doesn't Exist
+            phrasetoShow = "The card selected doesn't exist";
+            cost = null;
         }
+        notifyWantToBuyCardResponse(PlayerIndex, phrasetoShow, slot, cost);
+        System.out.println("Arriva nel model");
+
+
     }
     public void BuyCard(int PlayerIndex, ArrayList<CostOfCard> resourcesFromStrogbox, ArrayList<CostOfCard> resourcesFromWarehouse, ArrayList<Integer> rows, int row, int col, int slot ) {
         int contRow = 0;
-        boolean notEnoughResources = false;
         Player currentPlayer = players.get(PlayerIndex);
-        for (CostOfCard resourceFromStrongbox : resourcesFromStrogbox) {
-            if (currentPlayer.getStrongbox().CountResources(resourceFromStrongbox.getCostColor()) < resourceFromStrongbox.getCostNumber()) {
-                notEnoughResources = true;
-            }
-        }
-        if (notEnoughResources) {
-            //NotifyNotEnoughResourcesFromStrongbox
-        } else {
-            for (CostOfCard resourceFromWarehouse : resourcesFromWarehouse) {
-                if (currentPlayer.getWarehouse().CheckRow(rows.get(contRow), resourceFromWarehouse.getCostNumber(), resourceFromWarehouse.getCostColor())) {
-                    notEnoughResources = true;
-                }
-                contRow++;
-            }
-            if (notEnoughResources) {
-                //NotifyNotEnoughResourcesFromRowsSelected
-            }
-        }
-        if (!notEnoughResources) {
-            contRow = 0;
-            for (CostOfCard resourceFromStrongbox2 : resourcesFromStrogbox) {
-                currentPlayer.getStrongbox().RemoveResourcesFromStrongbox(resourceFromStrongbox2.getCostNumber(), resourceFromStrongbox2.getCostColor());
-            }
-            for (CostOfCard resourceFromWarehouse2 : resourcesFromWarehouse) {
-                currentPlayer.getWarehouse().getRow(contRow).removeMarble(resourceFromWarehouse2.getCostColor(), resourceFromWarehouse2.getCostNumber());
-                contRow++;
-            }
-            DevelopmentCard card = developmentGrid.remove(row, col);
-            currentPlayer.buyCard(card,slot);
-            notifyCardBuyedResponse(PlayerIndex, currentPlayer.getWarehouse(), currentPlayer.getStrongbox(), currentPlayer.getSlotsBoard(),currentPlayer.getProductionsAvailable(), col, row);
 
-            //NotifyNewStrongboxNewWarehouseNewDevelopmentGridNewSlotsBoardNewProductionsAvailable
+        contRow = 0;
+        for (CostOfCard resourceFromStrongbox2 : resourcesFromStrogbox) {
+            currentPlayer.getStrongbox().RemoveResourcesFromStrongbox(resourceFromStrongbox2.getCostNumber(), resourceFromStrongbox2.getCostColor());
         }
+        for (CostOfCard resourceFromWarehouse2 : resourcesFromWarehouse) {
+            currentPlayer.getWarehouse().getRow(contRow).removeMarble(resourceFromWarehouse2.getCostColor(), resourceFromWarehouse2.getCostNumber());
+            contRow++;
+        }
+        DevelopmentCard card = developmentGrid.remove(row, col);
+        currentPlayer.buyCard(card,slot);
+
+        notifyCardBuyedResponse(PlayerIndex, developmentGrid.getTopcards(), currentPlayer.getWarehouse(), currentPlayer.getStrongbox(), card,currentPlayer.getProductionsAvailable(), slot);
     }
+
     public void DiscardLeaderCardAction(int PlayerIndex, int NCard) {
         int returnedvalue = 0;
         int PopeFavorStateChanged = 0;
-        boolean NeedToCheckPopeFavorState1 = false;
-        boolean NeedToCheckPopeFavorState2 = false;
-        boolean NeedToCheckPopeFavorState3 = false;
+        boolean popeFavorEvent = false;
         Player currentplayer = players.get(PlayerIndex);
-        if (currentplayer.getLeaderCard(NCard) != null && !currentplayer.getLeaderCard(NCard).isActivate()) {
+        if (currentplayer.getLeaderCards().size() > NCard && !currentplayer.getLeaderCard(NCard).isActivate() ){
             currentplayer.DiscardLeaderCard(NCard);
             if (!IsSinglePlayerGame) {
-                for (Player otherplayer : players) {
-                    if (!otherplayer.equals(currentplayer)) {
-                         returnedvalue = otherplayer.getFaithTrack().setRedPosition(1);
-                    }
-                    if (returnedvalue == 1){
-                        NeedToCheckPopeFavorState1 = true;
-                    }
-                    else if (returnedvalue == 2){
-                        NeedToCheckPopeFavorState2 = true;
-                    }
-                    else if (returnedvalue == 3){
-                        NeedToCheckPopeFavorState3 = true;
-                    }
+                returnedvalue = currentplayer.getFaithTrack().setRedPosition(1);
+                PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedvalue);
+                if (PopeFavorStateChanged != 0) {
+                    popeFavorEvent = true;
                 }
-                if (NeedToCheckPopeFavorState1 && !CheckedPopeFavorState1){
-                    CheckPopeFavorState(1);
-                    CheckedPopeFavorState1 = true;
+                if (popeFavorEvent){
+                    notifyDiscardLeaderCardActionResponse(PlayerIndex,NCard,true, true, getPopeFavorStates());
                 }
-                else if (NeedToCheckPopeFavorState2 && !CheckedPopeFavorState2){
-                    CheckPopeFavorState(2);
-                    CheckedPopeFavorState2 = true;
+                else {
+                    notifyDiscardLeaderCardActionResponse(PlayerIndex,NCard,false, true, null);
                 }
-                else if (NeedToCheckPopeFavorState3 && !CheckedPopeFavorState3){
-                    CheckPopeFavorState(2);
-                    CheckedPopeFavorState3 = true;
-                }
-                //Notify LeaderCardsAndFaithTracks
             }
             else {
                 returnedvalue = players.get(0).getFaithTrack().setBlackPosition(1);
@@ -280,7 +244,7 @@ public class Model extends ModelObservable {
             }
         }
         else{
-            //Notify Can't DiscardThisLeaderCard
+            notifyDiscardLeaderCardActionResponse(PlayerIndex,NCard,false, false, null);
         }
     }
 
@@ -290,10 +254,10 @@ public class Model extends ModelObservable {
             if (currentplayer.getLeaderCard(NCard).canBeActivated(currentplayer)){
                 currentplayer.getLeaderCard(NCard).setActivate(true);
                 currentplayer.getLeaderCard(NCard).effect(currentplayer);
-                //Notify
+                notifyActivateLeaderCardActionResponse(PlayerIndex,NCard,true);
             }
             else {
-                //NotifyCan'tBeActivated
+                notifyActivateLeaderCardActionResponse(PlayerIndex,NCard,false);
             }
         }
 
@@ -302,28 +266,21 @@ public class Model extends ModelObservable {
 
     public void MoveResources(int PlayerIndex, int row1, int row2) {
         Player currentplayer = players.get(PlayerIndex);
+        boolean ok = false;
         if (currentplayer.getWarehouse().MoveResource(row1, row2)) {
-            notifyNewWarehouse(PlayerIndex, currentplayer.getWarehouse());
-        } else {
-            //NotifyNotValidMove
+            ok = true;
         }
+        notifyMoveResourcesResponse(PlayerIndex,ok,currentplayer.getWarehouse());
     }
     public void CanProduce(int PlayerIndex, ArrayList<Integer> productionsIndexes, ArrayList<CostOfCard> productionBasicCost){
         Player currentplayer = players.get(PlayerIndex);
-        boolean allProductionAvailable = true;
+        boolean ok = false;
+
         int[] resources = new int[4]; // 0 Blue, 1 Grey, 2 Purple, 3 Yellow
         resources[0] = 0;
         resources[1] = 0;
         resources[2] = 0;
         resources[3] = 0;
-        for (int index : productionsIndexes){
-            if(index > 5 || !currentplayer.ProductionIsAvailable(index) ){
-                allProductionAvailable = false;
-            }
-        }
-        if (!allProductionAvailable){
-            //NotifyLeProduzioniCheHaiSelezionatoNonSonoTutteDisponibili
-        }else {
 
             for (int index : productionsIndexes){
                 if (index == 0) {
@@ -364,61 +321,63 @@ public class Model extends ModelObservable {
                 }
             }
             if(currentplayer.CheckResourcesForProduce(resources)){
-                notifyTextMessage(PlayerIndex, "You can produce everything that you selected ");
-                //NotifyCanProduceEverything
+                ok = true;
             }
-            else {
-                //NotifyYouDon'tHaveEnoughResources
-            }
+            notifyWantActivateProductionResponse(PlayerIndex, productionsIndexes, ok);
+
         }
-    }
-    public void Produce(int PlayerIndex, int production, ArrayList<CostOfCard> ResourcesFromStrongbox, ArrayList<CostOfCard> ResourcesFromWarehouse, ArrayList<Integer>rows, MarketMarble.ColorMarble profit) {
+
+    public void Produce(int PlayerIndex, ArrayList<Integer> production, ArrayList<ArrayList<CostOfCard>> ResourcesFromStrongbox, ArrayList<ArrayList<CostOfCard>> ResourcesFromWarehouse, ArrayList<ArrayList<Integer>> rows, ArrayList<MarketMarble.ColorMarble> profit) {
         int returnedValue = 0;
         Player currentplayer = players.get(PlayerIndex);
         int contRow = 0;
+        int j = 0;
         int PopeFavorStateChanged = 0;
-        for (CostOfCard c : ResourcesFromStrongbox) {
-            currentplayer.getStrongbox().RemoveResourcesFromStrongbox(c.getCostNumber(), c.getCostColor());
-        }
-        for (CostOfCard resourceFromWarehouse : ResourcesFromWarehouse) {
-            currentplayer.getWarehouse().getRow(rows.get(contRow)).removeMarble(resourceFromWarehouse.getCostColor(), resourceFromWarehouse.getCostNumber());
-            contRow++;
-        }
-        if (production == 0 || production == 4 || production == 5) {
-            if (profit.equals(MarketMarble.ColorMarble.RED)) {
-                returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
-                PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
-            } else {
-                currentplayer.getStrongbox().AddResource(1, profit);
+        int redPositions = 0;
+        for (int i = 0; i < production.size(); i++) {
+
+            for (CostOfCard c : ResourcesFromStrongbox.get(i)) {
+                currentplayer.getStrongbox().RemoveResourcesFromStrongbox(c.getCostNumber(), c.getCostColor());
             }
-            if (production != 0) {
-                returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
-                PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
+            for (CostOfCard c : ResourcesFromWarehouse.get(i)) {
+                currentplayer.getWarehouse().getRow(production.get(i)).removeMarble(c.getCostColor(), c.getCostNumber());
             }
-        } else {
-            ArrayList<CostOfCard> ProdProfit = new ArrayList<>();
-            ProdProfit = currentplayer.getProductionsAvailable().get(production).getProductionProfit();
-            for (CostOfCard c : ProdProfit) {
-                if (c.getCostColor() == MarketMarble.ColorMarble.RED) {
-                    currentplayer.getFaithTrack().setRedPosition(c.getCostNumber());
-                    PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
-                } else {
-                    currentplayer.getStrongbox().AddResource(c.getCostNumber(), c.getCostColor());
+            if (production.get(i) != 0 && production.get(i) != 4 && production.get(i) != 5) {
+                for (CostOfCard c : currentplayer.getProductionsAvailable().get(production.get(i)).getProductionProfit()) {
+                    if (c.getCostColor() == MarketMarble.ColorMarble.RED) {
+                        for (int r = 0; r < c.getCostNumber(); r++) {
+                            returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
+                            PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
+                            redPositions += 1;
+                        }
+                    } else {
+                        currentplayer.getStrongbox().AddResource(c.getCostNumber(), c.getCostColor());
+                    }
                 }
+            } else {
+                if (profit.get(j) == MarketMarble.ColorMarble.RED) {
+                    returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
+                    PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
+                    redPositions += 1;
+                } else {
+                    currentplayer.getStrongbox().AddResource(1, profit.get(j));
+                }
+                if (production.get(i) != 0) {
+                    returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
+                    PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
+                    redPositions += 1;
+                }
+                j++;
             }
         }
-        for (CostOfCard c : ResourcesFromStrongbox) {
-            currentplayer.getStrongbox().RemoveResourcesFromStrongbox(c.getCostNumber(), c.getCostColor());
+        if (PopeFavorStateChanged > 0){
+            notifyProductionResponse(PlayerIndex, currentplayer.getWarehouse().getRows(),currentplayer.getStrongbox().allResources(),redPositions,true,getPopeFavorStates());
         }
-        for (CostOfCard c : ResourcesFromWarehouse) {
-            currentplayer.getWarehouse().getRow(rows.get(contRow)).removeMarble(c.getCostColor(), c.getCostNumber());
-        }
-        if (PopeFavorStateChanged != 0) {
-            //Notify FaithTrack and PopeFavorStates e il resto
-        } else {
-            //NotifySoloIl Resto
+        else {
+            notifyProductionResponse(PlayerIndex, currentplayer.getWarehouse().getRows(),currentplayer.getStrongbox().allResources(),redPositions,false,null);
         }
     }
+
     public void EndTurn(int PlayerIndex){
         int IndexNewTurn = 0;
         players.get(PlayerIndex).setYourTurn(false);
@@ -493,6 +452,16 @@ public class Model extends ModelObservable {
                 p.CheckPositionPopeFavor(PopeFavorState);
             }
         }
+    }
+    public ArrayList<PopeFavorState> getPopeFavorStates(){
+        ArrayList<PopeFavorState> popeFavorStates = new ArrayList<>();
+        for (Player p : players){
+            popeFavorStates.add(p.getFaithTrack().getPopeFavor1());
+            popeFavorStates.add(p.getFaithTrack().getPopeFavor2());
+            popeFavorStates.add(p.getFaithTrack().getPopeFavor3());
+        }
+        return popeFavorStates;
+
     }
     public int CheckPopeFavorStateActivatedByCurrentPlayer(int PopeFavorState){
         if ((PopeFavorState == 1 && !CheckedPopeFavorState1) || (PopeFavorState == 2 && !CheckedPopeFavorState2) || (PopeFavorState == 3 && !CheckedPopeFavorState3) ){

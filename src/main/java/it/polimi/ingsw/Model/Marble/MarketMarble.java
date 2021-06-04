@@ -20,6 +20,9 @@ public class MarketMarble implements Serializable {
         WHITE,
         UNKNOWN
     }
+    public String toString(){
+        return getColorMarble().toString().substring(0,1);
+    }
 
 
     public MarketMarble.ColorMarble getColorMarble() {

@@ -8,7 +8,6 @@ public class BuyCardMessage extends Message{
     private int Cellrow;
     private int Cellcol;
     private int slot;
-
     private ArrayList<CostOfCard> ResourcesFromStrongbox;
     private ArrayList<CostOfCard> ResourcesFromWarehouse;
     private ArrayList<Integer> rows;
@@ -66,4 +65,5 @@ public class BuyCardMessage extends Message{
     public void setSlot(int slot) {
         this.slot = slot;
     }
+
 }

@@ -17,10 +17,7 @@ public class CostOfCard implements Serializable {
 
     @Override
     public String toString() {
-        return "CostOfCard{" +
-                "costNumber=" + getCostNumber() + "" +
-                ",costColor=" + getCostColor()+
-                '}';
+        return getCostNumber() + "" + getCostColor();
     }
 
     public int getCostNumber() {

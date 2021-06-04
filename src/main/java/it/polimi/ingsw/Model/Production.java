@@ -30,18 +30,25 @@ public class Production implements Serializable {
         ProductionProfit = productionProfit;
     }
 
-    public void Produce(ArrayList<CostOfCard> ResourcesFromWarehouse, ArrayList<Integer> Rows, ArrayList<CostOfCard> ResourcesFromStrongbox, Player player) {
-        // Le resources from Warehouse e from Strongbox me le deve passare il Player
-        // chiede quanti da Strongbox e quanti da Warehouse
-        for (CostOfCard costOfCard : ProductionProfit){
-            if (costOfCard.getCostColor() != MarketMarble.ColorMarble.RED) {
-                player.getStrongbox().AddResource(costOfCard.getCostNumber(), costOfCard.getCostColor());
-            }
-            else {
-                player.getFaithTrack().setRedPosition(costOfCard.getCostNumber());
-            }
+    public StringBuilder printProduction(){
+        StringBuilder string = new StringBuilder();
+        string.append("You pay:\n");
+        for (CostOfCard c : ProductionCost){
+            string.append(c.getCostNumber());
+            string.append(" ");
+            string.append(c.getCostColor());
+            string.append(" ");
         }
-
+        string.append("\n");
+        string.append("You get:\n");
+        for (CostOfCard c : ProductionProfit){
+            string.append(c.getCostNumber());
+            string.append(" ");
+            string.append(c.getCostColor());
+            string.append(" ");
+        }
+        return string;
     }
+
 
 }

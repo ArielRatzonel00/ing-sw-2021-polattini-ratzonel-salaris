@@ -13,13 +13,13 @@ public interface ControllerObserver<T>{
 
     void updateMarketTrayAction(MarketTrayActionMessage marketTrayActionMessage);
 
-    void updateDealWithAResourceFromMarketTray(DealWithAResourceFromMarketTrayMessage dealWithAResourceFromMarketTrayMessage);
+    void updateDealWithAResourceFromMarketTray(DealWithResourcesFromMarketTrayMessage dealWithResourcesFromMarketTrayMessage);
 
     void updateMoveResources(MoveResourcesMessage moveResourcesMessage);
 
-    void updateDiscardLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage);
+    void updateDiscardLeaderCardAction(DiscardLeaderCardActionMessage discardLeaderCardActionMessage);
 
-    void updateActivateLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage);
+    void updateActivateLeaderCardAction(ActivateLeaderCardActionMessage activateLeaderCardActionMessage);
     void updateBuyCard(BuyCardMessage buyCardMessage);
     void updateProduce(ProduceMessage produceMessage);
     void updateEndOfTurn(EndOfTurnMessage endOfTurnMessage);

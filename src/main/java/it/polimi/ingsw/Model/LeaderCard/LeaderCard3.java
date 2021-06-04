@@ -39,9 +39,9 @@ public class LeaderCard3 extends LeaderCard{ //extra warehouse
 
     @Override
     public String StampaCarta() {
-        return "POTERE: Aggiunge un extra warehouse (di 2 spazi) di colore " + getColorOfExtraWarehouse() + "\n" +
-                "NECESSITA: 5 risorse di colore " + getColorCost() +  "\n" +
-                "VICTORY POINTS: " + getVictoryPoints();
+        return "Power: extra warehouse (2 space) " + getColorOfExtraWarehouse() + "\n" +
+                "Requirements: 5 resources" + getColorCost() +  "\n" +
+                "VP: " + getVictoryPoints();
     }
 
     public ArrayList<MarketMarble> getExtraRow() {

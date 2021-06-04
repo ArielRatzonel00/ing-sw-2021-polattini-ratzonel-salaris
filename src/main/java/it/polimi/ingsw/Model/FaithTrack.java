@@ -4,11 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class FaithTrack  implements Serializable {
-    public enum PopeFavorState{
-        Activate,
-        Unabled,
-        Deleted
-    }
     private ArrayList<Player> OtherPlayers = new ArrayList<>();
     private int redPosition = 0;
     private int blackPosition = 0;

@@ -45,6 +45,7 @@ public class GridCell implements Serializable {
         }
     } // Method that removes the bottom card of the cell. Returns true if it exists and false if not. This method is used by the marker that remove cards
 
+
    /* public void RemoveTopCard() {
         if (cell.size() > 0) { //THROWS EXCEPTION EMPTYCELLEXCEPTION
             cell.remove(cell.size() - 1);

@@ -1,14 +1,11 @@
 package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
-import it.polimi.ingsw.Model.LeaderCard.LeaderCard1;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Network.Messages.*;
 import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.Observer.ControllerObserver;
 import it.polimi.ingsw.Observer.Observable;
 
-import java.io.IOException;
 import java.util.*;
 
 
@@ -64,8 +61,8 @@ public class GameManager extends Observable<Model> implements ControllerObserver
         game.MarketTrayAction(marketTrayActionMessage.getPlayerIndex(), marketTrayActionMessage.isRow(), marketTrayActionMessage.getIndex());
     }
 
-    public void updateDealWithAResourceFromMarketTray(DealWithAResourceFromMarketTrayMessage dealWithAResourceFromMarketTrayMessage) {
-        game.DealWithAResource(dealWithAResourceFromMarketTrayMessage.getPlayerIndex(), dealWithAResourceFromMarketTrayMessage.isKeep(), dealWithAResourceFromMarketTrayMessage.getMarble(), dealWithAResourceFromMarketTrayMessage.getRowOfTheWarehouse());
+    public void updateDealWithAResourceFromMarketTray(DealWithResourcesFromMarketTrayMessage dealWithResourcesFromMarketTrayMessage) {
+        game.DealWithResources(dealWithResourcesFromMarketTrayMessage.getPlayerIndex(), dealWithResourcesFromMarketTrayMessage.getKeeps(), dealWithResourcesFromMarketTrayMessage.getMarbles(), dealWithResourcesFromMarketTrayMessage.getRows());
     }
 
     public void updateMoveResources(MoveResourcesMessage moveResourcesMessage) {
@@ -77,16 +74,16 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     }
 
     public void updateProduce(ProduceMessage produceMessage) {
-        int i = produceMessage.getProduction();
-        game.Produce(produceMessage.getPlayerIndex(), i, produceMessage.getResourcesFromStrongbox(), produceMessage.getResourcesFromWarehouse(), produceMessage.getRows(), produceMessage.getProductionProfit());
+        //int i = produceMessage.getProduction();
+        //game.Produce(produceMessage.getPlayerIndex(), i, produceMessage.getResourcesFromStrongbox(), produceMessage.getResourcesFromWarehouse(), produceMessage.getRows(), produceMessage.getProductionProfit());
         }
 
-    public void updateDiscardLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage) {
-        game.DiscardLeaderCardAction(leaderCardActionMessage.getPlayerIndex(), leaderCardActionMessage.getNLeaderCard());
+    public void updateDiscardLeaderCardAction(DiscardLeaderCardActionMessage discardLeaderCardActionMessage) {
+        game.DiscardLeaderCardAction(discardLeaderCardActionMessage.getPlayerIndex(), discardLeaderCardActionMessage.getLeaderCardIndex());
     }
 
-    public void updateActivateLeaderCardAction(LeaderCardActionMessage leaderCardActionMessage) {
-        game.ActivateLeaderCardAction(leaderCardActionMessage.getPlayerIndex(), leaderCardActionMessage.getNLeaderCard());
+    public void updateActivateLeaderCardAction(ActivateLeaderCardActionMessage activateLeaderCardActionMessage) {
+        game.ActivateLeaderCardAction(activateLeaderCardActionMessage.getPlayerIndex(), activateLeaderCardActionMessage.getLeaderCardIndex());
     }
 
     public void updateEndOfTurn(EndOfTurnMessage endOfTurnMessage) {

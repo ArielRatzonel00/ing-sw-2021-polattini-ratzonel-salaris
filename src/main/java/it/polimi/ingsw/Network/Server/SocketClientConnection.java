@@ -10,9 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class SocketClientConnection extends Messanger implements Runnable, Observer{
     private Socket socket;
@@ -154,7 +152,33 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
                 System.out.println("Ricevuto InitialResources");
                 virtualView.notifyObserver(obs->obs.updateInitialResource((InitialResourcesMessage)message));
                 break;
-
+            case "MarketTrayActionMessage":
+                virtualView.notifyObserver(obs->obs.updateMarketTrayAction((MarketTrayActionMessage) message));
+                break;
+            case "DealWithResourcesFromMarketTrayMessage":
+                virtualView.notifyObserver(obs->obs.updateDealWithAResourceFromMarketTray((DealWithResourcesFromMarketTrayMessage) message));
+            break;
+            case "WantToBuyCardMessage":
+                virtualView.notifyObserver(obs->obs.updateWantToBuyCard((WantToBuyCardMessage) message));
+                break;
+            case "MoveResourcesMessage":
+                virtualView.notifyObserver(obs->obs.updateMoveResources((MoveResourcesMessage) message));
+                break;
+            case "WantActivateProductionMessage":
+                virtualView.notifyObserver(obs->obs.updateWantActivateProduction((WantActivateProductionMessage) message));
+                break;
+            case "EndOfTurnMessage":
+                virtualView.notifyObserver(obs->obs.updateEndOfTurn((EndOfTurnMessage) message));
+                break;
+            case "ActivateLeaderCardActionMessage":
+                virtualView.notifyObserver(obs->obs.updateActivateLeaderCardAction((ActivateLeaderCardActionMessage) message));
+                break;
+            case "DiscardLeaderCardActionMessage":
+                virtualView.notifyObserver(obs->obs.updateDiscardLeaderCardAction((DiscardLeaderCardActionMessage) message));
+                break;
+            case "BuyCardMessage":
+                virtualView.notifyObserver(obs->obs.updateBuyCard((BuyCardMessage) message));
+                break;
         }
     }
 

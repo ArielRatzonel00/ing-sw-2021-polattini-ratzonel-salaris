@@ -50,4 +50,39 @@ public class ClientModel {
     public void setDevGrid(ArrayList<DevelopmentCard> devGrid) {
         this.devGrid = devGrid;
     }
+
+    public void printDevGrid(int level){
+        switch (level){
+            case 1:
+                for (int i = 0; i< 4;i++) {
+                    if (devGrid.get(i) != null) {
+                        System.out.println("[" + i + "]");
+                        devGrid.get(i).printCard();
+                    } else {
+                        System.out.println("no card");
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 4; i < 8; i++){
+                    if (devGrid.get(i) != null) {
+                        System.out.println(i + "\n");
+                        devGrid.get(i).printCard();
+                    } else {
+                        System.out.println("no card");
+                    }
+                }
+                break;
+            case 3:
+                for (int i = 8; i < 12; i++){
+                    if (devGrid.get(i) != null) {
+                        System.out.println(i + "\n");
+                        devGrid.get(i).printCard();
+                    } else {
+                        System.out.println("no card");
+                    }
+                }
+                break;
+        }
+    }
 }

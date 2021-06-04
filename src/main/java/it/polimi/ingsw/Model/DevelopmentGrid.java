@@ -10,6 +10,7 @@ public class DevelopmentGrid implements Serializable {
     private GridCell[][] CardMatrix = new GridCell[3][4]; // Matrice che contiene tutte le developmentCard
     
     public DevelopmentGrid(Deck deck) {
+
         CardMatrix[0][0] = deck.getCell00();
         CardMatrix[0][1] = deck.getCell01();
         CardMatrix[0][2] = deck.getCell02();
@@ -27,7 +28,7 @@ public class DevelopmentGrid implements Serializable {
     public ArrayList<DevelopmentCard> getTopcards(){
         ArrayList<DevelopmentCard> topcards = new ArrayList<>();
         for (int i = 0; i<3; i++){
-            for (int j=0;j<2;j++){
+            for (int j=0;j<4;j++){
                 topcards.add(CardMatrix[i][j].getTopCard());
             }
         }

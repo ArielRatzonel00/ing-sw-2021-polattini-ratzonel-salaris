@@ -1,17 +1,52 @@
 package it.polimi.ingsw.Network.Messages;
 
-import it.polimi.ingsw.Model.Production;
-import it.polimi.ingsw.Model.SlotsBoard;
-import it.polimi.ingsw.Model.Strongbox;
-import it.polimi.ingsw.Model.Warehouse;
+import it.polimi.ingsw.Model.*;
 
 import java.util.ArrayList;
 
 public class CardBuyedResponse extends Message{
-    Warehouse newwarehouse;
-    Strongbox newstrongbox;
-    SlotsBoard slotsBoard;
-    ArrayList<Production> newproductionAvailables;
+    private ArrayList<WarehouseRow> newwarehouse;
+    private ArrayList<Integer> newstrongbox;
+    private ArrayList<DevelopmentCard> newDevGrid;
+    private DevelopmentCard card;
+    private ArrayList<Production> newproductionAvailables;
+    private int slot;
+    public CardBuyedResponse() {
+        this.typeOfMessage = "CardBuyedResponse";
+    }
+
+
+    public ArrayList<DevelopmentCard> getNewDevGrid() {
+        return newDevGrid;
+    }
+
+    public void setNewDevGrid(ArrayList<DevelopmentCard> newDevGrid) {
+        this.newDevGrid = newDevGrid;
+    }
+
+    public ArrayList<WarehouseRow> getNewwarehouse() {
+        return newwarehouse;
+    }
+
+    public void setNewwarehouse(ArrayList<WarehouseRow> newwarehouse) {
+        this.newwarehouse = newwarehouse;
+    }
+
+    public ArrayList<Integer> getNewstrongbox() {
+        return newstrongbox;
+    }
+
+    public void setNewstrongbox(ArrayList<Integer> newstrongbox) {
+        this.newstrongbox = newstrongbox;
+    }
+
+    public DevelopmentCard getCard() {
+        return card;
+    }
+
+    public void setCard(DevelopmentCard card) {
+        this.card = card;
+    }
 
     public ArrayList<Production> getNewproductionAvailables() {
         return newproductionAvailables;
@@ -20,50 +55,11 @@ public class CardBuyedResponse extends Message{
     public void setNewproductionAvailables(ArrayList<Production> newproductionAvailables) {
         this.newproductionAvailables = newproductionAvailables;
     }
-
-    int col;
-    int row;
-    public CardBuyedResponse() {
-        this.typeOfMessage = "CardBuyedResponse";
+    public int getSlot() {
+        return slot;
     }
 
-    public Warehouse getNewwarehouse() {
-        return newwarehouse;
-    }
-
-    public void setNewwarehouse(Warehouse newwarehouse) {
-        this.newwarehouse = newwarehouse;
-    }
-
-    public Strongbox getNewstrongbox() {
-        return newstrongbox;
-    }
-
-    public void setNewstrongbox(Strongbox newstrongbox) {
-        this.newstrongbox = newstrongbox;
-    }
-
-    public SlotsBoard getSlotsBoard() {
-        return slotsBoard;
-    }
-
-    public void setSlotsBoard(SlotsBoard slotsBoard) {
-        this.slotsBoard = slotsBoard;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
+    public void setSlot(int slot) {
+        this.slot = slot;
     }
 }

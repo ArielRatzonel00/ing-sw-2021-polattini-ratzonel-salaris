@@ -44,9 +44,9 @@ public class LeaderCard4 extends LeaderCard { //converte in punto fede e materia
     }
     @Override
     public String StampaCarta() {
-        return "POTERE: Aggiunge produzione da" + getProduction().getProductionCost().get(0).getCostNumber() + getProduction().getProductionCost().get(0).getCostColor() + " ad un punto fede e una risorsa a tua scelta\n " +
-                "NECESSITA: DevCard di livello 2 di colore" + getCostCardLevelTwo() + "\n" +
-                "VICTORY POINTS: " + getVictoryPoints();
+        return "Power: Extra production pay: " + getProduction().getProductionCost().get(0).getCostNumber() + getProduction().getProductionCost().get(0).getCostColor() + " get 1 Faithpoint and 1 resource of your choice\n " +
+                "Requirements: level 2 DevCard " + getCostCardLevelTwo() + "\n" +
+                "VP: " + getVictoryPoints();
     }
     @Override
     public int getType() {

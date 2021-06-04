@@ -1,9 +1,9 @@
 package it.polimi.ingsw.Network.Messages;
 
-public class EndTurnMessage extends Message{
+public class EndTurnResponse extends Message{
     int IndexNewTurn;
-    public EndTurnMessage() {
-        this.typeOfMessage = "EndTurn";
+    public EndTurnResponse() {
+        this.typeOfMessage = "EndTurnResponse";
     }
 
     public int getIndexNewTurn() {

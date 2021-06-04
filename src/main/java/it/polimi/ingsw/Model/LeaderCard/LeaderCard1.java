@@ -28,9 +28,9 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
     }
     @Override
     public String StampaCarta(){
-        return  "POTERE: Trasforma palline bianche in palline : " + getNewColorMarble() + "\n" +
-                "NECESSITA: 1 devCard colore " + getColorCostOne() + ", 2 devCard colore " + getColorCostTwo() + "\n" +
-                "VICTORY POINTS: " + getVictoryPoints();
+        return  "Power: white marble →: " + getNewColorMarble() + "\n" +
+                "Requirements: 1 devCard " + getColorCostOne() + ", 2 devCard " + getColorCostTwo() + "\n" +
+                "VP: " + getVictoryPoints();
     }
 
     public DevelopmentCard.colorCard getColorCostOne() {
@@ -57,5 +57,15 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
     @Override
     public int getType() {
         return 1;
+    }
+
+    @Override
+    public void effect(Player player) {
+        if (player.getChangeWhite1()!= MarketMarble.ColorMarble.WHITE){
+            player.setChangeWhite2(getNewColorMarble());
+        }
+        else {
+            player.setChangeWhite1(getNewColorMarble());
+        }
     }
 }

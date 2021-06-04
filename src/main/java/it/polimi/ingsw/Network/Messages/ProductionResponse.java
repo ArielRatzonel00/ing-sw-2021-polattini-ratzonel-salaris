@@ -1,38 +1,56 @@
 package it.polimi.ingsw.Network.Messages;
 
-import it.polimi.ingsw.Model.FaithTrack;
-import it.polimi.ingsw.Model.Strongbox;
-import it.polimi.ingsw.Model.Warehouse;
+import it.polimi.ingsw.Model.*;
+
+import java.util.ArrayList;
 
 public class ProductionResponse extends Message{
     public ProductionResponse() {
         this.typeOfMessage = "ProductionResponse";
     }
-    Warehouse newwarehouse;
-    Strongbox newstrongbox;
-    FaithTrack faithTrack;
+    private ArrayList<WarehouseRow> newwarehouse;
+    private ArrayList<Integer> newstrongbox;
+    private int faithTrackpositions;
+    private boolean PopeFavoreStateEvent = false;
+    private ArrayList<PopeFavorState> popeFavorStates;
 
-    public Warehouse getNewwarehouse() {
+    public ArrayList<WarehouseRow> getNewwarehouse() {
         return newwarehouse;
     }
 
-    public void setNewwarehouse(Warehouse newwarehouse) {
+    public void setNewwarehouse(ArrayList<WarehouseRow> newwarehouse) {
         this.newwarehouse = newwarehouse;
     }
 
-    public Strongbox getNewstrongbox() {
+    public ArrayList<PopeFavorState> getPopeFavorStates() {
+        return popeFavorStates;
+    }
+
+    public void setPopeFavorStates(ArrayList<PopeFavorState> popeFavorStates) {
+        this.popeFavorStates = popeFavorStates;
+    }
+
+    public ArrayList<Integer> getNewstrongbox() {
         return newstrongbox;
     }
 
-    public void setNewstrongbox(Strongbox newstrongbox) {
+    public void setNewstrongbox(ArrayList<Integer> newstrongbox) {
         this.newstrongbox = newstrongbox;
     }
 
-    public FaithTrack getFaithTrack() {
-        return faithTrack;
+    public int getFaithTrackpositions() {
+        return faithTrackpositions;
     }
 
-    public void setFaithTrack(FaithTrack faithTrack) {
-        this.faithTrack = faithTrack;
+    public void setFaithTrackpositions(int faithTrackpositions) {
+        this.faithTrackpositions = faithTrackpositions;
+    }
+
+    public boolean isPopeFavoreStateEvent() {
+        return PopeFavoreStateEvent;
+    }
+
+    public void setPopeFavoreStateEvent(boolean popeFavoreStateEvent) {
+        PopeFavoreStateEvent = popeFavoreStateEvent;
     }
 }

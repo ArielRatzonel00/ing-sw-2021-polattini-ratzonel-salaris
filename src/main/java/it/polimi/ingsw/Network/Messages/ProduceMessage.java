@@ -10,11 +10,11 @@ public class ProduceMessage extends Message{
         this.typeOfMessage = "ProduceMessage";
     }
     private int production = 0;
-    private ArrayList<CostOfCard> ResourcesFromStrongbox;
-    private ArrayList<CostOfCard> ResourcesFromWarehouse;
-    private ArrayList<CostOfCard> ProductionBasicCost;
-    private MarketMarble.ColorMarble ProductionProfit;
-    private ArrayList<Integer> rows;
+
+    private ArrayList<MarketMarble.ColorMarble> ProductionProfit = new ArrayList<>();
+    private ArrayList<ArrayList<CostOfCard>> ResourcesFromStrongbox = new ArrayList<>();;
+    private ArrayList<ArrayList<CostOfCard>> ResourcesFromWarehouse = new ArrayList<>();;
+    private ArrayList<ArrayList<Integer>> rows;
 
     public int getProduction() {
         return production;
@@ -24,43 +24,33 @@ public class ProduceMessage extends Message{
         this.production = production;
     }
 
-    public ArrayList<CostOfCard> getResourcesFromStrongbox() {
-        return ResourcesFromStrongbox;
-    }
-
     public void setResourcesFromStrongbox(ArrayList<CostOfCard> resourcesFromStrongbox) {
-        ResourcesFromStrongbox = resourcesFromStrongbox;
+        this.ResourcesFromStrongbox.add(resourcesFromStrongbox);
     }
-
-    public ArrayList<CostOfCard> getResourcesFromWarehouse() {
-        return ResourcesFromWarehouse;
-    }
-
     public void setResourcesFromWarehouse(ArrayList<CostOfCard> resourcesFromWarehouse) {
-        ResourcesFromWarehouse = resourcesFromWarehouse;
-    }
-
-    public ArrayList<CostOfCard> getProductionBasicCost() {
-        return ProductionBasicCost;
-    }
-
-    public void setProductionBasicCost(ArrayList<CostOfCard> productionBasicCost) {
-        ProductionBasicCost = productionBasicCost;
-    }
-
-    public MarketMarble.ColorMarble getProductionProfit() {
-        return ProductionProfit;
+        this.ResourcesFromWarehouse .add(resourcesFromWarehouse);
     }
 
     public void setProductionProfit(MarketMarble.ColorMarble productionProfit) {
-        ProductionProfit = productionProfit;
+        ProductionProfit.add(productionProfit);
     }
-
-    public ArrayList<Integer> getRows() {
-        return rows;
-    }
-
     public void setRows(ArrayList<Integer> rows) {
-        this.rows = rows;
+        this.rows.add(rows);
+    }
+
+    public ArrayList<MarketMarble.ColorMarble> getProductionProfit() {
+        return ProductionProfit;
+    }
+
+    public ArrayList<ArrayList<CostOfCard>> getResourcesFromStrongbox() {
+        return ResourcesFromStrongbox;
+    }
+
+    public ArrayList<ArrayList<CostOfCard>> getResourcesFromWarehouse() {
+        return ResourcesFromWarehouse;
+    }
+
+    public ArrayList<ArrayList<Integer>> getRows() {
+        return rows;
     }
 }

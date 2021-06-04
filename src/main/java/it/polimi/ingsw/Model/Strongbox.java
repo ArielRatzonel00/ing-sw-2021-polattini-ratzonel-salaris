@@ -40,6 +40,15 @@ public class Strongbox implements Serializable {
         }
     } // Method that returns the number of the resources that has the color of the parameter passed
 
+    public ArrayList<Integer> allResources(){
+        ArrayList allResources = new ArrayList();
+        allResources.add(shield);
+        allResources.add(stone);
+        allResources.add(servant);
+        allResources.add(coin);
+        return allResources;
+    }
+
     public void AddResource(int num, MarketMarble.ColorMarble ColorOfResource){
         switch (ColorOfResource) {
             case BLUE:

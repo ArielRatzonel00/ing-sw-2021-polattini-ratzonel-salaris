@@ -29,7 +29,8 @@ public class Player implements Serializable {
     private ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
     private ArrayList<CostOfCard> ProductionBasicProfit = new ArrayList<>();
     private Production BasicProduction = new Production(ProductionBasicCost, ProductionBasicProfit);
-
+    private MarketMarble.ColorMarble ChangeWhite1;
+    private MarketMarble.ColorMarble ChangeWhite2;
     public Player(String nickname) {
         this.nickname = nickname;
         this.warehouse = new Warehouse();
@@ -46,6 +47,8 @@ public class Player implements Serializable {
         this.productionsAvailable.add(BasicProduction);
         this.productionsAvailable.add(BasicProduction);
         this.productionsAvailable.add(BasicProduction);
+        this.ChangeWhite1 = MarketMarble.ColorMarble.WHITE;
+        this.ChangeWhite2 = MarketMarble.ColorMarble.WHITE;
     }
 
     public void AssignFourLeaderCard(ArrayList<LeaderCard> FourLeaderCards){
@@ -133,29 +136,29 @@ public class Player implements Serializable {
     public void CheckPositionPopeFavor(int PopeFavor){
         if (PopeFavor == 1){
             if (faithTrack.getRedPosition() >=5 ){
-                faithTrack.setPopeFavor1(FaithTrack.PopeFavorState.Activate);
+                faithTrack.setPopeFavor1(PopeFavorState.Activate);
                 faithTrack.setPoints(2);
             }
             else {
-                faithTrack.setPopeFavor1(FaithTrack.PopeFavorState.Deleted);
+                faithTrack.setPopeFavor1(PopeFavorState.Deleted);
             }
         }
         else if (PopeFavor == 2){
             if (faithTrack.getRedPosition() >= 12){
-                faithTrack.setPopeFavor2(FaithTrack.PopeFavorState.Activate);
+                faithTrack.setPopeFavor2(PopeFavorState.Activate);
                 faithTrack.setPoints(3);
             }
             else {
-                faithTrack.setPopeFavor1(FaithTrack.PopeFavorState.Deleted);
+                faithTrack.setPopeFavor1(PopeFavorState.Deleted);
             }
         }
         else {
             if (faithTrack.getRedPosition() >= 19){
-                faithTrack.setPopeFavor3(FaithTrack.PopeFavorState.Activate);
+                faithTrack.setPopeFavor3(PopeFavorState.Activate);
                 faithTrack.setPoints(4);
             }
             else {
-                faithTrack.setPopeFavor3(FaithTrack.PopeFavorState.Deleted);
+                faithTrack.setPopeFavor3(PopeFavorState.Deleted);
             }
         }
     }
@@ -253,6 +256,22 @@ public class Player implements Serializable {
     @Override
     public String toString() {
         return nickname;
+    }
+
+    public MarketMarble.ColorMarble getChangeWhite1() {
+        return ChangeWhite1;
+    }
+
+    public void setChangeWhite1(MarketMarble.ColorMarble changeWhite1) {
+        ChangeWhite1 = changeWhite1;
+    }
+
+    public MarketMarble.ColorMarble getChangeWhite2() {
+        return ChangeWhite2;
+    }
+
+    public void setChangeWhite2(MarketMarble.ColorMarble changeWhite2) {
+        ChangeWhite2 = changeWhite2;
     }
 }
 
