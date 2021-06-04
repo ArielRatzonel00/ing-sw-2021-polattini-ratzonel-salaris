@@ -11,6 +11,7 @@ import it.polimi.ingsw.Model.Strongbox;
 import it.polimi.ingsw.Model.Production;
 import it.polimi.ingsw.Model.CostOfCard;
 import it.polimi.ingsw.Model.DevCardSlot;
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard4;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,7 @@ class PlayerTest {
     private DevCardSlot SlotTest2;
     private DevCardSlot SlotTest3;
     private ArrayList<DevCardSlot> ArrayDevCardSlotTest;
+    private Production ProductionLeaderTest;
 
 
     @BeforeEach
@@ -50,7 +52,7 @@ class PlayerTest {
         warehouseTest = new Warehouse();
         strongboxTest = new Strongbox();
         slotsBoardTest = new SlotsBoard();
-        productionsTest = new ArrayList<>(4);
+        productionsTest = new ArrayList<>();
         deck = new Deck();
         leaderCards = new ArrayList<>();
         leaderCards.add(deck.getExtraRsc1());
@@ -120,29 +122,49 @@ class PlayerTest {
         gamer.getSlotsBoard().getSlots().get(2).addCard(deck.getGreen11());
         gamer.setProductionsAvailable(2);
         assertTrue(gamer.ProductionIsAvailable(3));
+        assertTrue(gamer.ProductionIsAvailable(0));
+        assertFalse(gamer.ProductionIsAvailable(1));
     }
 
     @Test
     void buyCardTest() {
+        gamer.buyCard(deck.getGreen11(),2);
+        SlotTest3.addCard(deck.getGreen11());
+        assertTrue(gamer.getSlotsBoard().getSlots().get(2).getTopCard().equals(SlotTest3.getTopCard()));
     }
 
     @Test
     void newProductionFromLeaderCardTest() {
+        gamer.newProductionFromLeaderCard(((LeaderCard4) deck.getConvertRsc1()).getProduction());
+        assertTrue(gamer.ProductionIsAvailable(4));
     }
 
     @Test
     void pointsFromLeaderCardTest() {
+        gamer.AssignFourLeaderCard(leaderCards);
+        gamer.getLeaderCard(1).setActivate(true);
+        gamer.getLeaderCard(2).setActivate(true);
+        assertEquals(10, gamer.PointsFromLeaderCard());
     }
 
     @Test
     void pointsFromWarehouseAndStrongboxTest() {
+        gamer.getStrongbox().AddResource(3, MarketMarble.ColorMarble.BLUE);
+        gamer.getStrongbox().AddResource(5, MarketMarble.ColorMarble.YELLOW);
+        gamer.getWarehouse().addToRow(Blue,0);
+        gamer.getWarehouse().addToRow(Blue,1);
+        gamer.getWarehouse().addToRow(Yellow,1);
+        assertEquals(2,gamer.PointsFromWarehouseAndStrongbox());
     }
 
     @Test
     void getTotalPointsTest() {
-    }
-
-    @Test
-    void getProductionsAvailableTest() {
+        gamer.getStrongbox().AddResource(3, MarketMarble.ColorMarble.BLUE);
+        gamer.getStrongbox().AddResource(5, MarketMarble.ColorMarble.YELLOW);
+        gamer.getWarehouse().addToRow(Blue,0);
+        gamer.getWarehouse().addToRow(Blue,1);
+        gamer.getWarehouse().addToRow(Yellow,1);
+        gamer.getFaithTrack().setRedPosition(10);
+        assertEquals(6,gamer.GetTotalPoints());
     }
 }
