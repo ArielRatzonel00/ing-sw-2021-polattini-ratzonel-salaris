@@ -5,11 +5,17 @@ import it.polimi.ingsw.Model.Model;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SinglePlayerGame;
 
-public abstract class Marker {
+import java.io.Serializable;
+
+public abstract class Marker implements Serializable {
     public int MarkerEffect(Model game){
         return 0;
     }
 
+    public String getType()
+    {
+        return "";
+    }
 
 }
 

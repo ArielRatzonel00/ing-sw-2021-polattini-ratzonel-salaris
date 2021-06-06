@@ -3,6 +3,7 @@ package it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Model.Markers.Marker;
 import it.polimi.ingsw.Network.Messages.*;
 import it.polimi.ingsw.Network.Server.VirtualView;
 
@@ -17,13 +18,15 @@ public class ModelObservable extends Observable<VirtualView> {
             observers.add(observer);
         }
     }
-    public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards, ArrayList<DevelopmentCard> developmentGrid, MarketTray marketTray, String nickname){
+    public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards, ArrayList<DevelopmentCard> developmentGrid, MarketTray marketTray, String nickname, boolean isSinglePlayerGame, MarkerStack markers){
 
         FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse(leaderCards);
         fourLeaderCardResponse.setNickname(nickname);
         fourLeaderCardResponse.setTopCards(developmentGrid);
         fourLeaderCardResponse.setMarketTray(marketTray);
         fourLeaderCardResponse.setPlayerIndex(PlayerIndex);
+        fourLeaderCardResponse.setSinglePlayer(isSinglePlayerGame);
+        fourLeaderCardResponse.setMarkers(markers.getMarkers());
         System.out.println("le crea e le invia all'indice: "+fourLeaderCardResponse.getPlayerIndex());
 
         //fourLeaderCardResponse.setLeaderCards(leaderCards);
@@ -85,12 +88,14 @@ public class ModelObservable extends Observable<VirtualView> {
             obs.updateMarketTrayActionResponse(marketTrayActionResponse);
         }
     }
-    public void notifyWantToBuyCardResponse(int PlayerIndex, String phraseToShow, int slot, ArrayList<CostOfCard> cost){
+    public void notifyWantToBuyCardResponse(int PlayerIndex, String phraseToShow,int row,int col, int slot, ArrayList<CostOfCard> cost){
         WantToBuyCardResponse wantToBuyCardResponse = new WantToBuyCardResponse();
         wantToBuyCardResponse.setPhrasetoShow(phraseToShow);
         wantToBuyCardResponse.setPlayerIndex(PlayerIndex);
         wantToBuyCardResponse.setCost(cost);
         wantToBuyCardResponse.setSlot(slot);
+        wantToBuyCardResponse.setCellRow(row);
+        wantToBuyCardResponse.setCellCol(col);
         for (VirtualView obs:observers
         ) {
             obs.updateWantToBuyCardResponse(wantToBuyCardResponse);
@@ -122,9 +127,10 @@ public class ModelObservable extends Observable<VirtualView> {
             obs.updateCardBuyedResponse(cardBuyedResponse);
         }
     }
-    public void notifyWantActivateProductionResponse(int PlayerIndex, ArrayList<Integer> productions, boolean ok){
+    public void notifyWantActivateProductionResponse(int PlayerIndex, ArrayList<CostOfCard> productionBasicCost, ArrayList<Integer> productions, boolean ok){
         WantActivateProductionResponse wantActivateProductionResponse = new WantActivateProductionResponse();
         wantActivateProductionResponse.setPlayerIndex(PlayerIndex);
+        wantActivateProductionResponse.setBasicProductionCost(productionBasicCost);
         wantActivateProductionResponse.setProductions(productions);
         wantActivateProductionResponse.setOk(ok);
         for (VirtualView obs:observers
@@ -146,8 +152,13 @@ public class ModelObservable extends Observable<VirtualView> {
         }
 
     }
-    public void notifyNewTurn(int NewTurnPlayerIndex){
+    public void notifyNewTurn(int NewTurnPlayerIndex, int blackPosition, boolean popeFavorStateChanged, ArrayList<PopeFavorState> popeFavorStates, Marker topMarker, ArrayList<DevelopmentCard> newDevGrid){
         EndTurnResponse endTurnResponse = new EndTurnResponse();
+        endTurnResponse.setBlackPosition(blackPosition);
+        endTurnResponse.setPopeFavorChanged(popeFavorStateChanged);
+        endTurnResponse.setTopMarker(topMarker);
+        endTurnResponse.setNewDevGrid(newDevGrid);
+        endTurnResponse.setPopeFavorStates(popeFavorStates);
         endTurnResponse.setIndexNewTurn(NewTurnPlayerIndex);
         for (VirtualView obs:observers
         ) {

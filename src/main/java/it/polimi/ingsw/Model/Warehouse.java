@@ -62,7 +62,8 @@ public class Warehouse implements Serializable {
             }
         }
         if(rows.get(rowNumber1).getMarbles().size()<=rows.get(rowNumber2).getSpace() && rows.get(rowNumber2).getMarbles().size()<=rows.get(rowNumber1).getSpace()){
-            WarehouseRow temp = rows.get(rowNumber2);
+            WarehouseRow temp = new WarehouseRow(rows.get(rowNumber2).getSpace());
+            temp.setMarbles(rows.get(rowNumber2).getMarbles());
             rows.get(rowNumber2).ChangeMarbles(rows.get(rowNumber1).getMarbles(),rows.get(rowNumber1).getColor());
             rows.get(rowNumber1).ChangeMarbles(temp.getMarbles(), temp.getColor());
 

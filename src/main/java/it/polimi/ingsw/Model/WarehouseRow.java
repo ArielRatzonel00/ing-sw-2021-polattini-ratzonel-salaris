@@ -15,6 +15,9 @@ public class WarehouseRow implements Serializable {
         this.space = space;
     } // A warehouse row is created by passing the number of maximum Marbles accepted
 
+    public void setMarbles(ArrayList<MarketMarble> marbles) {
+        this.marbles = marbles;
+    }
 
     public boolean addMarble(MarketMarble MarketMarble){
         if(marbles.size() == 0) {

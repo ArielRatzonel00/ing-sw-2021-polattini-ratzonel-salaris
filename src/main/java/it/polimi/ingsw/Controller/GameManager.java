@@ -29,9 +29,7 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     public void updateAssignFourLeaderCards(FourLeaderCardsMessage fourLeaderCardsMessage) {
         game.AssignFourLeaderCards(fourLeaderCardsMessage.getPlayerIndex());
     }
-    public void MarkerStackAction(){
-        game.MarkerStackAction();
-    }
+
 
     public void updateDiscardLeaderCards(DiscardInitialLeaderCardsMessage discardInitialLeaderCardsMessage) {
         game.DiscardInitialLeaderCards(discardInitialLeaderCardsMessage.getPlayerIndex(), discardInitialLeaderCardsMessage.getIndexLeaderCard1(), discardInitialLeaderCardsMessage.getIndexLeaderCard2() - 1);

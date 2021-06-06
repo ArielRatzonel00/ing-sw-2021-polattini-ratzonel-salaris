@@ -11,4 +11,9 @@ public class PlusTwoBlackMarker extends Marker {
         game.getPlayers().get(0).getFaithTrack().setBlackPosition(2);
         return 2;
     } // Method that moves forward Lorenzo of two positions and shuffles the MarkerStack
+
+    @Override
+    public String getType() {
+        return "+2 black positions";
+    }
 }

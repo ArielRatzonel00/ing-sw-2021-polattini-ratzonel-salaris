@@ -11,6 +11,10 @@ public class PlusOneShuffleMarker extends Marker {
         game.getPlayers().get(0).getFaithTrack().setBlackPosition(1);
         game.getMarkers().Shuffle();
         return 1;
-
     } // Method that moves forward Lorenzo of one position and shuffles the MarkerStack
+
+    @Override
+    public String getType() {
+        return "+1 black position and shuffle markers";
+    }
 }

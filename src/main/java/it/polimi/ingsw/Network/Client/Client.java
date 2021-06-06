@@ -32,6 +32,7 @@ public class Client extends Messanger implements ViewObserver{
     private ClientModel clientModel = new ClientModel();
     private boolean actionDone = false;
     private int leaderCardActionAvailable = 2;
+    private boolean isSinglePlayer = false;
     public Client(String ip, int port, UserInterface userInterface) {
         this.ip = ip;
         this.port = port;
@@ -54,7 +55,13 @@ public class Client extends Messanger implements ViewObserver{
         this.socketIn = socketIn;
     }
 
+    public boolean isSinglePlayer() {
+        return isSinglePlayer;
+    }
 
+    public void setSinglePlayer(boolean singlePlayer) {
+        isSinglePlayer = singlePlayer;
+    }
 
     public synchronized void setActive(boolean active) {
         this.active = active;
@@ -95,6 +102,10 @@ public class Client extends Messanger implements ViewObserver{
                     clientModel.getPlayerBoards().get(fourLeaderCardResponse.getPlayerIndex()).setLeaderCards(fourLeaderCardResponse.getLeaderCards());
 
                     if (message.getPlayerIndex() == ID) {
+                        if (fourLeaderCardResponse.isSinglePlayer()){
+                            setSinglePlayer(true);
+                            clientModel.getPlayerBoards().get(ID).setTopMarker(fourLeaderCardResponse.getMarkers().get(fourLeaderCardResponse.getMarkers().size()-1));
+                        }
                         clientModel.getMarketTrayClient().setMarketMatrix(((fourLeaderCardResponse).getMarketTray().getMarketMatrix()));
                         clientModel.getMarketTrayClient().setOustideMarble(((fourLeaderCardResponse).getMarketTray().getOustideMarble()));
                         clientModel.setDevGrid(((fourLeaderCardResponse.getTopCards())));
@@ -113,11 +124,9 @@ public class Client extends Messanger implements ViewObserver{
                         int a = 4;
                         int b = 4;
                         while (a > 3 || b > 3) {
-
                             System.out.println("Which ones you want to discard? insert 2 index [0-3]");
                             a = stdin.nextInt();
                             b = stdin.nextInt();
-
                             if (a > 3 || b > 3 || a == b) {
                                 a = 4;
                                 System.out.println("wrong indexes, try again");
@@ -284,23 +293,43 @@ public class Client extends Messanger implements ViewObserver{
 
                 case "DealWithResourcesFromMarketTrayResponse":
                     int i = -1;
+                    int indexPopeFavor = 0;
                     DealWithResourcesFromMarketTrayResponse dealWithResourcesFromMarketTrayResponse = (DealWithResourcesFromMarketTrayResponse) message;
                     clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).getFaithTrackClient().setRedPosition(dealWithResourcesFromMarketTrayResponse.getCurrPlayersAdvances());
                     clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).getWarehosueClient().setWarehouseRows(dealWithResourcesFromMarketTrayResponse.getWarehouse().getRows());
-                    for (PlayerBoard p : clientModel.getPlayerBoards()) {
-                        if (p.getNickname() != null && !p.getNickname().equals(clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).getNickname())) {
-                            p.getFaithTrackClient().setRedPosition(dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
-                        }
-                    }
                     if (dealWithResourcesFromMarketTrayResponse.isPopeFavoreEvent()) {
                         System.out.println("PopeFavorEvent has occured\n");
+                        for (PlayerBoard p : clientModel.getPlayerBoards()){
+                            p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(0), indexPopeFavor);
+                            indexPopeFavor++;
+                            p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(1), indexPopeFavor);
+                            indexPopeFavor++;
+                            p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(2), indexPopeFavor);
+                            indexPopeFavor++;
+                        }
                     }
+                    if (!isSinglePlayer) {
+                        for (PlayerBoard p : clientModel.getPlayerBoards()) {
+                            if (p.getNickname() != null && !p.getNickname().equals(clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).getNickname())) {
+                                p.getFaithTrackClient().setRedPosition(dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
+                            }
+                        }
+                        if (dealWithResourcesFromMarketTrayResponse.getPlayerIndex() == ID) {
+                            System.out.println("You advanced by " + dealWithResourcesFromMarketTrayResponse.getCurrPlayersAdvances() + "\n" +
+                                    "OtherPlayers advanced by " + dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
+                            actionDone = true;
+                            MenuCli();
+                        }
+                    }
+                    else {
+                        clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).getFaithTrackClient().setBlackPosition(dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
+                        if (dealWithResourcesFromMarketTrayResponse.getPlayerIndex() == ID) {
+                            System.out.println("You advanced by " + dealWithResourcesFromMarketTrayResponse.getCurrPlayersAdvances() + "\n" +
+                                    "Black advanced by " + dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
+                            actionDone = true;
+                            MenuCli();
+                        }
 
-                    if (dealWithResourcesFromMarketTrayResponse.getPlayerIndex() == ID) {
-                        System.out.println("You advanced by " + dealWithResourcesFromMarketTrayResponse.getCurrPlayersAdvances() + "\n" +
-                                "OtherPlayers advanced by " + dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
-                        actionDone = true;
-                        MenuCli();
                     }
                     break;
                 case "WantToBuyCardResponse":
@@ -339,7 +368,7 @@ public class Client extends Messanger implements ViewObserver{
                     if (moveResourcesResponse.isOk()) {
                         clientModel.getPlayerBoards().get(moveResourcesResponse.getPlayerIndex()).getWarehosueClient().setWarehouseRows(moveResourcesResponse.getNewwarehouse());
                         if (moveResourcesResponse.getPlayerIndex() == ID) {
-                            System.out.println("nuovo warehouse"); // in realtà qua bisogna stampare il nuovo warehouse
+                            clientModel.getPlayerBoards().get(ID).PrintWarehouse();
                         }
                         MenuCli();
                     } else {
@@ -369,13 +398,13 @@ public class Client extends Messanger implements ViewObserver{
                                 System.out.println("How do you want to pay it?\n");
                                 if (prod == 0) {
                                     Payment(wantActivateProductionResponse.getBasicProductionCost(),ResourcesFromStrongbox, ResourcesFromWarehouse, rows, ID);
-                                    System.out.println("Choose the marble to get [P] [Y] [G] [B]\n");
+                                    System.out.println("Choose the profit marble  [P] [Y] [G] [B]\n");
                                     c1 = stdin.next();
                                     produceMessage.setResourcesFromStrongbox(ResourcesFromStrongbox);
                                     produceMessage.setResourcesFromWarehouse(ResourcesFromWarehouse);
                                     produceMessage.setProductionProfit(marbleChoice(c1));
                                     produceMessage.setRows(rows);
-                                    c1 = "";
+
                                 }
                                 else {
                                     Payment(clientModel.getPlayerBoards().get(ID).getProductions().get(prod).getProductionCost(),ResourcesFromStrongbox,ResourcesFromWarehouse,rows,ID);
@@ -383,14 +412,14 @@ public class Client extends Messanger implements ViewObserver{
                                     produceMessage.setResourcesFromWarehouse(ResourcesFromWarehouse);
                                     produceMessage.setRows(rows);
                                     if (prod == 4 || prod == 5){
-                                        System.out.println("Choose the marble to get [P] [Y] [G] [B]\n");
+                                        System.out.println("Choose the profit marble  [P] [Y] [G] [B]\n");
                                         c1 = stdin.next();
                                         produceMessage.setProductionProfit(marbleChoice(c1));
                                     }
                                 }
-                                produceMessage.setPlayerIndex(ID);
-
                             }
+                            produceMessage.setProductions(wantActivateProductionResponse.getProductions());
+                            produceMessage.setPlayerIndex(ID);
                             sendMessage(socketOut, produceMessage);
                         } else {
                             System.out.println("You don't have enough resources to produce all the productions that you selected");
@@ -399,10 +428,28 @@ public class Client extends Messanger implements ViewObserver{
                     }
                     break;
                 case "EndTurnResponse":
+                    int popeFavorIndex = 0;
                     EndTurnResponse endTurnResponse = (EndTurnResponse) message;
                     if (endTurnResponse.getIndexNewTurn() == ID) {
-                        System.out.println("It's your turn!");
-                        MenuCli();
+                        if (!isSinglePlayer) {
+                            System.out.println("It's your turn!");
+                            MenuCli();
+                        }
+                        else {
+                            clientModel.getPlayerBoards().get(ID).setTopMarker(endTurnResponse.getTopMarker());
+                            clientModel.setDevGrid(endTurnResponse.getNewDevGrid());
+                            clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setBlackPosition(endTurnResponse.getBlackPosition());
+                            if (endTurnResponse.isPopeFavorChanged()){
+                                System.out.println("a pope favor event has occured!\n");
+                                clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setPopeFavors(endTurnResponse.getPopeFavorStates().get(popeFavorIndex), popeFavorIndex);
+                                popeFavorIndex++;
+                                clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setPopeFavors(endTurnResponse.getPopeFavorStates().get(popeFavorIndex), popeFavorIndex);
+                                popeFavorIndex++;
+                                clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setPopeFavors(endTurnResponse.getPopeFavorStates().get(popeFavorIndex), popeFavorIndex);
+                                popeFavorIndex++;
+                            }
+                            MenuCli();
+                        }
                     } else {
                         System.out.println("Now it's the turn of:" + clientModel.getPlayerBoards().get(endTurnResponse.getIndexNewTurn()).getNickname());
                     }
@@ -427,16 +474,26 @@ public class Client extends Messanger implements ViewObserver{
                         leaderCardActionAvailable--;
                         clientModel.getPlayerBoards().get(discardLeaderCardActionResponse.getPlayerIndex()).getLeaderCards().remove(discardLeaderCardActionResponse.getCardIndex());
                         if (discardLeaderCardActionResponse.isPopeFavorStateEvent()) {
-                            System.out.println("A pope favor state event has occured!");
-                            for (PlayerBoard p : clientModel.getPlayerBoards()) {
-                                if (p.getNickname() != null) {
-                                    p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 0);
-                                    indexPopeFavorState++;
-                                    p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
-                                    indexPopeFavorState++;
-                                    p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
-                                    indexPopeFavorState++;
+                            System.out.println("A pope favor  event has occured!");
+                            if (!isSinglePlayer) {
+                                for (PlayerBoard p : clientModel.getPlayerBoards()) {
+                                    if (p.getNickname() != null) {
+                                        p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 0);
+                                        indexPopeFavorState++;
+                                        p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
+                                        indexPopeFavorState++;
+                                        p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
+                                        indexPopeFavorState++;
+                                    }
                                 }
+                            }
+                            else {
+                                clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 0);
+                                indexPopeFavorState++;
+                                clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
+                                indexPopeFavorState++;
+                                clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
+                                indexPopeFavorState++;
                             }
                         }
                         clientModel.getPlayerBoards().get(discardLeaderCardActionResponse.getPlayerIndex()).getFaithTrackClient().setRedPosition(1);
@@ -455,15 +512,25 @@ public class Client extends Messanger implements ViewObserver{
                     clientModel.getPlayerBoards().get(productionResponse.getPlayerIndex()).setStrongBox(productionResponse.getNewstrongbox());
                     if (productionResponse.isPopeFavoreStateEvent()) {
                         System.out.println("A pope favor state event has occured!");
-                        for (PlayerBoard p : clientModel.getPlayerBoards()) {
-                            if (p.getNickname() != null) {
-                                p.getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 0);
-                                indexPopeFavorState++;
-                                p.getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
-                                indexPopeFavorState++;
-                                p.getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
-                                indexPopeFavorState++;
+                        if (!isSinglePlayer) {
+                            for (PlayerBoard p : clientModel.getPlayerBoards()) {
+                                if (p.getNickname() != null) {
+                                    p.getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 0);
+                                    indexPopeFavorState++;
+                                    p.getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
+                                    indexPopeFavorState++;
+                                    p.getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
+                                    indexPopeFavorState++;
+                                }
                             }
+                        }
+                        else {
+                            clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 0);
+                            indexPopeFavorState++;
+                            clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
+                            indexPopeFavorState++;
+                            clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
+                            indexPopeFavorState++;
                         }
                     }
                     if (productionResponse.getPlayerIndex() == ID) {
@@ -471,6 +538,7 @@ public class Client extends Messanger implements ViewObserver{
                         MenuCli();
                     }
                     break;
+
                 case "CardBuyedResponse":
                     CardBuyedResponse cardBuyedResponse = (CardBuyedResponse) message;
                     clientModel.setDevGrid(cardBuyedResponse.getNewDevGrid());
@@ -531,26 +599,48 @@ public class Client extends Messanger implements ViewObserver{
 
         } else {
             if (leaderCardActionAvailable > 0) {
-                System.out.println("----------------Menù------------" +
-                        "\n [0] See general informations (Market tray and DevGrid)." +
-                        "\n [1] See a personal player board." +
-                        "\n [2] Move resources in the Warehouse." +
-                        "\n [3] ---Option not Available ---" +
-                        "\n [4] Leader Action" +
-                        "\n [5] EndTurn");
+                if (!isSinglePlayer) {
+                    System.out.println("----------------Menù------------" +
+                            "\n [0] See general informations (Market tray and DevGrid)." +
+                            "\n [1] See a personal player board." +
+                            "\n [2] Move resources in the Warehouse." +
+                            "\n [3] ---Option not Available ---" +
+                            "\n [4] Leader Action" +
+                            "\n [5] EndTurn");
+                } else {
+                    System.out.println("----------------Menù------------" +
+                            "\n [0] See general informations (Market tray and DevGrid)." +
+                            "\n [1] See a personal player board." +
+                            "\n [2] Move resources in the Warehouse." +
+                            "\n [3] ---Option not Available ---" +
+                            "\n [4] Leader Action" +
+                            "\n [5] EndTurn and pick the Top Marker (Type: " + clientModel.getPlayerBoards().get(ID).getTopMarker().getType() + ")");
+                }
                 while (i > 5 || i < 0 || i == 3) {
                     System.out.println("Insert the right index\n");
                     i = stdin.nextInt();
                 }
             }
             else {
-                System.out.println("----------------Menù------------" +
-                        "\n [0] See general informations (Market tray and DevGrid)." +
-                        "\n [1] See a personal player board." +
-                        "\n [2] Move resources in the Warehouse." +
-                        "\n [3] ---Option not Available ---" +
-                        "\n [4] ---Option not Available ---" +
-                        "\n [5] EndTurn");
+                if (!isSinglePlayer) {
+                    System.out.println("----------------Menù------------" +
+                            "\n [0] See general informations (Market tray and DevGrid)." +
+                            "\n [1] See a personal player board." +
+                            "\n [2] Move resources in the Warehouse." +
+                            "\n [3] ---Option not Available ---" +
+                            "\n [4] ---Option not Available ---" +
+                            "\n [5] EndTurn");
+                }
+                else {
+                    System.out.println("----------------Menù------------" +
+                            "\n [0] See general informations (Market tray and DevGrid)." +
+                            "\n [1] See a personal player board." +
+                            "\n [2] Move resources in the Warehouse." +
+                            "\n [3] ---Option not Available ---" +
+                            "\n [4] ---Option not Available ---" +
+                            "\n [5] EndTurn and pick the Top Marker (Type: " + clientModel.getPlayerBoards().get(ID).getTopMarker() + ")");
+
+                }
                 while (i > 5 || i < 0 || i == 3 || i == 4) {
                     System.out.println("Insert the right index\n");
                     i = stdin.nextInt();
@@ -658,16 +748,20 @@ public class Client extends Messanger implements ViewObserver{
                         if (i == 0){
                             System.out.println("Choose marble1  [Y] [G] [P] [B]\n");
                             choice2 = stdin.next();
-                            ProductionBasicCost.add(new CostOfCard(1, marbleChoice(choice2)));
                             System.out.println("Choose marble2  [Y] [G] [P] [B]\n");
                             choice3 = stdin.next();
-                            ProductionBasicCost.add(new CostOfCard(1, marbleChoice(choice3)));
+                            if (choice2.equalsIgnoreCase(choice3)) {
+                                ProductionBasicCost.add(new CostOfCard(2, marbleChoice(choice2)));
+                            }
+                            else {
+                                ProductionBasicCost.add(new CostOfCard(1, marbleChoice(choice2)));
+                                ProductionBasicCost.add(new CostOfCard(1, marbleChoice(choice3)));
+                            }
                             wantActivateProductionMessage.setProductionBasicCost(ProductionBasicCost);
                         }
                     }
-                    sendMessage(socketOut,wantActivateProductionMessage);
                 }
-
+                sendMessage(socketOut,wantActivateProductionMessage);
                 break;
             case 3:
                 clientModel.getMarketTrayClient().printMarketTray();
@@ -709,7 +803,7 @@ public class Client extends Messanger implements ViewObserver{
         }
         clientModel.getPlayerBoards().get(index).PrintStrongbox();
         clientModel.getPlayerBoards().get(index).PrintWarehouse();
-        clientModel.getPlayerBoards().get(index).PrintFaithTrack();
+        clientModel.getPlayerBoards().get(index).PrintFaithTrack(isSinglePlayer);
         clientModel.getPlayerBoards().get(index).PrintDevCard();
         if (index == ID) {
             clientModel.getPlayerBoards().get(index).PrintLeaderCards(true);
@@ -727,6 +821,11 @@ public class Client extends Messanger implements ViewObserver{
         System.out.println("Choose the two rows of the warehosue to switch\n");
         row1 = stdin.nextInt();
         row2 = stdin.nextInt();
+        if (row2 < row1){
+            int temp = row1;
+            row1 = row2;
+            row2 = temp;
+        }
         MoveResourcesMessage moveResourcesMessage = new MoveResourcesMessage();
         moveResourcesMessage.setPlayerIndex(ID);
         moveResourcesMessage.setRow1(row1);
@@ -770,7 +869,9 @@ public class Client extends Messanger implements ViewObserver{
                         }
                         resFromStrong = temp;
                         contServants -= resFromStrong;
-                        resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.PURPLE));
+                        if (resFromStrong!=0) {
+                            resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.PURPLE));
+                        }
                         for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
                             temp = 0;
                             if (r.getColor() == MarketMarble.ColorMarble.PURPLE && r.getMarbles().size() > 0) {
@@ -795,11 +896,13 @@ public class Client extends Messanger implements ViewObserver{
                         }
                         resFromStrong = temp;
                         contCoins -= resFromStrong;
-                        resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.YELLOW));
+                        if (resFromStrong != 0) {
+                            resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.YELLOW));
+                        }
                         for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
                             temp = 0;
                             if (r.getColor() == MarketMarble.ColorMarble.YELLOW && r.getMarbles().size() > 0) {
-                                while (temp > r.getMarbles().size() || temp < contShields) {
+                                while (temp > r.getMarbles().size() || temp < contCoins) {
                                     System.out.println("How many coins(Y) from row " + indexrow);
                                     temp = stdin.nextInt();
                                 }
@@ -820,7 +923,9 @@ public class Client extends Messanger implements ViewObserver{
                         }
                         resFromStrong = temp;
                         contStones -= resFromStrong;
-                        resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.GREY));
+                        if (resFromStrong != 0) {
+                            resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.GREY));
+                        }
                         for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
                             temp = 0;
                             if (r.getColor() == MarketMarble.ColorMarble.GREY && r.getMarbles().size() > 0) {
@@ -845,7 +950,9 @@ public class Client extends Messanger implements ViewObserver{
                         }
                         resFromStrong = temp;
                         contShields -= resFromStrong;
-                        resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.BLUE));
+                        if (resFromStrong != 0) {
+                            resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.BLUE));
+                        }
                         for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
                             temp = 0;
                             if (r.getColor() == MarketMarble.ColorMarble.BLUE && r.getMarbles().size() > 0) {
@@ -867,20 +974,6 @@ public class Client extends Messanger implements ViewObserver{
     }
 
 
-    public ArrayList<CostOfCard> PayWithWarehouseResources(){
-        int indexRow = 0;
-        int n = 0;
-        ArrayList<CostOfCard> resourcesFromWarehouse = new ArrayList<>();
-        for (WarehouseRow w : clientModel.getPlayerBoards().get(ID).getWarehosueClient().getWarehouseRows()){
-            System.out.println("How many marbles from row" + indexRow);
-            n = stdin.nextInt();
-            if (n!=0) {
-                resourcesFromWarehouse.add(new CostOfCard(n, w.getColor()));
-            }
-        }
-        return resourcesFromWarehouse;
-
-    }
     public void LeaderCardActionChoice() throws IOException {
         clientModel.getPlayerBoards().get(ID).PrintLeaderCards(true);
         int choice = 0;
@@ -1024,6 +1117,10 @@ public class Client extends Messanger implements ViewObserver{
     public void updateMessage(Message message) throws IOException {
         message.setPlayerIndex(ID);
         sendMessage(this.socketOut, message);
+    }
+    public void TopMarker(){
+        System.out.println("Press a button to pick the top marker, type :" + clientModel.getPlayerBoards().get(ID).getTopMarker().getType() +"\n" );
+        String c = stdin.next();
     }
 
 }

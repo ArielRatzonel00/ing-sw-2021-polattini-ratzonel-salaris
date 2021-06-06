@@ -18,5 +18,10 @@ public class RemoveCardsMarker extends Marker {
         game.getDevelopmentGrid().RemoveCardByColor(colorCard);
         game.getDevelopmentGrid().RemoveCardByColor(colorCard);
         return 0;
-    } // Method that removes the tow bottom card of the lowest level that are still in the DevelopmentGrif
+    } // Method that removes the tow bottom card of the lowest level that are still in the DevelopmentGrid
+
+    @Override
+    public String getType() {
+        return "-2 " + colorCard;
+    }
 }

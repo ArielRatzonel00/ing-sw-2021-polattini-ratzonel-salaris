@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Client.CModel;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.LeaderCard.*;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
+import it.polimi.ingsw.Model.Markers.Marker;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class PlayerBoard {
     private ArrayList<Production> productions = new ArrayList<>();
     private FaithTrackClient faithTrackClient = new FaithTrackClient();
     private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+    private Marker topMarker;
     private int totalCards = 0;
     private int lvl1 = 0;
     private int lvl2 = 0;
@@ -30,6 +32,14 @@ public class PlayerBoard {
         strongBox.add(0);
         strongBox.add(0);
 
+    }
+
+    public Marker getTopMarker() {
+        return topMarker;
+    }
+
+    public void setTopMarker(Marker topMarker) {
+        this.topMarker = topMarker;
     }
 
     public WarehouseClient getWarehosueClient() {
@@ -208,13 +218,30 @@ public class PlayerBoard {
                 "SERVANTS: " + strongBox.get(2) + "\n" +
                 "COINS: " + strongBox.get(3) + "\n\n");
     }
-    public void PrintFaithTrack(){
-        System.out.println("-------FAITHTRACK--------");
-        for (int a = 0; a < 24; a++) {
-            if (faithTrackClient.getRedPosition() == a)
-                System.out.print("[ X ]");
-            else
-                System.out.print("[ ]");
+    public void PrintFaithTrack(boolean isSinglePlayer){
+        if (!isSinglePlayer) {
+            System.out.println("-------FAITHTRACK--------");
+            for (int a = 0; a < 24; a++) {
+                if (faithTrackClient.getRedPosition() == a)
+                    System.out.print("[ X ]");
+                else
+                    System.out.print("[ ]");
+            }
+        }
+        else {
+            System.out.println("-------FAITHTRACK--------");
+            for (int a = 0; a < 24; a++) {
+                if (faithTrackClient.getRedPosition() == a)
+                    if (faithTrackClient.getBlackPosition() == a)
+                        System.out.print("[ RB ]");
+                    else
+                        System.out.print("[ R ]");
+                else
+                    if (faithTrackClient.getBlackPosition() == a)
+                        System.out.print("[ B ]");
+                    else
+                        System.out.print("[ ]");
+            }
         }
         System.out.println("\n POPE FAVORS 1:" + faithTrackClient.getPopeFavors().get(0));
         System.out.println("\n POPE FAVORS 2:" + faithTrackClient.getPopeFavors().get(1));

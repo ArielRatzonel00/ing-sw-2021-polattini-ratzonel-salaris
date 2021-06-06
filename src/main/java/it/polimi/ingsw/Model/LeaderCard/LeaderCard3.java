@@ -40,7 +40,7 @@ public class LeaderCard3 extends LeaderCard{ //extra warehouse
     @Override
     public String StampaCarta() {
         return "Power: extra warehouse (2 space) " + getColorOfExtraWarehouse() + "\n" +
-                "Requirements: 5 resources" + getColorCost() +  "\n" +
+                "Requirements: 5 resources " + getColorCost() +  "\n" +
                 "VP: " + getVictoryPoints();
     }
 

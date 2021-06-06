@@ -40,8 +40,6 @@ public class BuyCardMessage extends Message{
     }
 
 
-
-
     public int getCellrow() {
         return Cellrow;
     }

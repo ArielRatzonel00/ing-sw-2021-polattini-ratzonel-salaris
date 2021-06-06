@@ -65,9 +65,6 @@ public class Strongbox implements Serializable {
             case YELLOW:
                 this.coin += num;
                 break;
-
-            default: break;
-
         }
     }
     // Methods that add #num Resources of colorMarble

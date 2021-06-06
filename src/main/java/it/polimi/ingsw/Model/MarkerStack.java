@@ -33,8 +33,13 @@ public class MarkerStack {
         return temp;
     } // Method that returns the TopMarket in the stack and put it at the bottom of the stack
 
+    public ArrayList<Marker> getMarkers() {
+        return markers;
+    }
 
-
+    public void setMarkers(ArrayList<Marker> markers) {
+        this.markers = markers;
+    }
 
     public void Shuffle(){
         Collections.shuffle(markers);

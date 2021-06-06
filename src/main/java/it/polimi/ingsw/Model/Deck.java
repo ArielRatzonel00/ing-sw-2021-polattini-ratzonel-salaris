@@ -52,9 +52,15 @@ public class Deck {
     private DevelopmentCard Green21;
     private DevelopmentCard Green31;
 
+    private DevelopmentCard nullCard;
+
 
     public Deck() {
 
+        ArrayList<CostOfCard> nullCardcost = new ArrayList<>();
+        ArrayList<CostOfCard> nullCardProdCost = new ArrayList<>();
+        ArrayList<CostOfCard> nullCardProdProfit = new ArrayList<>();
+        nullCard = new DevelopmentCard(nullCardcost, new Production(nullCardProdCost,nullCardProdProfit),0, null, 0, 0 );
 
         ArrayList<CostOfCard> Green11Cost = new ArrayList<>();
         Green11Cost.add(new CostOfCard(2, MarketMarble.ColorMarble.BLUE));
@@ -737,6 +743,10 @@ public class Deck {
 
     public LeaderCard getConvertRsc1() {
         return ConvertRsc1;
+    }
+
+    public DevelopmentCard getNullCard() {
+        return nullCard;
     }
 
     public ArrayList<LeaderCard> getTopFourLeaderCard() {
