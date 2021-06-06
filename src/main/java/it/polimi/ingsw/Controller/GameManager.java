@@ -26,16 +26,16 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     }
 
     @Override
-    public void updateAssignFourLeaderCards(FourLeaderCardsMessage fourLeaderCardsMessage) {
+    public synchronized void  updateAssignFourLeaderCards(FourLeaderCardsMessage fourLeaderCardsMessage) {
         game.AssignFourLeaderCards(fourLeaderCardsMessage.getPlayerIndex());
     }
 
 
-    public void updateDiscardLeaderCards(DiscardInitialLeaderCardsMessage discardInitialLeaderCardsMessage) {
+    public synchronized void updateDiscardLeaderCards(DiscardInitialLeaderCardsMessage discardInitialLeaderCardsMessage) {
         game.DiscardInitialLeaderCards(discardInitialLeaderCardsMessage.getPlayerIndex(), discardInitialLeaderCardsMessage.getIndexLeaderCard1(), discardInitialLeaderCardsMessage.getIndexLeaderCard2() - 1);
     }
 
-    public void updateInitialResource(InitialResourcesMessage initialResourcesMessage) {
+    public synchronized void updateInitialResource(InitialResourcesMessage initialResourcesMessage) {
         if (initialResourcesMessage.getPlayerIndex() == 1) {
             game.SetInitialResourcesForSecondPlayer(initialResourcesMessage.getColorMarble1(), initialResourcesMessage.getRow1());
         } else if (initialResourcesMessage.getPlayerIndex() == 2) {
@@ -47,44 +47,44 @@ public class GameManager extends Observable<Model> implements ControllerObserver
             game.SetInitialResourcesForFirstPlayer();
     }
 
-    public void updateWantToBuyCard(WantToBuyCardMessage wantToBuyCardMessage) {
+    public synchronized  void updateWantToBuyCard(WantToBuyCardMessage wantToBuyCardMessage) {
         game.WantToBuyCard(wantToBuyCardMessage.getPlayerIndex(), wantToBuyCardMessage.getRow(), wantToBuyCardMessage.getCol(), wantToBuyCardMessage.getSlot());
     }
 
-    public void updateBuyCard(BuyCardMessage buyCardMessage) {
+    public synchronized  void updateBuyCard(BuyCardMessage buyCardMessage) {
         game.BuyCard(buyCardMessage.getPlayerIndex(), buyCardMessage.getResourcesFromStrongbox(), buyCardMessage.getResourcesFromWarehouse(), buyCardMessage.getRows(), buyCardMessage.getCellrow(), buyCardMessage.getCellcol(), buyCardMessage.getSlot());
     }
 
-    public void updateMarketTrayAction(MarketTrayActionMessage marketTrayActionMessage) {
+    public synchronized void updateMarketTrayAction(MarketTrayActionMessage marketTrayActionMessage) {
         game.MarketTrayAction(marketTrayActionMessage.getPlayerIndex(), marketTrayActionMessage.isRow(), marketTrayActionMessage.getIndex());
     }
 
-    public void updateDealWithAResourceFromMarketTray(DealWithResourcesFromMarketTrayMessage dealWithResourcesFromMarketTrayMessage) {
+    public synchronized  void updateDealWithAResourceFromMarketTray(DealWithResourcesFromMarketTrayMessage dealWithResourcesFromMarketTrayMessage) {
         game.DealWithResources(dealWithResourcesFromMarketTrayMessage.getPlayerIndex(), dealWithResourcesFromMarketTrayMessage.getKeeps(), dealWithResourcesFromMarketTrayMessage.getMarbles(), dealWithResourcesFromMarketTrayMessage.getRows());
     }
 
-    public void updateMoveResources(MoveResourcesMessage moveResourcesMessage) {
+    public synchronized void updateMoveResources(MoveResourcesMessage moveResourcesMessage) {
         game.MoveResources(moveResourcesMessage.getPlayerIndex(), moveResourcesMessage.getRow1(), moveResourcesMessage.getRow2());
     }
 
-    public void updateWantActivateProduction(WantActivateProductionMessage wantActivateProductionMessage) {
+    public synchronized void updateWantActivateProduction(WantActivateProductionMessage wantActivateProductionMessage) {
         game.CanProduce(wantActivateProductionMessage.getPlayerIndex(), wantActivateProductionMessage.getProductions(), wantActivateProductionMessage.getProductionBasicCost());
     }
 
-    public void updateProduce(ProduceMessage produceMessage) {
+    public synchronized  void updateProduce(ProduceMessage produceMessage) {
 
         game.Produce(produceMessage.getPlayerIndex(),produceMessage.getProductions(),produceMessage.getResourcesFromStrongbox(),produceMessage.getResourcesFromWarehouse(),produceMessage.getRows(),produceMessage.getProductionProfit());
         }
 
-    public void updateDiscardLeaderCardAction(DiscardLeaderCardActionMessage discardLeaderCardActionMessage) {
+    public synchronized void updateDiscardLeaderCardAction(DiscardLeaderCardActionMessage discardLeaderCardActionMessage) {
         game.DiscardLeaderCardAction(discardLeaderCardActionMessage.getPlayerIndex(), discardLeaderCardActionMessage.getLeaderCardIndex());
     }
 
-    public void updateActivateLeaderCardAction(ActivateLeaderCardActionMessage activateLeaderCardActionMessage) {
+    public synchronized void updateActivateLeaderCardAction(ActivateLeaderCardActionMessage activateLeaderCardActionMessage) {
         game.ActivateLeaderCardAction(activateLeaderCardActionMessage.getPlayerIndex(), activateLeaderCardActionMessage.getLeaderCardIndex());
     }
 
-    public void updateEndOfTurn(EndOfTurnMessage endOfTurnMessage) {
+    public synchronized void updateEndOfTurn(EndOfTurnMessage endOfTurnMessage) {
         game.EndTurn(endOfTurnMessage.getPlayerIndex());
     }
 }
