@@ -39,6 +39,9 @@ public class WarehouseRow implements Serializable {
             if (colorMarble.equals(color) && marbles.size() > 0) {
                 marbles.remove(marbles.size() - 1);
             }
+            if (marbles.size() == 0){
+                color = MarketMarble.ColorMarble.WHITE;
+            }
         }
     } // Method that removes a Marble in the row.
 

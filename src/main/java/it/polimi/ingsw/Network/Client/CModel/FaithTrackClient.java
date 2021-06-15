@@ -21,7 +21,7 @@ public class FaithTrackClient {
     }
 
     public void setRedPosition(int redPosition) {
-        this.redPosition = redPosition;
+        this.redPosition += redPosition;
     }
 
     public int getBlackPosition() {
@@ -29,7 +29,7 @@ public class FaithTrackClient {
     }
 
     public void setBlackPosition(int blackPosition) {
-        this.blackPosition = blackPosition;
+        this.blackPosition += blackPosition;
     }
 
     public ArrayList<PopeFavorState> getPopeFavors() {

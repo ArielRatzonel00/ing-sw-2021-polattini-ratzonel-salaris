@@ -103,14 +103,14 @@ public class PlayerBoard {
         int index = 0;
         for (Production p : productions){
             if (index == 0){
-                System.out.println(0 + ":\n");
+                System.out.println( "Production #0"+ ":\n");
                 System.out.println("You pay 2 marbles of your choice:\n");
                 System.out.println("You get 1 marble of your choice\n");
             }
             if (!p.equals(productions.get(0))){
                 System.out.println("Production #" + index + ":");
                 System.out.println("You Pay:");
-                for (CostOfCard c : productions.get(index).getProductionProfit()){
+                for (CostOfCard c : productions.get(index).getProductionCost()){
                     System.out.println(c.toString() + "\n");
                 }
                 System.out.println("You get:");
@@ -207,7 +207,7 @@ public class PlayerBoard {
             if(r.getMarbles()!=null && r.getMarbles().size()!=0)
                 System.out.println("ROW " + indexRow + ":" +r.getMarbles().size() + r.getMarbles().get(0).getColorMarble());
             else
-                System.out.println("ROW " + indexRow + "; empty");
+                System.out.println("ROW " + indexRow + ": empty");
             indexRow++;
         }
     }
@@ -243,9 +243,9 @@ public class PlayerBoard {
                         System.out.print("[ ]");
             }
         }
-        System.out.println("\n POPE FAVORS 1:" + faithTrackClient.getPopeFavors().get(0));
-        System.out.println("\n POPE FAVORS 2:" + faithTrackClient.getPopeFavors().get(1));
-        System.out.println("\n POPE FAVORS 1:" + faithTrackClient.getPopeFavors().get(2) + "\n\n");
+        System.out.println("\n Pope Favor 1:" + faithTrackClient.getPopeFavors().get(0));
+        System.out.println("\n Pope Favor 2:" + faithTrackClient.getPopeFavors().get(1));
+        System.out.println("\n Pope Favor 3:" + faithTrackClient.getPopeFavors().get(2) + "\n\n");
     }
     public void PrintDevCard(){
         int nSlot = 0;

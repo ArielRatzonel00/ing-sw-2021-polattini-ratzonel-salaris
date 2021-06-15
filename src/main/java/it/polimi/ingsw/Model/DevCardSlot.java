@@ -19,6 +19,7 @@ public class DevCardSlot implements Serializable {
     }
     //Method that adds card above the top card if its level is higher and the Slot isn't full
 
+
     public boolean CanBeAddedInTheSlot(DevelopmentCard card){
         if (getTopCard() != null) {
             if (card.getLevel() == getTopCard().getLevel() + 1 && cards.size() < 3)

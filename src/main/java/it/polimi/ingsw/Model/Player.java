@@ -42,7 +42,7 @@ public class Player implements Serializable {
         ProductionBasicCost.add(0, new CostOfCard(2, MarketMarble.ColorMarble.UNKNOWN));
         ProductionBasicProfit.add(0, new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
         BasicProduction.setProductionCost(ProductionBasicCost);
-        BasicProduction.setProductionCost(ProductionBasicProfit);
+        BasicProduction.setProductionProfit(ProductionBasicProfit);
         this.productionsAvailable.add(BasicProduction);
         this.productionsAvailable.add(BasicProduction);
         this.productionsAvailable.add(BasicProduction);

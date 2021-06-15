@@ -128,6 +128,9 @@ public class Model extends ModelObservable {
             if (marbles.get(contIndexMarblesRows) == MarketMarble.ColorMarble.RED) {
                 CurrPlayerAdvances++;
                 returnedValue = currentPlayer.getFaithTrack().setRedPosition(1);
+                if (returnedValue == 3){
+                    lastTurn = true;
+                }
                 PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
                 if (PopeFavorStateChanged != 0) {
                     PopeFavorStateEvent = true;
@@ -146,6 +149,7 @@ public class Model extends ModelObservable {
                                     NeedToCheckPopeFavorState2 = true;
                                 } else if (returnedValue == 3) {
                                     NeedToCheckPopeFavorState3 = true;
+                                    lastTurn = true;
                                 }
                                 if (NeedToCheckPopeFavorState1 && !CheckedPopeFavorState1) {
                                     CheckPopeFavorState(1);
@@ -166,8 +170,7 @@ public class Model extends ModelObservable {
                                 }
                             }
                         }
-                    }
-                    else {
+                    } else {
                         OtherPlayerAdvances++;
                         returnedValue = players.get(0).getFaithTrack().setBlackPosition(1);
                         PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
@@ -177,7 +180,6 @@ public class Model extends ModelObservable {
                         }
                     }
                 }
-
             }
             contIndexMarblesRows++;
         }
@@ -225,6 +227,10 @@ public class Model extends ModelObservable {
         }
         DevelopmentCard card = developmentGrid.remove(row, col);
         currentPlayer.buyCard(card,slot);
+        currentPlayer.setProductionsAvailable(slot);
+        if (currentPlayer.getSlotsBoard().filterCount(1) + currentPlayer.getSlotsBoard().filterCount(2) + currentPlayer.getSlotsBoard().filterCount(3) == 7){
+            lastTurn = true;
+        }
         notifyCardBuyedResponse(PlayerIndex, developmentGrid.getTopcards(), currentPlayer.getWarehouse(), currentPlayer.getStrongbox(), card,currentPlayer.getProductionsAvailable(), slot);
     }
 
@@ -235,8 +241,10 @@ public class Model extends ModelObservable {
         Player currentplayer = players.get(PlayerIndex);
         if (currentplayer.getLeaderCards().size() > NCard && !currentplayer.getLeaderCard(NCard).isActivate() ){
             currentplayer.DiscardLeaderCard(NCard);
-            if (!IsSinglePlayerGame) {
                 returnedvalue = currentplayer.getFaithTrack().setRedPosition(1);
+                if (returnedvalue == 3){
+                    lastTurn = true;
+                }
                 PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedvalue);
                 if (PopeFavorStateChanged != 0) {
                     popeFavorEvent = true;
@@ -247,16 +255,8 @@ public class Model extends ModelObservable {
                 else {
                     notifyDiscardLeaderCardActionResponse(PlayerIndex,NCard,false, true, null);
                 }
-            }
-            else {
-                returnedvalue = players.get(0).getFaithTrack().setBlackPosition(1);
-                PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedvalue);
-                if (PopeFavorStateChanged!=0){
-                    //NotifyFaithTrackChanged And PopeFavorState, Black Advance by one
-                }
-            }
         }
-        else{
+        else {
             notifyDiscardLeaderCardActionResponse(PlayerIndex,NCard,false, false, null);
         }
     }
@@ -373,6 +373,9 @@ public class Model extends ModelObservable {
                     if (c.getCostColor() == MarketMarble.ColorMarble.RED) {
                         for (int r = 0; r < c.getCostNumber(); r++) {
                             returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
+                            if (returnedValue == 3){
+                                lastTurn = true;
+                            }
                             PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
                             redPositions += 1;
                         }
@@ -383,15 +386,20 @@ public class Model extends ModelObservable {
             } else {
                 if (profit.get(indexProfit) == MarketMarble.ColorMarble.RED) {
                     returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
+                    if (returnedValue == 3){
+                        lastTurn = true;
+                    }
                     PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
                     redPositions += 1;
                 } else {
-
                     currentplayer.getStrongbox().AddResource(1, profit.get(indexProfit));
 
                 }
                 if (production.get(i) != 0) {
                     returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
+                    if (returnedValue == 3){
+                        lastTurn = true;
+                    }
                     PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
                     redPositions += 1;
                 }
@@ -410,15 +418,20 @@ public class Model extends ModelObservable {
     public void EndTurn(int PlayerIndex) {
         int IndexNewTurn = 0;
         if (!IsSinglePlayerGame) {
-            players.get(PlayerIndex).setYourTurn(false);
-            if (PlayerIndex != players.size() - 1) {
-                players.get(PlayerIndex + 1).setYourTurn(true);
-                IndexNewTurn = PlayerIndex + 1;
+            if (lastTurn && PlayerIndex == players.size() - 1) {
+                Player winnerPlayer = GetWinnerMultiplayer();
+                notifyFinishMultiplayerGame(winnerPlayer.getNickname());
             } else {
-                IndexNewTurn = 0;
-                players.get(0).setYourTurn(true);
+                players.get(PlayerIndex).setYourTurn(false);
+                if (PlayerIndex != players.size() - 1) {
+                    players.get(PlayerIndex + 1).setYourTurn(true);
+                    IndexNewTurn = PlayerIndex + 1;
+                } else {
+                    IndexNewTurn = 0;
+                    players.get(0).setYourTurn(true);
+                }
+                notifyNewTurn(IndexNewTurn, 0, false, null, null, null);
             }
-            notifyNewTurn(IndexNewTurn,0,false,null,null,null);
         }
         else {
             int blackPositions = 0;
@@ -466,7 +479,7 @@ public class Model extends ModelObservable {
 
  */
 
-    public Player GetWinner() {
+    public Player GetWinnerMultiplayer() {
         int MaxPoints = 0;
         int MaxResources = 0;
         Player winner = null;

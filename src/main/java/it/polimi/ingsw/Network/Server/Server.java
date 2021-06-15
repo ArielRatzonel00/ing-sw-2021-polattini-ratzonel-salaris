@@ -67,6 +67,8 @@ public class Server {
         if (multiplayer == false){
             player = new Player(name);
             player.setSinglePlayer(true);
+            temp.add(socket);
+            startGame(temp);
             return false;
         }
 

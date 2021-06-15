@@ -39,6 +39,9 @@ public class Client extends Messanger implements ViewObserver{
         this.userInterface=userInterface;
     }
 
+    public ClientModel getClientModel() {
+        return clientModel;
+    }
 
     public synchronized boolean isActive() {
         return active;
@@ -78,12 +81,12 @@ public class Client extends Messanger implements ViewObserver{
                     userInterface.askNumberOfPlayers(stdin);
                     break;
                 case "waiting":
-                    System.out.println("Waiting for other players...");
+                    userInterface.Waiting(stdin);
+
                     break;
                 case "GameStarted":
                     ID=message.getValue();
-                    System.out.println("   MASTERS OF THE RENAISSANCE!    \n" +
-                            "(game started!) ");
+                    userInterface.GameStarted(stdin);
                     sendMessage(socketOut, new SocketMessage("Fine",0, null, null));
                     userInterface.FourLeaderCards(stdin);
 
@@ -110,32 +113,12 @@ public class Client extends Messanger implements ViewObserver{
                         clientModel.getMarketTrayClient().setOustideMarble(((fourLeaderCardResponse).getMarketTray().getOustideMarble()));
                         clientModel.setDevGrid(((fourLeaderCardResponse.getTopCards())));
 
-                        if (clientModel.getPlayerBoards().get(ID).getLeaderCards() == null)
-                            System.out.println("NOLEADERS");
+                        int a = 0;
+                        int b = 0;
                         int cont = 0;
-                        for (LeaderCard l : clientModel.getPlayerBoards().get(ID).getLeaderCards()) {
-                            userInterface.ShowCard(l);
-                            //System.out.println(l);
-                            System.out.println(cont);
-                            cont++;
-                            System.out.println("\n");
-
-                        }
-                        int a = 4;
-                        int b = 4;
-                        while (a > 3 || b > 3) {
-                            System.out.println("Which ones you want to discard? insert 2 index [0-3]");
-                            a = stdin.nextInt();
-                            b = stdin.nextInt();
-                            if (a > 3 || b > 3 || a == b) {
-                                a = 4;
-                                System.out.println("wrong indexes, try again");
-                            }
-                        }
                         DiscardInitialLeaderCardsMessage discardInitial = new DiscardInitialLeaderCardsMessage();
                         discardInitial.setPlayerIndex(ID);
-                        discardInitial.setIndexLeaderCard1(a);
-                        discardInitial.setIndexLeaderCard2(b);
+                        userInterface.DiscardInitialLeaderCards(stdin, clientModel.getPlayerBoards().get(ID).getLeaderCards(), discardInitial);
                         sendMessage(socketOut, discardInitial);
                         break;
                     } else
@@ -146,76 +129,9 @@ public class Client extends Messanger implements ViewObserver{
                     clientModel.getPlayerBoards().get(message.getPlayerIndex()).setLeaderCards(twoLeaderCardsResponse.getLeaderCards());
                     clientModel.getPlayerBoards().get(message.getPlayerIndex()).setProductions(twoLeaderCardsResponse.getProductions());
                     if (message.getPlayerIndex() == ID) {
-                        System.out.println("It's time to choose your initial resources");
-
                         InitialResourcesMessage message1 = new InitialResourcesMessage();
                         message1.setPlayerIndex(ID);
-                        switch (ID) {
-                            case 0:
-                                System.out.println("You are the first one, no initial resources\n");
-                                break;
-                            case 1, 2:
-                                String c = "a";
-                                while (!c.equalsIgnoreCase("P") && !c.equalsIgnoreCase("B") && !c.equalsIgnoreCase("G") && !c.equalsIgnoreCase("Y")) {
-                                    if (ID == 1)
-                                        System.out.println("You are the second one, you have one initial resource, choose between: SERVANT[P], SHIELD[B], STONE[G], COIN [Y]");
-                                    else
-                                        System.out.println("You are the third one, you have on FaithPoint and one initial resource , choose beetween: SERVANT[P], SHIELD[B], STONE[G], COIN [Y]");
-                                    c = stdin.next();
-                                }
-                                message1.setColorMarble1(marbleChoice(c));
-
-                                int a = 5;
-                                while (a < 0 || a > 2) {
-                                    System.out.println("Choose the Warehouse row [0-2]");
-                                    a = stdin.nextInt();
-                                    if (a < 0 || a > 2)
-                                        System.out.println("Wrong index");
-                                }
-                                message1.setRow1(a);
-                                break;
-                            case 3:
-                                c = "a";
-                                while (!c.equalsIgnoreCase("P") && !c.equalsIgnoreCase("B") && !c.equalsIgnoreCase("G") && !c.equalsIgnoreCase("Y")) {
-                                    System.out.println("You are the forth one, you have on FaithPoint and two initial resources , choose the first one between: SERVANT[P], SHIELD[B], STONE[G], COIN [Y]");
-                                    c = stdin.next();
-                                }
-                                message1.setColorMarble1(marbleChoice(c));
-                                a = 3;
-                                while (a < 0 || a > 2) {
-                                    System.out.println("Choose the Warehouse row [0-2]");
-                                    a = stdin.nextInt();
-                                    if (a < 0 || a > 2)
-                                        System.out.println("Wrong index");
-                                }
-                                message1.setRow1(a);
-                                int i = 0;
-                                while (i == 0) {
-                                    c = "a";
-                                    while (!c.equalsIgnoreCase("P") && !c.equalsIgnoreCase("B") && !c.equalsIgnoreCase("G") && !c.equalsIgnoreCase("Y")) {
-                                        System.out.println("choose the first one between: SERVANT[P], SHIELD[B], STONE[G], COIN [Y]");
-                                        c = stdin.next();
-                                    }
-                                    message1.setColorMarble2(marbleChoice(c));
-
-                                    int b = 3;
-                                    while (b < 0 || b > 2) {
-                                        System.out.println("Choose the Warehouse row [0-2]");
-                                        b = stdin.nextInt();
-                                        if (b < 0 || b > 2)
-                                            System.out.println("Wrong index");
-                                    }
-
-
-                                    if ((message1.getRow1() == b && (message1.getColorMarble1() != message1.getColorMarble2() || b == 0)) || (message1.getRow1() != b && message1.getColorMarble1() == message1.getColorMarble2())) {
-                                        System.out.println("Wrong combination, choose again the second resource");
-                                    } else {
-                                        message1.setRow2(b);
-                                        i = 1;
-                                    }
-                                }
-                        }
-                        System.out.println("Waiting for other playes...");
+                        userInterface.InitialResources(stdin, ID, message1);
                         sendMessage(socketOut, message1);
                         break;
                     } else
@@ -227,19 +143,15 @@ public class Client extends Messanger implements ViewObserver{
                     boolean start = initialResourcesSet.getStart();
                     if (start) {
                         if (ID == 0) {
-                            int i = -1;
-                            MenuCli();
+                            int i = userInterface.Menù(stdin,actionDone, leaderCardActionAvailable, isSinglePlayer);
+                            ChoiceOfTheMenu(i);
+                            //MenuCli();
                         } else {
-                            System.out.println("The game is started, it isn't your turn now");
+                            userInterface.PrintMessages("The game is started, it isn't your turn now");
                         }
                     }
                     break;
                 case "MarketTrayActionResponse":
-
-                    boolean keep = false;
-                    String c = "";
-                    int row = 0;
-                    int ch = 0;
                     MarketTrayActionResponse marketTrayActionResponse = (MarketTrayActionResponse) message;
                     MarketMarble.ColorMarble colorMarble;
                     DealWithResourcesFromMarketTrayMessage dealWithResourcesFromMarketTrayMessage = new DealWithResourcesFromMarketTrayMessage();
@@ -247,62 +159,19 @@ public class Client extends Messanger implements ViewObserver{
                     clientModel.getMarketTrayClient().setMarketMatrix(marketTrayActionResponse.getMarketTray());
                     clientModel.getMarketTrayClient().setOustideMarble(marketTrayActionResponse.getOutsideMarble());
                     if (marketTrayActionResponse.getPlayerIndex() == ID) {
-                        clientModel.getPlayerBoards().get(ID).PrintWarehouse();
-                        System.out.println("You have collected some marbles, choose what to do with them: ");
-                        for (MarketMarble marketMarble : marketTrayActionResponse.getReturnedmarbles()) {
-                            colorMarble = marketMarble.getColorMarble();
-                            if (colorMarble == MarketMarble.ColorMarble.WHITE) {
-                                if (marketTrayActionResponse.getChangeWhite1() != MarketMarble.ColorMarble.WHITE) {
-                                    if (marketTrayActionResponse.getChangeWhite2() == MarketMarble.ColorMarble.WHITE) {
-                                        while (ch != 1 && ch != 2) {
-                                            System.out.println("You want to trasform the white marble in" + marketTrayActionResponse.getChangeWhite1() + "[1] or" + marketTrayActionResponse.getChangeWhite2() + "[2]\n");
-                                            ch = stdin.nextInt();
-                                            if (ch == 1) {
-                                                colorMarble = marketTrayActionResponse.getChangeWhite1();
-                                            } else if (ch == 2){
-                                                colorMarble = marketTrayActionResponse.getChangeWhite2();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            if (colorMarble != MarketMarble.ColorMarble.WHITE) {
-                                if (colorMarble == MarketMarble.ColorMarble.RED) {
-                                    System.out.println("Red marble, you have to keep it \n");
-                                    keep = true;
-                                    row = 0;
-                                } else {
-                                    System.out.println("What do you want to do with marble: " + colorMarble + "? Keep it [S] or not [other] ?\n");
-                                    c = stdin.next();
-                                    if (c.equalsIgnoreCase("s")) {
-                                        keep = true;
-                                        System.out.println("In which warehouse row do you want to add the marble?\nChoose correctly because if you can't add the marble in the row selected, it will be automatically considered as you discarded it\n");
-                                        row = stdin.nextInt();
-                                    } else {
-                                        keep = false;
-                                        row = 0;
-                                    }
-                                }
-                                dealWithResourcesFromMarketTrayMessage.setKeeps(keep);
-                                dealWithResourcesFromMarketTrayMessage.setMarbles(marketMarble.getColorMarble());
-                                dealWithResourcesFromMarketTrayMessage.setRows(row);
-                            } else {
-                                System.out.println("\nWhite marble, does nothing\n");
-                            }
-                        }
+                        userInterface.DealWithResourcesFromMarketTray(stdin, marketTrayActionResponse,dealWithResourcesFromMarketTrayMessage, ID);
                         sendMessage(socketOut, dealWithResourcesFromMarketTrayMessage);
                     }
 
                     break;
 
                 case "DealWithResourcesFromMarketTrayResponse":
-                    int i = -1;
                     int indexPopeFavor = 0;
                     DealWithResourcesFromMarketTrayResponse dealWithResourcesFromMarketTrayResponse = (DealWithResourcesFromMarketTrayResponse) message;
                     clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).getFaithTrackClient().setRedPosition(dealWithResourcesFromMarketTrayResponse.getCurrPlayersAdvances());
                     clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).getWarehosueClient().setWarehouseRows(dealWithResourcesFromMarketTrayResponse.getWarehouse().getRows());
                     if (dealWithResourcesFromMarketTrayResponse.isPopeFavoreEvent()) {
-                        System.out.println("PopeFavorEvent has occured\n");
+                        userInterface.PopeFavorStateEventOccured(stdin);
                         for (PlayerBoard p : clientModel.getPlayerBoards()){
                             p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(0), indexPopeFavor);
                             indexPopeFavor++;
@@ -319,21 +188,20 @@ public class Client extends Messanger implements ViewObserver{
                             }
                         }
                         if (dealWithResourcesFromMarketTrayResponse.getPlayerIndex() == ID) {
-                            System.out.println("You advanced by " + dealWithResourcesFromMarketTrayResponse.getCurrPlayersAdvances() + "\n" +
-                                    "OtherPlayers advanced by " + dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
+                            userInterface.DealWithResFromMarkTrayResponse(stdin, dealWithResourcesFromMarketTrayResponse, isSinglePlayer);
                             actionDone = true;
-                            MenuCli();
+                            int i = userInterface.Menù(stdin,actionDone, leaderCardActionAvailable, isSinglePlayer);
+                            ChoiceOfTheMenu(i);
                         }
                     }
                     else {
                         clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).getFaithTrackClient().setBlackPosition(dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
                         if (dealWithResourcesFromMarketTrayResponse.getPlayerIndex() == ID) {
-                            System.out.println("You advanced by " + dealWithResourcesFromMarketTrayResponse.getCurrPlayersAdvances() + "\n" +
-                                    "Black advanced by " + dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
+                            userInterface.DealWithResFromMarkTrayResponse(stdin,dealWithResourcesFromMarketTrayResponse,isSinglePlayer);
                             actionDone = true;
-                            MenuCli();
+                            int i = userInterface.Menù(stdin,actionDone, leaderCardActionAvailable, isSinglePlayer);
+                            ChoiceOfTheMenu(i);
                         }
-
                     }
                     break;
                 case "WantToBuyCardResponse":
@@ -342,19 +210,19 @@ public class Client extends Messanger implements ViewObserver{
                     ArrayList<Integer> warehouseRows = new ArrayList<>();
                     WantToBuyCardResponse wantToBuyCardResponse = (WantToBuyCardResponse) message;
                     if (wantToBuyCardResponse.getPlayerIndex() == ID) {
+                        userInterface.WantToBuyCardResponse(stdin, wantToBuyCardResponse, ID);
                         switch (wantToBuyCardResponse.getPhrasetoShow()) {
                             case "The card can't be added in the slot that you selected", "The card selected doesn't exist", "You don't have enough resources to buy this card":
-                                System.out.println(wantToBuyCardResponse.getPhrasetoShow());
-                                MenuCli();
+                                userInterface.PrintMessages(wantToBuyCardResponse.getPhrasetoShow());
+                                int i = userInterface.Menù(stdin,actionDone,leaderCardActionAvailable, isSinglePlayer);
+                                ChoiceOfTheMenu(i);
                                 break;
                             case "You have the resources to add the card and you can add it in the slot that you selected":
                                 BuyCardMessage buyCardMessage = new BuyCardMessage();
                                 buyCardMessage.setPlayerIndex(ID);
-                                System.out.println(wantToBuyCardResponse.getPhrasetoShow() + "[" + wantToBuyCardResponse.getSlot() + "]" + "\nThe card costs:" + CostofCardInString(wantToBuyCardResponse.getCost()));
-                                clientModel.getPlayerBoards().get(ID).PrintWarehouse();
-                                clientModel.getPlayerBoards().get(ID).PrintStrongbox();
-                                System.out.println("How do you want to buy it?\n");
-                                Payment(wantToBuyCardResponse.getCost(),resourcesFromStrongbox,resourcesFromWarehouse,warehouseRows,ID);
+
+                                userInterface.WantToBuyCardResponse(stdin, wantToBuyCardResponse, ID);
+                                userInterface.Payment(stdin, wantToBuyCardResponse.getCost(),resourcesFromStrongbox,resourcesFromWarehouse,warehouseRows,ID);
                                 buyCardMessage.setResourcesFromWarehouse(resourcesFromWarehouse);
                                 buyCardMessage.setResourcesFromStrongbox(resourcesFromStrongbox);
                                 buyCardMessage.setPlayerIndex(ID);
@@ -372,13 +240,16 @@ public class Client extends Messanger implements ViewObserver{
                     if (moveResourcesResponse.isOk()) {
                         clientModel.getPlayerBoards().get(moveResourcesResponse.getPlayerIndex()).getWarehosueClient().setWarehouseRows(moveResourcesResponse.getNewwarehouse());
                         if (moveResourcesResponse.getPlayerIndex() == ID) {
-                            clientModel.getPlayerBoards().get(ID).PrintWarehouse();
+                            userInterface.newWarehosue(stdin, ID);
+                            int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
+                            ChoiceOfTheMenu(i);
                         }
-                        MenuCli();
                     } else {
                         if (moveResourcesResponse.getPlayerIndex() == ID) {
-                            System.out.println("Can't move the resources selected");
-                            MenuCli();
+                            userInterface.PrintMessages("Can't move the resources selected");
+                            int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
+                            ChoiceOfTheMenu(i);
+
                         }
                     }
 
@@ -387,52 +258,21 @@ public class Client extends Messanger implements ViewObserver{
 
                     WantActivateProductionResponse wantActivateProductionResponse = (WantActivateProductionResponse) message;
                     if (wantActivateProductionResponse.getPlayerIndex() == ID) {
-                        String c1 = "";
-                        ProduceMessage produceMessage = new ProduceMessage();
-                        if (wantActivateProductionResponse.isOk()) {
-                            System.out.println("You have the resources to produce\n");
-                            clientModel.getPlayerBoards().get(ID).PrintWarehouse();
-                            clientModel.getPlayerBoards().get(ID).PrintStrongbox();
-                            for (int prod : wantActivateProductionResponse.getProductions()) {
-                                ArrayList<CostOfCard> ResourcesFromStrongbox = new ArrayList<>();
-                                ArrayList<CostOfCard> ResourcesFromWarehouse = new ArrayList<>();
-                                ArrayList<Integer> rows = new ArrayList<>();
-                                System.out.println("Production number " + prod + ":\n");
-                                System.out.println(clientModel.getPlayerBoards().get(ID).getProductions().get(prod).printProduction());
-                                produceMessage.setPlayerIndex(ID);
-                                System.out.println("How do you want to pay it?\n");
-                                if (prod == 0) {
-                                    Payment(wantActivateProductionResponse.getBasicProductionCost(),ResourcesFromStrongbox, ResourcesFromWarehouse, rows, ID);
-                                    while (!c1.equalsIgnoreCase("P") && !c1.equalsIgnoreCase("B") && !c1.equalsIgnoreCase("G") && !c1.equalsIgnoreCase("Y")) {
-                                        System.out.println("Choose the profit marble  [P] [Y] [G] [B]\n");
-                                        c1 = stdin.next();
-                                    }
-                                    produceMessage.setResourcesFromStrongbox(ResourcesFromStrongbox);
-                                    produceMessage.setResourcesFromWarehouse(ResourcesFromWarehouse);
-                                    produceMessage.setProductionProfit(marbleChoice(c1));
-                                    produceMessage.setRows(rows);
 
-                                }
-                                else {
-                                    Payment(clientModel.getPlayerBoards().get(ID).getProductions().get(prod).getProductionCost(),ResourcesFromStrongbox,ResourcesFromWarehouse,rows,ID);
-                                    produceMessage.setResourcesFromStrongbox(ResourcesFromStrongbox);
-                                    produceMessage.setResourcesFromWarehouse(ResourcesFromWarehouse);
-                                    produceMessage.setRows(rows);
-                                    if (prod == 4 || prod == 5){
-                                        while (!c1.equalsIgnoreCase("P") && !c1.equalsIgnoreCase("B") && !c1.equalsIgnoreCase("G") && !c1.equalsIgnoreCase("Y")) {
-                                            System.out.println("Choose the profit marble  [P] [Y] [G] [B]\n");
-                                            c1 = stdin.next();
-                                        }
-                                        produceMessage.setProductionProfit(marbleChoice(c1));
-                                    }
-                                }
+                        ProduceMessage produceMessage = new ProduceMessage();
+                        produceMessage.setPlayerIndex(ID);
+                        if (wantActivateProductionResponse.isOk()) {
+                            userInterface.WantToActivateProdResponse(stdin, ID);
+                            for (int prod : wantActivateProductionResponse.getProductions()) {
+                                userInterface.Produce(stdin, wantActivateProductionResponse, produceMessage, ID, prod);
                             }
                             produceMessage.setProductions(wantActivateProductionResponse.getProductions());
                             produceMessage.setPlayerIndex(ID);
                             sendMessage(socketOut, produceMessage);
                         } else {
-                            System.out.println("You don't have enough resources to produce all the productions that you selected");
-                            MenuCli();
+                            userInterface.PrintMessages("You don't have enough resources to produce all the productions that you selected");
+                            int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
+                            ChoiceOfTheMenu(i);
                         }
                     }
                     break;
@@ -441,15 +281,16 @@ public class Client extends Messanger implements ViewObserver{
                     EndTurnResponse endTurnResponse = (EndTurnResponse) message;
                     if (endTurnResponse.getIndexNewTurn() == ID) {
                         if (!isSinglePlayer) {
-                            System.out.println("It's your turn!");
-                            MenuCli();
+                            userInterface.PrintMessages("It's your turn!");
+                            int i = userInterface.Menù(stdin,actionDone,leaderCardActionAvailable,isSinglePlayer);
+                            ChoiceOfTheMenu(i);
                         }
                         else {
                             clientModel.getPlayerBoards().get(ID).setTopMarker(endTurnResponse.getTopMarker());
                             clientModel.setDevGrid(endTurnResponse.getNewDevGrid());
                             clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setBlackPosition(endTurnResponse.getBlackPosition());
                             if (endTurnResponse.isPopeFavorChanged()){
-                                System.out.println("a pope favor event has occured!\n");
+                                userInterface.PrintMessages("a pope favor event has occured!\n");
                                 clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setPopeFavors(endTurnResponse.getPopeFavorStates().get(popeFavorIndex), popeFavorIndex);
                                 popeFavorIndex++;
                                 clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setPopeFavors(endTurnResponse.getPopeFavorStates().get(popeFavorIndex), popeFavorIndex);
@@ -457,10 +298,11 @@ public class Client extends Messanger implements ViewObserver{
                                 clientModel.getPlayerBoards().get(ID).getFaithTrackClient().setPopeFavors(endTurnResponse.getPopeFavorStates().get(popeFavorIndex), popeFavorIndex);
                                 popeFavorIndex++;
                             }
-                            MenuCli();
+                            int i = userInterface.Menù(stdin,actionDone,leaderCardActionAvailable,isSinglePlayer);
+                            ChoiceOfTheMenu(i);
                         }
                     } else {
-                        System.out.println("Now it's the turn of:" + clientModel.getPlayerBoards().get(endTurnResponse.getIndexNewTurn()).getNickname());
+                        userInterface.PrintMessages("Now it's the turn of:" + clientModel.getPlayerBoards().get(endTurnResponse.getIndexNewTurn()).getNickname());
                     }
                     break;
                 case "ActivateLeaderCardActionResponse":
@@ -469,21 +311,21 @@ public class Client extends Messanger implements ViewObserver{
                         clientModel.getPlayerBoards().get(activateLeaderCardActionResponse.getPlayerIndex()).getLeaderCards().get(activateLeaderCardActionResponse.getCardindex()).setActivate(true);
                     }
                     if (activateLeaderCardActionResponse.getPlayerIndex() == ID) {
-                        System.out.println(activateLeaderCardActionResponse.getResponse());
+                        userInterface.PrintMessages(activateLeaderCardActionResponse.getResponse());
                         if (activateLeaderCardActionResponse.isOk()) {
                             leaderCardActionAvailable--;
                         }
-                        MenuCli();
+                        int i = userInterface.Menù(stdin,actionDone,leaderCardActionAvailable,isSinglePlayer);
+                        ChoiceOfTheMenu(i);
                     }
                     break;
                 case "DiscardLeaderCardActionResponse":
                     int indexPopeFavorState = 0;
                     DiscardLeaderCardActionResponse discardLeaderCardActionResponse = (DiscardLeaderCardActionResponse) message;
                     if (discardLeaderCardActionResponse.isOk()) {
-                        leaderCardActionAvailable--;
                         clientModel.getPlayerBoards().get(discardLeaderCardActionResponse.getPlayerIndex()).getLeaderCards().remove(discardLeaderCardActionResponse.getCardIndex());
                         if (discardLeaderCardActionResponse.isPopeFavorStateEvent()) {
-                            System.out.println("A pope favor  event has occured!");
+                            userInterface.PrintMessages("A pope favor  event has occured!");
                             if (!isSinglePlayer) {
                                 for (PlayerBoard p : clientModel.getPlayerBoards()) {
                                     if (p.getNickname() != null) {
@@ -492,7 +334,7 @@ public class Client extends Messanger implements ViewObserver{
                                         p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
                                         indexPopeFavorState++;
                                         p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
-                                        indexPopeFavorState++;
+
                                     }
                                 }
                             }
@@ -502,16 +344,20 @@ public class Client extends Messanger implements ViewObserver{
                                 clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
                                 indexPopeFavorState++;
                                 clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
-                                indexPopeFavorState++;
+
                             }
                         }
                         clientModel.getPlayerBoards().get(discardLeaderCardActionResponse.getPlayerIndex()).getFaithTrackClient().setRedPosition(1);
                     }
 
                     if (discardLeaderCardActionResponse.getPlayerIndex() == ID) {
-                        System.out.println(discardLeaderCardActionResponse.getResponse());
-                        MenuCli();
+                        leaderCardActionAvailable--;
+                        userInterface.PrintMessages(discardLeaderCardActionResponse.getResponse());
+                        int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
+                        ChoiceOfTheMenu(i);
                     }
+
+
                     break;
                 case "ProductionResponse":
                     ProductionResponse productionResponse = (ProductionResponse) message;
@@ -520,7 +366,8 @@ public class Client extends Messanger implements ViewObserver{
                     indexPopeFavorState = 0;
                     clientModel.getPlayerBoards().get(productionResponse.getPlayerIndex()).setStrongBox(productionResponse.getNewstrongbox());
                     if (productionResponse.isPopeFavoreStateEvent()) {
-                        System.out.println("A pope favor state event has occured!");
+
+                        userInterface.PrintMessages("A pope favor state event has occured!");
                         if (!isSinglePlayer) {
                             for (PlayerBoard p : clientModel.getPlayerBoards()) {
                                 if (p.getNickname() != null) {
@@ -544,7 +391,8 @@ public class Client extends Messanger implements ViewObserver{
                     }
                     if (productionResponse.getPlayerIndex() == ID) {
                         actionDone = true;
-                        MenuCli();
+                        int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
+                        ChoiceOfTheMenu(i);
                     }
                     break;
 
@@ -574,121 +422,28 @@ public class Client extends Messanger implements ViewObserver{
                     }
                     if (cardBuyedResponse.getPlayerIndex() == ID){
                         actionDone = true;
-                        MenuCli();
+                        int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
+                        ChoiceOfTheMenu(i);
                     }
-            }
-    }
-    public void MenuCli() throws IOException {
-        int i = -1;
-        if (!actionDone) {
-            if (leaderCardActionAvailable > 0) {
-                System.out.println("----------------Menù------------" +
-                        "\n [0] See general informations (Market tray and DevGrid)." +
-                        "\n [1] See a personal player board." +
-                        "\n [2] Move resources in the Warehouse." +
-                        "\n [3] Action" +
-                        "\n [4] Leader Action");
-                while (i > 4 || i < 0) {
-                    System.out.println("Insert the right index\n");
-                    i = stdin.nextInt();
-                }
-            }
-            else {
-                System.out.println("----------------Menù------------" +
-                        "\n [0] See general informations (Market tray and DevGrid)." +
-                        "\n [1] See a personal player board." +
-                        "\n [2] Move resources in the Warehouse." +
-                        "\n [3] Action" +
-                        "\n [4] ---Option not Available ---");
-                while (i >= 4 || i < 0) {
-                    System.out.println("Insert the right index\n");
-                    i = stdin.nextInt();
-                }
+                    break;
+                case "updateFinishMultiplayerGame":
+                    FinishMultiplayerGame finishMultiplayerGame = (FinishMultiplayerGame) message;
+                    userInterface.PrintMessages("The game is finished, the winner is.............. ");
+                    userInterface.PrintMessages(finishMultiplayerGame.getWinnerPlayer() + ", Congratulations!!!");
+                    break;
             }
 
-        } else {
-            if (leaderCardActionAvailable > 0) {
-                if (!isSinglePlayer) {
-                    System.out.println("----------------Menù------------" +
-                            "\n [0] See general informations (Market tray and DevGrid)." +
-                            "\n [1] See a personal player board." +
-                            "\n [2] Move resources in the Warehouse." +
-                            "\n [3] ---Option not Available ---" +
-                            "\n [4] Leader Action" +
-                            "\n [5] EndTurn");
-                } else {
-                    System.out.println("----------------Menù------------" +
-                            "\n [0] See general informations (Market tray and DevGrid)." +
-                            "\n [1] See a personal player board." +
-                            "\n [2] Move resources in the Warehouse." +
-                            "\n [3] ---Option not Available ---" +
-                            "\n [4] Leader Action" +
-                            "\n [5] EndTurn and pick the Top Marker (Type: " + clientModel.getPlayerBoards().get(ID).getTopMarker().getType() + ")");
-                }
-                while (i > 5 || i < 0 || i == 3) {
-                    System.out.println("Insert the right index\n");
-                    i = stdin.nextInt();
-                }
-            }
-            else {
-                if (!isSinglePlayer) {
-                    System.out.println("----------------Menù------------" +
-                            "\n [0] See general informations (Market tray and DevGrid)." +
-                            "\n [1] See a personal player board." +
-                            "\n [2] Move resources in the Warehouse." +
-                            "\n [3] ---Option not Available ---" +
-                            "\n [4] ---Option not Available ---" +
-                            "\n [5] EndTurn");
-                }
-                else {
-                    System.out.println("----------------Menù------------" +
-                            "\n [0] See general informations (Market tray and DevGrid)." +
-                            "\n [1] See a personal player board." +
-                            "\n [2] Move resources in the Warehouse." +
-                            "\n [3] ---Option not Available ---" +
-                            "\n [4] ---Option not Available ---" +
-                            "\n [5] EndTurn and pick the Top Marker (Type: " + clientModel.getPlayerBoards().get(ID).getTopMarker() + ")");
-
-                }
-                while (i > 5 || i < 0 || i == 3 || i == 4) {
-                    System.out.println("Insert the right index\n");
-                    i = stdin.nextInt();
-                }
-            }
-        }
-        ChoiceOfTheMenu(i);
     }
 
-    public void MenuAzione(){
-        System.out.println("----------------Menù------------" +
-                "\n [1] BuyCard." +
-                "\n [2] Produce." +
-                "\n [3] MarketTrayAction");
-    }
-    public StringBuilder CostofCardInString(ArrayList<CostOfCard> cc){
-        StringBuilder string = new StringBuilder();
-        for (CostOfCard c : cc){
-            string.append(c.getCostNumber());
-            string.append(" ");
-            string.append(c.getCostColor());
-            string.append(" ");
-        }
-        string.append("\n");
-        return string;
-    }
+
+
     public void ChoiceOfTheMenu(int choice) throws IOException {
-        int lvl = -1;
+
         switch (choice) {
             case 0:
-                clientModel.getMarketTrayClient().printMarketTray();
-                while (lvl < 0 || lvl > 3) {
-                    System.out.println("\nChoose level of the card that you want to see\n[0] don't want to see DevGrid\n[1] lvl1\n[2] lvl2\n[3] lvl3");
-                    lvl = stdin.nextInt();
-                }
-                if (lvl != 0) {
-                    clientModel.printDevGrid(lvl);
-                }
-                MenuCli();
+                userInterface.GeneralInformationchoice(stdin);
+                int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
+                ChoiceOfTheMenu(i);
                 break;
             case 1:
                 SeePersonalPlayerBoardChoice();
@@ -714,332 +469,71 @@ public class Client extends Messanger implements ViewObserver{
     }
     public void ActionChoice() throws IOException {
         int choice = 0;
-        MenuAzione();
-        while (choice < 1 || choice > 3) {
-            System.out.println("Select an action[1-3]\n");
-            choice = stdin.nextInt();
-        }
+        choice = userInterface.ActionMenu(stdin);
         WhichActionChoice(choice);
     }
     public void WhichActionChoice(int choice) throws IOException {
         switch (choice){
             case 1:
-                int levelRow = 0;
-                int DevGridCol = -1;
-                int slot = -1;
-                int lvl = 0;
-                clientModel.getPlayerBoards().get(ID).PrintDevCard();
-                while (levelRow < 1 || levelRow >3) {
-                    System.out.println("Choose the level of the card [1-3]\n");
-                    levelRow = stdin.nextInt();
-                }
-                clientModel.printDevGrid(levelRow);
-                while (DevGridCol < 0 || DevGridCol > 3) {
-                    System.out.println("Choose the column [0-3]\n");
-                    DevGridCol = stdin.nextInt();
-                }
-                while (slot < 0 || slot > 3) {
-                    System.out.println("Choose in which slot do you want to add the card[0-3]\n");
-                    slot = stdin.nextInt();
-                }
                 WantToBuyCardMessage wantToBuyCardMessage = new WantToBuyCardMessage();
-                wantToBuyCardMessage.setPlayerIndex(ID);
-                wantToBuyCardMessage.setRow(levelRow-1);
-                wantToBuyCardMessage.setCol(DevGridCol);
-                wantToBuyCardMessage.setSlot(slot);
+                userInterface.BuyCardChoice(stdin,wantToBuyCardMessage, ID);
                 sendMessage(socketOut, wantToBuyCardMessage);
                 break;
             case 2: // Produce
-                clientModel.getPlayerBoards().get(ID).PrintProductionsAvailable();
+
                 WantActivateProductionMessage wantActivateProductionMessage = new WantActivateProductionMessage();
                 wantActivateProductionMessage.setPlayerIndex(ID);
-                ArrayList<CostOfCard> ProductionBasicCost = new ArrayList<>();
-                String choice1 = "";
-                String choice2 = "";
-                String choice3 = "";
-                for (int i : clientModel.getPlayerBoards().get(ID).IndexesProductionAvailable()){
-                    while (!choice1.equalsIgnoreCase("y") && !choice1.equalsIgnoreCase("n")) {
-                        System.out.println("Do you want to produce production " + i + "? [Y] / [N]\n");
-                        choice1 = stdin.next();
-                    }
-                    if (choice1.equalsIgnoreCase("y")){
-                        wantActivateProductionMessage.getProductions().add(i);
-                        if (i == 0) {
-                            while (!choice2.equalsIgnoreCase("P") && !choice2.equalsIgnoreCase("B") && !choice2.equalsIgnoreCase("G") && !choice2.equalsIgnoreCase("Y")) {
-                                System.out.println("Choose marble1  [Y] [G] [P] [B]\n");
-                                choice2 = stdin.next();
-                            }
-                            while (!choice3.equalsIgnoreCase("P") && !choice3.equalsIgnoreCase("B") && !choice3.equalsIgnoreCase("G") && !choice3.equalsIgnoreCase("Y")) {
-                                System.out.println("Choose marble2  [Y] [G] [P] [B]\n");
-                                choice3 = stdin.next();
-                            }
+                int contYes = 0;
+                contYes = userInterface.ProduceChoice(stdin, ID,wantActivateProductionMessage);
 
-                            if (choice2.equalsIgnoreCase(choice3)) {
-                                ProductionBasicCost.add(new CostOfCard(2, marbleChoice(choice2)));
-                            }
-                            else {
-                                ProductionBasicCost.add(new CostOfCard(1, marbleChoice(choice2)));
-                                ProductionBasicCost.add(new CostOfCard(1, marbleChoice(choice3)));
-                            }
-                            wantActivateProductionMessage.setProductionBasicCost(ProductionBasicCost);
-                        }
-                    }
-                }
-                sendMessage(socketOut,wantActivateProductionMessage);
-                break;
-            case 3:
-                clientModel.getMarketTrayClient().printMarketTray();
-                String c = "";
-                boolean row = false;
-                int indexAct = -1;
-                MarketTrayActionMessage marketTrayActionMessage = new MarketTrayActionMessage();
-                while (!c.equalsIgnoreCase("r") && !c.equalsIgnoreCase("c") ) {
-                    System.out.println("Row[R] or Col[C]\n");
-                    c = stdin.next();
-                }
-                if(c.equalsIgnoreCase("r")){
-                    row = true;
-                    while (indexAct <0 || indexAct > 2) {
-                        System.out.println("Index?\n");
-                        indexAct = stdin.nextInt();
-                    }
+                if (contYes > 0) {
+                    sendMessage(socketOut, wantActivateProductionMessage);
                 }
                 else {
-                    while (indexAct <0 || indexAct > 3) {
-                        System.out.println("Index?\n");
-                        indexAct = stdin.nextInt();
-                    }
-
+                    int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
+                    ChoiceOfTheMenu(i);
                 }
-                System.out.println(marketTrayActionMessage.getPlayerIndex());
-                marketTrayActionMessage.setRow(row);
-                marketTrayActionMessage.setIndex(indexAct);
+                break;
+            case 3:
+                MarketTrayActionMessage marketTrayActionMessage = new MarketTrayActionMessage();
                 marketTrayActionMessage.setPlayerIndex(ID);
+                userInterface.MarketTrayActionChoice(stdin, marketTrayActionMessage);
                 sendMessage(socketOut, marketTrayActionMessage);
                 break;
         }
 
     }
     public void SeePersonalPlayerBoardChoice() throws IOException {
-        System.out.println("Choose player information?\n");
-        int index = 0;
-        for (PlayerBoard p : clientModel.getPlayerBoards()
-        ) {
-            if (p.getNickname() != null) {
-                System.out.println("[" + index + "]" + p.getNickname() + "\n");
-                index++;
-            }
-        }
-        index = 100;
-        while (index < 0 || index > clientModel.getPlayerBoards().size()) {
-            index = stdin.nextInt();
-            if (index < 0 || index > clientModel.getPlayerBoards().size())
-                System.out.println("Insert a valid index");
-        }
-        clientModel.getPlayerBoards().get(index).PrintStrongbox();
-        clientModel.getPlayerBoards().get(index).PrintWarehouse();
-        clientModel.getPlayerBoards().get(index).PrintFaithTrack(isSinglePlayer);
-        clientModel.getPlayerBoards().get(index).PrintDevCard();
-        if (index == ID) {
-            clientModel.getPlayerBoards().get(index).PrintLeaderCards(true);
-        }
-        else {
-           clientModel.getPlayerBoards().get(index).PrintLeaderCards(false);
-        }
-        System.out.println("\n ");
-        MenuCli();
+        userInterface.SeePersonalBoardChoice(stdin, ID, isSinglePlayer);
+        int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
+        ChoiceOfTheMenu(i);
     }
     public void MoveResourcesChoice() throws IOException {
-        int row1 = -1;
-        int row2 = -1;
-        clientModel.getPlayerBoards().get(ID).PrintWarehouse();
-        while (row1 <0 || row1>2 || row2<0 || row2 >2 || row1 == row2) {
-            System.out.println("Choose the two rows of the warehosue to switch\n");
-            row1 = stdin.nextInt();
-            row2 = stdin.nextInt();
-        }
-        if (row2 < row1){
-            int temp = row1;
-            row1 = row2;
-            row2 = temp;
-        }
         MoveResourcesMessage moveResourcesMessage = new MoveResourcesMessage();
         moveResourcesMessage.setPlayerIndex(ID);
-        moveResourcesMessage.setRow1(row1);
-        moveResourcesMessage.setRow2(row2);
+        userInterface.MoveResourcesChoice(stdin,ID, moveResourcesMessage);
         sendMessage(socketOut, moveResourcesMessage);
     }
-    public MarketMarble.ColorMarble marbleChoice(String c){
-        return switch (c) {
-            case "R", "r" -> MarketMarble.ColorMarble.RED;
-            case "B", "b" -> MarketMarble.ColorMarble.BLUE;
-            case "G", "g" -> MarketMarble.ColorMarble.GREY;
-            case "P", "p" -> MarketMarble.ColorMarble.PURPLE;
-            default -> MarketMarble.ColorMarble.YELLOW;
-        };
-    }
-    public void Payment(ArrayList<CostOfCard> cost, ArrayList<CostOfCard> resourcesFromStrongbox, ArrayList<CostOfCard> resourcesFromWarehouse, ArrayList<Integer> rows, int playerIndex) {
-        int contServants = 0;
-        int contCoins = 0;
-        int contStones = 0;
-        int contShields = 0;
-        int indexrow = 0;
-        for (CostOfCard c : cost) {
-            switch (c.getCostColor()) {
-                case BLUE -> contShields += c.getCostNumber();
-                case GREY -> contStones += c.getCostNumber();
-                case PURPLE -> contServants += c.getCostNumber();
-                case YELLOW -> contCoins += c.getCostNumber();
-            }
-        }
-        for (CostOfCard c : cost) {
-            int resFromStrong = 0;
-            int temp = 100;
-            int row = 0;
-            switch (c.getCostColor()) {
-                case PURPLE:
-                    while (contServants > 0) {
-                        while (temp > contServants || temp > clientModel.getPlayerBoards().get(playerIndex).getStrongBox().get(2)) {
-                            indexrow = 0;
-                            System.out.println("How many servants(P) from Strongbox\n");
-                            temp = stdin.nextInt();
-                        }
-                        resFromStrong = temp;
-                        contServants -= resFromStrong;
-                        if (resFromStrong!=0) {
-                            resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.PURPLE));
-                        }
-                        for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
-                            temp = 0;
-                            if (r.getColor() == MarketMarble.ColorMarble.PURPLE && r.getMarbles().size() > 0) {
-                                while (temp > r.getMarbles().size() || temp < contServants) {
-                                    System.out.println("How many servants(P) from row " + indexrow);
-                                    temp = stdin.nextInt();
-                                }
-                                contServants -= temp;
-                                resourcesFromWarehouse.add(new CostOfCard(temp, MarketMarble.ColorMarble.PURPLE));
-                                rows.add(indexrow);
-                            }
-                            indexrow++;
-                        }
-                    }
-                    break;
-                case YELLOW:
-                    while (contCoins > 0) {
-                        while (temp > contCoins || temp > clientModel.getPlayerBoards().get(playerIndex).getStrongBox().get(3)) {
-                            indexrow = 0;
-                            System.out.println("How many coins(Y) from Strongbox\n");
-                            temp = stdin.nextInt();
-                        }
-                        resFromStrong = temp;
-                        contCoins -= resFromStrong;
-                        if (resFromStrong != 0) {
-                            resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.YELLOW));
-                        }
-                        for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
-                            temp = 0;
-                            if (r.getColor() == MarketMarble.ColorMarble.YELLOW && r.getMarbles().size() > 0) {
-                                while (temp > r.getMarbles().size() || temp < contCoins) {
-                                    System.out.println("How many coins(Y) from row " + indexrow);
-                                    temp = stdin.nextInt();
-                                }
-                                contCoins -= temp;
-                                resourcesFromWarehouse.add(new CostOfCard(temp, MarketMarble.ColorMarble.YELLOW));
-                                rows.add(indexrow);
-                            }
-                            indexrow++;
-                        }
-                    }
-                    break;
-                case GREY:
-                    while (contStones > 0) {
-                        while (temp > contStones || temp > clientModel.getPlayerBoards().get(playerIndex).getStrongBox().get(1)) {
-                            indexrow = 0;
-                            System.out.println("How many stones(G) from Strongbox\n");
-                            temp = stdin.nextInt();
-                        }
-                        resFromStrong = temp;
-                        contStones -= resFromStrong;
-                        if (resFromStrong != 0) {
-                            resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.GREY));
-                        }
-                        for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
-                            temp = 0;
-                            if (r.getColor() == MarketMarble.ColorMarble.GREY && r.getMarbles().size() > 0) {
-                                while (temp > r.getMarbles().size() || temp < contStones) {
-                                    System.out.println("How many stones(G) from row " + indexrow);
-                                    temp = stdin.nextInt();
-                                }
-                                contStones -= temp;
-                                resourcesFromWarehouse.add(new CostOfCard(temp, MarketMarble.ColorMarble.GREY));
-                                rows.add(indexrow);
-                            }
-                            indexrow++;
-                        }
-                    }
-                    break;
-                case BLUE:
-                    while (contShields > 0) {
-                        while (temp > contShields || temp > clientModel.getPlayerBoards().get(playerIndex).getStrongBox().get(0)) {
-                            indexrow = 0;
-                            System.out.println("How many shields(B) from Strongbox\n");
-                            temp = stdin.nextInt();
-                        }
-                        resFromStrong = temp;
-                        contShields -= resFromStrong;
-                        if (resFromStrong != 0) {
-                            resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.BLUE));
-                        }
-                        for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
-                            temp = 0;
-                            if (r.getColor() == MarketMarble.ColorMarble.BLUE && r.getMarbles().size() > 0) {
-                                while (temp > r.getMarbles().size() || temp < contShields) {
-                                    System.out.println("How many shields(B) from row " + indexrow);
-                                    temp = stdin.nextInt();
-                                }
-                                contShields -= temp;
-                                resourcesFromWarehouse.add(new CostOfCard(temp, MarketMarble.ColorMarble.BLUE));
-                                rows.add(indexrow);
-                            }
-                            indexrow++;
-                        }
-                    }
-                    break;
-            }
-        }
-
-    }
-
 
     public void LeaderCardActionChoice() throws IOException {
-        clientModel.getPlayerBoards().get(ID).PrintLeaderCards(true);
+
         int choice = 0;
-        int choice2 = -1;
-        System.out.println("What do you want to do?\n");
-        while (choice != 1 && choice!=2 ){
-            System.out.println("[1] Discard Leader Card\n[2] Activate Leader Card\n");
-            choice = stdin.nextInt();
-        }
+        int choice2 = 0;
+        choice = userInterface.LeaderCardActionChoice(stdin, ID);
+
         if (choice == 2){
-            while (choice2 != 0 && choice2 != 1) {
-                System.out.println("Which card do you want to activate? [0] or [1]\n");
-                choice2 = stdin.nextInt();
-            }
+            choice2 = userInterface.ActivateLeaderCardActionChoice(stdin);
             ActivateLeaderCardActionMessage activateLeaderCardActionMessage = new ActivateLeaderCardActionMessage();
             activateLeaderCardActionMessage.setPlayerIndex(ID);
             activateLeaderCardActionMessage.setLeaderCardIndex(choice2);
             sendMessage(socketOut, activateLeaderCardActionMessage);
         }
         else {
-            while (choice2 != 0 && choice2 != 1) {
-                System.out.println("Which card do you want to discard? [0] or [1]\n");
-                choice2 = stdin.nextInt();
-            }
+            choice2 = userInterface.DiscardLeaderCardActionChoice(stdin);
             DiscardLeaderCardActionMessage discardLeaderCardActionMessage = new DiscardLeaderCardActionMessage();
             discardLeaderCardActionMessage.setPlayerIndex(ID);
             discardLeaderCardActionMessage.setLeaderCardIndex(choice2);
             sendMessage(socketOut, discardLeaderCardActionMessage);
-
         }
     }
 
@@ -1125,7 +619,7 @@ public class Client extends Messanger implements ViewObserver{
     public void updateOnline(boolean online) throws IOException {
      if(online){
          Socket socket = new Socket(ip, port);
-         System.out.println("Connection established");
+         //System.out.println("Connection established");
          setSocket(socket);
          setSocketOut(new ObjectOutputStream(socket.getOutputStream()));
          setSocketIn(new ObjectInputStream(socket.getInputStream()));
@@ -1148,17 +642,30 @@ public class Client extends Messanger implements ViewObserver{
     }
     @Override
     public void updateNumberOfPlayers(int numberOfPlayers) throws IOException {
-        System.out.println("Number of players set, waiting for them to connect...");
+        userInterface.waitingForOtherPlayers(stdin);
         sendMessage(this.socketOut,new SocketMessage("numberOfPlayersReply",numberOfPlayers,null,nickname));
     }
     public void updateMessage(Message message) throws IOException {
         message.setPlayerIndex(ID);
         sendMessage(this.socketOut, message);
     }
-    public void TopMarker(){
-        System.out.println("Press a button to pick the top marker, type :" + clientModel.getPlayerBoards().get(ID).getTopMarker().getType() +"\n" );
-        String c = stdin.next();
+
+    public int nextInt(){
+        int a = 0;
+        boolean ok = false;
+        while (!ok){
+            try {
+                a = stdin.nextInt();
+                ok = true;
+            }catch (Exception e){
+                ok = false;
+                stdin.next();
+            }
+        }
+        return a;
+
     }
+
 
 }
 

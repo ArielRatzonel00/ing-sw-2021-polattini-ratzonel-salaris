@@ -68,6 +68,9 @@ public class VirtualView extends VirtualViewObservable implements VirtualViewObs
     public void updateCardBuyedResponse(CardBuyedResponse cardBuyedResponse){
         connection.send(cardBuyedResponse);
     }
+    public void updateFinishMultiplayerGame(FinishMultiplayerGame finishMultiplayerGame){
+        connection.send(finishMultiplayerGame);
+    }
    /* @Override
     public void updateTest(SocketMessage message) throws IOException {
         connection.sendMessage(connection.getOut(), message);

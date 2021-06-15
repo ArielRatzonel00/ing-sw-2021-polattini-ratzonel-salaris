@@ -18,5 +18,6 @@ public interface VirtualViewObserver {
     void updateDiscardLeaderCardActionResponse(DiscardLeaderCardActionResponse discardLeaderCardActionResponse);
     void updateProductionResponse(ProductionResponse productionResponse);
     void updateCardBuyedResponse(CardBuyedResponse cardBuyedResponse);
+    void updateFinishMultiplayerGame(FinishMultiplayerGame finishMultiplayerGame);
 
 }

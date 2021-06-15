@@ -186,6 +186,11 @@ public class ModelObservable extends Observable<VirtualView> {
             obs.updateDiscardLeaderCardActionResponse(discardLeaderCardActionResponse);
         }
     }
+    public void notifyFinishMultiplayerGame(String winnerplayer){
+        FinishMultiplayerGame finishMultiplayerGame = new FinishMultiplayerGame();
+        finishMultiplayerGame.setWinnerPlayer(winnerplayer);
+
+    }
     /*protected void notify(T message, int code){
         synchronized (observers) {
             for(Observer<T> observer : observers){
