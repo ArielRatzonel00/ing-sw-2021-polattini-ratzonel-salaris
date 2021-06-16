@@ -87,6 +87,10 @@ public class GameManager extends Observable<Model> implements ControllerObserver
     public synchronized void updateEndOfTurn(EndOfTurnMessage endOfTurnMessage) {
         game.EndTurn(endOfTurnMessage.getPlayerIndex());
     }
+
+    public synchronized void updateDisconnection(){
+        game.setDisconnection(true);
+    }
 }
 
 

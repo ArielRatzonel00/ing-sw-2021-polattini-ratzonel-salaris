@@ -25,6 +25,7 @@ public class Model extends ModelObservable {
     private boolean CheckedPopeFavorState1 = false;
     private boolean CheckedPopeFavorState2 = false;
     private boolean CheckedPopeFavorState3 = false;
+    private boolean disconnection = false;
     public Model(ArrayList<Player> players) {
         this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();
@@ -32,6 +33,15 @@ public class Model extends ModelObservable {
         if (players.size() == 1){
             this.IsSinglePlayerGame = true;
         }
+    }
+
+    public boolean isDisconnection() {
+        return disconnection;
+    }
+
+    public void setDisconnection(boolean disconnection) {
+        notifyDisconnection();
+        this.disconnection = disconnection;
     }
 
     public ArrayList<Player> getPlayers() {

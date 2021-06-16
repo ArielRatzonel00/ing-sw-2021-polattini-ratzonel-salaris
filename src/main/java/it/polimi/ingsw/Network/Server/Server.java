@@ -32,6 +32,9 @@ public class Server {
     //ExecutorService executor = Executors.newCachedThreadPool();
     private int nextGameNPlayers;
 
+    public ArrayList<SocketClientConnection> getWaitingConnections() {
+        return waitingConnections;
+    }
 
     public Server(int port) throws IOException {
         this.port = port;
@@ -42,8 +45,8 @@ public class Server {
     }
     public void handleConnections(SocketClientConnection conn) throws IOException {
         conn.sendMessage(conn.getOut(),new SocketMessage("connected",0,null,"server"));
-
     }
+
 
     public void run() throws IOException {
         while(true) {

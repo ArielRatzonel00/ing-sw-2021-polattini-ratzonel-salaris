@@ -74,6 +74,13 @@ public class VirtualView extends VirtualViewObservable implements VirtualViewObs
     public void updateFinishSingleplayerGame(FinishSinglePlayerGame finishSinglePlayerGame) {
      connection.send(finishSinglePlayerGame);
     }
+    public void handleDisconnection(DisconnectionMessage disconnectionMessage){
+        try {
+            connection.send(disconnectionMessage);
+        }catch(Exception e){
+            System.out.println("Disconnessione");
+        }
+    }
     /* @Override
     public void updateTest(SocketMessage message) throws IOException {
         connection.sendMessage(connection.getOut(), message);

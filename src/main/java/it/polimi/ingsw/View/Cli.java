@@ -177,7 +177,13 @@ public class Cli extends ViewObservable implements UserInterface {
     public void askNickname(Scanner scanner) {
         out.println("Insert your nickname:");
         String name= scanner.nextLine();
-        notifyObserver(obs->obs.updateNickname(name));
+        notifyObserver(obs-> {
+            try {
+                obs.updateNickname(name);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -830,7 +836,10 @@ public class Cli extends ViewObservable implements UserInterface {
     }
 
 
-
+    @Override
+    public void handleDisconnection() {
+        System.out.println("A disconnection has occurred, the game is terminated! \n");
+    }
 }
 
 

@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.NoSuchElementException;
 
 public class SocketClientConnection extends Messanger implements Runnable, Observer{
@@ -79,14 +80,14 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
                 }
 
             } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
-                System.err.println("Error!" + e.getMessage());
+                System.err.println("DISCONNESSIONE EFFETTUATA");
+                virtualView.notifyObserver(obs->obs.updateDisconnection());
             }finally{
-
                 try {
                     socket.close();
                     out.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Disconnessione di un client!");
                 }
 
             }
@@ -111,8 +112,20 @@ public class SocketClientConnection extends Messanger implements Runnable, Obser
     @Override
     public void receiveMessage(SocketMessage message) throws IOException {
         switch (message.getID()){
+            case "nickname":
+                name= message.getSender();
+                int freeNickname=1;
+                for (SocketClientConnection s:server.getWaitingConnections()
+                     ) {
+                    if(s.getName().equalsIgnoreCase(name))
+                        freeNickname=0;
+                }
+
+                sendMessage(getOut(),new SocketMessage("nicknameResponse",freeNickname, Collections.singletonList(name),null));
+                break;
             case "newMulti":
                 name= message.getSender();
+
                 player=new Player(name);
                 if(message.getValue()==0) {
                     System.out.println("singleplayer chosen, start the game...");

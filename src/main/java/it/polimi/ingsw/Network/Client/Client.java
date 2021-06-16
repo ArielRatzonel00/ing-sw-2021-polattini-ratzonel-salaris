@@ -74,8 +74,16 @@ public class Client extends Messanger implements ViewObserver{
         //System.out.println("messaggio ricevuto: " + message.getID() + "destinato a: "+ message.getReceiver());
         if(message.getReceiver()==null || message.getReceiver().contains(this.nickname)){
             switch (message.getID()){
+                case "nicknameResponse":
+                    if(message.getValue()==0){
+                        userInterface.PrintMessages("Nickname already in use, choose again...");
+                        userInterface.askNickname(stdin);
+                    }
+                    else
+                        userInterface.askMultiplayer(stdin);
+                    break;
                 case "connected":
-                    userInterface.askMultiplayer(stdin);
+                    userInterface.askNickname(stdin);
                     break;
                 case "numberOfPlayers":
                     userInterface.askNumberOfPlayers(stdin);
@@ -89,13 +97,13 @@ public class Client extends Messanger implements ViewObserver{
                     userInterface.GameStarted(stdin);
                     sendMessage(socketOut, new SocketMessage("Fine",0, null, null));
                     userInterface.FourLeaderCards(stdin);
-
+                    break;
                 default:
                     break;
             }
         }
     }
-    public void receiveMessageFromServer(Message message) throws IOException {
+    public synchronized void receiveMessageFromServer(Message message) throws IOException {
         //if(message.getPlayerIndex()==null || message.getPlayerIndex().contains(this.nickname)){
             switch (message.getTypeOfMessage()) {
                 case ("FourLeaderCardResponse"):
@@ -435,6 +443,9 @@ public class Client extends Messanger implements ViewObserver{
                     FinishSinglePlayerGame finishSinglePlayerGame = (FinishSinglePlayerGame) message;
                     userInterface.singlePlayerGameFinished(finishSinglePlayerGame.isRedWon(), finishSinglePlayerGame.getTotPoints());
                     break;
+                case "DisconnectionMessage":
+                    userInterface.handleDisconnection();
+                    break;
             }
 
     }
@@ -586,9 +597,13 @@ public class Client extends Messanger implements ViewObserver{
 */
 
     public void run() throws IOException {
-        userInterface.askNickname(stdin);
-        userInterface.askOnline(stdin);
-            try {
+        Socket socket = new Socket(ip, port);
+        //System.out.println("Connection established");
+        setSocket(socket);
+        setSocketOut(new ObjectOutputStream(socket.getOutputStream()));
+        setSocketIn(new ObjectInputStream(socket.getInputStream()));
+
+        try {
 
                 SocketMessage message=(SocketMessage)socketIn.readObject();
                 receiveMessage(message);
@@ -622,11 +637,7 @@ public class Client extends Messanger implements ViewObserver{
     @Override
     public void updateOnline(boolean online) throws IOException {
      if(online){
-         Socket socket = new Socket(ip, port);
-         //System.out.println("Connection established");
-         setSocket(socket);
-         setSocketOut(new ObjectOutputStream(socket.getOutputStream()));
-         setSocketIn(new ObjectInputStream(socket.getInputStream()));
+
      }
      else
          System.out.println("OFFLINE GAME SELECTED!");
@@ -635,14 +646,20 @@ public class Client extends Messanger implements ViewObserver{
     @Override
     public void updateMultiplayer(boolean multiplayer) throws IOException {
         if(multiplayer){
+            userInterface.PrintMessages("Waiting ...\n");
+
             sendMessage(this.socketOut,new SocketMessage("newMulti",1,null,nickname));
+
         }
-        else
-            sendMessage(this.socketOut,new SocketMessage("newMulti",0,null,nickname));
+        else {
+            sendMessage(this.socketOut, new SocketMessage("newMulti", 0, null, nickname));
+        }
+
     }
     @Override
-    public void updateNickname(String nickname){
+    public void updateNickname(String nickname) throws IOException {
         this.nickname=nickname;
+        sendMessage(this.socketOut,new SocketMessage("nickname",0,null,nickname));
     }
     @Override
     public void updateNumberOfPlayers(int numberOfPlayers) throws IOException {

@@ -18,6 +18,11 @@ public class ModelObservable extends Observable<VirtualView> {
             observers.add(observer);
         }
     }
+    public void notifyDisconnection(){
+        for (VirtualView obs:observers
+        )
+                obs.handleDisconnection(new DisconnectionMessage());
+    }
     public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards, ArrayList<DevelopmentCard> developmentGrid, MarketTray marketTray, String nickname, boolean isSinglePlayerGame, MarkerStack markers){
 
         FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse(leaderCards);

@@ -8,7 +8,7 @@ import java.net.Socket;
 public interface ViewObserver {
     void updateOnline(boolean Online) throws IOException;
     void updateMultiplayer(boolean multiplayer) throws IOException;
-    void updateNickname(String nickname);
+    void updateNickname(String nickname) throws IOException;
     void updateNumberOfPlayers(int numberOfPlayers) throws IOException;
     void updateMessage(Message message) throws IOException;
 
