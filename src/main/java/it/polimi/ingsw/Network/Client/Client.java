@@ -426,10 +426,14 @@ public class Client extends Messanger implements ViewObserver{
                         ChoiceOfTheMenu(i);
                     }
                     break;
-                case "updateFinishMultiplayerGame":
+                case "FinishMultiplayerGame":
                     FinishMultiplayerGame finishMultiplayerGame = (FinishMultiplayerGame) message;
                     userInterface.PrintMessages("The game is finished, the winner is.............. ");
                     userInterface.PrintMessages(finishMultiplayerGame.getWinnerPlayer() + ", Congratulations!!!");
+                    break;
+                case "FinishSinglePlayerGame":
+                    FinishSinglePlayerGame finishSinglePlayerGame = (FinishSinglePlayerGame) message;
+                    userInterface.singlePlayerGameFinished(finishSinglePlayerGame.isRedWon(), finishSinglePlayerGame.getTotPoints());
                     break;
             }
 

@@ -189,7 +189,19 @@ public class ModelObservable extends Observable<VirtualView> {
     public void notifyFinishMultiplayerGame(String winnerplayer){
         FinishMultiplayerGame finishMultiplayerGame = new FinishMultiplayerGame();
         finishMultiplayerGame.setWinnerPlayer(winnerplayer);
-
+        for (VirtualView obs:observers
+        ) {
+            obs.updateFinishMultiplayerGame(finishMultiplayerGame);
+        }
+    }
+    public void notifyFinishSingleplayerGame(boolean RedWon, int points){
+        FinishSinglePlayerGame finishSinglePlayerGame = new FinishSinglePlayerGame();
+        finishSinglePlayerGame.setRedWon(RedWon);
+        finishSinglePlayerGame.setTotPoints(points);
+        for (VirtualView obs:observers
+        ) {
+            obs.updateFinishSingleplayerGame(finishSinglePlayerGame);
+        }
     }
     /*protected void notify(T message, int code){
         synchronized (observers) {

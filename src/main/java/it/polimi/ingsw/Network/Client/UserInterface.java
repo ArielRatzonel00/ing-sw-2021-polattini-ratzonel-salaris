@@ -39,5 +39,6 @@ public interface UserInterface {
     void GeneralInformationchoice(Scanner scanner);
     void newWarehosue(Scanner scanner, int ID);
     void waitingForOtherPlayers(Scanner scanner);
+    void singlePlayerGameFinished(boolean redWon, int TotalPoints);
     //void ShowCard(LeaderCard leaderCard);
 }

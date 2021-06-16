@@ -20,6 +20,8 @@ public class Model extends ModelObservable {
     private int contForStart;
     private Player CurrentPlayer;
     private boolean lastTurn = false;
+    private boolean lastTurnSinglePlayer = false;
+    private boolean redWonSP = false;
     private boolean CheckedPopeFavorState1 = false;
     private boolean CheckedPopeFavorState2 = false;
     private boolean CheckedPopeFavorState3 = false;
@@ -129,7 +131,13 @@ public class Model extends ModelObservable {
                 CurrPlayerAdvances++;
                 returnedValue = currentPlayer.getFaithTrack().setRedPosition(1);
                 if (returnedValue == 3){
-                    lastTurn = true;
+                    if (IsSinglePlayerGame){
+                        lastTurnSinglePlayer = true;
+                        redWonSP = true;
+                    }
+                    else {
+                        lastTurn = true;
+                    }
                 }
                 PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
                 if (PopeFavorStateChanged != 0) {
@@ -177,6 +185,10 @@ public class Model extends ModelObservable {
                         if (PopeFavorStateChanged!=0){
                          PopeFavorStateEvent = true;
                          popeFavorStates = getPopeFavorStates();
+                        }
+                        if (returnedValue == 3){
+                            lastTurnSinglePlayer = true;
+                            redWonSP = false;
                         }
                     }
                 }
@@ -226,10 +238,20 @@ public class Model extends ModelObservable {
             contRow++;
         }
         DevelopmentCard card = developmentGrid.remove(row, col);
+        if (developmentGrid.getSingleCell(0,col).getTopCard() == null && developmentGrid.getSingleCell(1,col).getTopCard() == null && developmentGrid.getSingleCell(2,col).getTopCard() == null ){
+            redWonSP = false;
+            lastTurnSinglePlayer = true;
+        }
         currentPlayer.buyCard(card,slot);
         currentPlayer.setProductionsAvailable(slot);
         if (currentPlayer.getSlotsBoard().filterCount(1) + currentPlayer.getSlotsBoard().filterCount(2) + currentPlayer.getSlotsBoard().filterCount(3) == 7){
-            lastTurn = true;
+            if (IsSinglePlayerGame){
+                lastTurnSinglePlayer = true;
+                redWonSP = true;
+            }
+            else {
+                lastTurn = true;
+            }
         }
         notifyCardBuyedResponse(PlayerIndex, developmentGrid.getTopcards(), currentPlayer.getWarehouse(), currentPlayer.getStrongbox(), card,currentPlayer.getProductionsAvailable(), slot);
     }
@@ -243,7 +265,13 @@ public class Model extends ModelObservable {
             currentplayer.DiscardLeaderCard(NCard);
                 returnedvalue = currentplayer.getFaithTrack().setRedPosition(1);
                 if (returnedvalue == 3){
-                    lastTurn = true;
+                    if (IsSinglePlayerGame){
+                        lastTurnSinglePlayer = true;
+                        redWonSP = true;
+                    }
+                    else {
+                        lastTurn = true;
+                    }
                 }
                 PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedvalue);
                 if (PopeFavorStateChanged != 0) {
@@ -374,7 +402,13 @@ public class Model extends ModelObservable {
                         for (int r = 0; r < c.getCostNumber(); r++) {
                             returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
                             if (returnedValue == 3){
-                                lastTurn = true;
+                                if (IsSinglePlayerGame){
+                                    lastTurnSinglePlayer = true;
+                                    redWonSP = true;
+                                }
+                                else {
+                                    lastTurn = true;
+                                }
                             }
                             PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
                             redPositions += 1;
@@ -387,7 +421,13 @@ public class Model extends ModelObservable {
                 if (profit.get(indexProfit) == MarketMarble.ColorMarble.RED) {
                     returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
                     if (returnedValue == 3){
-                        lastTurn = true;
+                        if (IsSinglePlayerGame){
+                            lastTurnSinglePlayer = true;
+                            redWonSP = true;
+                        }
+                        else {
+                            lastTurn = true;
+                        }
                     }
                     PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
                     redPositions += 1;
@@ -398,7 +438,13 @@ public class Model extends ModelObservable {
                 if (production.get(i) != 0) {
                     returnedValue = currentplayer.getFaithTrack().setRedPosition(1);
                     if (returnedValue == 3){
-                        lastTurn = true;
+                        if (IsSinglePlayerGame){
+                            lastTurnSinglePlayer = true;
+                            redWonSP = false;
+                        }
+                        else {
+                            lastTurn = true;
+                        }
                     }
                     PopeFavorStateChanged += CheckPopeFavorStateActivatedByCurrentPlayer(returnedValue);
                     redPositions += 1;
@@ -434,23 +480,31 @@ public class Model extends ModelObservable {
             }
         }
         else {
-            int blackPositions = 0;
-            int returnedvalue = 0;
-            int PopeFavorStateChanged = 0;
-            Marker topMarker = markers.getTopMarker();
-            blackPositions = topMarker.MarkerEffect(this);
-            if (blackPositions== 1) {
-                returnedvalue = players.get(0).getFaithTrack().setBlackPosition(1);
-            }else if (blackPositions == 2){
-                returnedvalue = players.get(0).getFaithTrack().setBlackPosition(1);
-                returnedvalue += players.get(0).getFaithTrack().setBlackPosition(1);
-            }
-            PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedvalue);
-            if (PopeFavorStateChanged!=0){
-                notifyNewTurn(PlayerIndex,blackPositions,true,getPopeFavorStates(),markers.getMarkers().get(markers.getMarkers().size()-1), developmentGrid.getTopcards());
+            if (lastTurnSinglePlayer){
+                int totPoints = 0;
+                if (redWonSP){
+                    totPoints = players.get(0).GetTotalPoints();
+                }
+                notifyFinishSingleplayerGame(redWonSP, totPoints);
             }
             else {
-                notifyNewTurn(PlayerIndex, blackPositions, false, null, markers.getMarkers().get(markers.getMarkers().size()-1), developmentGrid.getTopcards());
+                int blackPositions = 0;
+                int returnedvalue = 0;
+                int PopeFavorStateChanged = 0;
+                Marker topMarker = markers.getTopMarker();
+                blackPositions = topMarker.MarkerEffect(this);
+                if (blackPositions == 1) {
+                    returnedvalue = players.get(0).getFaithTrack().setBlackPosition(1);
+                } else if (blackPositions == 2) {
+                    returnedvalue = players.get(0).getFaithTrack().setBlackPosition(1);
+                    returnedvalue += players.get(0).getFaithTrack().setBlackPosition(1);
+                }
+                PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedvalue);
+                if (PopeFavorStateChanged != 0) {
+                    notifyNewTurn(PlayerIndex, blackPositions, true, getPopeFavorStates(), markers.getMarkers().get(markers.getMarkers().size() - 1), developmentGrid.getTopcards());
+                } else {
+                    notifyNewTurn(PlayerIndex, blackPositions, false, null, markers.getMarkers().get(markers.getMarkers().size() - 1), developmentGrid.getTopcards());
+                }
             }
 
         }

@@ -776,6 +776,21 @@ public class Cli extends ViewObservable implements UserInterface {
     public void waitingForOtherPlayers(Scanner scanner) {
         System.out.println("Number of players set, waiting for them to connect...");
     }
+    @Override
+    public void newWarehosue(Scanner scanner, int ID) {
+        clientModel.getPlayerBoards().get(ID).PrintWarehouse();
+    }
+
+    @Override
+    public void singlePlayerGameFinished(boolean redWon, int TotalPoints) {
+        if (redWon){
+            System.out.println("Congratulations, you won the game!\n");
+            System.out.println("Total Points:" + TotalPoints);
+        }
+        else {
+            System.out.println("Lorenzo il Magnifico has won the game :(");
+        }
+    }
 
     public int nextInt(Scanner scanner){
         int a = 0;
@@ -814,10 +829,8 @@ public class Cli extends ViewObservable implements UserInterface {
         return string;
     }
 
-    @Override
-    public void newWarehosue(Scanner scanner, int ID) {
-        clientModel.getPlayerBoards().get(ID).PrintWarehouse();
-    }
+
+
 }
 
 
