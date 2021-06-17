@@ -2,7 +2,6 @@ package it.polimi.ingsw.Network.Client;
 
 import it.polimi.ingsw.Model.CostOfCard;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
-import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Messages.*;
 
 import java.util.ArrayList;
@@ -10,11 +9,10 @@ import java.util.Scanner;
 
 public interface UserInterface {
     void Waiting(Scanner scanner);
-    void askOnline(Scanner scanner);
-    void askMultiplayer(Scanner scanner);
-    void askNickname(Scanner scanner);
-    void askNumberOfPlayers(Scanner scanner);
-    void FourLeaderCards(Scanner scanner);
+    boolean askMultiplayer(Scanner scanner);
+    String askNickname(Scanner scanner);
+    int askNumberOfPlayers(Scanner scanner);
+    FourLeaderCardsMessage FourLeaderCards(Scanner scanner);
     void DiscardInitialLeaderCards(Scanner scanner, ArrayList<LeaderCard> leaderCards, DiscardInitialLeaderCardsMessage discardInitialLeaderCardsMessage);
     void InitialResources(Scanner scanner, int PlayerIndex, InitialResourcesMessage initialResourcesMessage);
     int Menù(Scanner scanner, boolean actionDone, int leaderCardActionAvailable, boolean isSinglePlayer);

@@ -6,7 +6,7 @@ import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Network.Client.CModel.ClientModel;
 import it.polimi.ingsw.Network.Client.CModel.PlayerBoard;
 import it.polimi.ingsw.Network.Messages.*;
-import it.polimi.ingsw.Observer.ViewObserver;
+
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -17,7 +17,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Client extends Messanger implements ViewObserver{
+public class Client extends Messanger {
 
     private String ip;
     private String nickname;
@@ -77,26 +77,45 @@ public class Client extends Messanger implements ViewObserver{
                 case "nicknameResponse":
                     if(message.getValue()==0){
                         userInterface.PrintMessages("Nickname already in use, choose again...");
-                        userInterface.askNickname(stdin);
+                        this.nickname = userInterface.askNickname(stdin);
+                        sendMessage(this.socketOut,new SocketMessage("nickname",0,null,this.nickname));
                     }
-                    else
-                        userInterface.askMultiplayer(stdin);
+                    else {
+                        boolean multiplayer = false;
+                        multiplayer = userInterface.askMultiplayer(stdin);
+                        if(multiplayer){
+                            userInterface.PrintMessages("Waiting ...\n");
+
+                            sendMessage(this.socketOut,new SocketMessage("newMulti",1,null,nickname));
+
+                        }
+                        else {
+                            sendMessage(this.socketOut, new SocketMessage("newMulti", 0, null, nickname));
+                        }
+                    }
                     break;
                 case "connected":
-                    userInterface.askNickname(stdin);
+                    this.nickname = userInterface.askNickname(stdin);
+                    sendMessage(this.socketOut,new SocketMessage("nickname",0,null,this.nickname));
                     break;
                 case "numberOfPlayers":
-                    userInterface.askNumberOfPlayers(stdin);
+                    int numberOfPlayers = 0;
+                    numberOfPlayers = userInterface.askNumberOfPlayers(stdin);
+                    userInterface.waitingForOtherPlayers(stdin);
+                    sendMessage(this.socketOut,new SocketMessage("numberOfPlayersReply",numberOfPlayers,null,this.nickname));
+
                     break;
                 case "waiting":
                     userInterface.Waiting(stdin);
-
                     break;
                 case "GameStarted":
                     ID=message.getValue();
                     userInterface.GameStarted(stdin);
                     sendMessage(socketOut, new SocketMessage("Fine",0, null, null));
-                    userInterface.FourLeaderCards(stdin);
+                    FourLeaderCardsMessage fourLeaderCardsMessage = userInterface.FourLeaderCards(stdin);
+                    fourLeaderCardsMessage.setPlayerIndex(ID);
+                    sendMessage(this.socketOut, fourLeaderCardsMessage);
+
                     break;
                 default:
                     break;
@@ -634,42 +653,7 @@ public class Client extends Messanger implements ViewObserver{
             }
     }
 
-    @Override
-    public void updateOnline(boolean online) throws IOException {
-     if(online){
 
-     }
-     else
-         System.out.println("OFFLINE GAME SELECTED!");
-    }
-
-    @Override
-    public void updateMultiplayer(boolean multiplayer) throws IOException {
-        if(multiplayer){
-            userInterface.PrintMessages("Waiting ...\n");
-
-            sendMessage(this.socketOut,new SocketMessage("newMulti",1,null,nickname));
-
-        }
-        else {
-            sendMessage(this.socketOut, new SocketMessage("newMulti", 0, null, nickname));
-        }
-
-    }
-    @Override
-    public void updateNickname(String nickname) throws IOException {
-        this.nickname=nickname;
-        sendMessage(this.socketOut,new SocketMessage("nickname",0,null,nickname));
-    }
-    @Override
-    public void updateNumberOfPlayers(int numberOfPlayers) throws IOException {
-        userInterface.waitingForOtherPlayers(stdin);
-        sendMessage(this.socketOut,new SocketMessage("numberOfPlayersReply",numberOfPlayers,null,nickname));
-    }
-    public void updateMessage(Message message) throws IOException {
-        message.setPlayerIndex(ID);
-        sendMessage(this.socketOut, message);
-    }
 
     public int nextInt(){
         int a = 0;

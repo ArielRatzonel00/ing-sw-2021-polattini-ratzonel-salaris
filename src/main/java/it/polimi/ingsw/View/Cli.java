@@ -9,7 +9,7 @@ import it.polimi.ingsw.Network.Client.CModel.ClientModel;
 import it.polimi.ingsw.Network.Client.CModel.PlayerBoard;
 import it.polimi.ingsw.Network.Client.UserInterface;
 import it.polimi.ingsw.Network.Messages.*;
-import it.polimi.ingsw.Observer.ViewObservable;
+
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -18,10 +18,10 @@ import java.util.Scanner;
 
 //import it.polimi.ingsw.utils.gameMessage;
 
-public class Cli extends ViewObservable implements UserInterface {
+public class Cli implements UserInterface {
     private boolean SinglePlayer;
     private final PrintStream out;
-    String response;
+
     ClientModel clientModel;
 
     public Cli() {
@@ -37,38 +37,22 @@ public class Cli extends ViewObservable implements UserInterface {
     }
 
 
-    @Override
-    public void askOnline(Scanner scanner){
-    out.println("Would you like to play Online or Offline? (ON/OFF)");
-    response=scanner.nextLine();
-    Boolean online=false;
-    if(response.equalsIgnoreCase("ON"))
-        online=true;
-    final boolean onlineFinal=online;  //lambda expression require final parameter
-        notifyObserver(obs -> {
-            try {
-                obs.updateOnline(onlineFinal);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
+
 
     @Override
-    public void askMultiplayer(Scanner scanner){
-        out.println("Would you play SinglePlayer or Multiplayer? (S/M)");
-        response=scanner.nextLine();
+    public boolean askMultiplayer(Scanner scanner){
+        String response = "";
         boolean multiplayer=true;
+
+        while (!response.equalsIgnoreCase("s") && !response.equalsIgnoreCase("m")) {
+            System.out.println("Would you play SinglePlayer or Multiplayer? (S/M)");
+            response = scanner.nextLine();
+        }
         if(response.equalsIgnoreCase("S"))
             multiplayer=false;
-        final boolean multiplayerFinal=multiplayer;
-        notifyObserver(obs-> {
-            try {
-                obs.updateMultiplayer(multiplayerFinal);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+
+        return multiplayer;
+
     }
 
     @Override
@@ -174,42 +158,25 @@ public class Cli extends ViewObservable implements UserInterface {
 
 
     @Override
-    public void askNickname(Scanner scanner) {
+    public String askNickname(Scanner scanner) {
         out.println("Insert your nickname:");
         String name= scanner.nextLine();
-        notifyObserver(obs-> {
-            try {
-                obs.updateNickname(name);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        return name;
+
     }
 
     @Override
-    public void askNumberOfPlayers(Scanner scanner) {
+    public int askNumberOfPlayers(Scanner scanner) {
         System.out.println("How many players in the game (2-4)?");
         int numberOfPlayers=nextInt(scanner);
-        notifyObserver(obs-> {
-            try {
-                obs.updateNumberOfPlayers(numberOfPlayers);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        return numberOfPlayers;
     }
     @Override
-    public void  FourLeaderCards(Scanner scanner){
+    public FourLeaderCardsMessage FourLeaderCards(Scanner scanner){
             System.out.println("Press a button to start the game\n");
             String s=scanner.next();
             FourLeaderCardsMessage fourLeaderCardsMessage = new FourLeaderCardsMessage();
-            notifyObserver(obs-> {
-                try {
-                    obs.updateMessage(fourLeaderCardsMessage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+            return fourLeaderCardsMessage;
     }
 
     @Override

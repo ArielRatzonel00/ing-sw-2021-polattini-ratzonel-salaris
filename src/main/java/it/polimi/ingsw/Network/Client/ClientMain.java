@@ -15,7 +15,7 @@ public class ClientMain {
         try {
             Cli cli=new Cli();
             Client client = new Client("127.0.0.1", 1334, cli);
-            cli.addObserver(client);
+            //cli.addObserver(client);
             cli.setCmodel(client.getClientModel());
             client.run();
         } catch (IOException e) {
