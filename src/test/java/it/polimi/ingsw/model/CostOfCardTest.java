@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/*
 class CostOfCardTest {
     private CostOfCard Cost;
 
@@ -22,3 +22,5 @@ class CostOfCardTest {
         assertTrue(Cost.toString().equals("CostOfCard{costNumber=3,costColor=BLUE}"));
     }
 }
+
+ */
