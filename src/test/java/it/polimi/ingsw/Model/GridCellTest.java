@@ -1,13 +1,7 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Model.Deck;
-import it.polimi.ingsw.Model.DevelopmentCard;
-import it.polimi.ingsw.Model.GridCell;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

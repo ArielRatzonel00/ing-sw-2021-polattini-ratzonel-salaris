@@ -1,7 +1,5 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Model.FaithTrack;
-import it.polimi.ingsw.Model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
