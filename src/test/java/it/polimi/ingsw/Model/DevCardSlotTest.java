@@ -1,15 +1,9 @@
 
-package it.polimi.ingsw.model;
-
-import it.polimi.ingsw.Model.DevCardSlot;
-import it.polimi.ingsw.Model.DevelopmentCard;
-import it.polimi.ingsw.Model.Deck;
+package it.polimi.ingsw.Model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
