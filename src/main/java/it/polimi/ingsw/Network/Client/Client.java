@@ -71,7 +71,7 @@ public class Client extends Messanger {
     }
 
     public synchronized void receiveMessage(SocketMessage message) throws IOException {
-        //System.out.println("messaggio ricevuto: " + message.getID() + "destinato a: "+ message.getReceiver());
+
         if(message.getReceiver()==null || message.getReceiver().contains(this.nickname)){
             switch (message.getID()){
                 case "nicknameResponse":
@@ -413,7 +413,7 @@ public class Client extends Messanger {
                             clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
                             indexPopeFavorState++;
                             clientModel.getPlayerBoards().get(0).getFaithTrackClient().setPopeFavors(productionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
-                            indexPopeFavorState++;
+
                         }
                     }
                     if (productionResponse.getPlayerIndex() == ID) {
@@ -470,7 +470,11 @@ public class Client extends Messanger {
     }
 
 
-
+    /**
+     * Different actions based on the choice of the player, every turn the player has 5 choices
+     * @param choice choice of the player
+     * @throws IOException
+     */
     public void ChoiceOfTheMenu(int choice) throws IOException {
 
         switch (choice) {
@@ -501,11 +505,22 @@ public class Client extends Messanger {
 
         }
     }
+
+    /**
+     * If the players selectsd that he wants to do a normal action in the turn, this method invoke the menu of the three actions
+     * @throws IOException
+     */
     public void ActionChoice() throws IOException {
         int choice = 0;
         choice = userInterface.ActionMenu(stdin);
         WhichActionChoice(choice);
     }
+
+    /**
+     * Choice of the player in the menu of actions
+     * @param choice choice of the player
+     * @throws IOException
+     */
     public void WhichActionChoice(int choice) throws IOException {
         switch (choice){
             case 1:
@@ -571,49 +586,6 @@ public class Client extends Messanger {
         }
     }
 
-    /*public Thread asyncReadFromSocket(final ObjectInputStream socketIn) {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (isActive()) {
-                        Object inputObject = socketIn.readObject();
-                        if (inputObject instanceof String) {
-                            System.out.println((String) inputObject);
-                        } else if (inputObject instanceof Board) {
-                            ((Board) inputObject).print();
-                        } else {
-                            throw new IllegalArgumentException();
-                        }
-                    }
-                } catch (Exception e) {
-                    setActive(false);
-                }
-            }
-        });
-        t.start();
-        return t;
-    }
-
-    public Thread asyncWriteToSocket(final Scanner stdin, final PrintWriter socketOut) {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (isActive()) {
-                        String inputLine = stdin.nextLine();
-                        socketOut.println(inputLine);
-                        socketOut.flush();
-                    }
-                } catch (Exception e) {
-                    setActive(false);
-                }
-            }
-        });
-        t.start();
-        return t;
-    }
-*/
 
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);
@@ -637,12 +609,7 @@ public class Client extends Messanger {
                     Message message2=(Message)socketIn.readObject();
                     receiveMessageFromServer(message2);
                 }
-                /*System.out.println("Quanto vuoi che valga A?");
-                int a=stdin.nextInt();
-                socketOut.writeObject(a);
 
-                SocketMessage b= (SocketMessage)socketIn.readObject();
-                receiveMessage(b);*/
             } catch (NoSuchElementException | ClassNotFoundException e) {
                 System.out.println("Connection closed from the client side");
             } finally {
@@ -652,25 +619,6 @@ public class Client extends Messanger {
                 socket.close();
             }
     }
-
-
-
-    public int nextInt(){
-        int a = 0;
-        boolean ok = false;
-        while (!ok){
-            try {
-                a = stdin.nextInt();
-                ok = true;
-            }catch (Exception e){
-                ok = false;
-                stdin.next();
-            }
-        }
-        return a;
-
-    }
-
 
 }
 

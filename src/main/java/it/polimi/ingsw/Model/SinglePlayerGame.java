@@ -42,21 +42,3 @@ public class SinglePlayerGame {
         return deck;
     }
 }
-
- /*   public void startgame(){
-        //Creazione di Development grid
-        //Assegnazione di Leader Card a ogni player
-        // settaggio di tutte le cose iniziali come creazione di ogni faithTrack/Warehouse ecc per ogni player
-
-
-    }
-    public void finishgame(){
-        // Ricordarsi di fare i controlli nelle classi che posso far finire la partita esempio nella classed Faith Track controllare Red Position ecc
-        // fai i calcoli per finire la partita
-
-
-
-    }
-
-}
-  */

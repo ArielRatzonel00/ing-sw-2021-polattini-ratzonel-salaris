@@ -31,13 +31,16 @@ public class SlotsBoard implements Serializable {
         return points;
     } // Method that counts total victory points from the slots
 
+    /**
+     * @return the total cards that a player has, useful because if it is 7, the game ends
+     */
     public int getCardsQuantity(){
         int cards=0;
         for (DevCardSlot a: slots) {
             cards += a.getCards().size();
         }
         return cards;
-    } // Method that gets total number of DevelopmentCards on a player board, useful for the 7 cards ending game check
+    }
 
     public int filterCount(int level){
         int total=0;
@@ -62,5 +65,4 @@ public class SlotsBoard implements Serializable {
         }
         return total;
     }
-    // Methods filterCount receive a level, a color or a pair of level and color and return the total number of DevelopmentCards in the SlotsBoard with that attributes
 }

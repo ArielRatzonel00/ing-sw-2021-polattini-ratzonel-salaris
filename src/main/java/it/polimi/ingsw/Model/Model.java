@@ -64,6 +64,11 @@ public class Model extends ModelObservable {
     } // numero di giocatori
 
 
+    /**
+     * Assigns the initial four leader cards
+     * @param PlayerIndex index of the player that will receive the initial four leader cards
+     */
+
     public void AssignFourLeaderCards(int PlayerIndex){
         Player currentplayer = players.get(PlayerIndex);
         System.out.println("Asssegna 4leader nel game");
@@ -73,6 +78,12 @@ public class Model extends ModelObservable {
 
     }
 
+    /**
+     * Discards two of the four initial leadear cards
+     * @param PlayerIndex index of the player in the game
+     * @param LeaderCard1Index index of the first leader card to discard
+     * @param LeaderCard2Index index of the second leader card to discard
+     */
     public void DiscardInitialLeaderCards(int PlayerIndex, int LeaderCard1Index, int LeaderCard2Index){
         Player currentplayer = players.get(PlayerIndex);
         currentplayer.DiscardLeaderCard(LeaderCard1Index);
@@ -113,6 +124,13 @@ public class Model extends ModelObservable {
             notifyInitialResourcesSet(3, start, currentplayer.getWarehouse(),1);
         }
     }
+
+    /**
+     * Method that shift the market tray and notifies to the client the marbles that he collected
+     * @param PlayerIndex index of the player in the game
+     * @param isRow distinguishes between row and col
+     * @param index index of the row/col of the market tray
+     */
     public void MarketTrayAction(int PlayerIndex, boolean isRow, int index){
         Player currentplayer = players.get(PlayerIndex);
 
@@ -124,6 +142,14 @@ public class Model extends ModelObservable {
         }
         notifyMarketTrayActionResponse(PlayerIndex,marketTray.getMarketMatrix(),marketTray.getOustideMarble(),returnedMarbles, currentplayer.getChangeWhite1(),currentplayer.getChangeWhite2());
     }
+
+    /**
+     * Method that modifies the model with the choices done by the player with the marbles after a market tray action
+     * @param PlayerIndex index of the player in the game
+     * @param keepResource choices of the player (for every resources he choice if keep it or leave it)
+     * @param marbles color of the marbles with which the player interacts
+     * @param rowsOfWarehouse if the player choose to keep a marble, he also choose the row of the warehouse to place it, this param keep the choices
+     */
     public void DealWithResources(int PlayerIndex,  ArrayList<Boolean> keepResource, ArrayList<MarketMarble.ColorMarble> marbles, ArrayList<Integer> rowsOfWarehouse) {
         boolean NeedToCheckPopeFavorState1 = false;
         boolean NeedToCheckPopeFavorState2 = false;
@@ -209,6 +235,13 @@ public class Model extends ModelObservable {
 
     }
 
+    /**
+     * Checks if the card selected can be purchased and can be added in the slot selected
+     * @param PlayerIndex index of the player in the game
+     * @param row row of the position in the devGrid of the card selected
+     * @param col col of the position in the devGrid of the card selected
+     * @param slot slot to place the card selected
+     */
     public void WantToBuyCard(int PlayerIndex, int row, int col, int slot){
         String phrasetoShow = "";
         ArrayList<CostOfCard> cost = new ArrayList<>();
@@ -232,15 +265,24 @@ public class Model extends ModelObservable {
         }
         notifyWantToBuyCardResponse(PlayerIndex, phrasetoShow,row, col, slot, cost);
 
-
-
     }
-    public void BuyCard(int PlayerIndex, ArrayList<CostOfCard> resourcesFromStrogbox, ArrayList<CostOfCard> resourcesFromWarehouse, ArrayList<Integer> rows, int row, int col, int slot ) {
+
+    /**
+     * Places the card in the slot, update the productions available and removes the resources with which the player payed
+     * @param PlayerIndex index of the player in the game
+     * @param resourcesFromStrongbox resources taken from the strongbox
+     * @param resourcesFromWarehouse resources taken from the warehouse
+     * @param rows rows of the warehouse
+     * @param row row of the position in the devGrid of the card selected
+     * @param col col of the position in the devGrid of the card selected
+     * @param slot slot to place the card selected
+     */
+    public void BuyCard(int PlayerIndex, ArrayList<CostOfCard> resourcesFromStrongbox, ArrayList<CostOfCard> resourcesFromWarehouse, ArrayList<Integer> rows, int row, int col, int slot ) {
         int contRow = 0;
         Player currentPlayer = players.get(PlayerIndex);
 
         contRow = 0;
-        for (CostOfCard resourceFromStrongbox2 : resourcesFromStrogbox) {
+        for (CostOfCard resourceFromStrongbox2 : resourcesFromStrongbox) {
             currentPlayer.getStrongbox().RemoveResourcesFromStrongbox(resourceFromStrongbox2.getCostNumber(), resourceFromStrongbox2.getCostColor());
         }
         for (CostOfCard resourceFromWarehouse2 : resourcesFromWarehouse) {
@@ -266,6 +308,11 @@ public class Model extends ModelObservable {
         notifyCardBuyedResponse(PlayerIndex, developmentGrid.getTopcards(), currentPlayer.getWarehouse(), currentPlayer.getStrongbox(), card,currentPlayer.getProductionsAvailable(), slot);
     }
 
+    /**
+     * Removes the leader card selected and make the player advance by one in the faithTrack
+     * @param PlayerIndex index of the player in the game
+     * @param NCard index of the card to discard
+     */
     public void DiscardLeaderCardAction(int PlayerIndex, int NCard) {
         int returnedvalue = 0;
         int PopeFavorStateChanged = 0;
@@ -299,6 +346,11 @@ public class Model extends ModelObservable {
         }
     }
 
+    /**
+     * Activates the leader card selected by applying the effect of the leader card
+     * @param PlayerIndex index of the player in the game
+     * @param NCard index of the card to activate
+     */
     public void ActivateLeaderCardAction(int PlayerIndex, int NCard){
         Player currentplayer = players.get(PlayerIndex);
         if (currentplayer.getLeaderCard(NCard) != null && !currentplayer.getLeaderCard(NCard).isActivate()){
@@ -315,6 +367,12 @@ public class Model extends ModelObservable {
     }
 
 
+    /**
+     * Move the resources from row1 to row2 and the other way around
+     * @param PlayerIndex index of the player in the game
+     * @param row1 index of the row
+     * @param row2 index of the row
+     */
     public void MoveResources(int PlayerIndex, int row1, int row2) {
         Player currentplayer = players.get(PlayerIndex);
         boolean ok = false;
@@ -390,6 +448,15 @@ public class Model extends ModelObservable {
 
         }
 
+    /**
+     * Activates the productions selected adding the profit and removing the cost
+     * @param PlayerIndex index of the player in the game
+     * @param production indexes of the production to activate
+     * @param ResourcesFromStrongbox resources from strongbox to remove
+     * @param ResourcesFromWarehouse resources from warehouse to remove
+     * @param rows rows of the resources from warehouse to remove
+     * @param profit if the production contains a profit that can be chosen, this param contains the color of the chosen resource
+     */
     public void Produce(int PlayerIndex, ArrayList<Integer> production, ArrayList<ArrayList<CostOfCard>> ResourcesFromStrongbox, ArrayList<ArrayList<CostOfCard>> ResourcesFromWarehouse, ArrayList<ArrayList<Integer>> rows, ArrayList<MarketMarble.ColorMarble> profit) {
         int returnedValue = 0;
         Player currentplayer = players.get(PlayerIndex);
@@ -471,6 +538,10 @@ public class Model extends ModelObservable {
         }
     }
 
+    /**
+     * Ends the turn of a player and notifies the beginning of a new turn, if the game is finished, notifies the end of the game and the winner
+     * @param PlayerIndex index of the player in the game
+     */
     public void EndTurn(int PlayerIndex) {
         int IndexNewTurn = 0;
         if (!IsSinglePlayerGame) {
@@ -523,26 +594,10 @@ public class Model extends ModelObservable {
     public MarkerStack getMarkers() {
         return markers;
     }
-/*
-    public void MarkerStackAction(){
-        int blackPositions = 0;
-        int returnedvalue = 0;
-        int PopeFavorStateChanged = 0;
-        blackPositions = markers.getTopMarker().MarkerEffect(this);
-        if (blackPositions== 1) {
-            returnedvalue = players.get(0).getFaithTrack().setBlackPosition(1);
-        }else if (blackPositions == 2){
-            returnedvalue = players.get(0).getFaithTrack().setBlackPosition(1);
-            returnedvalue += players.get(0).getFaithTrack().setBlackPosition(1);
-        }
-        PopeFavorStateChanged = CheckPopeFavorStateActivatedByCurrentPlayer(returnedvalue);
-        if (PopeFavorStateChanged!=0){
-            //Notifica anche il cambiamento dei PopeFavorState
-        }
-    }
 
- */
-
+    /**
+     * @return the Player that has won the game
+     */
     public Player GetWinnerMultiplayer() {
         int MaxPoints = 0;
         int MaxResources = 0;
@@ -571,11 +626,19 @@ public class Model extends ModelObservable {
         return deck;
     }
 
+    /**
+     * Set the variable start at true if the game has reached the number of players expected
+     */
     public void incrementContForStart() {
         this.contForStart ++;
         if(contForStart==players.size())
             start=true;
     }
+
+    /**
+     * When a pope favor state happens, check the positions of the player and based on that activate/discards the pope favor state of the player
+     * @param PopeFavorState pope favor state number
+     */
     public void CheckPopeFavorState(int PopeFavorState){
         if (!IsSinglePlayerGame) {
             for (Player p : players) {
@@ -619,37 +682,5 @@ public class Model extends ModelObservable {
         return 0;
     }
 
-    /*
-    public int GetA() {
-        return a;
-    }
-    public void setA(int a) throws IOException {
-        this.a=a;
-        List<Integer> interi =new ArrayList<>();
-        interi.add(5);
-        interi.add(324);
-        notifyTest(new Message("abc",interi));
-    } */
 }
 
-
-
-
-
- /*   public void startgame(){
-        //Creazione di Development grid
-        //Assegnazione di Leader Card a ogni player
-        // settaggio di tutte le cose iniziali come creazione di ogni faithTrack/Warehouse ecc per ogni player
-
-
-    }
-    public void finishgame(){
-        // Ricordarsi di fare i controlli nelle classi che posso far finire la partita esempio nella classed Faith Track controllare Red Position ecc
-        // fai i calcoli per finire la partita
-
-
-
-    }
-
-}
-  */

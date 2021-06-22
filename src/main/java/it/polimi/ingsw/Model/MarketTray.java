@@ -57,6 +57,10 @@ public class MarketTray  implements Serializable {
         return OustideMarble;
     }
 
+    /**
+     * @param row index of the row of the market tray
+     * @return the four marbles present in the row selected
+     */
     public MarketMarble[] GetMarketMarblesFromRow(int row){
         MarketMarble[] returnedMarbles = new MarketMarble[4];
         returnedMarbles[0] = MarketMatrix[row][0];
@@ -64,15 +68,19 @@ public class MarketTray  implements Serializable {
         returnedMarbles[2] = MarketMatrix[row][2];
         returnedMarbles[3] = MarketMatrix[row][3];
         return returnedMarbles;
-    } // Method that returns 4 marbles by selecting a row in the MarketTray
+    }
 
+    /**
+     * @param col index of the col of the market tray
+     * @return the 3 marbles present in the col selected
+     */
     public MarketMarble[] GetMarketMarblesFromCol(int col){
         MarketMarble[] returnedMarbles = new MarketMarble[3];
         returnedMarbles[0] = MarketMatrix[0][col];
         returnedMarbles[1] = MarketMatrix[1][col];
         returnedMarbles[2] = MarketMatrix[2][col];
         return returnedMarbles;
-    } // Method that returns 3 marbles by selecting a column in the MarketTray
+    }
 
 
     public ArrayList<MarketMarble> ShiftMatrixByRow(int rig) {
@@ -88,7 +96,7 @@ public class MarketTray  implements Serializable {
         MarketMatrix[rig][2] = MarketMatrix[rig][3];
         MarketMatrix[rig][3] =  temp;
         return returnedMarbles;
-    } //Method that shift the MarketTray after choosing to get Marbles by selected a row in the MarketTray
+    }
 
 
     public ArrayList<MarketMarble> ShiftMatrixByCol(int col) {
@@ -103,5 +111,5 @@ public class MarketTray  implements Serializable {
         MarketMatrix[0][col] = temp2;
         return returnedMarbles;
 
-    } //Method that shift the MarketTray after choosing to get Marbles by selected a column in the MarketTray
+    }
 }

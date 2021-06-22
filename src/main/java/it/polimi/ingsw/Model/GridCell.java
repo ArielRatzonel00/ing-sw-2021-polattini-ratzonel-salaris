@@ -21,12 +21,12 @@ public class GridCell implements Serializable {
         Collections.shuffle(cell);
     }
 
-    public DevelopmentCard RemoveTopCard() { // mi ridà la prima carta non nulla
+    public DevelopmentCard RemoveTopCard() {
             DevelopmentCard temp = cell.get(cell.size() - 1);
             cell.remove(cell.size() - 1);
             return temp;
 
-    } // Method that removes the top card of the cell
+    }
     public DevelopmentCard getTopCard(){
         if (cell.size() > 0) {
             return cell.get(cell.size() - 1);
@@ -34,8 +34,12 @@ public class GridCell implements Serializable {
             return null;
         }
 
-    } // Method that returns the top card of the cell
+    }
 
+    /**
+     * Removes the bottom card of the cell
+     * @return true if  exist the card exists and false if not
+     */
     public boolean RemoveFirstCard() {
         if (cell.size() > 0) {
             cell.remove(0);
@@ -43,13 +47,6 @@ public class GridCell implements Serializable {
         } else {
             return false;
         }
-    } // Method that removes the bottom card of the cell. Returns true if it exists and false if not. This method is used by the marker that remove cards
+    }
 
-
-   /* public void RemoveTopCard() {
-        if (cell.size() > 0) { //THROWS EXCEPTION EMPTYCELLEXCEPTION
-            cell.remove(cell.size() - 1);
-        }
-    } // Method that removes the top card of the cell.
-*/
 }

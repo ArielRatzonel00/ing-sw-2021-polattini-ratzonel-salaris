@@ -18,7 +18,6 @@ public class Player implements Serializable {
     private ArrayList<LeaderCard> leaderCards = new ArrayList<>();
     private SlotsBoard slotsBoard;
     private boolean IsYourTurn = false;
-    private boolean isFirst;
     private int DiscountGrey = 0;
     private int DiscountYellow = 0;
     private int DiscountPurple = 0;
@@ -38,7 +37,6 @@ public class Player implements Serializable {
         this.faithTrack = new FaithTrack();
         //this.leaderCards = FourLeaderCards;
         this.slotsBoard = new SlotsBoard();
-        this.isFirst = false;
         ProductionBasicCost.add(0, new CostOfCard(2, MarketMarble.ColorMarble.UNKNOWN));
         ProductionBasicProfit.add(0, new CostOfCard(1, MarketMarble.ColorMarble.UNKNOWN));
         BasicProduction.setProductionCost(ProductionBasicCost);
@@ -83,10 +81,11 @@ public class Player implements Serializable {
         return slotsBoard;
     }
 
-    public void setFirst(boolean first) {
-        this.isFirst = first;
-    } // Method that set the first player to enter the lobby
 
+    /**
+     * @param cost cost of the card
+     * @return true if the player has the resources to buy the card, false if not
+     */
     public boolean CheckResourcesForAcquisition(ArrayList<CostOfCard> cost) {
         for (CostOfCard costOfCard : cost){
             if (costOfCard.getCostColor() == MarketMarble.ColorMarble.GREY){
@@ -113,6 +112,10 @@ public class Player implements Serializable {
         return true;
     }
 
+    /**
+     * @param cost cost of the production
+     * @return true if the player has the resources to produce, false if not
+     */
     public boolean CheckResourcesForProduce(int[] cost) {
         if (cost[0] > this.getWarehouse().getNumberOfResource(MarketMarble.ColorMarble.BLUE) + this.getStrongbox().CountResources(MarketMarble.ColorMarble.BLUE)){
             return false;
@@ -133,6 +136,10 @@ public class Player implements Serializable {
         leaderCards.remove(index);
     }
 
+    /**
+     * When a pope favor state happens, check if delete the pope favor or activate it
+     * @param PopeFavor index of the pope favor
+     */
     public void CheckPositionPopeFavor(int PopeFavor){
         if (PopeFavor == 1){
             if (faithTrack.getRedPosition() >=5 ){
@@ -202,11 +209,6 @@ public class Player implements Serializable {
     public void setDiscountPurple(int discountPurple) {
         DiscountPurple += discountPurple;
     }
-
-    public boolean isFirst() {
-        return isFirst;
-    }
-
     public int PointsFromLeaderCard(){
         int PointsFromLeaderCard = 0;
         for (LeaderCard leaderCard : leaderCards){

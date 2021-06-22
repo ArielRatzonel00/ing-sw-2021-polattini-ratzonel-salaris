@@ -26,12 +26,16 @@ public class MarkerStack {
     }
 
 
+    /**
+     * Returns the TopMarket in the stack and put it at the bottom of the stack
+     * @return the TopMarket in the stack
+     */
     public Marker getTopMarker(){
         Marker temp = markers.get(markers.size()-1);
         markers.remove(markers.size()-1);
         markers.add(0, temp);
         return temp;
-    } // Method that returns the TopMarket in the stack and put it at the bottom of the stack
+    }
 
     public ArrayList<Marker> getMarkers() {
         return markers;

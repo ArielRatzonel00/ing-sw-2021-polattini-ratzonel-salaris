@@ -20,6 +20,12 @@ public class Warehouse implements Serializable {
         return rows.get(rowNumber);
     } // returns the WarehouseRow selected
 
+    /**
+     * The method adds a Marble into the WarehouseRow selected.
+     * @param coloredMarble color of the marble
+     * @param rowNumber row of the warehouse
+     * @return true if it can be added, false if not
+     */
     public boolean addToRow(MarketMarble coloredMarble, int rowNumber) {
         if (rowNumber < 0 || rowNumber > 4){
             return false;
@@ -52,9 +58,14 @@ public class Warehouse implements Serializable {
             }
         }
         return rows.get(rowNumber).addMarble(coloredMarble);
-    } // The method adds a Marble into the WarehouseRow selected, the method returns true if it can be added and returns false if not. If the row is a Extrarow there is an extra check that controls if the Marble has the color of the WarehouseRow color
+    }
 
 
+    /**
+     * @param rowNumber1 index of the row
+     * @param rowNumber2 index of the row
+     * @return true if it can be done, false if not
+     */
     public boolean MoveResource(int rowNumber1, int rowNumber2){
         if (rowNumber1 == 3 || rowNumber1 == 4 || rowNumber2 == 3 ||rowNumber2 == 4 ){
             if (!(rows.get(rowNumber1).getColor().equals(rows.get(rowNumber2).getColor()))){
@@ -70,8 +81,12 @@ public class Warehouse implements Serializable {
             return true;
         }
         return false;
-    } // The method swap the marbles of two WarehouseRows, the method returns true if it can be done and returns false if not. The method does an extra check if one of the two rows in Extrarow and controls that the swap happens only if the color of the two WarehouseRow is the same
+    }
 
+    /**
+     * @param color color of the marble
+     * @return the number of Resources in the Warehouse that have the color selected
+     */
     public int getNumberOfResource(MarketMarble.ColorMarble color){
         int i=0;
         for (WarehouseRow a: rows) {
@@ -81,8 +96,14 @@ public class Warehouse implements Serializable {
             }
         }
         return i;
-    } // the method returns the number of Resources in the Warehouse that have the color selected
+    }
 
+    /**
+     * @param row row of the warehouse
+     * @param NumberOfMarbles number of marbles
+     * @param colorMarble color of the marble
+     * @return true if the row selected has at least the number of marbles selected of the color selected, else if not
+     */
     public boolean CheckRow(int row, int NumberOfMarbles, MarketMarble.ColorMarble colorMarble){
         if (row < 0 || row > 4){
             return false;
@@ -104,6 +125,9 @@ public class Warehouse implements Serializable {
         else return getRow(row).getNumberOfMarbles() >= NumberOfMarbles;
     }
 
+    /**
+     * @return the number of resources in the warehouse
+     */
     public int getNumberOfTotalResourcesInWarehouse(){
         int Resources = 0;
         Resources = getNumberOfResource(MarketMarble.ColorMarble.BLUE) + getNumberOfResource(MarketMarble.ColorMarble.GREY) + getNumberOfResource(MarketMarble.ColorMarble.PURPLE) + getNumberOfResource(MarketMarble.ColorMarble.YELLOW);
@@ -112,7 +136,7 @@ public class Warehouse implements Serializable {
 
     public ArrayList<WarehouseRow> getRows() {
         return rows;
-    } // the method returns all the WarehouseRows in the Warehouse
+    }
 }
 
 

@@ -19,6 +19,11 @@ public class WarehouseRow implements Serializable {
         this.marbles = marbles;
     }
 
+    /**
+     * adds a marble in the row
+     * @param MarketMarble marble to add
+     * @return true if it can be done and false if not
+     */
     public boolean addMarble(MarketMarble MarketMarble){
         if(marbles.size() == 0) {
             marbles.add(MarketMarble);
@@ -32,8 +37,12 @@ public class WarehouseRow implements Serializable {
             }
         }
         return false;
-    } // Method that adds a Marble in the row, the method returns true if it can be done and false if not
+    }
 
+    /**
+     * @param colorMarble color of the marble to remove
+     * @param num number of marbles to remove
+     */
     public void removeMarble(MarketMarble.ColorMarble colorMarble, int num){
         for (int i = 0; i < num; i++) {
             if (colorMarble.equals(color) && marbles.size() > 0) {
@@ -43,7 +52,7 @@ public class WarehouseRow implements Serializable {
                 color = MarketMarble.ColorMarble.WHITE;
             }
         }
-    } // Method that removes a Marble in the row.
+    }
 
     public ArrayList<MarketMarble> getMarbles() {
         return marbles;
@@ -53,14 +62,19 @@ public class WarehouseRow implements Serializable {
         return marbles.size();
     }
 
+    /**
+     * // Method that changes the marbles and the color of the row, it is used in the method MoveResources in the Warehouse
+     * @param newmarbles new marbles in the row
+     * @param newcolor new color of the row
+     */
     public void ChangeMarbles(ArrayList<MarketMarble> newmarbles, MarketMarble.ColorMarble newcolor){
         this.marbles = newmarbles;
         this.color = newcolor;
-    } // Method that changes the marbles and the color of the row, it is useful for the method MoveResources in the Warehouse
+    }
 
     public int getSpace() {
         return space;
-    } // Method that returns the number of maximum Marbles accepted in the full row without counting the marbles present
+    }
 
     public MarketMarble.ColorMarble getColor() {
         return color;
@@ -68,5 +82,5 @@ public class WarehouseRow implements Serializable {
 
     public void setColor(MarketMarble.ColorMarble color) {
         this.color = color;
-    } // Method that set the color of the row, it is used when the player activates the Leadercard that creates an extraWarehouseRow that has a specific color
+    }
 }

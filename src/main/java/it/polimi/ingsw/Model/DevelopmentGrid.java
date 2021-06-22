@@ -49,44 +49,49 @@ public class DevelopmentGrid implements Serializable {
         return CardMatrix[riga][colonna];
     }
 
+    /**
+     * removes the bottom card of the lowest level of the color that is still on the DevelopmentGrid (Used in the effect of the Marker that RemovesCard)
+     * @param colorCard color of the card
+     * @return true if the card exists
+     */
     public boolean RemoveCardByColor(DevelopmentCard.colorCard colorCard){
         switch(colorCard){
-            case Green:if(CardMatrix[0][0].RemoveFirstCard() == true){
+            case Green:if(CardMatrix[0][0].RemoveFirstCard()){
                 return true;
-            }else if(CardMatrix[1][0].RemoveFirstCard() == true) {
-                return true;
-            }
-            else if(CardMatrix[2][0].RemoveFirstCard() == true) {
+            }else if(CardMatrix[1][0].RemoveFirstCard()) {
                 return true;
             }
-            break;
-
-            case Blue:if(CardMatrix[0][1].RemoveFirstCard() == true){
-                return true;
-            }else if(CardMatrix[1][1].RemoveFirstCard() == true) {
-                return true;
-            }
-            else if(CardMatrix[2][1].RemoveFirstCard() == true) {
+            else if(CardMatrix[2][0].RemoveFirstCard()) {
                 return true;
             }
             break;
 
-            case Yellow: if(CardMatrix[0][2].RemoveFirstCard() == true){
+            case Blue:if(CardMatrix[0][1].RemoveFirstCard()){
                 return true;
-            }else if(CardMatrix[1][2].RemoveFirstCard() == true) {
+            }else if(CardMatrix[1][1].RemoveFirstCard()) {
                 return true;
             }
-            else if(CardMatrix[2][2].RemoveFirstCard() == true) {
+            else if(CardMatrix[2][1].RemoveFirstCard()) {
                 return true;
             }
             break;
 
-            case Purple: if(CardMatrix[0][3].RemoveFirstCard() == true){
+            case Yellow: if(CardMatrix[0][2].RemoveFirstCard()){
                 return true;
-            }else if(CardMatrix[1][3].RemoveFirstCard() == true) {
+            }else if(CardMatrix[1][2].RemoveFirstCard()) {
                 return true;
             }
-            else if(CardMatrix[2][3].RemoveFirstCard() == true) {
+            else if(CardMatrix[2][2].RemoveFirstCard()) {
+                return true;
+            }
+            break;
+
+            case Purple: if(CardMatrix[0][3].RemoveFirstCard()){
+                return true;
+            }else if(CardMatrix[1][3].RemoveFirstCard()) {
+                return true;
+            }
+            else if(CardMatrix[2][3].RemoveFirstCard()) {
                 return true;
             }
             break;
@@ -94,60 +99,15 @@ public class DevelopmentGrid implements Serializable {
             default:return true;
         }
 
-        /*
-        if(colorCard == DevelopmentCard.colorCard.Green){
-            if(CardMatrix[0][0].RemoveFirstCard() == true){
-                return true;
-            }else if(CardMatrix[1][0].RemoveFirstCard() == true) {
-                return true;
-            }
-            else if(CardMatrix[2][0].RemoveFirstCard() == true) {
-                return true;
-            }
-
-        }
-        else if (colorCard == DevelopmentCard.colorCard.Blue){
-            if(CardMatrix[0][1].RemoveFirstCard() == true){
-                return true;
-            }else if(CardMatrix[1][1].RemoveFirstCard() == true) {
-                return true;
-            }
-            else if(CardMatrix[2][1].RemoveFirstCard() == true) {
-                return true;
-            }
-        }
-        else if (colorCard == DevelopmentCard.colorCard.Yellow){
-            if(CardMatrix[0][2].RemoveFirstCard() == true){
-                return true;
-            }else if(CardMatrix[1][2].RemoveFirstCard() == true) {
-                return true;
-            }
-            else if(CardMatrix[2][2].RemoveFirstCard() == true) {
-                return true;
-            }
-        }
-        else if (colorCard == DevelopmentCard.colorCard.Purple){
-            if(CardMatrix[0][3].RemoveFirstCard() == true){
-                return true;
-            }else if(CardMatrix[1][3].RemoveFirstCard() == true) {
-                return true;
-            }
-            else if(CardMatrix[2][3].RemoveFirstCard() == true) {
-                return true;
-            }
-        }
         return true;
-        */
-
-        return true;
-    } // Method that removes the bottom card of the lowest level of the color that is still on the DevelopmentGrid (Used in the effect of the Marker that RemovesCard)
+    }
 
     public DevelopmentCard remove(int a, int b){
         return  CardMatrix[a][b].RemoveTopCard();
-    } // Method that removes and returns the top card of the cell selected
+    }
 
     public DevelopmentCard get(int a, int b){
         return CardMatrix[a][b].getTopCard();
-    } // Method that returns the top card of the cell selected
+    }
 
 }
