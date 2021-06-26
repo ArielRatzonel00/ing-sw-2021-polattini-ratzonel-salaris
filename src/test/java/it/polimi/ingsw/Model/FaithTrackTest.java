@@ -30,6 +30,9 @@ class FaithTrackTest {
         Faith.setRedPosition(8);
         Faith.setRedPosition(8);
         assertEquals(20, Faith.TotalPoints());
+        Faith.setBlackPosition(8);
+        Faith.setBlackPosition(8);
+        assertEquals(20, Faith.TotalPoints());
     }
 
     @Test

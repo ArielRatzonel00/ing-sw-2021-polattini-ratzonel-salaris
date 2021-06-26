@@ -24,7 +24,6 @@ public class ModelObservable extends Observable<VirtualView> {
                 obs.handleDisconnection(new DisconnectionMessage());
     }
     public void notifyFourLeaderCards(int PlayerIndex, ArrayList<LeaderCard> leaderCards, ArrayList<DevelopmentCard> developmentGrid, MarketTray marketTray, String nickname, boolean isSinglePlayerGame, MarkerStack markers){
-
         FourLeaderCardResponse fourLeaderCardResponse = new FourLeaderCardResponse(leaderCards);
         fourLeaderCardResponse.setNickname(nickname);
         fourLeaderCardResponse.setTopCards(developmentGrid);

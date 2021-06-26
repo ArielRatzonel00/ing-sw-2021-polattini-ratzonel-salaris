@@ -26,6 +26,7 @@ public class Model extends ModelObservable {
     private boolean CheckedPopeFavorState2 = false;
     private boolean CheckedPopeFavorState3 = false;
     private boolean disconnection = false;
+
     public Model(ArrayList<Player> players) {
         this.developmentGrid = new DevelopmentGrid(deck);
         this.marketTray = new MarketTray();
@@ -66,11 +67,10 @@ public class Model extends ModelObservable {
 
     public void AssignFourLeaderCards(int PlayerIndex){
         Player currentplayer = players.get(PlayerIndex);
-        System.out.println("Asssegna 4leader nel game");
+        System.out.println("Assegna 4 leader nel game");
         currentplayer.AssignFourLeaderCard(deck.getTopFourLeaderCard());
         System.out.println(currentplayer.getLeaderCards().size());
         notifyFourLeaderCards(PlayerIndex, currentplayer.getLeaderCards(), developmentGrid.getTopcards(), marketTray, currentplayer.getNickname(), IsSinglePlayerGame, markers) ;
-
     }
 
     public void DiscardInitialLeaderCards(int PlayerIndex, int LeaderCard1Index, int LeaderCard2Index){
@@ -113,6 +113,7 @@ public class Model extends ModelObservable {
             notifyInitialResourcesSet(3, start, currentplayer.getWarehouse(),1);
         }
     }
+
     public void MarketTrayAction(int PlayerIndex, boolean isRow, int index){
         Player currentplayer = players.get(PlayerIndex);
 
@@ -124,6 +125,7 @@ public class Model extends ModelObservable {
         }
         notifyMarketTrayActionResponse(PlayerIndex,marketTray.getMarketMatrix(),marketTray.getOustideMarble(),returnedMarbles, currentplayer.getChangeWhite1(),currentplayer.getChangeWhite2());
     }
+
     public void DealWithResources(int PlayerIndex,  ArrayList<Boolean> keepResource, ArrayList<MarketMarble.ColorMarble> marbles, ArrayList<Integer> rowsOfWarehouse) {
         boolean NeedToCheckPopeFavorState1 = false;
         boolean NeedToCheckPopeFavorState2 = false;
