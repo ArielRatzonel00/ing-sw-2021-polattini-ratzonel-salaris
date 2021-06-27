@@ -685,6 +685,11 @@ public class Model extends ModelObservable {
         return 0;
     }
 
+    /**
+     * The method applies a discount in the price of the card
+     * @param playerIndex index of the player in the game
+     * @param cost original cost of the card
+     */
     public void applyDiscount(int playerIndex, ArrayList<CostOfCard> cost){
         Player player = players.get(playerIndex);
         for (CostOfCard c : cost){
