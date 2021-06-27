@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network.Client;
 
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.LeaderCard.LeaderCard;
+import it.polimi.ingsw.Model.LeaderCard.LeaderCard2;
 import it.polimi.ingsw.Model.Marble.MarketMarble;
 import it.polimi.ingsw.Network.Client.CModel.ClientModel;
 import it.polimi.ingsw.Network.Client.CModel.PlayerBoard;
@@ -199,13 +200,15 @@ public class Client extends Messanger {
                     clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).getWarehosueClient().setWarehouseRows(dealWithResourcesFromMarketTrayResponse.getWarehouse().getRows());
                     if (dealWithResourcesFromMarketTrayResponse.isPopeFavoreEvent()) {
                         userInterface.PopeFavorStateEventOccured(stdin);
-                        for (PlayerBoard p : clientModel.getPlayerBoards()){
-                            p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(0), indexPopeFavor);
-                            indexPopeFavor++;
-                            p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(1), indexPopeFavor);
-                            indexPopeFavor++;
-                            p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(2), indexPopeFavor);
-                            indexPopeFavor++;
+                        for (PlayerBoard p : clientModel.getPlayerBoards()) {
+                            if (p.getNickname() != null) {
+                                p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(indexPopeFavor), 0);
+                                indexPopeFavor++;
+                                p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(indexPopeFavor), 1);
+                                indexPopeFavor++;
+                                p.getFaithTrackClient().setPopeFavors(dealWithResourcesFromMarketTrayResponse.getPopeFavorStates().get(indexPopeFavor), 2);
+                                indexPopeFavor++;
+                            }
                         }
                     }
                     if (!isSinglePlayer) {
@@ -237,7 +240,7 @@ public class Client extends Messanger {
                     ArrayList<Integer> warehouseRows = new ArrayList<>();
                     WantToBuyCardResponse wantToBuyCardResponse = (WantToBuyCardResponse) message;
                     if (wantToBuyCardResponse.getPlayerIndex() == ID) {
-                        userInterface.WantToBuyCardResponse(stdin, wantToBuyCardResponse, ID);
+                        //userInterface.WantToBuyCardResponse(stdin, wantToBuyCardResponse, ID);
                         switch (wantToBuyCardResponse.getPhrasetoShow()) {
                             case "The card can't be added in the slot that you selected", "The card selected doesn't exist", "You don't have enough resources to buy this card":
                                 userInterface.PrintMessages(wantToBuyCardResponse.getPhrasetoShow());
@@ -247,9 +250,8 @@ public class Client extends Messanger {
                             case "You have the resources to add the card and you can add it in the slot that you selected":
                                 BuyCardMessage buyCardMessage = new BuyCardMessage();
                                 buyCardMessage.setPlayerIndex(ID);
-
                                 userInterface.WantToBuyCardResponse(stdin, wantToBuyCardResponse, ID);
-                                userInterface.Payment(stdin, wantToBuyCardResponse.getCost(),resourcesFromStrongbox,resourcesFromWarehouse,warehouseRows,ID);
+                                userInterface.Payment(stdin,wantToBuyCardResponse.getCost(),resourcesFromStrongbox,resourcesFromWarehouse,warehouseRows,ID);
                                 buyCardMessage.setResourcesFromWarehouse(resourcesFromWarehouse);
                                 buyCardMessage.setResourcesFromStrongbox(resourcesFromStrongbox);
                                 buyCardMessage.setPlayerIndex(ID);
@@ -336,6 +338,8 @@ public class Client extends Messanger {
                     ActivateLeaderCardActionResponse activateLeaderCardActionResponse = (ActivateLeaderCardActionResponse) message;
                     if (activateLeaderCardActionResponse.isOk()) {
                         clientModel.getPlayerBoards().get(activateLeaderCardActionResponse.getPlayerIndex()).getLeaderCards().get(activateLeaderCardActionResponse.getCardindex()).setActivate(true);
+                        clientModel.getPlayerBoards().get(activateLeaderCardActionResponse.getPlayerIndex()).getWarehosueClient().setWarehouseRows(activateLeaderCardActionResponse.getNewWarehouse());
+                        clientModel.getPlayerBoards().get(activateLeaderCardActionResponse.getPlayerIndex()).setProductions(activateLeaderCardActionResponse.getNewProdAvailables());
                     }
                     if (activateLeaderCardActionResponse.getPlayerIndex() == ID) {
                         userInterface.PrintMessages(activateLeaderCardActionResponse.getResponse());
@@ -361,7 +365,7 @@ public class Client extends Messanger {
                                         p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 1);
                                         indexPopeFavorState++;
                                         p.getFaithTrackClient().setPopeFavors(discardLeaderCardActionResponse.getPopeFavorStates().get(indexPopeFavorState), 2);
-
+                                        indexPopeFavorState++;
                                     }
                                 }
                             }
@@ -378,7 +382,9 @@ public class Client extends Messanger {
                     }
 
                     if (discardLeaderCardActionResponse.getPlayerIndex() == ID) {
-                        leaderCardActionAvailable--;
+                        if (discardLeaderCardActionResponse.isOk()) {
+                            leaderCardActionAvailable--;
+                        }
                         userInterface.PrintMessages(discardLeaderCardActionResponse.getResponse());
                         int i = userInterface.Menù(stdin, actionDone, leaderCardActionAvailable, isSinglePlayer);
                         ChoiceOfTheMenu(i);

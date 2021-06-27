@@ -156,7 +156,7 @@ public class Player implements Serializable {
                 faithTrack.setPoints(3);
             }
             else {
-                faithTrack.setPopeFavor1(PopeFavorState.Deleted);
+                faithTrack.setPopeFavor2(PopeFavorState.Deleted);
             }
         }
         else {
@@ -274,6 +274,22 @@ public class Player implements Serializable {
 
     public void setChangeWhite2(MarketMarble.ColorMarble changeWhite2) {
         ChangeWhite2 = changeWhite2;
+    }
+
+    public int getDiscountGrey() {
+        return DiscountGrey;
+    }
+
+    public int getDiscountYellow() {
+        return DiscountYellow;
+    }
+
+    public int getDiscountPurple() {
+        return DiscountPurple;
+    }
+
+    public int getDiscountBlue() {
+        return DiscountBlue;
     }
 }
 

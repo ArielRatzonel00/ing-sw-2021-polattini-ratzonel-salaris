@@ -71,7 +71,7 @@ public class Cli implements UserInterface {
         int b = 4;
 
         while (a > 3 || b > 3) {
-            System.out.println("Which ones you want to discard? insert 2 index [0-3]");
+            System.out.println("These are your leader cards, which ones you want to discard? insert 2 index [0-3]");
             a = nextInt(scanner);
             b = nextInt(scanner);
             if (a > 3 || b > 3 || a == b) {
@@ -102,6 +102,7 @@ public class Cli implements UserInterface {
                     else
                         System.out.println("You are the third one, you have on FaithPoint and one initial resource , choose beetween: SERVANT[P], SHIELD[B], STONE[G], COIN [Y]");
                     c = stdin.next();
+
                 }
                 message1.setColorMarble1(marbleChoice(c));
 
@@ -109,10 +110,10 @@ public class Cli implements UserInterface {
                 while (a < 0 || a > 2) {
                     System.out.println("Choose the Warehouse row [0-2]");
                     a = nextInt(stdin);
-
                     if (a < 0 || a > 2)
                         System.out.println("Wrong index");
                 }
+                System.out.println("Resources correctly assigned");
                 message1.setRow1(a);
                 break;
             case 3:
@@ -129,6 +130,7 @@ public class Cli implements UserInterface {
                     if (a < 0 || a > 2)
                         System.out.println("Wrong index");
                 }
+                System.out.println("Resources correctly assigned");
                 message1.setRow1(a);
                 int i = 0;
                 while (i == 0) {
@@ -156,8 +158,9 @@ public class Cli implements UserInterface {
                     }
                 }
         }
-        System.out.println("Waiting for other playes...");
-        }
+        //System.out.println("Waiting for other playes...");
+
+    }
 
 
     @Override
@@ -251,7 +254,7 @@ public class Cli implements UserInterface {
                             "\n [2] Move resources in the Warehouse." +
                             "\n [3] ---Option not Available ---" +
                             "\n [4] ---Option not Available ---" +
-                            "\n [5] EndTurn and pick the Top Marker (Type: " + clientModel.getPlayerBoards().get(0).getTopMarker() + ")");
+                            "\n [5] EndTurn and pick the Top Marker (Type: " + clientModel.getPlayerBoards().get(0).getTopMarker().getType() + ")");
 
                 }
                 while (i > 5 || i < 0 || i == 3 || i == 4) {
@@ -322,14 +325,7 @@ public class Cli implements UserInterface {
 
     @Override
     public void DealWithResFromMarkTrayResponse(Scanner scanner, DealWithResourcesFromMarketTrayResponse dealWithResourcesFromMarketTrayResponse, boolean isSinglePlayer) {
-        if (!isSinglePlayer) {
-            System.out.println("You advanced by " + dealWithResourcesFromMarketTrayResponse.getCurrPlayersAdvances() + "\n" +
-                    "OtherPlayers advanced by " + dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
-        }
-        else {
-            System.out.println("You advanced by " + dealWithResourcesFromMarketTrayResponse.getCurrPlayersAdvances() + "\n" +
-                    "Black advanced by " + dealWithResourcesFromMarketTrayResponse.getOtherPlayersAdvances());
-        }
+            clientModel.getPlayerBoards().get(dealWithResourcesFromMarketTrayResponse.getPlayerIndex()).PrintFaithTrack(isSinglePlayer);
     }
     public void PrintMessages(String string){
         System.out.println(string);
@@ -378,16 +374,24 @@ public class Cli implements UserInterface {
                         for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
                             temp = 0;
                             if (r.getColor() == MarketMarble.ColorMarble.PURPLE && r.getMarbles().size() > 0) {
-                                while (temp > r.getMarbles().size() || temp < contServants) {
+                                if (contServants != 0) {
                                     System.out.println("How many servants(P) from row " + indexrow);
                                     temp = nextInt(scanner);
                                 }
-                                contServants -= temp;
-                                resourcesFromWarehouse.add(new CostOfCard(temp, MarketMarble.ColorMarble.PURPLE));
-                                rows.add(indexrow);
+                                while (temp > r.getMarbles().size() || temp > contServants) {
+                                    System.out.println("You selected too many resources, select again");
+                                    temp = nextInt(scanner);
+                                }
+                            }
+                            contServants -= temp;
+                            if (temp>0){
+                            resourcesFromWarehouse.add(new CostOfCard(temp, MarketMarble.ColorMarble.PURPLE));
+                            rows.add(indexrow);
                             }
                             indexrow++;
                         }
+                        temp = 100;
+                        indexrow = 0;
                     }
                     break;
                 case YELLOW:
@@ -399,22 +403,30 @@ public class Cli implements UserInterface {
                         }
                         resFromStrong = temp;
                         contCoins -= resFromStrong;
-                        if (resFromStrong != 0) {
+                        if (resFromStrong!=0) {
                             resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.YELLOW));
                         }
                         for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
                             temp = 0;
                             if (r.getColor() == MarketMarble.ColorMarble.YELLOW && r.getMarbles().size() > 0) {
-                                while (temp > r.getMarbles().size() || temp < contCoins) {
+                                if (contCoins != 0) {
                                     System.out.println("How many coins(Y) from row " + indexrow);
                                     temp = nextInt(scanner);
                                 }
-                                contCoins -= temp;
+                                while (temp > r.getMarbles().size() || temp > contCoins) {
+                                    System.out.println("You selected too many resources, select again");
+                                    temp = nextInt(scanner);
+                                }
+                            }
+                            contCoins -= temp;
+                            if (temp>0){
                                 resourcesFromWarehouse.add(new CostOfCard(temp, MarketMarble.ColorMarble.YELLOW));
                                 rows.add(indexrow);
                             }
                             indexrow++;
                         }
+                        temp = 100;
+                        indexrow = 0;
                     }
                     break;
                 case GREY:
@@ -426,22 +438,30 @@ public class Cli implements UserInterface {
                         }
                         resFromStrong = temp;
                         contStones -= resFromStrong;
-                        if (resFromStrong != 0) {
+                        if (resFromStrong!=0) {
                             resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.GREY));
                         }
                         for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
                             temp = 0;
                             if (r.getColor() == MarketMarble.ColorMarble.GREY && r.getMarbles().size() > 0) {
-                                while (temp > r.getMarbles().size() || temp < contStones) {
+                                if (contStones != 0) {
                                     System.out.println("How many stones(G) from row " + indexrow);
                                     temp = nextInt(scanner);
                                 }
-                                contStones -= temp;
+                                while (temp > r.getMarbles().size() || temp > contStones) {
+                                    System.out.println("You selected too many resources, select again");
+                                    temp = nextInt(scanner);
+                                }
+                            }
+                            contStones -= temp;
+                            if (temp>0){
                                 resourcesFromWarehouse.add(new CostOfCard(temp, MarketMarble.ColorMarble.GREY));
                                 rows.add(indexrow);
                             }
                             indexrow++;
                         }
+                        temp = 100;
+                        indexrow = 0;
                     }
                     break;
                 case BLUE:
@@ -453,22 +473,30 @@ public class Cli implements UserInterface {
                         }
                         resFromStrong = temp;
                         contShields -= resFromStrong;
-                        if (resFromStrong != 0) {
+                        if (resFromStrong!=0) {
                             resourcesFromStrongbox.add(new CostOfCard(resFromStrong, MarketMarble.ColorMarble.BLUE));
                         }
                         for (WarehouseRow r : clientModel.getPlayerBoards().get(playerIndex).getWarehosueClient().getWarehouseRows()) {
                             temp = 0;
                             if (r.getColor() == MarketMarble.ColorMarble.BLUE && r.getMarbles().size() > 0) {
-                                while (temp > r.getMarbles().size() || temp < contShields) {
+                                if (contShields != 0) {
                                     System.out.println("How many shields(B) from row " + indexrow);
                                     temp = nextInt(scanner);
                                 }
-                                contShields -= temp;
+                                while (temp > r.getMarbles().size() || temp > contShields) {
+                                    System.out.println("You selected too many resources, select again");
+                                    temp = nextInt(scanner);
+                                }
+                            }
+                            contShields -= temp;
+                            if (temp>0){
                                 resourcesFromWarehouse.add(new CostOfCard(temp, MarketMarble.ColorMarble.BLUE));
                                 rows.add(indexrow);
                             }
                             indexrow++;
                         }
+                        temp = 100;
+                        indexrow = 0;
                     }
                     break;
             }
@@ -515,8 +543,6 @@ public class Cli implements UserInterface {
     @Override
     public void WantToActivateProdResponse(Scanner scanner, int PlayerIndex) {
         System.out.println("You have the resources to produce\n");
-        clientModel.getPlayerBoards().get(PlayerIndex).PrintWarehouse();
-        clientModel.getPlayerBoards().get(PlayerIndex).PrintStrongbox();
     }
 
     @Override
@@ -535,8 +561,8 @@ public class Cli implements UserInterface {
             System.out.println("Choose the column [0-3]\n");
             DevGridCol = nextInt(scanner);
         }
-        while (slot < 0 || slot > 3) {
-            System.out.println("Choose in which slot do you want to add the card[0-3]\n");
+        while (slot < 0 || slot > 2) {
+            System.out.println("Choose in which slot do you want to add the card[0-2]\n");
             slot = nextInt(scanner);
         }
         wantToBuyCardMessage.setPlayerIndex(ID);
@@ -566,6 +592,8 @@ public class Cli implements UserInterface {
         String choice2 = "";
         String choice3 = "";
         int contYes = 0;
+        clientModel.getPlayerBoards().get(ID).PrintWarehouse();
+        clientModel.getPlayerBoards().get(ID).PrintStrongbox();
         clientModel.getPlayerBoards().get(ID).PrintProductionsAvailable();
         for (int i : clientModel.getPlayerBoards().get(ID).IndexesProductionAvailable()){
             choice1 = "";

@@ -26,6 +26,7 @@ public class PlayerBoard {
     private int bluec = 0;
     private int purplec = 0;
 
+
     public PlayerBoard() {
         strongBox.add(0);
         strongBox.add(0);
@@ -99,35 +100,35 @@ public class PlayerBoard {
         this.leaderCards = leaderCards;
     }
 
-    public void PrintProductionsAvailable(){
+    public void PrintProductionsAvailable() {
         int index = 0;
-        for (Production p : productions){
-            if (index == 0){
-                System.out.println( "Production #0"+ ":\n");
+        for (Production p : productions) {
+            if (index == 0) {
+                System.out.println("Production #0" + ":\n");
                 System.out.println("You pay 2 marbles of your choice:\n");
                 System.out.println("You get 1 marble of your choice\n");
             }
-            if (!p.equals(productions.get(0))){
+            if (!p.equals(productions.get(0))) {
                 System.out.println("Production #" + index + ":");
                 System.out.println("You Pay:");
-                for (CostOfCard c : productions.get(index).getProductionCost()){
+                for (CostOfCard c : productions.get(index).getProductionCost()) {
                     System.out.println(c.toString() + "\n");
                 }
                 System.out.println("You get:");
-                for (CostOfCard c : productions.get(index).getProductionProfit()){
-                    System.out.println(c.toString() +"\n");
+                for (CostOfCard c : productions.get(index).getProductionProfit()) {
+                    System.out.println(c.toString() + "\n");
                 }
             }
             index++;
         }
     }
 
-    public ArrayList<Integer> IndexesProductionAvailable(){
+    public ArrayList<Integer> IndexesProductionAvailable() {
         ArrayList<Integer> prodAvail = new ArrayList<>();
         int index = 0;
         prodAvail.add(0);
-        for (Production p : productions){
-            if (!p.equals(productions.get(0))){
+        for (Production p : productions) {
+            if (!p.equals(productions.get(0))) {
                 prodAvail.add(index);
             }
             index++;
@@ -199,26 +200,28 @@ public class PlayerBoard {
         this.purplec += 1;
     }
 
-    public void PrintWarehouse(){
+    public void PrintWarehouse() {
         System.out.println(" ----WAREHOUSE----\n");
         int indexRow = 0;
         for (WarehouseRow r : warehosueClient.getWarehouseRows()
         ) {
-            if(r.getMarbles()!=null && r.getMarbles().size()!=0)
-                System.out.println("ROW " + indexRow + ":" +r.getMarbles().size() + r.getMarbles().get(0).getColorMarble());
+            if (r.getMarbles() != null && r.getMarbles().size() != 0)
+                System.out.println("ROW " + indexRow + ":" + r.getMarbles().size() + r.getMarbles().get(0).getColorMarble());
             else
                 System.out.println("ROW " + indexRow + ": empty");
             indexRow++;
         }
     }
-    public void PrintStrongbox(){
+
+    public void PrintStrongbox() {
         System.out.println(" ----STRONGBOX----\n" +
                 "SHIELDS: " + strongBox.get(0) + "\n" +
                 "STONES: " + strongBox.get(1) + "\n" +
                 "SERVANTS: " + strongBox.get(2) + "\n" +
                 "COINS: " + strongBox.get(3) + "\n\n");
     }
-    public void PrintFaithTrack(boolean isSinglePlayer){
+
+    public void PrintFaithTrack(boolean isSinglePlayer) {
         if (!isSinglePlayer) {
             System.out.println("-------FAITHTRACK--------");
             for (int a = 0; a < 24; a++) {
@@ -227,8 +230,7 @@ public class PlayerBoard {
                 else
                     System.out.print("[ ]");
             }
-        }
-        else {
+        } else {
             System.out.println("-------FAITHTRACK--------");
             for (int a = 0; a < 24; a++) {
                 if (faithTrackClient.getRedPosition() == a)
@@ -236,38 +238,42 @@ public class PlayerBoard {
                         System.out.print("[ RB ]");
                     else
                         System.out.print("[ R ]");
+                else if (faithTrackClient.getBlackPosition() == a)
+                    System.out.print("[ B ]");
                 else
-                    if (faithTrackClient.getBlackPosition() == a)
-                        System.out.print("[ B ]");
-                    else
-                        System.out.print("[ ]");
+                    System.out.print("[ ]");
             }
         }
         System.out.println("\n Pope Favor 1:" + faithTrackClient.getPopeFavors().get(0));
         System.out.println("\n Pope Favor 2:" + faithTrackClient.getPopeFavors().get(1));
         System.out.println("\n Pope Favor 3:" + faithTrackClient.getPopeFavors().get(2) + "\n\n");
     }
-    public void PrintDevCard(){
+
+    public void PrintDevCard() {
         int nSlot = 0;
         System.out.println("---------DEVELOPMENT CARDS--------");
         for (DevelopmentCard d : devSlotClient
         ) {
-            System.out.println("Slot ["+ nSlot+ "]");
+            System.out.println("Slot [" + nSlot + "]");
             d.printCard();
             System.out.println("\n\n");
+            nSlot++;
         }
-        if (devSlotClient.size() == 0){
+        if (devSlotClient.size() == 0) {
             System.out.println("Empty Slots Board\n");
         }
-        System.out.println("#TotalDevCards: " + totalCards +"\n#Lvl1 cards: " + lvl1 + " #Lvl2 cards: " + lvl2 + " #Lvl3 cards: " + lvl3 + "\n#Green cards: " + greenc + " #Blue cards: " + bluec + " #Yellow cards: " + yellowc + " #Purple cards: " + purplec +"\n");
+        System.out.println("#TotalDevCards: " + totalCards + "\n#Lvl1 cards: " + lvl1 + " #Lvl2 cards: " + lvl2 + " #Lvl3 cards: " + lvl3 + "\n#Green cards: " + greenc + " #Blue cards: " + bluec + " #Yellow cards: " + yellowc + " #Purple cards: " + purplec + "\n");
     }
-    public void PrintLeaderCards(boolean all){
+
+    public void PrintLeaderCards(boolean all) {
         System.out.println("----- LEADERCARDS -----");
+        int index = 0;
         for (LeaderCard l : leaderCards
         ) {
             if (!all && !l.isActivate()) {
 
             } else {
+                System.out.println("[" + index + "]");
                 switch (l.getType()) {
                     case 1:
                         LeaderCard1 l1 = (LeaderCard1) l;
@@ -275,7 +281,8 @@ public class PlayerBoard {
                         break;
                     case 2:
                         LeaderCard2 l2 = (LeaderCard2) l;
-                        System.out.println(l2.StampaCarta());;
+                        System.out.println(l2.StampaCarta());
+                        ;
                         break;
                     case 3:
                         LeaderCard3 l3 = (LeaderCard3) l;
@@ -289,7 +296,8 @@ public class PlayerBoard {
                 System.out.println("------------------");
 
             }
+            index++;
         }
     }
-
 }
+

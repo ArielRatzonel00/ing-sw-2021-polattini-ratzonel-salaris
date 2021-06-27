@@ -30,6 +30,9 @@ public class FaithTrackClient {
 
     public void setBlackPosition(int blackPosition) {
         this.blackPosition += blackPosition;
+        if (blackPosition > 24){
+            this.blackPosition = 24;
+        }
     }
 
     public ArrayList<PopeFavorState> getPopeFavors() {

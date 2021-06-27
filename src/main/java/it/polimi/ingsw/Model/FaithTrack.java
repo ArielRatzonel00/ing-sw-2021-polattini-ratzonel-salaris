@@ -77,7 +77,7 @@ public class FaithTrack  implements Serializable {
     }
     public int setBlackPosition(int BlackPosition){
         blackPosition += BlackPosition;
-        if (blackPosition == 8 || blackPosition== 16 || blackPosition == 24){
+        if (blackPosition == 8 || blackPosition== 16 || blackPosition >= 24){
             if (blackPosition == 8){
                 return 1;
             }
@@ -113,7 +113,7 @@ public class FaithTrack  implements Serializable {
         else if (redPosition >= 21 && redPosition < 24){
             return 16;
         }
-        else if (redPosition == 24){
+        else if (redPosition >= 24){
             return 20;
         } else {
             return 0;

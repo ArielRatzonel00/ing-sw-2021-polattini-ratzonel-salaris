@@ -170,10 +170,12 @@ public class ModelObservable extends Observable<VirtualView> {
             obs.updateEndTurnResponse(endTurnResponse);
         }
     }
-    public void notifyActivateLeaderCardActionResponse(int playerIndex, int cardIndex, boolean ok){
+    public void notifyActivateLeaderCardActionResponse(int playerIndex, int cardIndex, boolean ok, ArrayList<WarehouseRow> newWarehouse, ArrayList<Production> newProdAvailable){
         ActivateLeaderCardActionResponse activateLeaderCardActionResponse = new ActivateLeaderCardActionResponse();
         activateLeaderCardActionResponse.setOk(ok);
         activateLeaderCardActionResponse.setPlayerIndex(playerIndex);
+        activateLeaderCardActionResponse.setNewWarehouse(newWarehouse);
+        activateLeaderCardActionResponse.setNewProdAvailables(newProdAvailable);
         for (VirtualView obs:observers
         ) {
             obs.updateActivateLeaderCardActionResponse(activateLeaderCardActionResponse);

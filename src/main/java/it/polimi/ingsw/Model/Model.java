@@ -248,6 +248,7 @@ public class Model extends ModelObservable {
 
         if (developmentGrid.getSingleCell(row,col)!= null && row>=0 && row <=2 && col>=0 && col <= 3 && developmentGrid.getSingleCell(row,col).getTopCard()!= null){
             cost = developmentGrid.getSingleCell(row, col).getTopCard().getCost();
+            applyDiscount(PlayerIndex,cost);
             if (slot < 0 || slot > 3 || !players.get(PlayerIndex).getSlotsBoard().getSlots().get(slot).CanBeAddedInTheSlot(developmentGrid.getSingleCell(row,col).getTopCard())){
                 phrasetoShow = "The card can't be added in the slot that you selected";
             }
@@ -357,10 +358,10 @@ public class Model extends ModelObservable {
             if (currentplayer.getLeaderCard(NCard).canBeActivated(currentplayer)){
                 currentplayer.getLeaderCard(NCard).setActivate(true);
                 currentplayer.getLeaderCard(NCard).effect(currentplayer);
-                notifyActivateLeaderCardActionResponse(PlayerIndex,NCard,true);
+                notifyActivateLeaderCardActionResponse(PlayerIndex,NCard,true, currentplayer.getWarehouse().getRows(),currentplayer.getProductionsAvailable());
             }
             else {
-                notifyActivateLeaderCardActionResponse(PlayerIndex,NCard,false);
+                notifyActivateLeaderCardActionResponse(PlayerIndex,NCard,false, null, null);
             }
         }
 
@@ -395,31 +396,33 @@ public class Model extends ModelObservable {
                 if (index == 0) {
                     switch (productionBasicCost.get(0).getCostColor()) {
                         case BLUE:
-                            resources[0]++;
+                            resources[0]+=productionBasicCost.get(0).getCostNumber();
                             break;
                         case GREY:
-                            resources[1]++;
+                            resources[1]+=productionBasicCost.get(0).getCostNumber();
                             break;
                         case PURPLE:
-                            resources[2]++;
+                            resources[2]+=productionBasicCost.get(0).getCostNumber();
                             break;
                         case YELLOW:
-                            resources[3]++;
+                            resources[3]+=productionBasicCost.get(0).getCostNumber();
                             break;
                     }
-                    switch (productionBasicCost.get(1).getCostColor()) {
-                        case BLUE:
-                            resources[0]++;
-                            break;
-                        case GREY:
-                            resources[1]++;
-                            break;
-                        case PURPLE:
-                            resources[2]++;
-                            break;
-                        case YELLOW:
-                            resources[3]++;
-                            break;
+                    if (productionBasicCost.size() > 1) {
+                        switch (productionBasicCost.get(1).getCostColor()) {
+                            case BLUE:
+                                resources[0]++;
+                                break;
+                            case GREY:
+                                resources[1]++;
+                                break;
+                            case PURPLE:
+                                resources[2]++;
+                                break;
+                            case YELLOW:
+                                resources[3]++;
+                                break;
+                        }
                     }
                 }
                 else{
@@ -672,7 +675,7 @@ public class Model extends ModelObservable {
             }
             else if (PopeFavorState == 2){
                 CheckedPopeFavorState2 = true;
-                return 0;
+                return 2;
             }
             else {
                 CheckedPopeFavorState3 = true;
@@ -682,5 +685,16 @@ public class Model extends ModelObservable {
         return 0;
     }
 
+    public void applyDiscount(int playerIndex, ArrayList<CostOfCard> cost){
+        Player player = players.get(playerIndex);
+        for (CostOfCard c : cost){
+            switch (c.getCostColor()){
+                case PURPLE -> c.setCostNumber(c.getCostNumber() - player.getDiscountPurple());
+                case BLUE -> c.setCostNumber(c.getCostNumber() - player.getDiscountBlue());
+                case GREY -> c.setCostNumber(c.getCostNumber() - player.getDiscountGrey());
+                case YELLOW -> c.setCostNumber(c.getCostNumber() - player.getDiscountYellow());
+            }
+        }
+    }
 }
 

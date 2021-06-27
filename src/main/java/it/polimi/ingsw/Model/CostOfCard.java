@@ -24,6 +24,10 @@ public class CostOfCard implements Serializable {
         return costNumber;
     }
 
+    public void setCostNumber(int costNumber) {
+        this.costNumber = costNumber;
+    }
+
     public MarketMarble.ColorMarble getCostColor() {
         return costColor;
     }

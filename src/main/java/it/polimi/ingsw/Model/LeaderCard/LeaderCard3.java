@@ -39,7 +39,7 @@ public class LeaderCard3 extends LeaderCard{ //extra warehouse
 
     @Override
     public String StampaCarta() {
-        return "Power: extra warehouse (2 space) " + getColorOfExtraWarehouse() + "\n" +
+        return "Power: Extra warehouse (2 space) " + getColorOfExtraWarehouse() + "\n" +
                 "Requirements: 5 resources " + getColorCost() +  "\n" +
                 "VP: " + getVictoryPoints();
     }
@@ -63,6 +63,7 @@ public class LeaderCard3 extends LeaderCard{ //extra warehouse
     public void effect(Player player){
         player.getWarehouse().getRows().add(new WarehouseRow(2));
         player.getWarehouse().getRows().get(player.getWarehouse().getRows().size()-1).setColor(colorOfExtraWarehouse);
+        player.getWarehouse().setExtraWarehouseRows();
     }
     @Override
     public String toString() {

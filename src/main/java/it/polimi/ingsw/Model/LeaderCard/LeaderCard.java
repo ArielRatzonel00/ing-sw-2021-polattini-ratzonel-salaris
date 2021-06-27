@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public  class LeaderCard implements Serializable {
-    //private int Type; // 1=TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
+    private int Type; // 1=TypeExtraResources, 2=TypeReduceCost, 3=TypeExtraWarehouse, 4=TypeConvertResource
     private boolean Activate = false;
 
     private int Id;
@@ -35,10 +35,6 @@ public  class LeaderCard implements Serializable {
     // è il colore dell'abilità speciale che hanno
 
 
-
-    /*public int getType() {
-        return Type;
-    }*/
 
     public boolean isActivate() {
         return Activate;
@@ -84,6 +80,7 @@ public  class LeaderCard implements Serializable {
     }
 
     public int getType() {
-        return 0;
+        return Type;
     }
+
 }

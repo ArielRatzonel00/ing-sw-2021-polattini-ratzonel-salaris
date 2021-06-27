@@ -31,7 +31,7 @@ public class DevelopmentGrid implements Serializable {
         ArrayList<DevelopmentCard> topcards = new ArrayList<>();
         for (int i = 0; i<3; i++) {
             for (int j = 0; j < 4; j++) {
-                if (CardMatrix[i][j] != null) {
+                if (CardMatrix[i][j].getTopCard() != null) {
                     topcards.add(CardMatrix[i][j].getTopCard());
                 } else {
                     topcards.add(nullCard);

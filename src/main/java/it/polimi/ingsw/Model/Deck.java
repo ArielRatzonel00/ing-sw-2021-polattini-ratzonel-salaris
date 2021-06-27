@@ -592,7 +592,6 @@ public class Deck {
         ReduceCost2 = new LeaderCard2(6, 2, DevelopmentCard.colorCard.Purple, DevelopmentCard.colorCard.Blue, MarketMarble.ColorMarble.BLUE); //meno un blu nel costo
         ReduceCost3 = new LeaderCard2(7, 2, DevelopmentCard.colorCard.Yellow, DevelopmentCard.colorCard.Purple, MarketMarble.ColorMarble.YELLOW); //meno un giallo nel costo
         ReduceCost4 = new LeaderCard2(8, 2, DevelopmentCard.colorCard.Green, DevelopmentCard.colorCard.Blue, MarketMarble.ColorMarble.GREY); //meno un grigio nel costo
-
         ExtraWarehouse1 = new LeaderCard3(9, 3, MarketMarble.ColorMarble.GREY, MarketMarble.ColorMarble.PURPLE); //più 2 spazi viola nel warehouse
         ExtraWarehouse2 = new LeaderCard3(10, 3, MarketMarble.ColorMarble.PURPLE, MarketMarble.ColorMarble.PURPLE); //più 2 spazi blu nel warehouse
         ExtraWarehouse3 = new LeaderCard3(11, 3, MarketMarble.ColorMarble.BLUE, MarketMarble.ColorMarble.YELLOW); //più 2 spazi gialli nel warehouse

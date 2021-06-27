@@ -137,6 +137,10 @@ public class Warehouse implements Serializable {
     public ArrayList<WarehouseRow> getRows() {
         return rows;
     }
+
+    public void setExtraWarehouseRows() {
+        ExtraWarehouseRows += 1;
+    }
 }
 
 

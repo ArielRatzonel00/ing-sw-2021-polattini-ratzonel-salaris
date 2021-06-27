@@ -12,6 +12,7 @@ public class ClientModel {
     private MarketTrayClient marketTrayClient=new MarketTrayClient();
     private ArrayList<DevelopmentCard> devGrid = new ArrayList<>();
 
+
     public ClientModel(){
         playerBoards.add(new PlayerBoard());
         playerBoards.add(new PlayerBoard());
@@ -55,7 +56,7 @@ public class ClientModel {
         switch (level){
             case 1:
                 for (int i = 0; i< 4;i++) {
-                    if (devGrid.get(i).getLevel() != 0) {
+                    if ( devGrid.get(i).getLevel() != 0 ) {
                         System.out.println("[" + i + "]");
                         devGrid.get(i).printCard();
                     } else {
@@ -85,4 +86,5 @@ public class ClientModel {
                 break;
         }
     }
+
 }
