@@ -57,6 +57,7 @@ public class DevelopmentCard implements Serializable {
     public int getVictoryPoints() {
         return VictoryPoints;
     }
+
     public void printCard(){
         System.out.println("Color: " + Color+"   " +
                 "Level: " + Level +"   " +
