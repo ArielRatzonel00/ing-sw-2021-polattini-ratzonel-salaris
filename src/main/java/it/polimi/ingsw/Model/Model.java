@@ -138,6 +138,7 @@ public class Model extends ModelObservable {
         int PopeFavorStateChanged = 0;
         ArrayList<PopeFavorState> popeFavorStates = new ArrayList<>();
         Player currentPlayer = players.get(PlayerIndex);
+
         for (Boolean k : keepResource) {
             if (marbles.get(contIndexMarblesRows) == MarketMarble.ColorMarble.RED) {
                 CurrPlayerAdvances++;
@@ -233,10 +234,8 @@ public class Model extends ModelObservable {
             cost = null;
         }
         notifyWantToBuyCardResponse(PlayerIndex, phrasetoShow,row, col, slot, cost);
-
-
-
     }
+
     public void BuyCard(int PlayerIndex, ArrayList<CostOfCard> resourcesFromStrogbox, ArrayList<CostOfCard> resourcesFromWarehouse, ArrayList<Integer> rows, int row, int col, int slot ) {
         int contRow = 0;
         Player currentPlayer = players.get(PlayerIndex);
@@ -316,7 +315,6 @@ public class Model extends ModelObservable {
 
     }
 
-
     public void MoveResources(int PlayerIndex, int row1, int row2) {
         Player currentplayer = players.get(PlayerIndex);
         boolean ok = false;
@@ -325,6 +323,7 @@ public class Model extends ModelObservable {
         }
         notifyMoveResourcesResponse(PlayerIndex,ok,currentplayer.getWarehouse());
     }
+
     public void CanProduce(int PlayerIndex, ArrayList<Integer> productionsIndexes, ArrayList<CostOfCard> productionBasicCost){
         Player currentplayer = players.get(PlayerIndex);
         boolean ok = false;
