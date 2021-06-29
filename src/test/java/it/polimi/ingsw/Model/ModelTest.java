@@ -10,13 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ModelTest {
     Player player1, player2, player3, player4;
-    Model model;
-    ArrayList<Player> players;
+    Model model, modelsingle;
+    ArrayList<Player> players, playersingle;
     int lead0,lead1,lead2,lead3;
     CostOfCard cost0, cost1, cost2, cost3;
     CostOfCard cost4, cost5, cost6, cost7;
     DevelopmentCard card1;
     MarketMarble yellow, purple, blue, grey;
+    Deck deck;
 
     @BeforeEach
     void initialization(){
@@ -30,6 +31,9 @@ class ModelTest {
         players.add(player3);
         players.add(player4);
         model = new Model(players);
+        playersingle = new ArrayList<>();
+        playersingle.add(player1);
+        modelsingle = new Model(playersingle);
         cost0 = new CostOfCard(2, MarketMarble.ColorMarble.BLUE);
         cost1 = new CostOfCard(2, MarketMarble.ColorMarble.PURPLE);
         cost2 = new CostOfCard(2, MarketMarble.ColorMarble.GREY);
@@ -42,7 +46,7 @@ class ModelTest {
         blue = new MarketMarble(MarketMarble.ColorMarble.BLUE);
         purple = new MarketMarble(MarketMarble.ColorMarble.PURPLE);
         grey = new MarketMarble(MarketMarble.ColorMarble.GREY);
-
+        deck = new Deck();
     }
 
     @Test
@@ -107,7 +111,7 @@ class ModelTest {
     }
 
     @Test
-    void wantToBuyCardeBuyCardTest() {
+    void wantToBuyCardAndBuyCardTest() {
         model.getPlayers().get(0).getStrongbox().AddResource(10, MarketMarble.ColorMarble.BLUE);
         model.getPlayers().get(0).getStrongbox().AddResource(10, MarketMarble.ColorMarble.YELLOW);
         model.getPlayers().get(0).getStrongbox().AddResource(10, MarketMarble.ColorMarble.GREY);
@@ -180,31 +184,25 @@ class ModelTest {
     }
 
     @Test
-    void canProduce() {
-    }
-
-    @Test
-    void produce() {
+    void produceAndCanProduceTest() {
+        model.getPlayers().get(0).getSlotsBoard().getSlots().get(0).addCard(deck.getGreen11());
+        model.getPlayers().get(0).getSlotsBoard().getSlots().get(1).addCard(deck.getGreen12());
+        ArrayList<Integer> productionsIndexes = new ArrayList<>();
+        ArrayList<CostOfCard> productionBasicCost = new ArrayList<>();
+        //
     }
 
     @Test
     void endTurn() {
-    }
-
-    @Test
-    void getMarkers() {
+        model.EndTurn(0);
+        modelsingle.EndTurn(0);
+        //
     }
 
     @Test
     void getWinnerMultiplayer() {
-    }
-
-    @Test
-    void getDeck() {
-    }
-
-    @Test
-    void incrementContForStart() {
+        model.getPlayers().get(0).getStrongbox().AddResource(10, MarketMarble.ColorMarble.BLUE);
+        assertTrue(player1.equals(model.GetWinnerMultiplayer()));
     }
 
     @Test
