@@ -290,6 +290,9 @@ public class Cli implements UserInterface {
                             }
                         }
                     }
+                    else{
+                        colorMarble = marketTrayActionResponse.getChangeWhite1();
+                    }
                 }
             }
             if (colorMarble != MarketMarble.ColorMarble.WHITE) {
