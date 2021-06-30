@@ -51,6 +51,7 @@ public class Deck {
 
     private DevelopmentCard Green21;
     private DevelopmentCard Green31;
+    private DevelopmentCard Purple13;
 
     private DevelopmentCard nullCard;
 
@@ -219,7 +220,7 @@ public class Deck {
         Purple13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.BLUE));
         Purple13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.PURPLE));
         Purple13ProductionProfit.add(new CostOfCard(1, MarketMarble.ColorMarble.GREY));
-        DevelopmentCard Purple13 = new DevelopmentCard(Purple13Cost, new Production(Purple13ProductionCost, Purple13ProductionProfit), 15, DevelopmentCard.colorCard.Purple, 1, 3);
+        Purple13 = new DevelopmentCard(Purple13Cost, new Production(Purple13ProductionCost, Purple13ProductionProfit), 15, DevelopmentCard.colorCard.Purple, 1, 3);
 
 
         ArrayList<CostOfCard> Purple14Cost = new ArrayList<>();
@@ -724,6 +725,10 @@ public class Deck {
 
     public DevelopmentCard getGreen31() {
         return Green31;
+    }
+
+    public DevelopmentCard getPurple13() {
+        return Purple13;
     }
 
     public LeaderCard getExtraRsc1(){
