@@ -6,7 +6,7 @@ import it.polimi.ingsw.View.Cli;
 
 import java.io.IOException;
 
-public class Launcher
+/*public class Launcher
 {
     public static void main( String[] args )
     {
@@ -34,7 +34,7 @@ public class Launcher
     }
 }
 
-/*
+*/
 public class Launcher
 {
     public static void main( String[] args ) {
@@ -65,7 +65,9 @@ public class Launcher
                 } catch (IOException e) {
                     System.err.println("Impossible to initialize the server: " + e.getMessage() + "!");
                 }
-            } else if (args.length == 6) {
+            } else
+                printHelp();
+        }else if (args.length == 6) {
                 if (args[0].equals("-cli")) {
                     //read the port
                     int port = 0;
@@ -103,11 +105,11 @@ public class Launcher
                         System.err.println(e.getMessage());
                     }
                 } else
+                    System.out.println("Primo ARG: "+ args[0]);
                     printHelp();
             } else
-                printHelp();
-            }else
-                printHelp();
+                System.out.println("ARGS: " + args.length);
+            printHelp();
     }
 
     public static void printHelp(){
@@ -117,4 +119,4 @@ public class Launcher
     }
 }
 
- */
+
