@@ -519,11 +519,15 @@ public class Cli implements UserInterface {
         ArrayList<CostOfCard> ResourcesFromWarehouse = new ArrayList<>();
         ArrayList<Integer> rows = new ArrayList<>();
         System.out.println("Production number " + prod + ":\n");
-        System.out.println(clientModel.getPlayerBoards().get(ID).getProductions().get(prod).printProduction());
-        if (prod == 4 || prod == 5){
-            System.out.println("1 RED");
+        if(prod == 0){
+            System.out.println("Basic Production");
         }
-
+        else {
+            System.out.println(clientModel.getPlayerBoards().get(ID).getProductions().get(prod).printProduction());
+            if (prod == 4 || prod == 5) {
+                System.out.println("1 resource of your choice");
+            }
+        }
         System.out.println("How do you want to pay it?\n");
         if (prod == 0) {
             Payment(scanner, wantActivateProductionResponse.getBasicProductionCost(),ResourcesFromStrongbox, ResourcesFromWarehouse, rows, ID);
@@ -775,8 +779,7 @@ public class Cli implements UserInterface {
 
     @Override
     public void GameStarted(Scanner scanner) {
-        System.out.println("   MASTERS OF THE RENAISSANCE!    \n" +
-                "(game started!) ");
+        System.out.println("   MASTERS OF THE RENAISSANCE!    \n");
     }
 
     @Override
