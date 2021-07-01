@@ -357,6 +357,7 @@ public class Model extends ModelObservable {
         if (currentplayer.getLeaderCard(NCard) != null && !currentplayer.getLeaderCard(NCard).isActivate()){
             if (currentplayer.getLeaderCard(NCard).canBeActivated(currentplayer)){
                 currentplayer.getLeaderCard(NCard).setActivate(true);
+                currentplayer.getLeaderCard(NCard).setActivate(true);
                 currentplayer.getLeaderCard(NCard).effect(currentplayer);
                 notifyActivateLeaderCardActionResponse(PlayerIndex,NCard,true, currentplayer.getWarehouse().getRows(),currentplayer.getProductionsAvailable());
             }

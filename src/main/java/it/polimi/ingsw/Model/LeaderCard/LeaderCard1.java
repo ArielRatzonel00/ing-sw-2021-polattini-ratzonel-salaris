@@ -62,10 +62,10 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
     @Override
     public void effect(Player player) {
         if (player.getChangeWhite1()!= MarketMarble.ColorMarble.WHITE){
-            player.setChangeWhite2(getNewColorMarble());
+            player.setChangeWhite2(this.NewColorMarble);
         }
         else {
-            player.setChangeWhite1(getNewColorMarble());
+            player.setChangeWhite1(this.NewColorMarble);
         }
     }
 }

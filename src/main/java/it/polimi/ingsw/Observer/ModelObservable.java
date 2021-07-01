@@ -86,7 +86,7 @@ public class ModelObservable extends Observable<VirtualView> {
         marketTrayActionResponse.setOutsideMarble(outsideMarble);
         marketTrayActionResponse.setReturnedmarbles(returnedmarbles);
         marketTrayActionResponse.setChangeWhite1(ChangeWhite1);
-        marketTrayActionResponse.setChangeWhite1(ChangeWhite2);
+        marketTrayActionResponse.setChangeWhite2(ChangeWhite2);
         for (VirtualView obs:observers
         ) {
             obs.updateMarketTrayActionResponse(marketTrayActionResponse);

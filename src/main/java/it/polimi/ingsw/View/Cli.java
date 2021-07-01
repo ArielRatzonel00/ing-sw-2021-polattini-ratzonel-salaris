@@ -279,7 +279,7 @@ public class Cli implements UserInterface {
             colorMarble = marketMarble.getColorMarble();
             if (colorMarble == MarketMarble.ColorMarble.WHITE) {
                 if (marketTrayActionResponse.getChangeWhite1() != MarketMarble.ColorMarble.WHITE) {
-                    if (marketTrayActionResponse.getChangeWhite2() == MarketMarble.ColorMarble.WHITE) {
+                    if (marketTrayActionResponse.getChangeWhite2() != MarketMarble.ColorMarble.WHITE) {
                         while (ch != 1 && ch != 2) {
                             System.out.println("You want to trasform the white marble in" + marketTrayActionResponse.getChangeWhite1() + "[1] or" + marketTrayActionResponse.getChangeWhite2() + "[2]\n");
                             ch = nextInt(scanner);
@@ -301,9 +301,14 @@ public class Cli implements UserInterface {
                     keep = true;
                     row = 0;
                 } else {
-                    System.out.println("What do you want to do with marble: " + colorMarble + "? Keep it [S] or not [other] ?\n");
-                    c = scanner.next();
-                    if (c.equalsIgnoreCase("s")) {
+                    while (!c.equalsIgnoreCase("y") && !c.equalsIgnoreCase("n")) {
+                        System.out.println("What do you want to do with marble: " + colorMarble + "? Keep it [Y] or not [N] ?\n");
+                        c = scanner.next();
+                        if (!c.equalsIgnoreCase("y") && !c.equalsIgnoreCase("n")) {
+                            System.out.println("Wrong selection, try again");
+                        }
+                    }
+                    if (c.equalsIgnoreCase("y")) {
                         keep = true;
                         System.out.println("In which warehouse row do you want to add the marble?\nChoose correctly because if you can't add the marble in the row selected, it will be automatically considered as you discarded it\n");
                         row = nextInt(scanner);
@@ -311,6 +316,7 @@ public class Cli implements UserInterface {
                         keep = false;
                         row = 0;
                     }
+                    c = "";
                 }
                 dealWithResourcesFromMarketTrayMessage.setKeeps(keep);
                 dealWithResourcesFromMarketTrayMessage.setMarbles(marketMarble.getColorMarble());
@@ -514,6 +520,9 @@ public class Cli implements UserInterface {
         ArrayList<Integer> rows = new ArrayList<>();
         System.out.println("Production number " + prod + ":\n");
         System.out.println(clientModel.getPlayerBoards().get(ID).getProductions().get(prod).printProduction());
+        if (prod == 4 || prod == 5){
+            System.out.println("1 RED");
+        }
 
         System.out.println("How do you want to pay it?\n");
         if (prod == 0) {

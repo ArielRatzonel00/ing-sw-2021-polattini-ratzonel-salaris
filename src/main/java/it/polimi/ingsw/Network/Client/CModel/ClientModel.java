@@ -60,6 +60,7 @@ public class ClientModel {
                         System.out.println("[" + i + "]");
                         devGrid.get(i).printCard();
                     } else {
+                        System.out.println("[" + i + "]");
                         System.out.println("no card");
                     }
                 }
@@ -70,6 +71,7 @@ public class ClientModel {
                         System.out.println("[" + (i-4) + "]");
                         devGrid.get(i).printCard();
                     } else {
+                        System.out.println("[" + i + "]");
                         System.out.println("no card");
                     }
                 }
@@ -80,6 +82,7 @@ public class ClientModel {
                         System.out.println("[" + (i-8) + "]");
                         devGrid.get(i).printCard();
                     } else {
+                        System.out.println("[" + i + "]");
                         System.out.println("no card");
                     }
                 }
