@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Client;
+/*package it.polimi.ingsw.Network.Client;
 
 import it.polimi.ingsw.View.Cli;
 
@@ -14,7 +14,7 @@ public class ClientMain {
 
         try {
             Cli cli=new Cli();
-            Client client = new Client("84.221.232.254", 1334, cli);
+            Client client = new Client("localhost", 1334, cli);
             //cli.addObserver(client);
             cli.setCmodel(client.getClientModel());
             client.run();
@@ -22,6 +22,5 @@ public class ClientMain {
             System.err.println(e.getMessage());
         }
     }
-
-}
+}*/
 

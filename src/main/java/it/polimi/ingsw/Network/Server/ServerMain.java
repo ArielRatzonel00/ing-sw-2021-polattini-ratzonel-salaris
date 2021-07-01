@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Server;
+/*package it.polimi.ingsw.Network.Server;
 
 import java.io.IOException;
 
@@ -13,4 +13,4 @@ public class ServerMain {
             System.err.println("Impossible to initialize the server: " + e.getMessage() + "!");
         }
     }
-}
+}*/
