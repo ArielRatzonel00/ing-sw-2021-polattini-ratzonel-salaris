@@ -21,9 +21,9 @@
 
 
 ## Test coverage 
-foto
+![Screenshot Coverage](https://github.com/LucaPolattini/ing-sw-2021-polattini-ratzonel-salaris/blob/master/Coverage/Coverage_final.JPG?raw=true)
 
-(Total number of tests: 176)
+(Total number of tests: 58)
 
 
 
@@ -41,14 +41,13 @@ mvn package
 The generated JAR ships all 2 applications, that can be accessed as follows:
 
 ### Server
-Remember to specify the port number and the server's IPv4.
+Remember to specify the port number.
 It is recommended to run this as Administrator.
 ```
 java -jar GC10-1.0-SNAPSHOT.jar -server <port number>
 ```
 ### CLI
-The WSL terminal in full screen mode is recommended for a proper use. 
+Remember to specify the port number and the server's IPv4.
 ```
 java -jar GC10-1.0-SNAPSHOT.jar -cli <port number> <server's IPv4 (example: 192 168 1 241)>
 ```
-
