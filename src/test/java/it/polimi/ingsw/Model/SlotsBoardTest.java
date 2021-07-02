@@ -36,6 +36,9 @@ class SlotsBoardTest {
         assertEquals(20, TestSlotGen.countVictoryPoints());
     }
 
+    /**
+     * tests that the player has a certain type of development cards in its slotsboard
+     */
     @Test
     void filterCountTest1() {
         assertEquals(0, TestSlotGen.filterCount(1));

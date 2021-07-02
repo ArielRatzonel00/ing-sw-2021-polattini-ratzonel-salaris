@@ -24,6 +24,9 @@ class FaithTrackTest {
         Faith.setRedPosition(RedPositionTest);
     }
 
+    /**
+     * test to count points from FaithTrack
+     */
     @Test
     void totalPointsTest() {
         assertEquals(2, Faith.TotalPoints());

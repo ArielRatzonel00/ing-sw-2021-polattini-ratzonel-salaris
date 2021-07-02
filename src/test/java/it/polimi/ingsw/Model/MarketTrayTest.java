@@ -22,6 +22,9 @@ class MarketTrayTest {
         returnedMarblesTest2 = new ArrayList<>();
     }
 
+    /**
+     * test to try that marbles are returned in the right way
+     */
     @Test
     void getMarketMarblesFromRowTest() {
         returnedMarblesTest = MarketTest.GetMarketMarblesFromRow(2);
@@ -31,6 +34,9 @@ class MarketTrayTest {
         assertSame(MarketTest.getMarketMatrix()[2][3],returnedMarblesTest[3]);
     }
 
+    /**
+     * test to try that marbles are returned in the right way
+     */
     @Test
     void getMarketMarblesFromColTest() {
         returnedMarblesTest1 = MarketTest.GetMarketMarblesFromCol(2);
@@ -39,6 +45,9 @@ class MarketTrayTest {
         assertSame(MarketTest.getMarketMatrix()[2][2],returnedMarblesTest1[2]);
     }
 
+    /**
+     * test to try that marbles are shifted and returned in the right way
+     */
     @Test
     void shiftMatrixByRowTest() {
         returnedMarblesTest2 = MarketTest.ShiftMatrixByRow(2);
@@ -48,6 +57,9 @@ class MarketTrayTest {
         assertSame(MarketTest.getOustideMarble(),returnedMarblesTest2.get(0));
     }
 
+    /**
+     * test to try that marbles are shifted and returned in the right way
+     */
     @Test
     void shiftMatrixByColTest() {
         returnedMarblesTest2 = MarketTest.ShiftMatrixByCol(2);

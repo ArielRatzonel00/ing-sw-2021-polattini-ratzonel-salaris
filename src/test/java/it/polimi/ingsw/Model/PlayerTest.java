@@ -73,6 +73,9 @@ class PlayerTest {
         assertTrue(leaderCards.equals(gamer.getLeaderCards()));
     }
 
+    /**
+     * tests that the player has enough resources to buy a development card
+     */
     @Test
     void checkResourcesForAcquisitionTest() {
         costTest.add(costCard1);
@@ -89,6 +92,9 @@ class PlayerTest {
         assertFalse(gamer.CheckResourcesForAcquisition(costTest));
     }
 
+    /**
+     * tests that the player has enough resources to activate the production
+     */
     @Test
     void checkResourcesForProduceTest() { //cost[0] = BLUE, cost[1] = GREY, cost[2] = PURPLE, cost[3] = YELLOW
         CostProduceTest[3]= 2;

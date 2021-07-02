@@ -56,6 +56,9 @@ class ModelTest {
         popeFavorUn = PopeFavorState.Unabled;
     }
 
+    /**
+     * tests that is possible to assign the initial leader cards and the player can discard two of them
+     */
     @Test
     void assignFourLeaderCardsTest() {
         assertEquals(4, model.getNumberOfPlayers());
@@ -69,6 +72,9 @@ class ModelTest {
         assertSame(lead2, model.getPlayers().get(0).getLeaderCard(1).getId());
     }
 
+    /**
+     * tests that the initial resources are set correctly
+     */
     @Test
     void setInitialResourcesTest() {
         model.SetInitialResourcesForFirstPlayer();
@@ -81,6 +87,9 @@ class ModelTest {
         assertEquals(2, model.getPlayers().get(3).getWarehouse().getNumberOfResource(MarketMarble.ColorMarble.GREY));
     }
 
+    /**
+     * tests that the player can take resources from the market tray and can administrate them correctly
+     */
     @Test
     void marketTrayActionTest() { //
         MarketTray marketTray = new MarketTray();
@@ -117,6 +126,9 @@ class ModelTest {
         assertEquals(1, model.getPlayers().get(0).getWarehouse().getNumberOfTotalResourcesInWarehouse());
     }
 
+    /**
+     * tests that the player can buy cards from the DevelomplentGrid and can put them in personal slots
+     */
     @Test
     void wantToBuyCardAndBuyCardTest() {
         model.getPlayers().get(0).getStrongbox().AddResource(10, MarketMarble.ColorMarble.BLUE);
@@ -145,6 +157,9 @@ class ModelTest {
         assertSame(card1, model.getPlayers().get(0).getSlotsBoard().getSlots().get(0).getTopCard());
     }
 
+    /**
+     * tests that the player can discard LeaderCards during the game
+     */
     @Test
     void discardLeaderCardActionTest() {
         model.AssignFourLeaderCards(0);
@@ -158,6 +173,9 @@ class ModelTest {
         assertSame(lead0, model.getPlayers().get(0).getLeaderCard(0).getId());
     }
 
+    /**
+     * tests that the player can activate LeaderCards during the game
+     */
     @Test
     void activateLeaderCardActionTest() {
         model.getPlayers().get(0).getStrongbox().AddResource(10, MarketMarble.ColorMarble.BLUE);
@@ -179,6 +197,9 @@ class ModelTest {
         }
     }
 
+    /**
+     * tests that the player can move resources in the warehouse during the game
+     */
     @Test
     void moveResourcesTest() {
         model.getPlayers().get(0).getWarehouse().addToRow(grey, 0);
@@ -191,6 +212,9 @@ class ModelTest {
         assertSame(MarketMarble.ColorMarble.BLUE, model.getPlayers().get(0).getWarehouse().getRow(0).getColor());
     }
 
+    /**
+     * tests that the player can choose produce action and it works
+     */
     @Test
     void produceAndCanProduceTest() {
         //faccio la produzione base e la produzione della carta Purple13 -> carta di livello 1 viola con 3 punti vittoria
@@ -258,6 +282,9 @@ class ModelTest {
 
     }
 
+    /**
+     * tests that turn ends in the right way (one player ends its the turn and the next player can start its turn)
+     */
     @Test
     void endTurn1() {
         model.EndTurn(0);
@@ -273,12 +300,18 @@ class ModelTest {
         assertTrue(model.getPlayers().get(0).isYourTurn());
     }
 
+    /**
+     * tests that the winner of the multiplayer game is the right player
+     */
     @Test
     void getWinnerMultiplayer() {
         model.getPlayers().get(0).getStrongbox().AddResource(10, MarketMarble.ColorMarble.BLUE);
         assertTrue(player1.equals(model.GetWinnerMultiplayer()));
     }
 
+    /**
+     * tests the activation of the PopeFavorStates of the players
+     */
     @Test
     void checkPopeFavorState() {
         ArrayList<PopeFavorState> popeFavorStatesUn = new ArrayList<>();
