@@ -44,10 +44,15 @@ The generated JAR ships all 2 applications, that can be accessed as follows:
 Remember to specify the port number.
 It is recommended to run this as Administrator.
 ```
-java -jar GC10-1.0-SNAPSHOT.jar -server <port number>
+java -jar GC10-1.0-SNAPSHOT-jar-with-dependencies.jar -server port
 ```
+
+Example: java -jar GC10-1.0-SNAPSHOT-jar-with-dependencies.jar -server 1334
 ### CLI
 Remember to specify the port number and the server's IPv4.
 ```
-java -jar GC10-1.0-SNAPSHOT.jar -cli <port number> <server's IPv4 (example: 192 168 1 241)>
+java -jar GC10-1.0-SNAPSHOT-jar-with-dependencies.jar -cli port IPv4
 ```
+N.B. The server's IPv4 address must be written without dots.
+
+Example: java -jar GC10-1.0-SNAPSHOT-jar-with-dependencies.jar -cli 1334 84 221 232 254
