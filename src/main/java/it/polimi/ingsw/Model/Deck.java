@@ -749,6 +749,14 @@ public class Deck {
         return ConvertRsc1;
     }
 
+    public LeaderCard getReduceCost1() {
+        return ReduceCost1;
+    }
+
+    public LeaderCard getExtraWarehouse1() {
+        return ExtraWarehouse1;
+    }
+
     public DevelopmentCard getNullCard() {
         return nullCard;
     }
