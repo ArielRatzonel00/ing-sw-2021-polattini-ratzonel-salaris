@@ -175,6 +175,7 @@ public class ModelObservable extends Observable<VirtualView> {
         activateLeaderCardActionResponse.setPlayerIndex(playerIndex);
         activateLeaderCardActionResponse.setNewWarehouse(newWarehouse);
         activateLeaderCardActionResponse.setNewProdAvailables(newProdAvailable);
+        activateLeaderCardActionResponse.setCardindex(cardIndex);
         for (VirtualView obs:observers
         ) {
             obs.updateActivateLeaderCardActionResponse(activateLeaderCardActionResponse);

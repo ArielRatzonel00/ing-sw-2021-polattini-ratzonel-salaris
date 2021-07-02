@@ -31,7 +31,7 @@ public class MarketTrayClient {
                 System.out.println("Row" + i + ": " + MarketMatrix[i][0].toString() + " " + MarketMatrix[i][1].toString() + " " + MarketMatrix[i][2].toString() + " " + MarketMatrix[i][3].toString() + " -");
 
         }
-        System.out.println("      " + "| " + "| " + "|");
+        System.out.println("      " + "| " + "| " + "| " + "|");
         System.out.println("Outside Marble: " + OustideMarble.toString());
 
 

@@ -105,7 +105,7 @@ public class PlayerBoard {
         for (Production p : productions) {
             if (index == 0) {
                 System.out.println("Production #0" + ":\n");
-                System.out.println("You pay 2 marbles of your choice:\n");
+                System.out.println("You pay 2 marbles of your choice\n");
                 System.out.println("You get 1 marble of your choice\n");
             }
             if (!p.equals(productions.get(0))) {
