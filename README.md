@@ -21,9 +21,9 @@
 
 
 ## Test coverage 
-![Screenshot Coverage](https://github.com/LucaPolattini/ing-sw-2021-polattini-ratzonel-salaris/blob/master/Coverage/Coverage_final.JPG?raw=true)
+![Screenshot Coverage](https://raw.githubusercontent.com/LucaPolattini/ing-sw-2021-polattini-ratzonel-salaris/master/Coverage/CoverageFinal.JPG?token=ATCFD3HNOHZJDMZ5ROTM7JDA5BL5M)
 
-(Total number of tests: 58)
+(Total number of tests: 60)
 
 
 
