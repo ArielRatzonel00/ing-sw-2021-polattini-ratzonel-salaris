@@ -605,7 +605,7 @@ public class Model extends ModelObservable {
     public Player GetWinnerMultiplayer() {
         int MaxPoints = 0;
         int MaxResources = 0;
-        Player winner = null;
+        Player winner = new Player("nessuno");
         ArrayList<Player> PlayersWithMorePoints = new ArrayList<>();
         for (Player player : players) {
             if (player.GetTotalPoints() > MaxPoints) {
@@ -613,15 +613,21 @@ public class Model extends ModelObservable {
                     PlayersWithMorePoints.remove(PlayersWithMorePoints.size() - 1);
                 }
                 PlayersWithMorePoints.add(player);
+                MaxPoints = player.GetTotalPoints();
             } else if (player.GetTotalPoints() == MaxPoints) {
                 PlayersWithMorePoints.add(player);
             }
         }
-        for (Player player : PlayersWithMorePoints) {
-            if (player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResourcesInStrongbox() > MaxResources) {
-                winner = player;
-                MaxResources = player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResourcesInStrongbox();
+        if (PlayersWithMorePoints.size()>1) {
+            for (Player player : PlayersWithMorePoints) {
+                if (player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResourcesInStrongbox() >= MaxResources) {
+                    winner = player;
+                    MaxResources = player.getWarehouse().getNumberOfTotalResourcesInWarehouse() + player.getStrongbox().getNumberOfTotalResourcesInStrongbox();
+                }
             }
+        }
+        else {
+            winner = PlayersWithMorePoints.get(0);
         }
         return winner;
     }
