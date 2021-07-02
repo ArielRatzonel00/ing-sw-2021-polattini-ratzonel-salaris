@@ -49,7 +49,7 @@ java -jar GC10-1.0-SNAPSHOT-jar-with-dependencies.jar -server port
 
 Example: java -jar GC10-1.0-SNAPSHOT-jar-with-dependencies.jar -server 1334
 ### CLI
-Remember to specify the port number and the server's IPv4.
+Remember to specify the port number and the server's IPv4 address.
 ```
 java -jar GC10-1.0-SNAPSHOT-jar-with-dependencies.jar -cli port IPv4
 ```
