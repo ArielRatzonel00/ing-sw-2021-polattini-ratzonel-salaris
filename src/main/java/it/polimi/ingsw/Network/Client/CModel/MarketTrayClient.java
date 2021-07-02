@@ -26,12 +26,12 @@ public class MarketTrayClient {
         System.out.println("Col   " + "0 " + "1 " + "2 " + "3");
         for (int i = 0; i <= 2; i++) {
             if (i!=2)
-                System.out.println("Row" + i + ": " + MarketMatrix[i][0].toString() + " " + MarketMatrix[i][1].toString() + " " + MarketMatrix[i][2].toString() + " " + MarketMatrix[i][3].toString() + " ←\n");
+                System.out.println("Row" + i + ": " + MarketMatrix[i][0].toString() + " " + MarketMatrix[i][1].toString() + " " + MarketMatrix[i][2].toString() + " " + MarketMatrix[i][3].toString() + " -\n");
             else
-                System.out.println("Row" + i + ": " + MarketMatrix[i][0].toString() + " " + MarketMatrix[i][1].toString() + " " + MarketMatrix[i][2].toString() + " " + MarketMatrix[i][3].toString() + " ←");
+                System.out.println("Row" + i + ": " + MarketMatrix[i][0].toString() + " " + MarketMatrix[i][1].toString() + " " + MarketMatrix[i][2].toString() + " " + MarketMatrix[i][3].toString() + " -");
 
         }
-        System.out.println("      " + "↑ " + "↑ " + "↑");
+        System.out.println("      " + "| " + "| " + "|");
         System.out.println("Outside Marble: " + OustideMarble.toString());
 
 

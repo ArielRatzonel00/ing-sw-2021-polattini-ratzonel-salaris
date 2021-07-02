@@ -28,7 +28,7 @@ public class LeaderCard1 extends LeaderCard { //metodo per leader cards che tras
     }
     @Override
     public String StampaCarta(){
-        return  "Power: WHITE marble → " + getNewColorMarble() + " marble \n" +
+        return  "Power: WHITE marble -> " + getNewColorMarble() + " marble \n" +
                 "Requirements: 1 devCard " + getColorCostOne() + ", 2 devCard " + getColorCostTwo() + "\n" +
                 "VP: " + getVictoryPoints();
     }
