@@ -1,5 +1,5 @@
-# Prova finale di Ingegneria del Software 2021
-## Gruppo GC10
+# Software Engineering Project 2021
+## Group GC10
 
 - ### 910003 Luca Polattini 
 - ### 909986 Ariel Ratzonel  
